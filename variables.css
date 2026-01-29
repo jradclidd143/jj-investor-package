@@ -1,0 +1,73 @@
+/**
+ * CSS Custom Properties / Design Tokens
+ * All design values centralized for consistency and maintainability
+ */
+
+:root {
+  /* Colors - Dark Theme */
+  --bg0: #05060b;
+  --bg1: #070a12;
+  --card: #0d1222;
+  --card2: #0b1020;
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #e9ecf5;
+  --muted: rgba(233, 236, 245, 0.72);
+  
+  /* Accent Colors */
+  --gold: #c9a75a;
+  --gold2: #f0d59b;
+  --red: #d93c3c;
+  --blue: #2c74ff;
+  
+  /* Shadows */
+  --shadow: 0 22px 60px rgba(0, 0, 0, 0.55);
+  --shadow2: 0 10px 30px rgba(0, 0, 0, 0.35);
+  
+  /* Spacing Scale */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 26px;
+  --spacing-xl: 60px;
+  
+  /* Border Radius */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 22px;
+  
+  /* Typography */
+  --font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-size-xs: 10px;
+  --font-size-sm: 12px;
+  --font-size-base: 13px;
+  --font-size-md: 16px;
+  --font-size-lg: 22px;
+  --font-size-xl: clamp(28px, 5vw, 40px);
+  
+  /* Line Heights */
+  --line-height-tight: 1.06;
+  --line-height-normal: 1.55;
+  --line-height-relaxed: 1.7;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  
+  /* Z-Index Scale */
+  --z-background: -10;
+  --z-base: 1;
+  --z-dropdown: 10;
+  --z-header: 20;
+  --z-modal: 100;
+  
+  /* Print Prep Delay */
+  --print-prep-delay: 180ms;
+}
+
+/* Print-specific color overrides */
+@media print {
+  :root {
+    --text: rgba(233, 236, 245, 0.92);
+    --muted: rgba(233, 236, 245, 0.72);
+  }
+}

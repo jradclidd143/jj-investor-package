@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1020"/>
+      <stop offset="1" stop-color="#05070d"/>
+    </linearGradient>
+    <radialGradient id="r" cx="25%" cy="18%" r="65%">
+      <stop offset="0" stop-color="#13224a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#05070d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="1600" fill="url(#g)"/>
+  <rect width="1200" height="1600" fill="url(#r)"/>
+  <path d="M0 250 C 240 180, 440 320, 740 240 C 940 185, 1040 130, 1200 165 L1200 0 L0 0 Z" fill="#0f1630" fill-opacity="0.55"/>
+</svg>
+```
+
+## 10. Updated Package Structure
+```
+jj-investments-package/
+├── index.html                 # Main HTML file (refactored)
+├── css/
+│   ├── variables.css          # Design tokens
+│   ├── base.css              # Reset & foundational styles
+│   ├── components.css        # Reusable UI components
+│   ├── layout.css            # Grid & page structure
+│   └── print.css             # Print-specific styles
+├── js/
+│   └── print-handler.js      # Print functionality with error handling
+├── images/
+│   ├── jj-header.png         # Extracted from base64
+│   ├── bg-card.svg           # Card background
+│   ├── bg-card-accent.svg    # Accent card background
+│   └── bg-print.svg          # Print background
+└── docs/
+    └── [existing PDF files]
