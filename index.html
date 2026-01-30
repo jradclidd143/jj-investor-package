@@ -1,5 +1,25 @@
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Lender Review Package and Loan Structure Submission Prepared by J&J Investments of Florida.">
+<meta name="format-detection" content="telephone=no">
+<meta name="color-scheme" content="light dark">
 
+<title>J&J Investments of Florida — Lendor Review Package</title>
+
+<!-- Favicons (place the generated favicon files in the same folder as this HTML) -->
+<link rel="icon" href="favicon.ico?v=1">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=1">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=1">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=1">
+<link rel="manifest" href="site.webmanifest?v=1">
+<meta name="theme-color" content="#0b1020">
+<meta name="msapplication-TileColor" content="#0b1020">
+<meta name="msapplication-config" content="browserconfig.xml?v=1">
+
+<style>
 :root{
   --bg0:#05060b;
   --bg1:#070a12;
@@ -14,6 +34,17 @@
   --blue:#2c74ff;
   --shadow: 0 22px 60px rgba(0,0,0,.55);
   --shadow2: 0 10px 30px rgba(0,0,0,.35);
+  /* Print landscape variables */
+  --print-page-w: 11in;
+  --print-page-h: 8.5in;
+  --print-pad-x: 0.38in;
+  --print-header-top: 0.26in;
+  --print-header-h: 0.90in;
+  --print-footer-h: 0.34in;
+  --print-body-top: calc(var(--print-header-top) + var(--print-header-h) + 0.18in);
+  --print-body-bottom: calc(var(--print-footer-h) + 0.18in);
+  --print-scale: 0.92;
+}
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -500,30 +531,14 @@ h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em
 
 /* ---------- PRINT LAYOUT (PDF-ready) ---------- */
 @media print{
-  @page{ margin: 0.6in; }
-  html, body{ height:auto; }
-  body{
-    background:#fff !important;
-    color:#111 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
+  @page{ size: letter landscape; margin: 0.5in; }
+  html, body{ height:auto; margin:0; padding:0; background: transparent !important; color: rgba(233,236,245,0.92) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .bg-grid{ display:none !important; }
-  .topbar{
-    position: static !important;
-    background:#fff !important;
-    backdrop-filter:none !important;
-    border-bottom: 1px solid #ddd !important;
-  }
+  .topbar{ position: relative !important; background: transparent !important; border-bottom: 1px solid #ddd !important; }
   .topbar-inner{max-width:1180px;margin:0 auto;padding: 16px 20px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
   .pill{ background:#fff !important; border:1px solid #bbb !important; color:#111 !important; }
   .print-btn{ display:none !important; }
-
-  .container{
-    max-width:none !important;
-    padding: 0 !important;
-  }
-
+  .container{ max-width:none !important; padding: 0 !important; }
   /* Prevent awkward page breaks */
   .kpi-card, .property-card, .chart-card, .panel, .option-card, .compare-card, .risk-tile, .doc{
     box-shadow:none !important;
@@ -537,7 +552,6 @@ h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em
     background:#fff !important;
     border:1px solid #ddd !important;
   }
-
   /* Single-column print flow for readability */
   .hero{ grid-template-columns: 1fr !important; }
   .kpis{ grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
@@ -546,15 +560,13 @@ h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em
   .split{ grid-template-columns: 1fr !important; }
   .compare{ grid-template-columns: 1fr !important; }
   .risk-grid{ grid-template-columns: 1fr !important; }
-  .marketing-lanes{ grid-template-columns: 1fr 1fr !important; }
-
   /* Typography tuning for print */
   h1{ font-size: 26px !important; line-height:1.12 !important; }
   .lead{ font-size: 12.5px !important; color:#333 !important; }
   .section-head p, .kpi-sub, .sub, .chart-sub, .tiny-note, .rt-sub, .doc-sub, .disclaimer{
     color:#444 !important;
   }
-  .kpi-label{ color:#444 !important; }
+ .kpi-label{ color:#444 !important; }
   .kpi-value{ color:#111 !important; }
   .badge, .tag, .chip{
     color:#111 !important;
@@ -567,14 +579,20 @@ h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em
   }
   .option-card::before, .compare-card::before, .property-card::before, .kpi-card::before,
   .glass-card::after{ display:none !important; }
-
   /* Make charts fit page width */
   .chart{ margin-top: 12px; }
   svg{ shape-rendering: geometricPrecision; }
-
-  /* Links */
+ /* Links */
   a{ color:#111 !important; text-decoration:none !important; }
   .footer{ color:#666 !important; }
+  /* Avoid overflow */
+  .print-body-inner {
+    transform: scale(var(--print-scale));
+    transform-origin: top left;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 /* Print button (screen only) */
@@ -590,7 +608,6 @@ h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em
   cursor: pointer;
 }
 .print-btn:hover{ border-color: rgba(201,167,90,.35); background: rgba(201,167,90,.10); }
-
 .chart svg{max-width:100%;height:300px;display:block}
 .charts-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
 @media (max-width: 980px){.charts-row{grid-template-columns:1fr}}
