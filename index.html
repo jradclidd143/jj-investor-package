@@ -7,7 +7,7 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="color-scheme" content="light dark">
 
-<title>J&J Investments of Florida — Lendor Review Package</title>
+<title>J&J Investments of Florida — Lender Review Package</title>
 
 <!-- Favicons (place the generated favicon files in the same folder as this HTML) -->
 <link rel="icon" href="favicon.ico?v=1">
@@ -44,7 +44,6 @@
   --print-body-top: calc(var(--print-header-top) + var(--print-header-h) + 0.18in);
   --print-body-bottom: calc(var(--print-footer-h) + 0.18in);
   --print-scale: 0.92;
-}
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -356,7 +355,7 @@ h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em
 .runway-sub{ margin-top: 8px; color: rgba(233,236,245,.70); font-size: 12.6px; }
 
 /* Microcards (graphics) */
-.microcards{ margin-top: 12px; display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+.mcard{ margin-top: 12px; display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
 .mcard{ border-radius: 18px; border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.03); padding: 12px; }
 .mcard-ic{
   width: 44px; height:44px; border-radius: 16px;
@@ -520,7 +519,7 @@ h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em
   .split{ grid-template-columns: 1fr; }
   .compare{ grid-template-columns: 1fr; }
   .risk-grid{ grid-template-columns: 1fr; }
-  .microcards{ grid-template-columns: 1fr; }
+  .mcard{ grid-template-columns: 1fr; }
   .growth-grid-2{ grid-template-columns: 1fr; }
   .funds-flow{ grid-template-columns: 1fr; gap: 12px; }
   .flow-arrow{ display:none; }
@@ -649,10 +648,10 @@ h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em
 .okpi span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .okpi strong{white-space:normal;overflow-wrap:anywhere;word-break:break-word;line-height:1.25}
 /* Microcards: fill row (no dead space) */
-.microcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch;width:100%}
-.microcards .micro{min-height:160px}
+.mcard{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch;width:100%}
+.mcard .mcard{min-height:160px}
 @media (max-width: 980px){
-  .microcards{grid-template-columns:1fr}
+  .mcard{grid-template-columns:1fr}
 }/* Print reliability */
 html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 @page{ size: Letter; margin: 0.6in; }
@@ -665,7 +664,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .opt-grid{ grid-template-columns: 1fr !important; }
   .opt-mini{ break-inside: avoid; page-break-inside: avoid; }
   /* prevent chart cards splitting */
-  .chart-card, .panel, .compare-card, .property-card, .callout, .micro{ break-inside: avoid; page-break-inside: avoid; }
+  .chart-card, .panel, .compare-card, .property-card, .callout, .mcard{ break-inside: avoid; page-break-inside: avoid; }
   /* slightly smaller charts in print to reduce overflow */
   .chart svg{ height: 260px !important; }
 }
@@ -692,7 +691,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .print-btn{ display:none !important; }
   .container{ max-width: 7.6in !important; padding-top: 0 !important; }
   /* Avoid bad breaks */
-  .panel, .chart-card, .compare-card, .property-card, .callout, .micro{ break-inside: avoid; page-break-inside: avoid; }
+  .panel, .chart-card, .compare-card, .property-card, .callout, .mcard{ break-inside: avoid; page-break-inside: avoid; }
   /* Stack Option A/B in print */
   .opt-grid{ grid-template-columns: 1fr !important; }
   /* Charts */
@@ -716,12 +715,12 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .topbar, .container{ position: relative !important; z-index: 1 !important; }
 
   /* Convert "backgrounds" into print-safe image overlays */
-  .kpi-card, .panel, .chart-card, .property-card, .compare-card, .micro, .metric, .opt-mini, .callout, .runway {
+  .kpi-card, .panel, .chart-card, .property-card, .compare-card, .mcard, .metric, .opt-mini, .callout, .runway {
     background: transparent !important;
     position: relative !important;
     overflow: hidden !important;
   }
-  .kpi-card > *, .panel > *, .chart-card > *, .property-card > *, .compare-card > *, .micro > *, .metric > *, .opt-mini > *, .callout > *, .runway > * {
+  .kpi-card > *, .panel > *, .chart-card > *, .property-card > *, .compare-card > *, .mcard > *, .metric > *, .opt-mini > *, .callout > *, .runway > * {
     position: relative !important;
     z-index: 2 !important;
   }
@@ -739,7 +738,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   /* Keep layout stable in print */
   .bg-grid{ display:none !important; }
   .print-btn{ display:none !important; }
-  .panel, .chart-card, .compare-card, .property-card, .callout, .micro, .kpi-card, .metric, .opt-mini { break-inside: avoid; page-break-inside: avoid; }
+  .panel, .chart-card, .compare-card, .property-card, .callout, .mcard, .kpi-card, .metric, .opt-mini { break-inside: avoid; page-break-inside: avoid; }
   .chart svg{ height: 260px !important; }
 
   /* Print: stack option cards so nothing squeezes */
@@ -1739,7 +1738,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   const CARD_BG = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgdmlld0JveD0iMCAwIDEyMDAgODAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwZjE3MzAiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDkwYzE0Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJyIiBjeD0iMTglIiBjeT0iMTAlIiByPSI3MCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxYTJhNTUiIHN0b3Atb3BhY2l0eT0iMC41NSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwOTBjMTQiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ic2hpbmUiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIwIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMTAiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIwLjM1IiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMDIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgcng9IjQ0IiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEyMDAiIGhlaWdodD0iODAwIiByeD0iNDQiIGZpbGw9InVybCgjcikiLz4KICA8cGF0aCBkPSJNMCAxNjAgQyAyNDAgOTAsIDUyMCAyMTAsIDgyMCAxMzUgQyAxMDAwIDkwLCAxMTAwIDYwLCAxMjAwIDkwIEwgMTIwMCAwIEwgMCAwIFoiIGZpbGw9IiMwYjEwMjAiIG9wYWNpdHk9IjAuNTUiLz4KICA8cmVjdCB4PSIxOCIgeT0iMTgiIHdpZHRoPSIxMTY0IiBoZWlnaHQ9Ijc2NCIgcng9IjQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIG9wYWNpdHk9IjAuMTgiLz4KICA8cmVjdCB4PSIxOCIgeT0iMTgiIHdpZHRoPSIxMTY0IiBoZWlnaHQ9IjIxMCIgcng9IjQwIiBmaWxsPSJ1cmwoI3NoaW5lKSIvPgo8L3N2Zz4=";
   const ACCENT_BG = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgdmlld0JveD0iMCAwIDEyMDAgODAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwZTFjNDUiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDkwYzE0Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJyIiBjeD0iMjIlIiBjeT0iMTIlIiByPSI3NSUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyYzc0ZmYiIHN0b3Atb3BhY2l0eT0iMC4zNSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwOTBjMTQiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ic2hpbmUiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIwIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMTIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIwLjM1IiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMDMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgcng9IjQ0IiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEyMDAiIGhlaWdodD0iODAwIiByeD0iNDQiIGZpbGw9InVybCgjcikiLz4KICA8cGF0aCBkPSJNMCAxNzAgQyAyNjAgOTAsIDUyMCAyMzAsIDgzMCAxNTAgQyAxMDEwIDEwMCwgMTExMCA3MCwgMTIwMCA5NSBMIDEyMDAgMCBMIDAgMCBaIiBmaWxsPSIjMGIxMDIwIiBvcGFjaXR5PSIwLjU1Ii8+CiAgPHJlY3QgeD0iMTgiIHk9IjE4IiB3aWR0aD0iMTE2NCIgaGVpZ2h0PSI3NjQiIHJ4PSI0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmM3NGZmIiBvcGFjaXR5PSIwLjIyIi8+CiAgPHJlY3QgeD0iMTgiIHk9IjE4IiB3aWR0aD0iMTE2NCIgaGVpZ2h0PSIyMjAiIHJ4PSI0MCIgZmlsbD0idXJsKCNzaGluZSkiLz4KPC9zdmc+";
   const targets = [
-    '.kpi-card', '.panel', '.chart-card', '.property-card', '.compare-card', '.micro', '.metric', '.opt-mini', '.callout', '.runway'
+    '.kpi-card', '.panel', '.chart-card', '.property-card', '.compare-card', '.mcard', '.metric', '.opt-mini', '.callout', '.runway'
   ];
   function ensureOverlays(){
     targets.forEach(sel => {
