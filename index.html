@@ -35,7 +35,7 @@
       --blue:#2c74ff;
       --shadow: 0 22px 60px rgba(0,0,0,.55);
       --shadow2: 0 10px 30px rgba(0,0,0,.35);
-      --topbar-h: 140px;
+     --topbar-h: 110px; /* fallback only — JS will overwrite with real height */
       --dock-pad: 16px;
     }
 
@@ -79,12 +79,14 @@
       mask-image: radial-gradient(700px 420px at 30% 0%, black 35%, transparent 75%);
     }
 
-    .topbar{
-      position:sticky; top:0; z-index:20;
-      background: linear-gradient(180deg, rgba(5,6,11,.85), rgba(5,6,11,.55));
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-    }
+  .topbar{
+  position:sticky;
+  top:0;
+  z-index:40; /* was 20 — must be higher than .sidenav (30) */
+  background: linear-gradient(180deg, rgba(5,6,11,.85), rgba(5,6,11,.55));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
 
     .topbar-inner{
       max-width:1180px;
@@ -788,11 +790,10 @@
   pointer-events: auto;
 }
 
-/* If sidenav is open on the right, push the up button left */
-.sidenav:not(.min) ~ .up-btn{
+/* Move the up button left when nav is open */
+body.nav-open .up-btn{
   right: 280px;
 }
-
 .up-btn:hover{
   border-color: rgba(201,167,90,.35);
   background: rgba(201,167,90,.10);
@@ -1063,6 +1064,8 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     </div>
   </div>
 </header>
+  
+
 <main class="container">
     <section class="hero" id="top" data-nav="Executive Summary">
       <div class="hero-left">
@@ -2276,7 +2279,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
   // Build nav from [data-nav]
   const nav = document.getElementById("navList");
-  const navWrap = document.getElementById("sideNav");
+  const navWrap = document.getElementById("sideNav"); // must match your HTML
   const sections = Array.from(document.querySelectorAll("[data-nav]"))
     .filter(el => el.getAttribute("data-nav"));
 
