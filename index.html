@@ -35,6 +35,8 @@
       --blue:#2c74ff;
       --shadow: 0 22px 60px rgba(0,0,0,.55);
       --shadow2: 0 10px 30px rgba(0,0,0,.35);
+      --topbar-h: 140px;
+      --dock-pad: 16px;
     }
 
     /* ✅ Screen theme toggle support (your JS sets html[data-theme]) */
@@ -665,11 +667,11 @@
 /* ===== Side Navigation (required for your JS to “look like it works”) ===== */
 .sidenav{
   position: fixed;
-  top: 110px;
+  top: calc(var(--topbar-h, 110px) + 14px);
   right: 16px;
   left: auto;
   width: 240px;
-  max-height: calc(100vh - 140px);
+  max-height: calc(100vh - var(--topbar-h, 110px) - 34px);
   padding: 12px;
   border-radius: 18px;
   border: 1px solid var(--line);
@@ -682,12 +684,14 @@
   gap: 10px;
   overflow: hidden;
 }
+    
 /* Dock sidenav to the right edge of the centered document (not the browser edge)
    Set 1180px to match your .container max-width if different */
 @media (min-width: 1180px){
   .sidenav{
     right: calc((100vw - 1180px)/2 + 16px);
-  }
+  }  
+}
 /* Collapse state your JS toggles: navWrap.classList.toggle("min") */
 .sidenav.min{
   width: 64px;
@@ -2245,12 +2249,30 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .replace(/-+/g,"-");
   }
 
-  // Sticky header offset (topbar height-ish)
+  // ✅ Measure sticky topbar height and store it in CSS var: --topbar-h
+  function setTopbarHeightVar(){
+    const topbar = document.querySelector(".topbar");
+    if(!topbar) return 110; // fallback
+    const h = Math.ceil(topbar.getBoundingClientRect().height);
+    document.documentElement.style.setProperty("--topbar-h", h + "px");
+    return h;
+  }
+
+  // Sticky header offset (dynamic)
   function scrollToEl(el){
     if(!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - 110;
+
+    const topbarH = setTopbarHeightVar();
+    const offset = topbarH + 14; // matches your CSS gap below header
+
+    const y = el.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: y, behavior: "smooth" });
   }
+
+  // ✅ Keep --topbar-h accurate when images load / window resizes
+  window.addEventListener("load", setTopbarHeightVar);
+  window.addEventListener("resize", setTopbarHeightVar, { passive: true });
+  setTopbarHeightVar();
 
   // Build nav from [data-nav]
   const nav = document.getElementById("navList");
@@ -2301,7 +2323,6 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   // Side nav collapse toggle
   const t = document.getElementById("navToggle");
   if(t && navWrap){
-    // IMPORTANT: match your CSS. You already use ".sidenav.min" in your stylesheet.
     const saved = localStorage.getItem("jj_nav_collapsed");
     if(saved === "1"){
       navWrap.classList.add("min");
@@ -2329,8 +2350,8 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
   // Theme toggles (IDs must match your HTML)
   const htmlEl = document.documentElement;
-  const screenBtn = document.getElementById("screenThemeToggle"); // ✅ your actual id
-  const printThemeBtn = document.getElementById("printThemeToggle"); // ✅ your actual id
+  const screenBtn = document.getElementById("screenThemeToggle");
+  const printThemeBtn = document.getElementById("printThemeToggle");
 
   const savedTheme = localStorage.getItem("jj_theme") || "dark";
   htmlEl.setAttribute("data-theme", savedTheme);
@@ -2339,7 +2360,6 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   htmlEl.setAttribute("data-print", savedPrintTheme);
 
   if(screenBtn){
-    // Optional label update
     screenBtn.textContent = (savedTheme === "dark") ? "🌙 Screen: Dark" : "☀️ Screen: Light";
     screenBtn.addEventListener("click", ()=>{
       const cur = htmlEl.getAttribute("data-theme") || "dark";
