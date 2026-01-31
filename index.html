@@ -1,159 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Lender Review Package and Loan Structure Submission Prepared by J&J Investments of Florida.">
-<meta name="format-detection" content="telephone=no">
-<meta name="color-scheme" content="light dark">
-<title>J&J Investments of Florida — Lender Review Package</title>
-<!-- Favicons (place the generated favicon files in the same folder as this HTML) -->
-<link rel="icon" href="favicon.ico?v=1">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=1">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=1">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=1">
-<link rel="manifest" href="site.webmanifest?v=1">
-<meta name="theme-color" content="#0b1020">
-<meta name="msapplication-TileColor" content="#0b1020">
-<meta name="msapplication-config" content="browserconfig.xml?v=1">
-<style>
-:root{
-  --bg0:#05060b;
-  --bg1:#070a12;
-  --card:#0d1222;
-  --card2:#0b1020;
-  --line:rgba(255,255,255,.08);
-  --text:#e9ecf5;
-  --muted:rgba(233,236,245,.78); /* Increased opacity for better contrast */
-  --gold:#c9a75a;
-  --gold2:#f0d59b;
-  --red:#d93c3c;
-  --blue:#2c74ff;
-  --shadow: 0 22px 60px rgba(0,0,0,.55);
-  --shadow2: 0 10px 30px rgba(0,0,0,.35);
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  color:var(--text);
-  background: radial-gradient(1200px 600px at 20% 0%, rgba(44,116,255,.10), transparent 55%),
-              radial-gradient(900px 500px at 80% 10%, rgba(201,167,90,.12), transparent 52%),
-              linear-gradient(180deg, var(--bg0), var(--bg1));
-  overflow-x:hidden;
-}
-.bg-grid{
-  position:fixed; inset:0;
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-  opacity:.08;
-  pointer-events:none;
-  mask-image: radial-gradient(700px 420px at 30% 0%, black 35%, transparent 75%);
-}
-.topbar{
-  position:sticky; top:0; z-index:20;
-  background: linear-gradient(180deg, rgba(5,6,11,.85), rgba(5,6,11,.55));
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
-}
-.topbar-inner{max-width:1180px;margin:0 auto;padding: 16px 20px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.jj-header{height:96px;width:auto;filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));border-radius:12px}
-.topbar-meta{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
-.pill{
-  font-size:12px; letter-spacing:.10em;
-  padding:8px 12px;
-  border-radius:999px;
-  background: linear-gradient(180deg, rgba(201,167,90,.15), rgba(201,167,90,.07));
-  border: 1px solid rgba(201,167,90,.25);
-  color: rgba(240,213,155,.92);
-}
-.meta-line{ font-size:13px; color:rgba(233,236,245,.70); }
-.dot{ margin:0 10px; opacity:.55; }
-.container{ max-width:1180px; margin:0 auto; padding: 26px 20px 60px; }
-.hero{
-  display:grid;
-  grid-template-columns: 1.15fr .85fr;
-  gap: 22px;
-  align-items:stretch;
-  padding-top: 10px;
-}
-h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em; }
-.lead{ margin:0 0 18px; color:rgba(233,236,245,.72); font-size: 16px; line-height:1.55; max-width: 72ch; }
-/* KPI cards */
-.kpis{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
-.kpi-card{
-  position:relative;
-  padding: 16px 16px 14px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow: var(--shadow2);
-  overflow:hidden;
-  transform: translateZ(0);
-}
-.kpi-card::before{
-  content:"";
-  position:absolute; inset:-2px;
-  background: radial-gradient(180px 120px at 20% 0%, rgba(44,116,255,.18), transparent 60%),
-              radial-gradient(220px 140px at 100% 0%, rgba(201,167,90,.20), transparent 60%);
-  opacity:.9;
-  pointer-events:none;
-}
-.kpi-card > *{ position:relative; z-index:1; }
-.kpi-card.accent{ border-color: rgba(201,167,90,.35); }
-.kpi-label{ font-size:12px; letter-spacing:.08em; color: rgba(233,236,245,.70); text-transform: uppercase; }
-.kpi-value{ margin-top:8px; font-size: 28px; font-weight: 750; letter-spacing: -0.02em; }
-.kpi-sub{ margin-top:6px; font-size: 13px; color: rgba(233,236,245,.66); }
-/* Glass executive summary */
-.glass-card{
-  padding: 18px;
-  border-radius: 22px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: linear-gradient(180deg, rgba(13,18,34,.76), rgba(11,16,32,.58));
-  box-shadow: var(--shadow);
-  position:relative;
-  overflow:hidden;
-}
-.glass-card::after{
-  content:"";
-  position:absolute; inset:-1px;
-  background:
-    radial-gradient(360px 220px at 70% 0%, rgba(44,116,255,.10), transparent 62%),
-    radial-gradient(380px 250px at 0% 10%, rgba(201,167,90,.10), transparent 65%);
-  pointer-events:none;
-}
-.glass-card > *{ position:relative; z-index:1; }
-.glass-title{ font-weight: 800; letter-spacing:-0.01em; margin-bottom:12px; }
-.sum-grid{ display:grid; gap: 10px; }
-.sum-item{
-  display:flex; gap: 12px; align-items:center;
-  padding: 10px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.08);
-  background: rgba(255,255,255,.03);
-}
-.sum-ic{
-  width: 42px; height: 42px; border-radius: 16px;
-  border:1px solid rgba(201,167,90,.30);
-  background: rgba(201,167,90,.10);
-  position:relative;
-  box-shadow: 0 14px 26px rgba(0,0,0,.35);
-}
-.sum-ic::after{
-  content:"";
-  position:absolute; inset:11px;
-  border-radius: 12px;
-  background: rgba(240,213,155,.92);
-  mask-repeat:no-repeat; mask-position:center; mask-size:contain;
-}
-.ic-key::after{ mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M7 14a5 5 0 1 1 4.9-6h8.6l1.5 1.5-2 2L22 13l-2 2-1.5-1.5-1 1L16 13l-1 1-1.5-1.5-1 1H11.9A5 5 0 0 1 7 14zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'/%3E%3C/svg%3E"); }
-.ic-cash::after{ mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M2 7h20v10H2V7zm2 2v6h16V9H4zm8 5a3 3 0 1 1 0-6 3 3 0 0 1 0 6z'/%3E%3C/svg%3E"); }
-.ic-rocket::after{ mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2c4.4 0 8 3.6 8 8 0 1.4-.4 2.8-1 4l-3-3-2 2 3 3c-1.2.6-2.6 1-4 1-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8zm-6 16l3-3 2 2-3 3H6v-2z'/%3E%3C/svg%3E"); }
-.sum-title{ font-weight: 800; }
-.sum-sub{ color: rgba(233,236,245,.70); font-size: 12.8px; margin-top: 2px; line-height:1.35; }
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Lender Review Package and Loan Structure Submission Prepared by J&J Investments of Florida.">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="color-scheme" content="light dark">
+
+  <title>J&J Investments of Florida — Lender Review Package</title>
+
+  <!-- Favicons (place the generated favicon files in the same folder as this HTML) -->
+  <link rel="icon" href="favicon.ico?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=1">
+  <link rel="manifest" href="site.webmanifest?v=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="msapplication-TileColor" content="#0b1020">
+  <meta name="msapplication-config" content="browserconfig.xml?v=1">
+
+  <style>
+    :root{
+      --bg0:#05060b;
+      --bg1:#070a12;
+      --card:#0d1222;
+      --card2:#0b1020;
+      --line:rgba(255,255,255,.08);
+      --text:#e9ecf5;
+      --muted:rgba(233,236,245,.78); /* Increased opacity for better contrast */
+      --gold:#c9a75a;
+      --gold2:#f0d59b;
+      --red:#d93c3c;
+      --blue:#2c74ff;
+      --shadow: 0 22px 60px rgba(0,0,0,.55);
+      --shadow2: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    /* ✅ Screen theme toggle support (your JS sets html[data-theme]) */
+    html{ color-scheme: dark; }
+    html[data-theme="light"]{
+      color-scheme: light;
+      --bg0:#f5f7fb;
+      --bg1:#eef2f8;
+      --card:#ffffff;
+      --card2:#f7f9ff;
+      --line:rgba(0,0,0,.10);
+      --text:#0b1020;
+      --muted:rgba(11,16,32,.72);
+      --shadow: 0 22px 60px rgba(0,0,0,.14);
+      --shadow2: 0 10px 30px rgba(0,0,0,.10);
+    }
+
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0;
+      -webkit-text-size-adjust:100%;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(44,116,255,.10), transparent 55%),
+        radial-gradient(900px 500px at 80% 10%, rgba(201,167,90,.12), transparent 52%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    .bg-grid{
+      position:fixed; inset:0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity:.08;
+      pointer-events:none;
+      mask-image: radial-gradient(700px 420px at 30% 0%, black 35%, transparent 75%);
+    }
+
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      background: linear-gradient(180deg, rgba(5,6,11,.85), rgba(5,6,11,.55));
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1180px;
+      margin:0 auto;
+      padding: 16px 20px;
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    .jj-header{
+      height:96px;
+      width:auto;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+      border-radius:12px;
+    }
+
+    .topbar-meta{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      align-items:flex-end;
+    }
+
+    .pill{
+      font-size:12px;
+      letter-spacing:.10em;
+      padding:8px 12px;
+      border-radius:999px;
+      background: linear-gradient(180deg, rgba(201,167,90,.15), rgba(201,167,90,.07));
+      border: 1px solid rgba(201,167,90,.25);
+      color: rgba(240,213,155,.92);
+      white-space:nowrap;
+    }
+
+    /* ✅ Added (your HTML uses these) */
+    .toggle-row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+    .pill-toggle{
+      font-size:12px;
+      letter-spacing:.02em;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(233,236,245,.92);
+      font-weight:700;
+      cursor:pointer;
+      user-select:none;
+    }
+    .pill-toggle:hover{ border-color: rgba(201,167,90,.35); background: rgba(201,167,90,.10); }
+    .pill-toggle:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+
+    .meta-line{ font-size:13px; color:rgba(233,236,245,.70); }
+    .dot{ margin:0 10px; opacity:.55; }
+
+    .container{ max-width:1180px; margin:0 auto; padding: 26px 20px 60px; }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+      align-items:stretch;
+      padding-top: 10px;
+    }
+
+    h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em; }
+    .lead{ margin:0 0 18px; color:rgba(233,236,245,.72); font-size: 16px; line-height:1.55; max-width: 72ch; }
+
+    /* KPI cards */
+    .kpis{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+    .kpi-card{
+      position:relative;
+      padding: 16px 16px 14px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      transform: translateZ(0);
+    }
+    .kpi-card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(180px 120px at 20% 0%, rgba(44,116,255,.18), transparent 60%),
+        radial-gradient(220px 140px at 100% 0%, rgba(201,167,90,.20), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .kpi-card > *{ position:relative; z-index:1; }
+    .kpi-card.accent{ border-color: rgba(201,167,90,.35); }
+    .kpi-label{ font-size:12px; letter-spacing:.08em; color: rgba(233,236,245,.70); text-transform: uppercase; }
+    .kpi-value{ margin-top:8px; font-size: 28px; font-weight: 750; letter-spacing: -0.02em; }
+    .kpi-sub{ margin-top:6px; font-size: 13px; color: rgba(233,236,245,.66); }
+
+    /* Glass executive summary */
+    .glass-card{
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(13,18,34,.76), rgba(11,16,32,.58));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .glass-card::after{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(360px 220px at 70% 0%, rgba(44,116,255,.10), transparent 62%),
+        radial-gradient(380px 250px at 0% 10%, rgba(201,167,90,.10), transparent 65%);
+      pointer-events:none;
+    }
+    .glass-card > *{ position:relative; z-index:1; }
+    .glass-title{ font-weight: 800; letter-spacing:-0.01em; margin-bottom:12px; }
+
+    .sum-grid{ display:grid; gap: 10px; }
+    .sum-item{
+      display:flex; gap: 12px; align-items:center;
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+    }
+
+    .sum-ic{
+      width: 42px; height: 42px; border-radius: 16px;
+      border:1px solid rgba(201,167,90,.30);
+      background: rgba(201,167,90,.10);
+      position:relative;
+      box-shadow: 0 14px 26px rgba(0,0,0,.35);
+    }
+    .sum-ic::after{
+      content:"";
+      position:absolute; inset:11px;
+      border-radius: 12px;
+      background: rgba(240,213,155,.92);
+      mask-repeat:no-repeat; mask-position:center; mask-size:contain;
+    }
+
+    .ic-key::after{ mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M7 14a5 5 0 1 1 4.9-6h8.6l1.5 1.5-2 2L22 13l-2 2-1.5-1.5-1 1L16 13l-1 1-1.5-1.5-1 1H11.9A5 5 0 0 1 7 14zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'/%3E%3C/svg%3E"); }
+    .ic-cash::after{ mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M2 7h20v10H2V7zm2 2v6h16V9H4zm8 5a3 3 0 1 1 0-6 3 3 0 0 1 0 6z'/%3E%3C/svg%3E"); }
+    .ic-rocket::after{ mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2c4.4 0 8 3.6 8 8 0 1.4-.4 2.8-1 4l-3-3-2 2 3 3c-1.2.6-2.6 1-4 1-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8zm-6 16l3-3 2 2-3 3H6v-2z'/%3E%3C/svg%3E"); }
+
+    .sum-title{ font-weight: 800; }
+    .sum-sub{ color: rgba(233,236,245,.70); font-size: 12.8px; margin-top: 2px; line-height:1.35; }
 /* Callout */
 .callout{
   margin-top: 14px;
@@ -575,7 +658,135 @@ h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em
   justify-content:space-between;
   font-size: 12px;
 }
+/* ===== Side Navigation (required for your JS to “look like it works”) ===== */
+.sidenav{
+  position: fixed;
+  top: 110px;
+  left: 16px;
+  width: 240px;
+  max-height: calc(100vh - 140px);
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(13,18,34,.72);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow2);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+}
 
+/* Collapse state your JS toggles: navWrap.classList.toggle("min") */
+.sidenav.min{
+  width: 64px;
+  padding: 10px;
+}
+.sidenav.min .nav-title{ display:none; }
+.sidenav.min .nav-list{ display:none; }
+/* ===== End Side Navigation ===== */
+
+    /* Side nav toggle button (your HTML uses class="nav-toggle") */
+.sidenav .nav-toggle{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  cursor: pointer;
+}
+.sidenav .nav-toggle:hover{
+  border-color: rgba(201,167,90,.35);
+  background: rgba(201,167,90,.10);
+}
+.sidenav .nav-toggle:focus-visible{
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+/* NAVIGATION title */
+.sidenav .nav-title{
+  font-size: 11px;
+  letter-spacing: .14em;
+  font-weight: 900;
+  color: rgba(233,236,245,.70);
+  padding: 2px 6px;
+}
+
+/* Link list container (your HTML uses class="nav-list") */
+.nav-list{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+/* Links that your JS creates inside #navList */
+.nav-list a{
+  text-decoration: none;
+  color: rgba(233,236,245,.82);
+  font-size: 13px;
+  padding: 10px 10px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  background: transparent;
+}
+.nav-list a:hover{
+  border-color: rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+}
+
+/* JS adds .active */
+.nav-list a.active{
+  border-color: rgba(44,116,255,.40);
+  background: rgba(44,116,255,.12);
+  color: rgba(255,255,255,.92);
+}
+/* ===== Back to Top Button ===== */
+.up-btn{
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(13,18,34,.72);
+  color: rgba(233,236,245,.90);
+  box-shadow: var(--shadow2);
+  cursor: pointer;
+  z-index: 30;
+
+  /* hidden by default */
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+
+  transition: opacity .2s ease, transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+/* JS toggles .show */
+.up-btn.show{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.up-btn:hover{
+  border-color: rgba(201,167,90,.35);
+  background: rgba(201,167,90,.10);
+}
+.up-btn:focus-visible{
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+/* ===== End Back to Top ===== */
+
+    @media print{
+  .sidenav, .up-btn{ display:none !important; }
+}
 @media (max-width: 1020px){
   .hero{ grid-template-columns: 1fr; }
   .grid-2{ grid-template-columns: 1fr; }
@@ -620,7 +831,7 @@ h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em
   h1 { font-size:26px !important; line-height:1.12 !important; }
   .lead, .section-head p, .kpi-sub, .sub, .chart-sub, .tiny-note, .rt-sub, .doc-sub, .disclaimer { color:#444 !important; }
   .kpi-label { color:#444 !important; }
-  .kpi-value { color:#111 !ender; }
+  .kpi-value { color:#111 !important; }
   .badge, .panel-tag { background:#f5f5f5 !important; border-color:#ddd !important; color:#111 !important; }
   .badge.gold, .opt-badge.gold { background:#fff7e6 !important; border-color:#e7d3a5 !important; }
   a { color:#111 !important; text-decoration:none !important; }
@@ -1297,9 +1508,9 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         </div>
       </div>
  
-   <section></div><div class="growth-grid-3">
+       <div class="growth-grid-2">
         <div class="growth-card wide">
-          <div class="gc-LEFT">
+          <div class="gc-top">
             <div class="gc-ic ic-phone"></div>
             <div>
               <div class="gc-title">AssureCall Expansion Narrative</div>
@@ -1416,7 +1627,6 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         </div>
       </div>
   <div class="chart-card" style="margin-top:16px;">
-    <div class="chart-card">
       <div class="chart-title">Use of Proceeds (High Level)</div>
       <div class="chart-sub">Where the $30,000 is intended to go (placeholder — replace with your exact breakdown).</div>
       <div class="uf-table">
@@ -1427,7 +1637,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         <div class="uf-row total"><div class="uf-left"><div class="uf-name">Total</div><div class="uf-sub">Roofing Appointments growth tranche</div></div><div class="uf-amt">$30,000</div></div>
       </div>
     </div>
- <div class="chart-card"style="margin-top:16px;">
+ <div class="chart-card" style="margin-top:16px;">
       <div class="chart-title">Operating Model (Summary)</div>
       <div class="chart-sub">Mirrors AssureCall structure — built for predictable hiring, training, and fulfillment.</div>
       <ul class="bullets" style="margin-top:10px;">
@@ -1819,7 +2029,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 <text x="182.0" y="288" fill="rgba(233,236,245,0.62)" font-size="10" text-anchor="middle">Liens Cleared</text>
 <rect x="326" y="57.6" width="160" height="196.4" rx="14" fill="#d93c3c" fill-opacity="0.25" stroke="#d93c3c" stroke-opacity="0.95" stroke-width="1.2"/>
 <text x="406.0" y="272" fill="rgba(233,236,245,0.82)" font-size="10" text-anchor="middle">$300k Partial Loan Only</text>
-<text x="406.0" y="47.6" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$787,884.07.46</text>
+<text x="406.0" y="47.6" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$787,884.07</text>
 <text x="406.0" y="288" fill="rgba(233,236,245,0.62)" font-size="10" text-anchor="middle">Liens Remain</text>
 </svg>
 </div>
@@ -1913,7 +2123,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           <div class="doc-ic">PDF</div>
           <div class="doc-meta">
             <div class="doc-title">Executive Narrative — Loan Purpose & Expansion Rationale</div>
-            <div class="doc-sub">Executive purpose statement and expansion narrative.</div>
+            <div class="doc-sub">Executive Purpose Statement and Epansion Narrative.</div>
           </div>
         </a>
 
@@ -1921,22 +2131,22 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           <div class="doc-ic">PDF</div>
           <div class="doc-meta">
             <div class="doc-title">Use of Funds & Repayment Overview</div>
-            <div class="doc-sub">Summary allocation and repayment logic.</div>
+            <div class="doc-sub">Summary Allocation and Repayment logic.</div>
           </div>
         </a>
         
          <a class="doc" href="docs/Borrower%20Experience%20%26%20Operational%20Background.pdf" target="_blank" rel="noopener">
           <div class="doc-ic">PDF</div>
           <div class="doc-meta">
-            <div class="doc-title">Borrower Experience & Operational Background.pdf/div>
+            <div class="doc-title">Borrower Experience & Operational Background</div>
             <div class="doc-sub">Summary of Business and Industry Experience.</div>
-          </div>
-        </a>
+         </div>
+       </a>
 
         <a class="doc" href="docs/Borrower%20and%20Primary%20Guarantee.pdf" target="_blank" rel="noopener">
           <div class="doc-ic">PDF</div>
           <div class="doc-meta">
-            <div class="doc-title">Borrower and Primary Guarantee</div>
+            <div class="doc-title">Borrower & Primary Guarantee</div>
             <div class="doc-sub">Borrower and Primary Guarantee Information.</div>
           </div>
         </a>
