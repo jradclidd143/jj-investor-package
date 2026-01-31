@@ -682,7 +682,12 @@
   gap: 10px;
   overflow: hidden;
 }
-
+/* Dock sidenav to the right edge of the centered document (not the browser edge)
+   Set 1180px to match your .container max-width if different */
+@media (min-width: 1180px){
+  .sidenav{
+    right: calc((100vw - 1180px)/2 + 16px);
+  }
 /* Collapse state your JS toggles: navWrap.classList.toggle("min") */
 .sidenav.min{
   width: 64px;
