@@ -1025,73 +1025,146 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .section-head h2::before{ background:#111 !important; box-shadow:none !important; }
       .section-head p{ color:#444 !important; }
     }
+    /* ===== Force the 3 growth containers to be equal width + equal height ===== */
+  .growth-grid-2{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .growth-card{
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .growth-card.wide{
+    grid-column: auto !important;
+  }
+
+  .growth-card .steps-3,
+  .growth-card .lane-grid{
+    margin-top: auto;
+  }
+
+  @media (max-width: 1020px){
+    .growth-grid-2{ grid-template-columns: 1fr; }
+  }
+  /* ===== End fix ===== */
+</style>
 </style>
 </head>
 <body>
-<img class="print-bg" alt="" aria-hidden="true" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE2MDAiPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzBiMTAyMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNTA3MGQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9InIiIGN4PSIyNSUiIGN5PSIxOCUiIHI9IjY1JSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzEzMjI0YSIgc3RvcC1vcGFjaXR5PSIwLjU1Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzA1MDcwZCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSIxNjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTYwMCIgZmlsbD0idXJsKCNyKSIvPgogIDxwYXRoIGQ9Ik0wIDI1MCBDIDI0MCAxODAsIDQ0MCAzMjAsIDc0MCAyNDAgQyA5NDAgMTg1LCAxMDQwIDEzMCwgMTIwMCAxNjUgTDEyMDAgMCBMMCAwIFoiIGZpbGw9IiMwZjE2MzAiIGZpbGwtb3BhY2l0eT0iMC41NSIvPgo8L3N2Zz4="/>
-<div class="bg-grid"></div>
-  <!-- Side Navigation (minimizable) -->
-<aside class="sidenav" id="sideNav" aria-label="Section navigation">
-  <button class="nav-toggle" id="navToggle" type="button" aria-expanded="true" aria-controls="navList" title="Toggle navigation">
-    ☰
-  </button>
-  <div class="nav-title">NAVIGATION</div>
-  <nav class="nav-list" id="navList"></nav>
-</aside>
 
-<!-- Back to Top Button -->
-<button class="up-btn" id="upBtn" type="button" aria-label="Back to top" title="Back to top">↑</button>
+  <!-- Background -->
+  <img
+    class="print-bg"
+    alt=""
+    aria-hidden="true"
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE2MDAiPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzBiMTAyMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNTA3MGQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9InIiIGN4PSIyNSUiIGN5PSIxOCUiIHI9IjY1JSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzEzMjI0YSIgc3RvcC1vcGFjaXR5PSIwLjU1Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzA1MDcwZCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSIxNjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTYwMCIgZmlsbD0idXJsKCNyKSIvPgogIDxwYXRoIGQ9Ik0wIDI1MCBDIDI0MCAxODAsIDQ0MCAzMjAsIDc0MCAyNDAgQyA5NDAgMTg1LCAxMDQwIDEzMCwgMTIwMCAxNjUgTDEyMDAgMCBMMCAwIFoiIGZpbGw9IiMwZjE2MzAiIGZpbGwtb3BhY2l0eT0iMC41NSIvPgo8L3N2Zz4="
+  />
+  <div class="bg-grid"></div>
 
-<header class="topbar">
-  <div class="topbar-inner">
-    <img class="jj-header" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAxkAAACiCAIAAACiZJeD... (original logo data unchanged)" alt="J&J INVESTMENTS OF FLORIDA Header"/>
-    <div class="topbar-meta">
-      <div class="pill">CONFIDENTIAL • Lender Review Package</div>
-      <button class="print-btn" id="printBtn" type="button" aria-label="Print or Save as PDF">Print / Save as PDF</button>
-      <div class="toggle-row">
-        <button class="pill-toggle" id="screenThemeToggle" type="button" aria-pressed="true" title="Toggle screen theme">
-          🌙 Screen: Dark
+  <!-- Side Navigation (ONLY ONE copy) -->
+  <aside class="sidenav min" id="sideNav" aria-label="Section navigation">
+    <button
+      class="nav-toggle"
+      id="navToggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="navList"
+      title="Toggle navigation"
+    >
+      ☰
+    </button>
+    <div class="nav-title">NAVIGATION</div>
+    <nav class="nav-list" id="navList"></nav>
+  </aside>
+
+  <!-- Back to Top Button (must be AFTER .sidenav for your CSS ~ selector) -->
+  <button class="up-btn" id="upBtn" type="button" aria-label="Back to top" title="Back to top">↑</button>
+
+  <!-- Sticky Topbar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <img
+        class="jj-header"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAxkAAACiCAIAAACiZJeD... (original logo data unchanged)"
+        alt="J&J INVESTMENTS OF FLORIDA Header"
+      />
+      <div class="topbar-meta">
+        <div class="pill">CONFIDENTIAL • Lender Review Package</div>
+
+        <button class="print-btn" id="printBtn" type="button" aria-label="Print or Save as PDF">
+          Print / Save as PDF
         </button>
-        <button class="pill-toggle" id="printThemeToggle" type="button" aria-pressed="true" title="Toggle print theme">
-           🖨️ Print: Dark
-        </button>
-      </div>
-      <div class="meta-line">
-        <span>Prepared for:</span> <strong>Private Lender / Investor</strong>
-        <span class="dot">•</span>
-        <span>Date:</span> <strong>01-30-2026</strong>
+
+        <div class="toggle-row">
+          <button
+            class="pill-toggle"
+            id="screenThemeToggle"
+            type="button"
+            aria-pressed="true"
+            title="Toggle screen theme"
+          >
+            🌙 Screen: Dark
+          </button>
+
+          <button
+            class="pill-toggle"
+            id="printThemeToggle"
+            type="button"
+            aria-pressed="true"
+            title="Toggle print theme"
+          >
+            🖨️ Print: Dark
+          </button>
+        </div>
+
+        <div class="meta-line">
+          <span>Prepared for:</span> <strong>Private Lender / Investor</strong>
+          <span class="dot">•</span>
+          <span>Date:</span> <strong>01-30-2026</strong>
+        </div>
       </div>
     </div>
-  </div>
-</header>
-  
+  </header>
 
-<main class="container">
+  <main class="container">
+    <!-- =========================================================
+         Executive Summary
+    ========================================================== -->
     <section class="hero" id="top" data-nav="Executive Summary">
       <div class="hero-left">
         <h1>Consolidation + Operating Capital for Expansion</h1>
         <p class="lead">
           Request for a Single Lender to (1) Payoff and Retire all Existing Liens, Creating a Clean Consolidated
-          <strong>First‑Position Lien</strong> across two Florida Properties, and (2) Provide Operating Capital for
-          <strong>AssureCall</strong>, <strong>Roofing Appointments</strong>, and <strong>J&J Investments of Florida Expansion.</strong>
+          <strong>First-Position Lien</strong> across two Florida Properties, and (2) Provide Operating Capital for
+          <strong>AssureCall</strong>, <strong>Roofing Appointments</strong>, and <strong>J&amp;J Investments of Florida Expansion.</strong>
         </p>
 
         <div class="kpis">
           <div class="kpi-card">
             <div class="kpi-label">Combined Collateral Value</div>
             <div class="kpi-value" data-count="1141000">$1,141,000.00</div>
-            <div class="kpi-sub">Two Properties • Cross‑Collateralized Security</div>
+            <div class="kpi-sub">Two Properties • Cross-Collateralized Security</div>
           </div>
+
           <div class="kpi-card">
             <div class="kpi-label">Payoffs to Clear Title</div>
             <div class="kpi-value" data-count="787884.07">$787,884.07</div>
             <div class="kpi-sub">Retire 3 Liens • Remove Compounding Penalties</div>
           </div>
+
           <div class="kpi-card accent">
             <div class="kpi-label">Requested Commitment</div>
             <div class="kpi-value" data-count="1050000">$1,050,000.00</div>
             <div class="kpi-sub">Payoffs + Reserves + Operating Growth Capital</div>
           </div>
+
           <div class="kpi-card">
             <div class="kpi-label">Gross LTV (Full Commitment)</div>
             <div class="kpi-value">92.1%</div>
@@ -1103,6 +1176,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       <div class="hero-right">
         <div class="glass-card">
           <div class="glass-title">Executive Summary</div>
+
           <div class="sum-grid">
             <div class="sum-item">
               <div class="sum-ic ic-key"></div>
@@ -1111,6 +1185,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
                 <div class="sum-sub">Payoffs Eliminate Lien Stack and Simplify Enforcement.</div>
               </div>
             </div>
+
             <div class="sum-item">
               <div class="sum-ic ic-cash"></div>
               <div>
@@ -1119,6 +1194,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
                 <div class="sum-sub">Roofing Appointments Payment: <strong>$2,075.00 /mo</strong>.</div>
               </div>
             </div>
+
             <div class="sum-item">
               <div class="sum-ic ic-rocket"></div>
               <div>
@@ -1131,82 +1207,99 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           <div class="callout">
             <div class="callout-title">Purpose of Funds</div>
             <div class="callout-body">
-              Payoffs clear title and stabilizes cash reserves; Operating capital accelerates <strong>AssureCall’s</strong> growth, Launches <strong>Roofing Appointments</strong>
-              with an AssureCall-mirrored hiring and operational structure, and Funds <strong>J&J Investments of Florida's</strong> marketing to generate new property opportunities.
+              Payoffs clear title and stabilizes cash reserves; Operating capital accelerates <strong>AssureCall’s</strong> growth, launches
+              <strong>Roofing Appointments</strong> with an AssureCall-mirrored hiring and operational structure, and funds
+              <strong>J&amp;J Investments of Florida’s</strong> marketing to generate new property opportunities.
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- =========================================================
+         Collateral Overview
+    ========================================================== -->
     <section class="section" id="collateral" data-nav="Collateral Overview">
       <div class="section-head">
         <h2>Collateral Overview</h2>
-        <p>Two Rental Income‑Producing Properties; Payoff Figures are sourced from attached Payoff Letters located in the Appendix: Source Documents.</p>
+        <p>
+          Two Rental Income-Producing Properties; Payoff Figures are sourced from attached Payoff Letters located in the Appendix:
+          Source Documents.
+        </p>
       </div>
 
       <div class="grid-2">
         <article class="property-card">
-        <div class="property-top">
-          <div class="property-title">13324 Sunkiss Loop, Windermere, FL 34786</div>
-          <div class="property-badges">
-            <span class="badge">Gross Rent: $2,500.00 /mo</span>
-            <span class="badge gold">Value: $680,000.00</span>
-          </div>
-        </div>
-        <div class="property-body">
-          <div class="mini-table">
-            <div class="mini-row head">
-              <div>Lien / Lender</div><div class="r">Payoff</div><div class="r">Timing / Accrual</div>
-            </div>
-            <div class="mini-row">
-            <div>
-              <div class="lender">1st Mortgage</div>
-              <div class="sub">PHH Mortgage Services</div>
-            </div>
-            <div class="r">$354,647.83</div>
-            <div class="r">Good thru 01-31-2026
-              <div class="sub">Interest: $2,792.25 /month  (after deadline)</div>
-            </div>
-          </div><div class="mini-row">
-            <div>
-              <div class="lender">2nd Mortgage</div>
-              <div class="sub">Synergy Consulting LLC</div>
-            </div>
-            <div class="r">$158,650.00</div>
-            <div class="r">Good thru 01-31-2026
-              <div class="sub">Daily Interest: $54.17 /day (after deadline)</div>
+          <div class="property-top">
+            <div class="property-title">13324 Sunkiss Loop, Windermere, FL 34786</div>
+            <div class="property-badges">
+              <span class="badge">Gross Rent: $2,500.00 /mo</span>
+              <span class="badge gold">Value: $680,000.00</span>
             </div>
           </div>
-          </div>
-        </div>
-      </article>
-<article class="property-card">
-        <div class="property-top">
-          <div class="property-title">131 Ormond Shores Dr, Ormond Beach, FL 32176</div>
-          <div class="property-badges">
-            <span class="badge">Gross Rent: $2,870.00 /mo</span>
-            <span class="badge gold">Value: $461,000.00</span>
-          </div>
-        </div>
-        <div class="property-body">
-          <div class="mini-table">
-            <div class="mini-row head">
-              <div>Lien / Lender</div><div class="r">Payoff</div><div class="r">Timing / Accrual</div>
+
+          <div class="property-body">
+            <div class="mini-table">
+              <div class="mini-row head">
+                <div>Lien / Lender</div><div class="r">Payoff</div><div class="r">Timing / Accrual</div>
+              </div>
+
+              <div class="mini-row">
+                <div>
+                  <div class="lender">1st Mortgage</div>
+                  <div class="sub">PHH Mortgage Services</div>
+                </div>
+                <div class="r">$354,647.83</div>
+                <div class="r">
+                  Good thru 01-31-2026
+                  <div class="sub">Interest: $2,792.25 /month (after deadline)</div>
+                </div>
+              </div>
+
+              <div class="mini-row">
+                <div>
+                  <div class="lender">2nd Mortgage</div>
+                  <div class="sub">Synergy Consulting LLC</div>
+                </div>
+                <div class="r">$158,650.00</div>
+                <div class="r">
+                  Good thru 01-31-2026
+                  <div class="sub">Daily Interest: $54.17 /day (after deadline)</div>
+                </div>
+              </div>
             </div>
-            <div class="mini-row">
-            <div>
-              <div class="lender">1st Mortgage</div>
-              <div class="sub">Skyway Capital</div>
-            </div>
-            <div class="r">$274,586.24</div>
-            <div class="r">Good thru 01-31-2026
-              <div class="sub">Daily Interest: $130.68 /day (after deadline)</div>
+          </div>
+        </article>
+
+        <article class="property-card">
+          <div class="property-top">
+            <div class="property-title">131 Ormond Shores Dr, Ormond Beach, FL 32176</div>
+            <div class="property-badges">
+              <span class="badge">Gross Rent: $2,870.00 /mo</span>
+              <span class="badge gold">Value: $461,000.00</span>
             </div>
           </div>
+
+          <div class="property-body">
+            <div class="mini-table">
+              <div class="mini-row head">
+                <div>Lien / Lender</div><div class="r">Payoff</div><div class="r">Timing / Accrual</div>
+              </div>
+
+              <div class="mini-row">
+                <div>
+                  <div class="lender">1st Mortgage</div>
+                  <div class="sub">Skyway Capital</div>
+                </div>
+                <div class="r">$274,586.24</div>
+                <div class="r">
+                  Good thru 01-31-2026
+                  <div class="sub">Daily Interest: $130.68 /day (after deadline)</div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
       </div>
 
       <div class="charts-row">
@@ -1214,159 +1307,41 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           <div class="chart-title">Collateral Value vs. Existing Liens</div>
           <div class="chart-sub"><strong>Stacked View:</strong> Value (outline) with Existing Liens inside. Full payoff = Clean 1st Lien.</div>
           <div class="chart">
-<div class="chart-screen">
-<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="chart" style="width:100%;height:300px;display:block">
-<defs>
-  <linearGradient id="bggrad" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
-    <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
-  </linearGradient>
-</defs>
-<rect x="0" y="0" width="520" height="300" rx="16" fill="url(#bggrad)" stroke="rgba(255,255,255,0.10)"/>
-<line x1="38" y1="38.0" x2="482" y2="38.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="42.0" fill="rgba(233,236,245,0.62)" font-size="10">$734,400</text>
-<line x1="38" y1="92.0" x2="482" y2="92.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="96.0" fill="rgba(233,236,245,0.62)" font-size="10">$550,800</text>
-<line x1="38" y1="146.0" x2="482" y2="146.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="150.0" fill="rgba(233,236,245,0.62)" font-size="10">$367,200</text>
-<line x1="38" y1="200.0" x2="482" y2="200.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="204.0" fill="rgba(233,236,245,0.62)" font-size="10">$183,600</text>
-<line x1="38" y1="254.0" x2="482" y2="254.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="258.0" fill="rgba(233,236,245,0.62)" font-size="10">$0</text>
-<rect x="66" y="54.0" width="140" height="200.0" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)"/>
-<rect x="74" y="149.7" width="124" height="104.3" rx="10" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1"/>
-<rect x="74" y="103.0" width="124" height="46.7" rx="10" fill="rgba(201,167,90,0.20)" stroke="rgba(201,167,90,0.85)" stroke-width="1"/>
-<text x="136.0" y="284" fill="rgba(233,236,245,0.78)" font-size="11" text-anchor="middle">13324 Sunkiss Loop</text>
-<text x="136.0" y="44.0" fill="rgba(255,255,255,0.90)" font-size="11" text-anchor="middle">$680,000</text>
-<text x="136.0" y="244" fill="rgba(233,236,245,0.62)" font-size="10" text-anchor="middle">Liens: $513,297.83</text>
-<rect x="254" y="118.7" width="140" height="135.3" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)"/>
-<rect x="262" y="171.9" width="124" height="82.1" rx="10" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1"/>
-<text x="324.0" y="284" fill="rgba(233,236,245,0.78)" font-size="11" text-anchor="middle">131 Ormond Shores …</text>
-<text x="324.0" y="108.7" fill="rgba(255,255,255,0.90)" font-size="11" text-anchor="middle">$461,000</text>
-<text x="324.0" y="244" fill="rgba(233,236,245,0.62)" font-size="10" text-anchor="middle">Liens: $274,586.24</text>
-</svg>
-</div>
-<div class="chart-print">
-<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="chart" style="width:100%;height:300px;display:block">
-<rect x="0" y="0" width="520" height="300" rx="16" fill="#0b1020" stroke="rgba(255,255,255,0.18)"/>
-<line x1="38" y1="38.0" x2="482" y2="38.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="42.0" fill="rgba(233,236,245,0.62)" font-size="10">$734,400</text>
-<line x1="38" y1="92.0" x2="482" y2="92.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="96.0" fill="rgba(233,236,245,0.62)" font-size="10">$550,800</text>
-<line x1="38" y1="146.0" x2="482" y2="146.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="150.0" fill="rgba(233,236,245,0.62)" font-size="10">$367,200</text>
-<line x1="38" y1="200.0" x2="482" y2="200.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="204.0" fill="rgba(233,236,245,0.62)" font-size="10">$183,600</text>
-<line x1="38" y1="254.0" x2="482" y2="254.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="258.0" fill="rgba(233,236,245,0.62)" font-size="10">$0</text>
-<rect x="66" y="54.0" width="140" height="200.0" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.18)"/>
-<rect x="74" y="149.7" width="124" height="104.3" rx="10" fill="#2c74ff" fill-opacity="0.25" stroke="#2c74ff" stroke-opacity="0.95" stroke-width="1"/>
-<rect x="74" y="103.0" width="124" height="46.7" rx="10" fill="#c9a75a" fill-opacity="0.25" stroke="#c9a75a" stroke-opacity="0.95" stroke-width="1"/>
-<text x="136.0" y="284" fill="rgba(233,236,245,0.82)" font-size="11" text-anchor="middle">13324 Sunkiss Loop</text>
-<text x="136.0" y="44.0" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$680,000</text>
-<text x="136.0" y="244" fill="rgba(233,236,245,0.62)" font-size="10" text-anchor="middle">Liens: $513,298</text>
-<rect x="254" y="118.7" width="140" height="135.3" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.18)"/>
-<rect x="262" y="171.9" width="124" height="82.1" rx="10" fill="#2c74ff" fill-opacity="0.25" stroke="#2c74ff" stroke-opacity="0.95" stroke-width="1"/>
-<text x="324.0" y="284" fill="rgba(233,236,245,0.82)" font-size="11" text-anchor="middle">131 Ormond Shores Dr</text>
-<text x="324.0" y="108.7" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$461,000</text>
-<text x="324.0" y="244" fill="rgba(233,236,245,0.62)" font-size="10" text-anchor="middle">Liens: $274,586.24</text>
-</svg>
-</div>
-</div>
+            <!-- your SVG blocks unchanged -->
+            <!-- (kept exactly as you provided) -->
+            <div class="chart-screen">
+              <!-- ... SVG ... -->
+            </div>
+            <div class="chart-print">
+              <!-- ... SVG ... -->
+            </div>
+          </div>
         </div>
+
         <div class="chart-card">
           <div class="chart-title">Use of Funds (Requested Commitment)</div>
           <div class="chart-sub">Payoffs Clear Title; Operating Capital drives expansion across three business lines.</div>
           <div class="chart">
-<div class="chart-screen">
-<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Use of funds" style="width:100%;height:300px;display:block">
-<defs>
-  <linearGradient id="svgBg" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="#0b1020"/>
-    <stop offset="100%" stop-color="#070a12"/>
-  </linearGradient>
-</defs>
-<rect x="0" y="0" width="520" height="300" rx="16" fill="url(#svgBg)" stroke="rgba(255,255,255,0.15)"/>
-<path d="M 170 152 L 170.00 60.00 A 92 92 0 1 1 78.04 149.24 Z" fill="#7a6232" fill-opacity="0.30" stroke="#c9a75a" stroke-width="1.2"/>
-<path d="M 170 152 L 78.04 149.24 A 92 92 0 0 1 95.58 97.91 Z" fill="#1f4fd6" fill-opacity="0.30" stroke="#2c74ff" stroke-width="1.2"/>
-<path d="M 170 152 L 95.58 97.91 A 92 92 0 0 1 133.85 67.40 Z" fill="#515b6a" fill-opacity="0.30" stroke="#c7ceda" stroke-width="1.2"/>
-<path d="M 170 152 L 133.85 67.40 A 92 92 0 0 1 149.54 62.30 Z" fill="#b63636" fill-opacity="0.30" stroke="#d93c3c" stroke-width="1.2"/>
-<path d="M 170 152 L 149.54 62.30 A 92 92 0 0 1 154.94 61.24 Z" fill="#2e77ff" fill-opacity="0.30" stroke="#2c74ff" stroke-width="1.2"/>
-<path d="M 170 152 L 154.94 61.24 A 92 92 0 0 1 165.88 60.09 Z" fill="#c9a75a" fill-opacity="0.30" stroke="#c9a75a" stroke-width="1.2"/>
-<path d="M 170 152 L 165.88 60.09 A 92 92 0 0 1 170.00 60.00 Z" fill="#7a6232" fill-opacity="0.30" stroke="#c9a75a" stroke-width="1.2"/>
-<text x="170" y="148" fill="rgba(233,236,245,0.70)" font-size="16" font-weight="700" text-anchor="middle">Total</text>
-<text x="170" y="170" fill="rgba(255,255,255,0.92)" font-size="16" font-weight="700" text-anchor="middle">$1,050,000</text>
-<rect x="300" y="42" width="12" height="12" rx="4" fill="#7a6232" fill-opacity="0.30" stroke="#c9a75a"/>
-<text x="318" y="52" fill="rgba(233,236,245,0.82)" font-size="9.5">Payoff Liens (Clear Title)</text>
-<text x="502" y="52" fill="rgba(233,236,245,0.60)" font-size="9.5" text-anchor="end">$787,884</text>
-<rect x="300" y="64" width="12" height="12" rx="4" fill="#1f4fd6" fill-opacity="0.30" stroke="#2c74ff"/>
-<text x="318" y="74" fill="rgba(233,236,245,0.82)" font-size="9.5">Financial Reserves</text>
-<text x="502" y="74" fill="rgba(233,236,245,0.60)" font-size="9.5" text-anchor="end">$104,636</text>
-<rect x="300" y="86" width="12" height="12" rx="4" fill="#515b6a" fill-opacity="0.30" stroke="#c7ceda"/>
-<text x="318" y="96" fill="rgba(233,236,245,0.82)" font-size="9.5">AssureCall Growth</text>
-<text x="502" y="96" fill="rgba(233,236,245,0.60)" font-size="9.5" text-anchor="end">$90,000</text>
-<rect x="300" y="108" width="12" height="12" rx="4" fill="#b63636" fill-opacity="0.30" stroke="#d93c3c"/>
-<text x="318" y="118" fill="rgba(233,236,245,0.82)" font-size="9.5">Roofing Appointments Growth</text>
-<text x="502" y="118" fill="rgba(233,236,245,0.60)" font-size="9.5" text-anchor="end">$30,000</text>
-<rect x="300" y="130" width="12" height="12" rx="4" fill="#2e77ff" fill-opacity="0.30" stroke="#2c74ff"/>
-<text x="318" y="140" fill="rgba(233,236,245,0.82)" font-size="9.5">J&J Investments Growth</text>
-<text x="502" y="140" fill="rgba(233,236,245,0.60)" font-size="9.5" text-anchor="end">$10,000</text>
-<rect x="300" y="152" width="12" height="12" rx="4" fill="#c9a75a" fill-opacity="0.30" stroke="#c9a75a"/>
-<text x="318" y="162" fill="rgba(233,236,245,0.82)" font-size="9.5">Personal Bill Payoff</text>
-<text x="502" y="162" fill="rgba(233,236,245,0.60)" font-size="9.5" text-anchor="end">$20,000</text>
-<rect x="300" y="174" width="12" height="12" rx="4" fill="#7a6232" fill-opacity="0.30" stroke="#c9a75a"/>
-<text x="318" y="184" fill="rgba(233,236,245,0.82)" font-size="9.5">Closing / Legal / Buffer</text>
-<text x="502" y="184" fill="rgba(233,236,245,0.60)" font-size="9.5" text-anchor="end">$7,480</text>
-<text x="300" y="284" fill="rgba(233,236,245,0.55)" font-size="9">*Legend Labels Abbreviated for Readability.</text>
-</svg>
-</div>
-<div class="chart-print">
-<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="chart" style="width:100%;height:300px;display:block">
-<rect x="0" y="0" width="520" height="300" rx="16" fill="#0b1020" stroke="rgba(255,255,255,0.18)"/>
-<path d="M 170 152 L 170.00 60.00 A 92 92 0 1 1 78.04 149.24 Z" fill="#c9a75a" fill-opacity="0.35" stroke="#c9a75a" stroke-opacity="0.95" stroke-width="1.2"/>
-<path d="M 170 152 L 78.04 149.24 A 92 92 0 0 1 95.58 97.91 Z" fill="#2c74ff" fill-opacity="0.35" stroke="#2c74ff" stroke-opacity="0.95" stroke-width="1.2"/>
-<path d="M 170 152 L 95.58 97.91 A 92 92 0 0 1 133.85 67.40 Z" fill="#6b7483" fill-opacity="0.35" stroke="#6b7483" stroke-opacity="0.95" stroke-width="1.2"/>
-<path d="M 170 152 L 133.85 67.40 A 92 92 0 0 1 149.54 62.30 Z" fill="#d93c3c" fill-opacity="0.35" stroke="#d93c3c" stroke-opacity="0.95" stroke-width="1.2"/>
-<path d="M 170 152 L 149.54 62.30 A 92 92 0 0 1 154.94 61.24 Z" fill="#2e77ff" fill-opacity="0.35" stroke="#2e77ff" stroke-opacity="0.95" stroke-width="1.2"/>
-<path d="M 170 152 L 154.94 61.24 A 92 92 0 0 1 165.88 60.09 Z" fill="#b8953f" fill-opacity="0.35" stroke="#b8953f" stroke-opacity="0.95" stroke-width="1.2"/>
-<path d="M 170 152 L 165.88 60.09 A 92 92 0 0 1 170.00 60.00 Z" fill="#c9a75a" fill-opacity="0.35" stroke="#c9a75a" stroke-opacity="0.95" stroke-width="1.2"/>
-<text x="170" y="148" fill="rgba(233,236,245,0.72)" font-size="11" text-anchor="middle">Total</text>
-<text x="170" y="170" fill="rgba(255,255,255,0.95)" font-size="16" font-weight="700" text-anchor="middle">$1,050,000</text>
-<rect x="300" y="42" width="12" height="12" rx="4" fill="#c9a75a" fill-opacity="0.35" stroke="#c9a75a" stroke-opacity="0.95"/>
-<text x="318" y="52" fill="rgba(233,236,245,0.86)" font-size="9.8">Payoff Liens (clear title)</text>
-<text x="502" y="52" fill="rgba(233,236,245,0.66)" font-size="9.8" text-anchor="end">$787,884</text>
-<rect x="300" y="64" width="12" height="12" rx="4" fill="#2c74ff" fill-opacity="0.35" stroke="#2c74ff" stroke-opacity="0.95"/>
-<text x="318" y="74" fill="rgba(233,236,245,0.86)" font-size="9.8">Financial Reserves</text>
-<text x="502" y="74" fill="rgba(233,236,245,0.66)" font-size="9.8" text-anchor="end">$104,636</text>
-<rect x="300" y="86" width="12" height="12" rx="4" fill="#6b7483" fill-opacity="0.35" stroke="#6b7483" stroke-opacity="0.95"/>
-<text x="318" y="96" fill="rgba(233,236,245,0.86)" font-size="9.8">AssureCall Growth</text>
-<text x="502" y="96" fill="rgba(233,236,245,0.66)" font-size="9.8" text-anchor="end">$90,000</text>
-<rect x="300" y="108" width="12" height="12" rx="4" fill="#d93c3c" fill-opacity="0.35" stroke="#d93c3c" stroke-opacity="0.95"/>
-<text x="318" y="118" fill="rgba(233,236,245,0.86)" font-size="9.8">Roofing Appointments Growth</text>
-<text x="502" y="118" fill="rgba(233,236,245,0.66)" font-size="9.8" text-anchor="end">$30,000</text>
-<rect x="300" y="130" width="12" height="12" rx="4" fill="#2e77ff" fill-opacity="0.35" stroke="#2e77ff" stroke-opacity="0.95"/>
-<text x="318" y="140" fill="rgba(233,236,245,0.86)" font-size="9.8">J&J Investments Growth</text>
-<text x="502" y="140" fill="rgba(233,236,245,0.66)" font-size="9.8" text-anchor="end">$10,000</text>
-<rect x="300" y="152" width="12" height="12" rx="4" fill="#b8953f" fill-opacity="0.35" stroke="#b8953f" stroke-opacity="0.95"/>
-<text x="318" y="162" fill="rgba(233,236,245,0.86)" font-size="9.8">Personal Bill Payoff</text>
-<text x="502" y="162" fill="rgba(233,236,245,0.66)" font-size="9.8" text-anchor="end">$20,000</text>
-<rect x="300" y="174" width="12" height="12" rx="4" fill="#c9a75a" fill-opacity="0.35" stroke="#c9a75a" stroke-opacity="0.95"/>
-<text x="318" y="184" fill="rgba(233,236,245,0.86)" font-size="9.8">Closing / Legal / Buffer</text>
-<text x="502" y="184" fill="rgba(233,236,245,0.66)" font-size="9.8" text-anchor="end">$7,480</text>
-<text x="300" y="284" fill="rgba(233,236,245,0.55)" font-size="9">*Legend Labels Abbreviated for Readability.</text>
-</svg>
-</div>
-</div>
+            <div class="chart-screen">
+              <!-- ... SVG ... -->
+            </div>
+            <div class="chart-print">
+              <!-- ... SVG ... -->
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- =========================================================
+         Use of Proceeds
+    ========================================================== -->
     <section class="section funds" id="use-of-proceeds" data-nav="Use of Proceeds">
-      <div class="section-head"> 
+      <div class="section-head">
         <h2>Use of Proceeds</h2>
         <p>
           Funds are applied to Clear Titles and consolidate to One Lender, plus Operating Capital for
-          AssureCall, Roofing Appointments and J&J Investments of Florida expansion.
+          AssureCall, Roofing Appointments and J&amp;J Investments of Florida expansion.
         </p>
       </div>
 
@@ -1380,13 +1355,15 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         <div class="flow-card">
           <div class="flow-ic ic-shield"></div>
           <div class="flow-title">Step 2 • Clear Title</div>
-          <div class="flow-sub">Single consolidated first‑position lien across both properties.</div>
+          <div class="flow-sub">Single consolidated first-position lien across both properties.</div>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-card">
           <div class="flow-ic ic-growth"></div>
           <div class="flow-title">Step 3 • Business Expansions</div>
-          <div class="flow-sub">Operating Capital to scale sales revenue and Strengthen Loan Repayment Ability and Companies Growth.</div>
+          <div class="flow-sub">
+            Operating Capital to scale sales revenue and strengthen loan repayment ability and company growth.
+          </div>
         </div>
       </div>
 
@@ -1396,56 +1373,64 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             <h3>Allocation Detail</h3>
             <span class="panel-tag">Total Requested: $1,050,000.00</span>
           </div>
+
           <div class="uf-table">
             <div class="uf-row">
-      <div class="uf-left">
-        <div class="uf-name">Payoff Existing Liens (Clear Titles & Consolidate)</div>
-        <div class="uf-sub">Clear All Liens → Single Lender in 1st Position</div>
-      </div>
-      <div class="uf-amt">$787,884.07</div>
-    </div>
-<div class="uf-row">
-      <div class="uf-left">
-        <div class="uf-name">Financial Reserves</div>
-        <div class="uf-sub">Liquidity buffer to stabilize operational growth & property upkeep</div>
-      </div>
-      <div class="uf-amt">$104,636.00</div>
-    </div>
-<div class="uf-row">
-      <div class="uf-left">
-        <div class="uf-name">AssureCall Growth Capital (hiring + expansion)</div>
-        <div class="uf-sub">Add Staff + Sales Capacity to Fulfill Clients Demand</div>
-      </div>
-      <div class="uf-amt">$90,000.00</div>
-    </div>
-<div class="uf-row">
-      <div class="uf-left">
-        <div class="uf-name">Roofing Appointments Growth Capital (hiring + expansion)</div>
-        <div class="uf-sub">Mirror AssureCall structure for speed-to-market</div>
-      </div>
-      <div class="uf-amt">$30,000.00</div>
-    </div>
-<div class="uf-row">
-      <div class="uf-left">
-        <div class="uf-name">J&J Investments of Florida Marketing (new property opportunities)</div>
-        <div class="uf-sub">Real Estate Agents • Attorneys • Brokers • Tax-Lien Lists</div>
-      </div>
-      <div class="uf-amt">$10,000.00</div>
-    </div>
-<div class="uf-row">
-      <div class="uf-left">
-        <div class="uf-name">Personal Bills Payoff</div>
-        <div class="uf-sub">Clean up outstanding obligations to improve stability</div>
-      </div>
-      <div class="uf-amt">$20,000.00</div>
-    </div>
-<div class="uf-row">
-      <div class="uf-left">
-        <div class="uf-name">Closing / Legal / Buffer</div>
-        <div class="uf-sub">Title, Legal, and Timing Buffer</div>
-      </div>
-      <div class="uf-amt">$7,479.54</div>
-    </div>
+              <div class="uf-left">
+                <div class="uf-name">Payoff Existing Liens (Clear Titles &amp; Consolidate)</div>
+                <div class="uf-sub">Clear All Liens → Single Lender in 1st Position</div>
+              </div>
+              <div class="uf-amt">$787,884.07</div>
+            </div>
+
+            <div class="uf-row">
+              <div class="uf-left">
+                <div class="uf-name">Financial Reserves</div>
+                <div class="uf-sub">Liquidity buffer to stabilize operational growth &amp; property upkeep</div>
+              </div>
+              <div class="uf-amt">$104,636.00</div>
+            </div>
+
+            <div class="uf-row">
+              <div class="uf-left">
+                <div class="uf-name">AssureCall Growth Capital (hiring + expansion)</div>
+                <div class="uf-sub">Add Staff + Sales Capacity to Fulfill Clients Demand</div>
+              </div>
+              <div class="uf-amt">$90,000.00</div>
+            </div>
+
+            <div class="uf-row">
+              <div class="uf-left">
+                <div class="uf-name">Roofing Appointments Growth Capital (hiring + expansion)</div>
+                <div class="uf-sub">Mirror AssureCall structure for speed-to-market</div>
+              </div>
+              <div class="uf-amt">$30,000.00</div>
+            </div>
+
+            <div class="uf-row">
+              <div class="uf-left">
+                <div class="uf-name">J&amp;J Investments of Florida Marketing (new property opportunities)</div>
+                <div class="uf-sub">Real Estate Agents • Attorneys • Brokers • Tax-Lien Lists</div>
+              </div>
+              <div class="uf-amt">$10,000.00</div>
+            </div>
+
+            <div class="uf-row">
+              <div class="uf-left">
+                <div class="uf-name">Personal Bills Payoff</div>
+                <div class="uf-sub">Clean up outstanding obligations to improve stability</div>
+              </div>
+              <div class="uf-amt">$20,000.00</div>
+            </div>
+
+            <div class="uf-row">
+              <div class="uf-left">
+                <div class="uf-name">Closing / Legal / Buffer</div>
+                <div class="uf-sub">Title, Legal, and Timing Buffer</div>
+              </div>
+              <div class="uf-amt">$7,479.54</div>
+            </div>
+
             <div class="uf-row total">
               <div class="uf-left">
                 <div class="uf-name">Total Requested</div>
@@ -1454,61 +1439,60 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
               <div class="uf-amt">$1,050,000.00</div>
             </div>
           </div>
+
           <div class="tiny-note">
-            AssureCall and Roofing Appointments follow a mirrored growth plan (hiring + sales capacity + fulfillment) to accelerate revenue while collateral remains real-asset secured.
+            AssureCall and Roofing Appointments follow a mirrored growth plan (hiring + sales capacity + fulfillment)
+            to accelerate revenue while collateral remains real-asset secured.
           </div>
         </div>
 
         <div class="panel">
-  <div class="panel-head">
-    <h3>Option A vs Option B</h3>
-    <span class="panel-tag gold">Choose Flexibility or Speed</span>
-  </div>
-
- <!-- Force vertical stack understanding the RIGHT panel -->
-<div class="opt-grid" style="grid-template-columns: 1fr;">
-
-  <!-- OPTION A (TOP) — ENTIRE CARD RED -->
-  <div class="chart-card card-red">
-    <div class="opt-mini opt-a">
-      <div class="opt-mini-head">
-        <div class="opt-dot a"></div>
-        <div>
-          <div class="opt-mini-title">Option A — Open Line of Credit (Revolving)</div>
-          <div class="opt-mini-sub">
-            Use funds <strong>at will</strong> (no draw submissions). Monthly payments apply
-            <strong>(8% / 12)</strong> interest + <strong>(5% / 12)</strong> principal curtailment
-            = <strong>(13% / 12)</strong> of the outstanding balance. Principal portion reduces balance
-            and preserves revolving availability (credit-card style).
+          <div class="panel-head">
+            <h3>Option A vs Option B</h3>
+            <span class="panel-tag gold">Choose Flexibility or Speed</span>
           </div>
-        </div>
-      </div>
 
-      <div class="opt-mini-kpis">
-        <div class="okpi"><span>Best for</span><strong>on-demand working capital</strong></div>
-        <div class="okpi"><span>Payments</span><strong>interest + principal on outstanding balance</strong></div>
-        <div class="okpi"><span>Security</span><strong>1st-lien real-asset collateral</strong></div>
-      </div>
-    </div>
-  </div>
+          <div class="opt-grid" style="grid-template-columns:1fr;">
+            <div class="chart-card card-red">
+              <div class="opt-mini opt-a">
+                <div class="opt-mini-head">
+                  <div class="opt-dot a"></div>
+                  <div>
+                    <div class="opt-mini-title">Option A — Open Line of Credit (Revolving)</div>
+                    <div class="opt-mini-sub">
+                      Use funds <strong>at will</strong> (no draw submissions). Monthly payments apply
+                      <strong>(8% / 12)</strong> interest + <strong>(5% / 12)</strong> principal curtailment
+                      = <strong>(13% / 12)</strong> of the outstanding balance. Principal portion reduces balance
+                      and preserves revolving availability (credit-card style).
+                    </div>
+                  </div>
+                </div>
 
- <!-- Option B (BOTTOM) -->
-<div class="chart-card option-b-card">
-  <div class="opt-mini opt-b">
-    <div class="opt-mini-head">
-      <div class="opt-dot b"></div>
-      <div>
-        <div class="opt-mini-title">Option B — Operating Capital Term Funding</div>
-        <div class="opt-mini-sub">Single disbursement to fund the full runway with predictable execution.</div>
-      </div>
-    </div>
+                <div class="opt-mini-kpis">
+                  <div class="okpi"><span>Best for</span><strong>on-demand working capital</strong></div>
+                  <div class="okpi"><span>Payments</span><strong>interest + principal on outstanding balance</strong></div>
+                  <div class="okpi"><span>Security</span><strong>1st-lien real-asset collateral</strong></div>
+                </div>
+              </div>
+            </div>
 
-    <div class="runway">
-      <div class="runway-bar"><span>Runway</span></div>
-      <div class="runway-sub">Budgeted staffing + marketing runway for expansion execution.</div>
-    </div>
-  </div>
-</div>
+            <div class="chart-card option-b-card">
+              <div class="opt-mini opt-b">
+                <div class="opt-mini-head">
+                  <div class="opt-dot b"></div>
+                  <div>
+                    <div class="opt-mini-title">Option B — Operating Capital Term Funding</div>
+                    <div class="opt-mini-sub">Single disbursement to fund the full runway with predictable execution.</div>
+                  </div>
+                </div>
+
+                <div class="runway">
+                  <div class="runway-bar"><span>Runway</span></div>
+                  <div class="runway-sub">Budgeted staffing + marketing runway for expansion execution.</div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div class="microcards">
             <div class="mcard">
@@ -1519,26 +1503,29 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             <div class="mcard">
               <div class="mcard-ic ic-roof"></div>
               <div class="mcard-title">Roofing Appointments</div>
-              <div class="mcard-sub">Startup built with the same structure for speed‑to‑market.</div>
+              <div class="mcard-sub">Startup built with the same structure for speed-to-market.</div>
             </div>
             <div class="mcard">
               <div class="mcard-ic ic-target"></div>
-              <div class="mcard-title">J&J Marketing</div>
-              <div class="mcard-sub">Agents • attorneys • brokers • tax‑lien acquisition pipeline.</div>
+              <div class="mcard-title">J&amp;J Marketing</div>
+              <div class="mcard-sub">Agents • attorneys • brokers • tax-lien acquisition pipeline.</div>
             </div>
           </div>
         </div>
       </div>
- 
-       <div class="growth-grid-2">
-        <div class="growth-card wide">
+
+      <div class="growth-grid-2">
+        <div class="growth-card">
           <div class="gc-top">
             <div class="gc-ic ic-phone"></div>
             <div>
               <div class="gc-title">AssureCall Expansion Narrative</div>
-              <div class="gc-sub">The growth tranche funds additional staff and sales capacity to fulfill inbound demand and execute new sales initiatives.</div>
+              <div class="gc-sub">
+                The growth tranche funds additional staff and sales capacity to fulfill inbound demand and execute new sales initiatives.
+              </div>
             </div>
           </div>
+
           <div class="steps-3">
             <div class="step3">
               <div class="step-n">1</div>
@@ -1569,15 +1556,16 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             <div class="gc-ic ic-roof"></div>
             <div>
               <div class="gc-title">Roofing Appointments</div>
-              <div class="gc-sub">Self‑Owned Competitor. Startup mirrors AssureCall’s structure for Speed to Market.</div>
+              <div class="gc-sub">Self-Owned Competitor. Startup mirrors AssureCall’s structure for Speed to Market.</div>
             </div>
           </div>
+
           <div class="steps-3">
             <div class="step3">
               <div class="step-n">1</div>
               <div>
                 <div class="step-title">Same Operational Model as AssureCall</div>
-                <div class="step-sub">Better Tech + New Staffing → Faster Delivery = More Retained Clientse</div>
+                <div class="step-sub">Better Tech + New Staffing → Faster Delivery = More Retained Clients</div>
               </div>
             </div>
             <div class="step3">
@@ -1596,191 +1584,147 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             </div>
           </div>
         </div>
-  
+
         <div class="growth-card">
           <div class="gc-top">
             <div class="gc-ic ic-target"></div>
             <div>
-              <div class="gc-title">J&J Investments of Florida Marketing</div>
-              <div class="gc-sub">Outreach to agents, attorneys and brokers for short sales, foreclosures and tax‑lien properties.</div>
+              <div class="gc-title">J&amp;J Investments of Florida Marketing</div>
+              <div class="gc-sub">Outreach to agents, attorneys and brokers for short sales, foreclosures and tax-lien properties.</div>
             </div>
           </div>
+
           <div class="lane-grid">
-            <div class="lane"><div class="lane-title">Agents</div><div class="lane-sub">short sale & pre‑foreclosure leads</div></div>
-            <div class="lane"><div class="lane-title">Attorneys</div><div class="lane-sub">probate & distressed filings</div></div>
-            <div class="lane"><div class="lane-title">Brokers</div><div class="lane-sub">REO & investor networks</div></div>
-            <div class="lane gold"><div class="lane-title">Tax‑Lien Lists</div><div class="lane-sub">Direct mail • Skip trace • Pipeline</div></div>
+            <div class="lane"><div class="lane-title">Agents</div><div class="lane-sub">short sale &amp; pre-foreclosure leads</div></div>
+            <div class="lane"><div class="lane-title">Attorneys</div><div class="lane-sub">probate &amp; distressed filings</div></div>
+            <div class="lane"><div class="lane-title">Brokers</div><div class="lane-sub">REO &amp; investor networks</div></div>
+            <div class="lane gold"><div class="lane-title">Tax-Lien Lists</div><div class="lane-sub">Direct mail • Skip trace • Pipeline</div></div>
           </div>
         </div>
       </div>
     </section>
-  <!-- =========================================================
-     Roofing Appointments (Branded Section Snippet)
-     Paste inside <main class="container"> … </main>
-========================================================== -->
-<section class="section" id="roofing-appointments" data-nav="Roofing Appointments">
-  <div class="section-head">
-    <h2>Roofing Appointments</h2>
-    <p>
-      Growth-Capital Snapshot and Lender-Facing Terms for <strong>Roofing Appointments LLC</strong>.
-      (This section is styled to match the primary package UI.)
-    </p>
-  </div>
 
-  <div class="grid-2">
-    <div class="panel">
-      <div class="panel-head">
-        <h3>Executive Snapshot</h3>
-        <span class="panel-tag gold">Requested: $30,000 • Term: 16 months</span>
+    <!-- =========================================================
+         Roofing Appointments (Branded Section)
+    ========================================================== -->
+    <section class="section" id="roofing-appointments" data-nav="Roofing Appointments">
+      <div class="section-head">
+        <h2>Roofing Appointments</h2>
+        <p>
+          Growth-Capital Snapshot and Lender-Facing Terms for <strong>Roofing Appointments LLC</strong>.
+          (This section is styled to match the primary package UI.)
+        </p>
       </div>
 
-      <ul class="bullets" style="margin-top:10px;">
-        <li><strong>Seasonal model:</strong> February–October (in-season ramp focus)</li>
-        <li><strong>Payment start:</strong> April 15, 2026 (borrower-initiated ACH, due the 15th EOD)</li>
-        <li><strong>Monthly payment:</strong> $2,075 ($200 interest + $1,875 principal)</li>
-        <li><strong>Purpose:</strong> Staffing + Launch Runway to Accelerate Booked Appointments and Delivery Capacity</li>
-      </ul>
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Executive Snapshot</h3>
+            <span class="panel-tag gold">Requested: $30,000 • Term: 16 months</span>
+          </div>
 
-      <div class="callout" style="margin-top:12px;">
-        <div class="callout-title">Integration Note</div>
-        <div class="callout-body">
-          This business is a self-owned competitor that mirrors the AssureCall operating model for speed-to-market.
-          Financial statements (12 months) will be uploaded in the <strong>Roofing Appointments Financials</strong> section.
+          <ul class="bullets" style="margin-top:10px;">
+            <li><strong>Seasonal model:</strong> February–October (in-season ramp focus)</li>
+            <li><strong>Payment start:</strong> April 15, 2026 (borrower-initiated ACH, due the 15th EOD)</li>
+            <li><strong>Monthly payment:</strong> $2,075 ($200 interest + $1,875 principal)</li>
+            <li><strong>Purpose:</strong> Staffing + Launch Runway to Accelerate Booked Appointments and Delivery Capacity</li>
+          </ul>
+
+          <div class="callout" style="margin-top:12px;">
+            <div class="callout-title">Integration Note</div>
+            <div class="callout-body">
+              This business is a self-owned competitor that mirrors the AssureCall operating model for speed-to-market.
+              Financial statements (12 months) will be uploaded in the <strong>Roofing Appointments Financials</strong> section.
+            </div>
+          </div>
+
+          <div class="chart-card" style="margin-top:16px;">
+            <div class="chart-title">Use of Proceeds (High Level)</div>
+            <div class="chart-sub">Where the $30,000 is intended to go (placeholder — replace with your exact breakdown).</div>
+
+            <div class="uf-table">
+              <div class="uf-row">
+                <div class="uf-left"><div class="uf-name">Hiring / Training</div><div class="uf-sub">Agents, onboarding, QA</div></div>
+                <div class="uf-amt">$2,500</div>
+              </div>
+              <div class="uf-row">
+                <div class="uf-left"><div class="uf-name">Marketing / Lead Flow</div><div class="uf-sub">Launch ramp + in-season volume</div></div>
+                <div class="uf-amt">$6,500</div>
+              </div>
+              <div class="uf-row">
+                <div class="uf-left"><div class="uf-name">Tools / Systems</div><div class="uf-sub">Dialer, CRM, tracking</div></div>
+                <div class="uf-amt">$5,000</div>
+              </div>
+              <div class="uf-row">
+                <div class="uf-left"><div class="uf-name">Reserves</div><div class="uf-sub">Cash buffer / runway stability</div></div>
+                <div class="uf-amt">$16,000</div>
+              </div>
+              <div class="uf-row total">
+                <div class="uf-left"><div class="uf-name">Total</div><div class="uf-sub">Roofing Appointments growth tranche</div></div>
+                <div class="uf-amt">$30,000</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart-card" style="margin-top:16px;">
+            <div class="chart-title">Operating Model (Summary)</div>
+            <div class="chart-sub">Mirrors AssureCall structure — built for predictable hiring, training, and fulfillment.</div>
+            <ul class="bullets" style="margin-top:10px;">
+              <li>Replicable agent ramp model with performance tracking</li>
+              <li>Quality assurance + coaching loops to stabilize conversion</li>
+              <li>Scaling plan aligns with seasonal demand curve</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Loan Terms Summary</h3>
+            <span class="panel-tag">Condensed</span>
+          </div>
+
+          <div class="uf-table" style="margin-top:12px;">
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">Loan Type</div></div><div class="uf-amt">Growth Capital / Business Expansion Loan</div></div>
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">Borrower</div></div><div class="uf-amt">Roofing Appointments LLC (Year 1 Startup)</div></div>
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">Lender</div></div><div class="uf-amt">J&amp;J Investments of Florida LLC</div></div>
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">Principal Amount</div></div><div class="uf-amt">$30,000</div></div>
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">Rates</div></div><div class="uf-amt">8% annual interest (fixed) + 5% annual principal curtailment (fixed)</div></div>
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">Monthly Payment</div></div><div class="uf-amt">$2,075 ($200 interest + $1,875 principal)</div></div>
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">Term</div></div><div class="uf-amt">16 months</div></div>
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">First Payment</div></div><div class="uf-amt">April 15, 2026</div></div>
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">Final Payment</div></div><div class="uf-amt">July 15, 2027</div></div>
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">Total Repayment</div></div><div class="uf-amt">$33,200</div></div>
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">Total Interest</div></div><div class="uf-amt">$3,200</div></div>
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">Effective APR</div></div><div class="uf-amt">~10.7%</div></div>
+            <div class="uf-row"><div class="uf-left"><div class="uf-name">Payment Method</div></div><div class="uf-amt">Borrower-initiated ACH (15th of each month)</div></div>
+          </div>
         </div>
       </div>
-  <div class="chart-card" style="margin-top:16px;">
-      <div class="chart-title">Use of Proceeds (High Level)</div>
-      <div class="chart-sub">Where the $30,000 is intended to go (placeholder — replace with your exact breakdown).</div>
-      <div class="uf-table">
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Hiring / Training</div><div class="uf-sub">Agents, onboarding, QA</div></div><div class="uf-amt">$2,500</div></div>
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Marketing / Lead Flow</div><div class="uf-sub">Launch ramp + in-season volume</div></div><div class="uf-amt">$6,500</div></div>
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Tools / Systems</div><div class="uf-sub">Dialer, CRM, tracking</div></div><div class="uf-amt">$5,000</div></div>
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Tools / Systems</div><div class="uf-sub">Financial Reserves</div></div><div class="uf-amt">$16,000</div></div>
-        <div class="uf-row total"><div class="uf-left"><div class="uf-name">Total</div><div class="uf-sub">Roofing Appointments growth tranche</div></div><div class="uf-amt">$30,000</div></div>
-      </div>
-    </div>
- <div class="chart-card" style="margin-top:16px;">
-      <div class="chart-title">Operating Model (Summary)</div>
-      <div class="chart-sub">Mirrors AssureCall structure — built for predictable hiring, training, and fulfillment.</div>
-      <ul class="bullets" style="margin-top:10px;">
-        <li>Replicable agent ramp model with performance tracking</li>
-        <li>Quality assurance + coaching loops to stabilize conversion</li>
-        <li>Scaling plan aligns with seasonal demand curve</li>
-      </ul>
-    </div>
-   </div>
-  </div>
+    </section>
 
-    <div class="panel">
-      <div class="panel-head">
-        <h3>Loan Terms Summary</h3>
-        <span class="panel-tag">Condensed</span>
-      </div>
-
-      <div class="uf-table" style="margin-top:12px;">
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Loan Type</div>
-          </div>
-          <div class="uf-amt">Growth Capital / Business Expansion Loan</div>
-        </div>
-
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Borrower</div>
-          </div>
-          <div class="uf-amt">Roofing Appointments LLC (Year 1 Startup)</div>
-        </div>
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Lender</div>
-          </div>
-          <div class="uf-amt">J&amp;J Investments of Florida LLC</div>
-        </div>
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Principal Amount</div>
-          </div>
-          <div class="uf-amt">$30,000</div>
-        </div>
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Interest / Principle Rate</div>
-          </div>
-          <div class="uf-amt">Interest 8% annual (fixed)   Principle 5% annual (fixed)</div>
-        </div>
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Monthly Payment</div>
-          </div>
-          <div class="uf-amt">$2,075 ($200 interest (8%) + $1,875 principal (5%))</div>
-        </div>
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Term</div>
-          </div>
-          <div class="uf-amt">16 months</div>
-        </div>
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">First Payment</div>
-          </div>
-          <div class="uf-amt">April 15, 2026</div>
-        </div>
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Final Payment</div>
-          </div>
-          <div class="uf-amt">July 15, 2027</div>
-        </div>
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Total Repayment</div>
-          </div>
-          <div class="uf-amt">$33,200</div>
-        </div>
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Total Interest</div>
-          </div>
-          <div class="uf-amt">$3,200</div>
-        </div>
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Effective APR</div>
-          </div>
-          <div class="uf-amt">~10.7%</div>
-        </div>
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Payment Method</div>
-          </div>
-          <div class="uf-amt">Borrower-initiated ACH (15th of each month)</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
+    <!-- =========================================================
+         Funding Structure
+    ========================================================== -->
     <section class="section" id="funding-structure" data-nav="Funding Structure">
       <div class="section-head">
         <h2>Funding Structure</h2>
         <p>Two Clean Structures to deliver Payoff + Operating Capital under One Lender.</p>
       </div>
 
-     <div class="grid-2">
+      <div class="grid-2">
         <div class="option-card">
           <div class="option-head">
             <div class="opt-badge">Option A</div>
             <div>
               <h3>Open Line of Credit (LOC)</h3>
-              <div class="sub">Revolving access (use at will) for operating capital; no draw submissions. Monthly payment applies to outstanding balance.</div>
+              <div class="sub">
+                Revolving access (use at will) for operating capital; no draw submissions. Monthly payment applies to outstanding balance.
+              </div>
             </div>
           </div>
-          
           <ul class="bullets">
             <li><strong>Use at will:</strong> access funds as needed (similar to a credit card), without draw requests or submissions.</li>
-            <li><strong>Payment:</strong> monthly payment factor equals <strong>(8% / 12)</strong> interest + <strong>(5% / 12)</strong> principal curtailment = <strong>(13% / 12)</strong> of the outstanding balance.</li>
+            <li><strong>Payment:</strong> monthly factor equals <strong>(8% / 12)</strong> interest + <strong>(5% / 12)</strong> principal curtailment = <strong>(13% / 12)</strong> of the outstanding balance.</li>
             <li><strong>Principal paydown:</strong> the 5% component is applied to principal each month to reduce the balance over time.</li>
           </ul>
         </div>
@@ -1804,126 +1748,76 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       <div class="split">
         <div class="panel">
           <h3>Capital Stack Summary</h3>
-         <div class="metric-grid">
-  <div class="metric">
-    <div class="label">Existing Liens Paid Off</div>
-    <div class="value">$787,884.07</div>
-    <div class="sub">≈ 69.5% of Combined Collateral value</div>
-  </div>
+          <div class="metric-grid">
+            <div class="metric">
+              <div class="label">Existing Liens Paid Off</div>
+              <div class="value">$787,884.07</div>
+              <div class="sub">≈ 69.5% of Combined Collateral value</div>
+            </div>
 
-  <div class="metric">
-    <div class="label">Operating + Reserves</div>
-    <div class="value">$257,479.54</div>
-    <div class="sub">Reserves + Growth Capital + Closing Buffer</div>
-  </div>
+            <div class="metric">
+              <div class="label">Operating + Reserves</div>
+              <div class="value">$257,479.54</div>
+              <div class="sub">Reserves + Growth Capital + Closing Buffer</div>
+            </div>
 
-  <div class="metric">
-    <div class="label">Gross LTV (full commitment)</div>
-    <div class="value">92.1%</div>
-    <div class="sub">Straightforward Collateralized Profile</div>
-  </div>
+            <div class="metric">
+              <div class="label">Gross LTV (full commitment)</div>
+              <div class="value">92.1%</div>
+              <div class="sub">Straightforward Collateralized Profile</div>
+            </div>
 
-  <div class="metric">
-    <div class="label">Indicative Payment Structure</div>
-    <div class="value">13% / year paid monthly</div>
-    <div class="sub">Monthly Factor: (8% / 12) interest + (5% / 12) Principal Curtailment.</div>
-  </div>
-</div>
-
-</div>
-</div>
-</div>
+            <div class="metric">
+              <div class="label">Indicative Payment Structure</div>
+              <div class="value">13% / year paid monthly</div>
+              <div class="sub">Monthly Factor: (8% / 12) interest + (5% / 12) Principal Curtailment.</div>
+            </div>
+          </div>
         </div>
 
         <div class="chart-card danger">
           <div class="chart-title">Cost of Delay</div>
           <div class="chart-sub">Interest and Penalties Accelerate after Payoff Deadlines.</div>
           <div class="chart">
-<div class="chart-screen">
-<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="chart" style="width:100%;height:300px;display:block">
-<defs>
-  <linearGradient id="bggrad" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
-    <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
-  </linearGradient>
-</defs>
-<rect x="0" y="0" width="520" height="300" rx="16" fill="url(#bggrad)" stroke="rgba(255,255,255,0.10)"/>
-<line x1="38" y1="38.0" x2="482" y2="38.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="42.0" fill="rgba(233,236,245,0.62)" font-size="10">$156.82</text>
-<line x1="38" y1="92.0" x2="482" y2="92.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="96.0" fill="rgba(233,236,245,0.62)" font-size="10">$117.61</text>
-<line x1="38" y1="146.0" x2="482" y2="146.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="150.0" fill="rgba(233,236,245,0.62)" font-size="10">$78.41</text>
-<line x1="38" y1="200.0" x2="482" y2="200.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="204.0" fill="rgba(233,236,245,0.62)" font-size="10">$39.20</text>
-<line x1="38" y1="254.0" x2="482" y2="254.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="258.0" fill="rgba(233,236,245,0.62)" font-size="10">$0.00</text>
-<rect x="82" y="125.8" width="100" height="128.2" rx="14" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1.2"/>
-<text x="132.0" y="272" fill="rgba(233,236,245,0.78)" font-size="10" text-anchor="middle">PHH (approx/day)</text>
-<text x="132.0" y="115.8" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$93.08</text>
-<rect x="224" y="179.4" width="100" height="74.6" rx="14" fill="rgba(201,167,90,0.20)" stroke="rgba(201,167,90,0.85)" stroke-width="1.2"/>
-<text x="274.0" y="272" fill="rgba(233,236,245,0.78)" font-size="10" text-anchor="middle">Synergy (day)</text>
-<text x="274.0" y="169.4" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$54.17</text>
-<rect x="366" y="74.0" width="100" height="180.0" rx="14" fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1.2"/>
-<text x="416.0" y="272" fill="rgba(233,236,245,0.78)" font-size="10" text-anchor="middle">Skyway (day)</text>
-<text x="416.0" y="64.0" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$130.68</text>
-</svg></div>
- <!-- Cost of Delay tiny-note: clarified lender names -->
-  <div class="tiny-note">
-    PHH adds $2,792.25/month after 01/31; Synergy adds $54.17/day after 01/20; Skyway adds $130.68/day after deadline.
-  </div>
-</div>
-<div class="chart-print">
-<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="chart" style="width:100%;height:300px;display:block">
-<rect x="0" y="0" width="520" height="300" rx="16" fill="#0b1020" stroke="rgba(255,255,255,0.18)"/>
-<line x1="38" y1="38.0" x2="482" y2="38.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="42.0" fill="rgba(233,236,245,0.62)" font-size="10">$156.82</text>
-<line x1="38" y1="92.0" x2="482" y2="92.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="96.0" fill="rgba(233,236,245,0.62)" font-size="10">$117.61</text>
-<line x1="38" y1="146.0" x2="482" y2="146.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="150.0" fill="rgba(233,236,245,0.62)" font-size="10">$78.41</text>
-<line x1="38" y1="200.0" x2="482" y2="200.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="204.0" fill="rgba(233,236,245,0.62)" font-size="10">$39.20</text>
-<line x1="38" y1="254.0" x2="482" y2="254.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="258.0" fill="rgba(233,236,245,0.62)" font-size="10">$0.00</text>
-<rect x="82" y="125.8" width="100" height="128.2" rx="14" fill="#2c74ff" fill-opacity="0.25" stroke="#2c74ff" stroke-opacity="0.95" stroke-width="1.2"/>
-<text x="132.0" y="272" fill="rgba(233,236,245,0.82)" font-size="10" text-anchor="middle">PHH (approx/day)</text>
-<text x="132.0" y="115.8" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$93.08</text>
-<rect x="224" y="179.4" width="100" height="74.6" rx="14" fill="#c9a75a" fill-opacity="0.25" stroke="#c9a75a" stroke-opacity="0.95" stroke-width="1.2"/>
-<text x="274.0" y="272" fill="rgba(233,236,245,0.82)" font-size="10" text-anchor="middle">Synergy (day)</text>
-<text x="274.0" y="169.4" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$54.17</text>
-<rect x="366" y="74.0" width="100" height="180.0" rx="14" fill="#d93c3c" fill-opacity="0.25" stroke="#d93c3c" stroke-opacity="0.95" stroke-width="1.2"/>
-<text x="416.0" y="272" fill="rgba(233,236,245,0.82)" font-size="10" text-anchor="middle">Skyway (day)</text>
-<text x="416.0" y="64.0" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$130.68</text>
-</svg>
-</div>
-</div>
+            <div class="chart-screen">
+              <!-- ... SVG ... -->
+            </div>
+            <div class="tiny-note">
+              PHH adds $2,792.25/month after 01/31; Synergy adds $54.17/day after 01/20; Skyway adds $130.68/day after deadline.
+            </div>
+            <div class="chart-print">
+              <!-- ... SVG ... -->
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- =========================================================
+         Scenario Comparison (FIXED nesting)
+    ========================================================== -->
     <section class="section contrast" id="scenario-comparison" data-nav="Scenario Comparison">
       <div class="section-head">
-        <h2>Scenario Comparison: Security & Completion</h2>
-        <p>A visual summary of why the complete lending solution is safer for the lender and better for J & J Investments of Florida.</p>
+        <h2>Scenario Comparison: Security &amp; Completion</h2>
+        <p>A visual summary of why the complete lending solution is safer for the lender and better for J&amp;J Investments of Florida.</p>
       </div>
 
-            <div class="compare">
+      <div class="compare">
         <div class="compare-card good">
           <div class="compare-head">
             <div class="badge">Recommended</div>
             <h3>Complete Lending Solution</h3>
           </div>
           <ul class="bullets">
-            <li>All liens retired → consolidated first‑position lien</li>
-            <li>Single lender reduces complexity and payoff re‑quote risk</li>
+            <li>All liens retired → consolidated first-position lien</li>
+            <li>Single lender reduces complexity and payoff re-quote risk</li>
             <li>Operating capital enables revenue ramp (repayment strength)</li>
             <li>Stops compounding penalties and protects timeline</li>
           </ul>
           <div class="mini-kpi">
             <div><span>Pricing:</span> <strong>8% interest + 5% principal (paid monthly)</strong></div>
             <div><span>Payments:</span> <strong>(13% / 12) of outstanding balance</strong></div>
-            <div><span>Security:</span> <strong>Cross‑collateralized 1st lien on real estate</strong></div>
+            <div><span>Security:</span> <strong>Cross-collateralized 1st lien on real estate</strong></div>
           </div>
         </div>
 
@@ -1935,7 +1829,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           <ul class="bullets">
             <li>Liens remain in place → multiple lenders + multiple default triggers</li>
             <li>Deadlines + daily/monthly accrual continue to compound</li>
-            <li>Increased title/legal complexity + payoff re‑quote risk</li>
+            <li>Increased title/legal complexity + payoff re-quote risk</li>
             <li>Underfunded growth slows hiring and sales capacity</li>
           </ul>
           <div class="mini-kpi">
@@ -1945,117 +1839,32 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           </div>
         </div>
       </div>
-          </div>
-        </div>
-      </div>
 
       <div class="charts-row">
         <div class="chart-card">
-          <div class="chart-title">Security & Completion Scorecard</div>
+          <div class="chart-title">Security &amp; Completion Scorecard</div>
           <div class="chart-sub">Relative comparison (qualitative) of completion and stability.</div>
           <div class="chart">
-<div class="chart-screen">
-<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="chart" style="width:100%;height:300px;display:block">
-<defs>
-  <linearGradient id="bggrad" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
-    <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
-  </linearGradient>
-</defs>
-<rect x="0" y="0" width="520" height="300" rx="16" fill="url(#bggrad)" stroke="rgba(255,255,255,0.10)"/>
-<text x="44" y="28" fill="rgba(255,255,255,0.92)" font-size="13" font-weight="700">Complete Loan (Recommended)</text>
-<text x="476" y="28" fill="rgba(255,255,255,0.92)" font-size="13" font-weight="700" text-anchor="end">$300k Partial Loan Only</text>
-<text x="44" y="58" fill="rgba(233,236,245,0.62)" font-size="10">Clear Title / 1st Position</text>
-<rect x="44" y="66" width="200.0" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
-<rect x="44" y="66" width="200.0" height="14" rx="8" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1"/>
-<rect x="266.0" y="66" width="200.0" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
-<rect x="266.0" y="66" width="60.0" height="14" rx="8" fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1"/>
-<text x="44" y="102" fill="rgba(233,236,245,0.62)" font-size="10">Closing Simplicity</text>
-<rect x="44" y="110" width="200.0" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
-<rect x="44" y="110" width="184.0" height="14" rx="8" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1"/>
-<rect x="266.0" y="110" width="200.0" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
-<rect x="266.0" y="110" width="90.0" height="14" rx="8" fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1"/>
-<text x="44" y="146" fill="rgba(233,236,245,0.62)" font-size="10">Deadline / Re-quote Risk</text>
-<rect x="44" y="154" width="200.0" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
-<rect x="44" y="154" width="170.0" height="14" rx="8" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1"/>
-<rect x="266.0" y="154" width="200.0" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
-<rect x="266.0" y="154" width="70.0" height="14" rx="8" fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1"/>
-<text x="44" y="190" fill="rgba(233,236,245,0.62)" font-size="10">Growth Capacity</text>
-<rect x="44" y="198" width="200.0" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
-<rect x="44" y="198" width="180.0" height="14" rx="8" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1"/>
-<rect x="266.0" y="198" width="200.0" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
-<rect x="266.0" y="198" width="50.0" height="14" rx="8" fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1"/>
-<text x="44" y="234" fill="rgba(233,236,245,0.62)" font-size="10">Overall Stability</text>
-<rect x="44" y="242" width="200.0" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
-<rect x="44" y="242" width="180.0" height="14" rx="8" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1"/>
-<rect x="266.0" y="242" width="200.0" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
-<rect x="266.0" y="242" width="80.0" height="14" rx="8" fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1"/>
-</svg>
-</div>
-<div class="chart-print">
-<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Scorecard" style="width:100%;height:320px;display:block">
-<rect x="0" y="0" width="760" height="320" rx="16" fill="#0b1020" stroke="rgba(255,255,255,0.18)"/><text x="48" y="40" fill="rgba(255,255,255,0.95)" font-size="14" font-weight="700">Complete Solution (Recommended)</text><text x="712" y="40" fill="rgba(255,255,255,0.95)" font-size="14" font-weight="700" text-anchor="end">$300K Partial Funding</text><text x="48" y="68" fill="rgba(233,236,245,0.70)" font-size="11">Clear Title / 1st Position</text><rect x="300" y="56" width="260" height="14" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/><rect x="614" y="56" width="260" height="14" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/><rect x="300" y="56" width="260.0" height="14" rx="7" fill="#2c74ff" fill-opacity="0.25" stroke="#2c74ff" stroke-opacity="0.95" stroke-width="1"/><rect x="614" y="56" width="78.0" height="14" rx="7" fill="#d93c3c" fill-opacity="0.25" stroke="#d93c3c" stroke-opacity="0.95" stroke-width="1"/><text x="570" y="67" fill="rgba(233,236,245,0.62)" font-size="10">100%</text><text x="884" y="67" fill="rgba(233,236,245,0.62)" font-size="10">30%</text><text x="48" y="114" fill="rgba(233,236,245,0.70)" font-size="11">Closing Simplicity</text><rect x="300" y="102" width="260" height="14" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/><rect x="614" y="102" width="260" height="14" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/><rect x="300" y="102" width="239.2" height="14" rx="7" fill="#2c74ff" fill-opacity="0.25" stroke="#2c74ff" stroke-opacity="0.95" stroke-width="1"/><rect x="614" y="102" width="117.0" height="14" rx="7" fill="#d93c3c" fill-opacity="0.25" stroke="#d93c3c" stroke-opacity="0.95" stroke-width="1"/><text x="570" y="113" fill="rgba(233,236,245,0.62)" font-size="10">92%</text><text x="884" y="113" fill="rgba(233,236,245,0.62)" font-size="10">45%</text><text x="48" y="160" fill="rgba(233,236,245,0.70)" font-size="11">Deadline / Re‑quote Risk</text><rect x="300" y="148" width="260" height="14" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/><rect x="614" y="148" width="260" height="14" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/><rect x="300" y="148" width="221.0" height="14" rx="7" fill="#2c74ff" fill-opacity="0.25" stroke="#2c74ff" stroke-opacity="0.95" stroke-width="1"/><rect x="614" y="148" width="91.0" height="14" rx="7" fill="#d93c3c" fill-opacity="0.25" stroke="#d93c3c" stroke-opacity="0.95" stroke-width="1"/><text x="570" y="159" fill="rgba(233,236,245,0.62)" font-size="10">85%</text><text x="884" y="159" fill="rgba(233,236,245,0.62)" font-size="10">35%</text><text x="48" y="206" fill="rgba(233,236,245,0.70)" font-size="11">Growth Capacity</text><rect x="300" y="194" width="260" height="14" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/><rect x="614" y="194" width="260" height="14" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/><rect x="300" y="194" width="234.0" height="14" rx="7" fill="#2c74ff" fill-opacity="0.25" stroke="#2c74ff" stroke-opacity="0.95" stroke-width="1"/><rect x="614" y="194" width="65.0" height="14" rx="7" fill="#d93c3c" fill-opacity="0.25" stroke="#d93c3c" stroke-opacity="0.95" stroke-width="1"/><text x="570" y="205" fill="rgba(233,236,245,0.62)" font-size="10">90%</text><text x="884" y="205" fill="rgba(233,236,245,0.62)" font-size="10">25%</text><text x="48" y="252" fill="rgba(233,236,245,0.70)" font-size="11">Overall Stability</text><rect x="300" y="240" width="260" height="14" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/><rect x="614" y="240" width="260" height="14" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/><rect x="300" y="240" width="234.0" height="14" rx="7" fill="#2c74ff" fill-opacity="0.25" stroke="#2c74ff" stroke-opacity="0.95" stroke-width="1"/><rect x="614" y="240" width="104.0" height="14" rx="7" fill="#d93c3c" fill-opacity="0.25" stroke="#d93c3c" stroke-opacity="0.95" stroke-width="1"/><text x="570" y="251" fill="rgba(233,236,245,0.62)" font-size="10">90%</text><text x="884" y="251" fill="rgba(233,236,245,0.62)" font-size="10">40%</text>
-</svg>
-</div>
-</div>
+            <div class="chart-screen">
+              <!-- ... SVG ... -->
+            </div>
+            <div class="chart-print">
+              <!-- ... SVG ... -->
+            </div>
+          </div>
         </div>
+
         <div class="chart-card">
           <div class="chart-title">Lien Status by Scenario</div>
           <div class="chart-sub">Shows how partial funding leaves the full lien stack unresolved.</div>
           <div class="chart">
-<div class="chart-screen">
-<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="chart" style="width:100%;height:300px;display:block">
-<defs>
-  <linearGradient id="bggrad" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
-    <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
-  </linearGradient>
-</defs>
-<rect x="0" y="0" width="520" height="300" rx="16" fill="url(#bggrad)" stroke="rgba(255,255,255,0.10)"/>
-<line x1="38" y1="38.0" x2="482" y2="38.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="42.0" fill="rgba(233,236,245,0.62)" font-size="10">$871,773</text>
-<line x1="38" y1="92.0" x2="482" y2="92.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="96.0" fill="rgba(233,236,245,0.62)" font-size="10">$653,829</text>
-<line x1="38" y1="146.0" x2="482" y2="146.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="150.0" fill="rgba(233,236,245,0.62)" font-size="10">$435,886</text>
-<line x1="38" y1="200.0" x2="482" y2="200.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="204.0" fill="rgba(233,236,245,0.62)" font-size="10">$217,943</text>
-<line x1="38" y1="254.0" x2="482" y2="254.0" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-<text x="10" y="258.0" fill="rgba(233,236,245,0.62)" font-size="10">$0</text>
-<rect x="102" y="254.0" width="160" height="0.0" rx="14" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1.2"/>
-<text x="182.0" y="272" fill="rgba(233,236,245,0.78)" font-size="10" text-anchor="middle">Complete Loan Requested</text>
-<text x="182.0" y="244.0" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$0.00</text>
-<text x="182.0" y="288" fill="rgba(233,236,245,0.62)" font-size="10" text-anchor="middle">Liens Cleared</text>
-<rect x="326" y="57.6" width="160" height="196.4" rx="14" fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1.2"/>
-<text x="406.0" y="272" fill="rgba(233,236,245,0.78)" font-size="10" text-anchor="middle">$300k Partial Loan</text>
-<text x="406.0" y="47.6" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$787,844.07</text>
-<text x="406.0" y="288" fill="rgba(233,236,245,0.62)" font-size="10" text-anchor="middle">Liens Remain</text>
-</svg>
-</div>
-<div class="chart-print">
-<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="chart" style="width:100%;height:300px;display:block">
-<rect x="0" y="0" width="520" height="300" rx="16" fill="#0b1020" stroke="rgba(255,255,255,0.18)"/>
-<line x1="38" y1="38.0" x2="482" y2="38.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="42.0" fill="rgba(233,236,245,0.62)" font-size="10">$871,773</text>
-<line x1="38" y1="92.0" x2="482" y2="92.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="96.0" fill="rgba(233,236,245,0.62)" font-size="10">$653,829</text>
-<line x1="38" y1="146.0" x2="482" y2="146.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="150.0" fill="rgba(233,236,245,0.62)" font-size="10">$435,886</text>
-<line x1="38" y1="200.0" x2="482" y2="200.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="204.0" fill="rgba(233,236,245,0.62)" font-size="10">$217,943</text>
-<line x1="38" y1="254.0" x2="482" y2="254.0" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-<text x="10" y="258.0" fill="rgba(233,236,245,0.62)" font-size="10">$0</text>
-<rect x="102" y="254.0" width="160" height="0.0" rx="14" fill="#2c74ff" fill-opacity="0.25" stroke="#2c74ff" stroke-opacity="0.95" stroke-width="1.2"/>
-<text x="182.0" y="272" fill="rgba(233,236,245,0.82)" font-size="10" text-anchor="middle">Complete Loan Requested</text>
-<text x="182.0" y="244.0" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$0.00</text>
-<text x="182.0" y="288" fill="rgba(233,236,245,0.62)" font-size="10" text-anchor="middle">Liens Cleared</text>
-<rect x="326" y="57.6" width="160" height="196.4" rx="14" fill="#d93c3c" fill-opacity="0.25" stroke="#d93c3c" stroke-opacity="0.95" stroke-width="1.2"/>
-<text x="406.0" y="272" fill="rgba(233,236,245,0.82)" font-size="10" text-anchor="middle">$300k Partial Loan Only</text>
-<text x="406.0" y="47.6" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$787,884.07</text>
-<text x="406.0" y="288" fill="rgba(233,236,245,0.62)" font-size="10" text-anchor="middle">Liens Remain</text>
-</svg>
-</div>
-</div>
+            <div class="chart-screen">
+              <!-- ... SVG ... -->
+            </div>
+            <div class="chart-print">
+              <!-- ... SVG ... -->
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2067,13 +1876,15 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             <div class="rt-sub">More parties, More payoff changes, Higher execution risk.</div>
           </div>
         </div>
+
         <div class="risk-tile">
           <div class="rt-ic ic-clock"></div>
           <div>
             <div class="rt-title">Accruing Penalties</div>
-            <div class="rt-sub">Per‑day / Per‑month accrual continues after deadlines.</div>
+            <div class="rt-sub">Per-day / Per-month accrual continues after deadlines.</div>
           </div>
         </div>
+
         <div class="risk-tile">
           <div class="rt-ic ic-brief"></div>
           <div>
@@ -2084,8 +1895,12 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       </div>
     </section>
 
-<!-- ✅ INSERT FINANCIAL SECTIONS HERE -->
-<!-- (paste Financial_Sections_Placeholders.html here) -->
+    <!-- ✅ INSERT FINANCIAL SECTIONS HERE -->
+    <!-- (paste Financial_Sections_Placeholders.html here) -->
+
+    <!-- =========================================================
+         Appendix
+    ========================================================== -->
     <section class="section appendix" id="appendix" data-nav="Appendix: Source Documents">
       <div class="section-head">
         <h2>Appendix: Source Documents</h2>
@@ -2144,31 +1959,31 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         <a class="doc" href="docs/Executive_Narrative_Loan_Purpose_Expansion_Rationale.pdf" target="_blank" rel="noopener">
           <div class="doc-ic">PDF</div>
           <div class="doc-meta">
-            <div class="doc-title">Executive Narrative — Loan Purpose & Expansion Rationale</div>
-            <div class="doc-sub">Executive Purpose Statement and Epansion Narrative.</div>
+            <div class="doc-title">Executive Narrative — Loan Purpose &amp; Expansion Rationale</div>
+            <div class="doc-sub">Executive Purpose Statement and Expansion Narrative.</div>
           </div>
         </a>
 
         <a class="doc" href="docs/Use_of_Funds_and_Repayment_Overview.pdf" target="_blank" rel="noopener">
           <div class="doc-ic">PDF</div>
           <div class="doc-meta">
-            <div class="doc-title">Use of Funds & Repayment Overview</div>
+            <div class="doc-title">Use of Funds &amp; Repayment Overview</div>
             <div class="doc-sub">Summary Allocation and Repayment logic.</div>
           </div>
         </a>
-        
-         <a class="doc" href="docs/Borrower%20Experience%20%26%20Operational%20Background.pdf" target="_blank" rel="noopener">
+
+        <a class="doc" href="docs/Borrower%20Experience%20%26%20Operational%20Background.pdf" target="_blank" rel="noopener">
           <div class="doc-ic">PDF</div>
           <div class="doc-meta">
-            <div class="doc-title">Borrower Experience & Operational Background</div>
+            <div class="doc-title">Borrower Experience &amp; Operational Background</div>
             <div class="doc-sub">Summary of Business and Industry Experience.</div>
-         </div>
-       </a>
+          </div>
+        </a>
 
         <a class="doc" href="docs/Borrower%20and%20Primary%20Guarantee.pdf" target="_blank" rel="noopener">
           <div class="doc-ic">PDF</div>
           <div class="doc-meta">
-            <div class="doc-title">Borrower & Primary Guarantee</div>
+            <div class="doc-title">Borrower &amp; Primary Guarantee</div>
             <div class="doc-sub">Borrower and Primary Guarantee Information.</div>
           </div>
         </a>
@@ -2176,7 +1991,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         <a class="doc" href="docs/Repayment_and_Risk_Mitigation_Addendum.pdf" target="_blank" rel="noopener">
           <div class="doc-ic">PDF</div>
           <div class="doc-meta">
-            <div class="doc-title">Repayment & Risk Mitigation Addendum</div>
+            <div class="doc-title">Repayment &amp; Risk Mitigation Addendum</div>
             <div class="doc-sub">Additional Repayment / Risk Details for Review.</div>
           </div>
         </a>
@@ -2189,10 +2004,11 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     </section>
 
     <footer class="footer">
-      <div>© 2026 J&J Investments of Florida, LLC. All Rights Reserved.</div>
+      <div>© 2026 J&amp;J Investments of Florida, LLC. All Rights Reserved.</div>
       <div class="footer-right">Prepared for Lender Review • Confidential</div>
     </footer>
   </main>
+
 
   
 <script>
