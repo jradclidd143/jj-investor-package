@@ -525,8 +525,21 @@
 }
 
 /* Microcards (graphics) */
-.mcard{ margin-top: 12px; display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
-.mcard{ border-radius: 18px; border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.03); padding: 12px; }
+.microcards{
+  margin-top: 12px;
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 10px;
+  align-items: stretch;
+}
+
+.microcards .mcard{
+  border-radius: 18px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+  padding: 12px;
+  min-width: 0;
+}
 .mcard-ic{
   width: 44px; height:44px; border-radius: 16px;
   border:1px solid rgba(201,167,90,.30);
@@ -864,7 +877,7 @@ body.nav-open .up-btn{
   .split{ grid-template-columns: 1fr; }
   .compare{ grid-template-columns: 1fr; }
   .risk-grid{ grid-template-columns: 1fr; }
-  .mcard{ grid-template-columns: 1fr; }
+  .microcards{ grid-template-columns: 1fr !important; }
   .growth-grid-2{ grid-template-columns: 1fr; }
   .funds-flow{ grid-template-columns: 1fr; gap: 12px; }
   .flow-arrow{ display:none; }
@@ -880,7 +893,9 @@ body.nav-open .up-btn{
   .bg-grid, .print-btn { display:none !important; }
   .topbar { position:relative !important; background:transparent !important; border-bottom:1px solid #ddd !important; }
   .container { max-width:none !important; padding:0 !important; padding-top:0; }
-  .hero,.grid-2,.charts-row,.split,.compare,.risk-grid,.mcard,.growth-grid-2,.funds-flow,.opt-grid { grid-template-columns:1fr !important; }
+  .hero,.grid-2,.charts-row,.split,.compare,.risk-grid,.growth-grid-2,.funds-flow,.opt-grid { 
+  grid-template-columns:1fr !important; 
+}
   .kpis { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
   .chart svg { height:260px !important; }
   .jj-header { height:72px; }
@@ -894,7 +909,7 @@ body.nav-open .up-btn{
   .kpi-card,.panel,.chart-card,.property-card,.compare-card,.mcard,.metric,.opt-mini,.callout,.runway,.glass-card {
     break-inside:avoid; page-break-inside:avoid; background:transparent !important; box-shadow:none !important; position:relative; overflow:hidden;
   }
-  .kpi-card > *, .panel > *, .chart-card > *, .property-card > *, .compare-card > *, .mcard > *, .metric > *, .opt-mini > *, .callout > *, .runway > *, .glass-card > * {
+  .kpi-card > *, .panel > *, .chart-card > *, .property-card > *, .compare-card > *, .microcards .mcard > *, .metric > *, .opt-mini > *, .callout > *, .runway > *, .glass-card > * {
     position:relative !important; z-index:2 !important;
   }
   .option-card::before, .compare-card::before, .property-card::before, .kpi-card::before, .glass-card::after { display:none !important; }
@@ -987,11 +1002,22 @@ body.nav-open .up-btn{
 .okpi{min-height:92px;overflow:hidden}
 .okpi span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .okpi strong{white-space:normal;overflow-wrap:anywhere;word-break:break-word;line-height:1.25}
-/* Microcards: fill row (no dead space) */
-.mcard{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch;width:100%}
-.mcard .mcard{min-height:160px}
+/* Microcards: grid + card sizing (correct) */
+.microcards{
+  margin-top: 12px;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  align-items:stretch;
+  width:100%;
+}
+.microcards .mcard{
+  min-height:160px;
+}
+/* Mobile */
 @media (max-width: 980px){
-  .mcard{grid-template-columns:1fr}
+  .microcards{ grid-template-columns:1fr; }
+}   
 }/* Print reliability */
 html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 @page{ size: Letter; margin: 0.6in; }
@@ -1060,7 +1086,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     position: relative !important;
     overflow: hidden !important;
   }
-  .kpi-card > *, .panel > *, .chart-card > *, .property-card > *, .compare-card > *, .mcard > *, .metric > *, .opt-mini > *, .callout > *, .runway > * {
+  .kpi-card > *, .panel > *, .chart-card > *, .property-card > *, .compare-card > *, .microcards .mcard > *, .metric > *, .opt-mini > *, .callout > *, .runway > * {
     position: relative !important;
     z-index: 2 !important;
   }
