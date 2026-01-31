@@ -531,10 +531,34 @@
 .mcard-title{ margin-top: 10px; font-weight: 850; }
 .mcard-sub{ margin-top: 4px; color: rgba(233,236,245,.70); font-size: 12.6px; line-height:1.45; }
 
-/* Growth cards */
-.growth-grid-2{ margin-top: 16px; display:grid; grid-template-columns: 1.2fr .8fr .8fr; gap: 14px; align-items:stretch; }
-.growth-card{ border-radius: 20px; border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.03); padding: 12px; }
-.growth-card.wide{ grid-column: 1 / 2; }
+/* Growth cards (equal 3-up, equal height) */
+.growth-grid-2{
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 equal columns */
+  gap: 16px;
+  align-items: stretch; /* equal height per row */
+}
+    
+.growth-card{
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+  padding: 12px;
+
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* kill the old wide behavior */
+.growth-card.wide{
+  grid-column: auto !important;
+}
+
+/* keep your existing inner styles */
 .gc-top{ display:flex; gap: 10px; align-items:center; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.08); }
 .gc-ic{ width: 44px; height:44px; border-radius: 16px; border:1px solid rgba(201,167,90,.25); background: rgba(201,167,90,.10); position:relative; }
 .gc-ic::after{ content:""; position:absolute; inset:10px; border-radius: 12px; background: rgba(240,213,155,.92); mask-repeat:no-repeat; mask-position:center; mask-size:contain; }
@@ -551,6 +575,17 @@
 .lane.gold{ border-color: rgba(201,167,90,.30); background: rgba(201,167,90,.08); }
 .lane-title{ font-weight: 900; }
 .lane-sub{ color: rgba(233,236,245,.68); font-size: 12.5px; margin-top: 4px; line-height:1.45; }
+
+/* Optional: push the “blocks” down so bottoms align nicer */
+.growth-card .steps-3,
+.growth-card .lane-grid{
+  margin-top: auto;
+}
+
+/* Responsive */
+@media (max-width: 1020px){
+  .growth-grid-2{ grid-template-columns: 1fr; }
+}
 
 /* Options cards */
 .option-card{
@@ -1025,36 +1060,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .section-head h2::before{ background:#111 !important; box-shadow:none !important; }
       .section-head p{ color:#444 !important; }
     }
-    /* ===== Force the 3 growth containers to be equal width + equal height ===== */
-  .growth-grid-2{
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-    align-items: stretch;
-  }
 
-  .growth-card{
-    min-width: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .growth-card.wide{
-    grid-column: auto !important;
-  }
-
-  .growth-card .steps-3,
-  .growth-card .lane-grid{
-    margin-top: auto;
-  }
-
-  @media (max-width: 1020px){
-    .growth-grid-2{ grid-template-columns: 1fr; }
-  }
-  /* ===== End fix ===== */
-</style>
 </style>
 </head>
 <body>
@@ -1514,94 +1520,108 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         </div>
       </div>
 
-      <div class="growth-grid-2">
-        <div class="growth-card">
-          <div class="gc-top">
-            <div class="gc-ic ic-phone"></div>
-            <div>
-              <div class="gc-title">AssureCall Expansion Narrative</div>
-              <div class="gc-sub">
-                The growth tranche funds additional staff and sales capacity to fulfill inbound demand and execute new sales initiatives.
-              </div>
-            </div>
-          </div>
+<div class="growth-grid-2">
 
-          <div class="steps-3">
-            <div class="step3">
-              <div class="step-n">1</div>
-              <div>
-                <div class="step-title">Hire + Train</div>
-                <div class="step-sub">Calling Agents, QA/QC, Team Leads, Support and Operational Staff</div>
-              </div>
-            </div>
-            <div class="step3">
-              <div class="step-n">2</div>
-              <div>
-                <div class="step-title">Expand Sales Capacity</div>
-                <div class="step-sub">New Sales Reps + Book of Business Growth</div>
-              </div>
-            </div>
-            <div class="step3">
-              <div class="step-n">3</div>
-              <div>
-                <div class="step-title">Scale Fulfillment</div>
-                <div class="step-sub">Better Tech + Additional Staffing → Faster Delivery = More Retained Clients</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="growth-card">
-          <div class="gc-top">
-            <div class="gc-ic ic-roof"></div>
-            <div>
-              <div class="gc-title">Roofing Appointments</div>
-              <div class="gc-sub">Self-Owned Competitor. Startup mirrors AssureCall’s structure for Speed to Market.</div>
-            </div>
-          </div>
-
-          <div class="steps-3">
-            <div class="step3">
-              <div class="step-n">1</div>
-              <div>
-                <div class="step-title">Same Operational Model as AssureCall</div>
-                <div class="step-sub">Better Tech + New Staffing → Faster Delivery = More Retained Clients</div>
-              </div>
-            </div>
-            <div class="step3">
-              <div class="step-n">2</div>
-              <div>
-                <div class="step-title">Fast launch with Predictable Growth</div>
-                <div class="step-sub">New Staff + Book of Business Growth</div>
-              </div>
-            </div>
-            <div class="step3">
-              <div class="step-n">3</div>
-              <div>
-                <div class="step-title">Scale Fulfillment</div>
-                <div class="step-sub">More Staffing → Faster Delivery → More Retained Clients</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="growth-card">
-          <div class="gc-top">
-            <div class="gc-ic ic-target"></div>
-            <div>
-              <div class="gc-title">J&amp;J Investments of Florida Marketing</div>
-              <div class="gc-sub">Outreach to agents, attorneys and brokers for short sales, foreclosures and tax-lien properties.</div>
-            </div>
-          </div>
-
-          <div class="lane-grid">
-            <div class="lane"><div class="lane-title">Agents</div><div class="lane-sub">short sale &amp; pre-foreclosure leads</div></div>
-            <div class="lane"><div class="lane-title">Attorneys</div><div class="lane-sub">probate &amp; distressed filings</div></div>
-            <div class="lane"><div class="lane-title">Brokers</div><div class="lane-sub">REO &amp; investor networks</div></div>
-            <div class="lane gold"><div class="lane-title">Tax-Lien Lists</div><div class="lane-sub">Direct mail • Skip trace • Pipeline</div></div>
-          </div>
+  <!-- Card 1 -->
+  <div class="growth-card">
+    <div class="gc-top">
+      <div class="gc-ic ic-phone"></div>
+      <div>
+        <div class="gc-title">AssureCall Expansion Narrative</div>
+        <div class="gc-sub">
+          The growth tranche funds additional staff and sales capacity to fulfill inbound demand and execute new sales initiatives.
         </div>
       </div>
+    </div>
+
+    <div class="gc-divider"></div>
+
+    <div class="steps-3">
+      <div class="step3">
+        <div class="step-n">1</div>
+        <div>
+          <div class="step-title">Hire + Train</div>
+          <div class="step-sub">call agents, QA/QC, team leads</div>
+        </div>
+      </div>
+
+      <div class="step3">
+        <div class="step-n">2</div>
+        <div>
+          <div class="step-title">Expand Sales Capacity</div>
+          <div class="step-sub">new reps + book of business growth</div>
+        </div>
+      </div>
+
+      <div class="step3">
+        <div class="step-n">3</div>
+        <div>
+          <div class="step-title">Scale Fulfillment</div>
+          <div class="step-sub">more staffing → faster delivery → more retained clients</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="growth-card">
+    <div class="gc-top">
+      <div class="gc-ic ic-roof"></div>
+      <div>
+        <div class="gc-title">Roofing Appointments</div>
+        <div class="gc-sub">
+          Self-owned competitor. Startup mirrors AssureCall’s structure for speed to market.
+        </div>
+      </div>
+    </div>
+
+    <div class="gc-divider"></div>
+
+    <ul class="bullets bullets-tight">
+      <li>Same operational model: recruiting + QA + performance</li>
+      <li>Fast launch with predictable staffing lanes</li>
+      <li>Directly supports repayment through new recurring revenue</li>
+    </ul>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="growth-card">
+    <div class="gc-top">
+      <div class="gc-ic ic-target"></div>
+      <div>
+        <div class="gc-title">J&amp;J Marketing</div>
+        <div class="gc-sub">
+          Outreach to agents, attorneys and brokers for short sales, foreclosures and tax-lien properties.
+        </div>
+      </div>
+    </div>
+
+    <div class="gc-divider"></div>
+
+    <div class="lane-grid lane-grid-2">
+      <div class="lane">
+        <div class="lane-title">Agents</div>
+        <div class="lane-sub">short sale &amp; pre-foreclosure leads</div>
+      </div>
+
+      <div class="lane">
+        <div class="lane-title">Attorneys</div>
+        <div class="lane-sub">probate &amp; distressed filings</div>
+      </div>
+
+      <div class="lane">
+        <div class="lane-title">Brokers</div>
+        <div class="lane-sub">REO &amp; investor networks</div>
+      </div>
+
+      <div class="lane gold">
+        <div class="lane-title">Tax-Lien Lists</div>
+        <div class="lane-sub">direct mail • skip trace • pipeline</div>
+      </div>
+    </div>
+  </div>
+
+</div>
     </section>
 
     <!-- =========================================================
