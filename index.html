@@ -935,11 +935,38 @@ body.nav-open .up-btn{
 .panel-head{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .panel-head h3{margin:0}
 .panel-tag{margin-left:0}
-.runway{margin-top:12px;border-radius:18px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.02);padding:12px}
-.runway-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(233,236,245,.70)}
-.runway-bar{margin-top:8px;height:14px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);overflow:hidden}
-.runway-fill{height:100%;background:linear-gradient(90deg, rgba(44,116,255,.45), rgba(201,167,90,.45))}
-.runway-sub{margin-top:8px;color:rgba(233,236,245,.72);font-size:13px}
+/* ===== RUNWAY (correct big bar style) ===== */
+.runway{
+  margin-top: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.02);
+  padding: 12px;
+}
+
+/* you don't need a progress fill for this design */
+.runway-fill{ display:none; }
+
+.runway-bar{
+  margin-top: 0;
+  height: 42px;
+  border-radius: 16px;
+  border: 1px solid rgba(201,167,90,.30);
+  background: linear-gradient(90deg, rgba(201,167,90,.22), rgba(44,116,255,.14));
+  display:flex;
+  align-items:center;
+  padding: 0 14px;
+  font-weight: 900;
+  letter-spacing: .02em;
+  overflow: visible;
+}
+
+.runway-sub{
+  margin-top: 8px;
+  color: rgba(233,236,245,.70);
+  font-size: 12.6px;
+}
+/* ===== END RUNWAY ===== */
 @media print{.topbar{position:relative} .print-btn{display:none} .bg-grid{display:none} body{background:white;color:#111} .container{padding-top:0} .chart-card, .panel, .property-card, .compare-card{box-shadow:none} .chart svg{height:260px} }/* Capital Stack Summary: better use of space */
 .metric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .metric-grid .metric{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03)}
