@@ -498,16 +498,31 @@
 .draws{ margin-top: 10px; display:grid; gap: 8px; }
 .draw{ padding: 10px; border-radius: 14px; border:1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.02); color: rgba(233,236,245,.80); font-size: 12.8px; }
 .dtag{ display:inline-block; padding: 2px 8px; border-radius: 999px; border:1px solid rgba(44,116,255,.30); background: rgba(44,116,255,.12); margin-right: 8px; font-weight: 800; font-size: 11px; }
-.runway{ margin-top: 10px; }
+.runway{
+  margin-top: 12px;
+}
+
 .runway-bar{
   height: 42px;
   border-radius: 16px;
   border:1px solid rgba(201,167,90,.30);
-  background: linear-gradient(90deg, rgba(201,167,90,.22), rgba(44,116,255,.14));
-  display:flex; align-items:center; padding: 0 14px;
+  background: linear-gradient(
+    90deg,
+    rgba(201,167,90,.22),
+    rgba(44,116,255,.14)
+  );
+  display:flex;
+  align-items:center;
+  padding: 0 14px;
   font-weight: 900;
+  letter-spacing: .02em;
 }
-.runway-sub{ margin-top: 8px; color: rgba(233,236,245,.70); font-size: 12.6px; }
+
+.runway-sub{
+  margin-top: 8px;
+  color: rgba(233,236,245,.70);
+  font-size: 12.6px;
+}
 
 /* Microcards (graphics) */
 .mcard{ margin-top: 12px; display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
@@ -1492,13 +1507,10 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
                   </div>
                 </div>
 
-                <div class="runway">
-                  <div class="runway-bar"><span>Runway</span></div>
-                  <div class="runway-sub">Budgeted staffing + marketing runway for expansion execution.</div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="runway">
+          <div class="runway-bar">Runway</div>
+          <div class="runway-sub">Budgeted staffing + marketing runway for expansion execution.</div>
+        </div>
 
           <div class="microcards">
             <div class="mcard">
