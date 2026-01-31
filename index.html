@@ -1227,43 +1227,65 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         </div>
 
         <div class="panel">
-          <div class="panel-head">
-            <h3>Option A vs Option B</h3>
-            <span class="panel-tag gold">Choose Flexibility or Speed</span>
+  <div class="panel-head">
+    <h3>Option A vs Option B</h3>
+    <span class="panel-tag gold">Choose Flexibility or Speed</span>
+  </div>
+
+  <!-- Force vertical stack on the RIGHT panel -->
+  <div class="opt-grid" style="grid-template-columns: 1fr;">
+    
+    <!-- Option A (TOP) -->
+    <div class="opt-mini">
+      <div class="opt-mini-head">
+        <div class="opt-dot a"></div>
+        <div>
+          <div class="opt-mini-title">Option A — Open Line of Credit (Revolving)</div>
+                  <div class="opt-mini-sub">
+                    Use funds <strong>at will</strong> (no draw submissions). Monthly payments apply <strong>(8% / 12)</strong> interest + <strong>(5% / 12)</strong> principal curtailment
+                    = <strong>(13% / 12)</strong> of the outstanding balance. Principal portion reduces balance and preserves revolving availability (credit‑card style).
+                  </div>
+                </div>
+              </div>
+
+     <div class="opt-mini-kpis">
+                <div class="okpi"><span>Best for</span><strong>on‑demand working capital</strong></div>
+                <div class="okpi"><span>Payments</span><strong>interest + principal on outstanding balance</strong></div>
+                <div class="okpi"><span>Security</span><strong>1st‑lien real‑asset collateral</strong></div>
+              </div>
+            </div>
+
+
+    <!-- Option B (MIDDLE) -->
+    <div class="opt-mini">
+      <div class="opt-mini-head">
+        <div class="opt-dot b"></div>
+        <div>
+          <div class="opt-mini-title">Option B — Operating Capital Term Funding</div>
+          <div class="opt-mini-sub">
+            Single disbursement to fund the full runway with predictable execution.
+                    Monthly payment factor uses the same pricing: <strong>(8% / 12)</strong> interest + <strong>(5% / 12)</strong> principal curtailment.
+                  </div>
+                </div>
+              </div>
+              <div class="opt-mini-kpis">
+                <div class="okpi"><span>Best for</span><strong>defined runway & budget</strong></div>
+                <div class="okpi"><span>Payments</span><strong>scheduled monthly curtailment</strong></div>
+                <div class="okpi"><span>Execution</span><strong>fast closing + simple funding</strong></div>
+              </div>
+            </div>
           </div>
 
-          <div class="opt-grid">
-            <div class="opt-mini">
-              <div class="opt-mini-head">
-                <div class="opt-dot a"></div>
-                <div>
-                  <div class="opt-mini-title">Option A — Open Line of Credit</div>
-                  <div class="opt-mini-sub">Draw as hiring + marketing scales; interest only on drawn balance.</div>
-                </div>
-              </div>
-              <div class="draws">
-                <div class="draw"><span class="dtag">Draw 1</span> Recruit + onboarding ramp</div>
-                <div class="draw"><span class="dtag">Draw 2</span> Sales expansion + training</div>
-                <div class="draw"><span class="dtag">Draw 3</span> Fulfillment capacity + marketing</div>
-              </div>
-            </div>
-            
-         <section><div class="opt-mini">
-              <div class="opt-mini-head">
-                <div class="opt-dot b"></div>
-                <div>
-                  <div class="opt-mini-title">Option B — Operating Capital Term Funding</div>
-                  <div class="opt-mini-sub">Single disbursement to fund the full runway with predictable execution.</div>
-                </div>
-              </div>
-              <div class="runway">
-                <div class="runway-bar"><span>Runway</span></div>
-                <div class="runway-sub">Budgeted staffing + marketing runway for expansion execution.</div>
-              </div>
-            </div>
-          </div>
-        </section>
-          
+     <!-- RUNWAY (BOTTOM) --> 
+      <div class="runway">
+        <div class="runway-label"><strong>Runway</strong></div>
+        <div class="runway-bar">
+          <div class="runway-fill" style="width:100%"></div>
+        </div>
+        <div class="runway-sub">Budgeted staffing + marketing runway for expansion execution.</div>
+      </div>
+    </div>
+ 
    <section></div><div class="growth-grid-3">
         <div class="growth-card wide">
           <div class="gc-top">
