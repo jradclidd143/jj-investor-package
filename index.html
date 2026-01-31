@@ -147,7 +147,11 @@
     .dot{ margin:0 10px; opacity:.55; }
 
     .container{ max-width:1180px; margin:0 auto; padding: 26px 20px 60px; }
-
+    
+     /* Optional: create room for right-side nav on large screens */
+     @media (min-width: 1180px){
+      .container{ padding-right: 280px; }
+    }
     .hero{
       display:grid;
       grid-template-columns: 1.15fr .85fr;
@@ -662,7 +666,8 @@
 .sidenav{
   position: fixed;
   top: 110px;
-  left: 16px;
+  right: 16px;
+  left: auto;
   width: 240px;
   max-height: calc(100vh - 140px);
   padding: 12px;
@@ -772,6 +777,11 @@
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+}
+
+/* If sidenav is open on the right, push the up button left */
+.sidenav:not(.min) ~ .up-btn{
+  right: 280px;
 }
 
 .up-btn:hover{
