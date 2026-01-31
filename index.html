@@ -170,6 +170,88 @@ h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em
 .section-head p{ margin: 8px 0 0; color: rgba(233,236,245,.72); line-height:1.6; }
 .grid-2{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; margin-top: 16px; }
 .charts-row{ margin-top: 16px; display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* === Section header upgrade (drop-in) === */
+.section{
+  margin-top: 34px;
+  padding-top: 26px;
+  border-top: none;             /* replace the plain border-top */
+  position: relative;
+  scroll-margin-top: 120px;     /* helpful if you use anchor links */
+}
+
+/* Bold “start of section” rule */
+.section::before{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  top:0;
+  height:2px;
+  background: linear-gradient(
+    90deg,
+    rgba(44,116,255,0),
+    rgba(44,116,255,.70),
+    rgba(201,167,90,.75),
+    rgba(44,116,255,0)
+  );
+  opacity:.95;
+}
+
+/* Turn the section head into a banner card */
+.section-head{
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+  box-shadow: 0 12px 26px rgba(0,0,0,.28);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient glow behind the header */
+.section-head::after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  background:
+    radial-gradient(360px 160px at 20% 0%, rgba(44,116,255,.18), transparent 60%),
+    radial-gradient(320px 180px at 80% 0%, rgba(201,167,90,.18), transparent 60%);
+  pointer-events:none;
+  opacity:.95;
+}
+
+.section-head > *{ position:relative; z-index:1; }
+
+/* Make the H2 itself feel like a “title bar” */
+.section-head h2{
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  margin:0;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* Left accent “pill” so your eye instantly catches the section start */
+.section-head h2::before{
+  content:"";
+  width: 10px;
+  height: 22px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(44,116,255,.95), rgba(201,167,90,.90));
+  box-shadow: 0 10px 18px rgba(0,0,0,.35);
+}
+
+.section-head p{
+  margin: 8px 0 0;
+  color: rgba(233,236,245,.74);
+  line-height: 1.55;
+  max-width: 90ch;
+}
+
+  
 /* Property cards */
 .property-card{
   border-radius: 20px;
@@ -697,12 +779,21 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 /* ===== End Print Render Fix ===== */
 
 
+    /* --- PRINT OVERRIDES --- */
+    @media print{
+      .section{ margin-top: 18px !important; padding-top: 14px !important; }
+      .section::before{ height:1px !important; opacity:1 !important; background:#bbb !important; }
 
-
-
-
-
-
+      .section-head{
+        box-shadow:none !important;
+        border:1px solid #ddd !important;
+        background:#fff !important;
+      }
+      .section-head::after{ display:none !important; }
+      .section-head h2{ color:#111 !important; }
+      .section-head h2::before{ background:#111 !important; box-shadow:none !important; }
+      .section-head p{ color:#444 !important; }
+    }
 </style>
 </head>
 <body>
@@ -1038,7 +1129,7 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     </section>
 
     <section class="section funds" id="use-of-proceeds" data-nav="Use of Proceeds">
-      <div class="section-head">
+      <div class="section-head"> 
         <h2>Use of Proceeds</h2>
         <p>
           Funds are applied to Clear Titles and consolidate to One Lender, plus Operating Capital for
@@ -1277,6 +1368,172 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         </div>
       </div>
     </section>
+  <!-- =========================================================
+     Roofing Appointments (Branded Section Snippet)
+     Paste inside <main class="container"> … </main>
+========================================================== -->
+<section class="section" id="roofing-appointments" data-nav="Roofing Appointments">
+  <div class="section-head">
+    <h2>Roofing Appointments</h2>
+    <p>
+      Growth-capital snapshot and lender-facing terms for <strong>Roofing Appointments LLC</strong>.
+      (This section is styled to match the primary package UI.)
+    </p>
+  </div>
+
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Executive Snapshot</h3>
+        <span class="panel-tag gold">Requested: $30,000 • Term: 16 months</span>
+      </div>
+
+      <ul class="bullets" style="margin-top:10px;">
+        <li><strong>Seasonal model:</strong> February–October (in-season ramp focus)</li>
+        <li><strong>Payment start:</strong> April 15, 2026 (borrower-initiated ACH, due the 15th EOD)</li>
+        <li><strong>Monthly payment:</strong> $2,075 ($200 interest + $1,875 principal)</li>
+        <li><strong>Purpose:</strong> staffing + launch runway to accelerate booked appointments and delivery capacity</li>
+      </ul>
+
+      <div class="callout" style="margin-top:12px;">
+        <div class="callout-title">Integration Note</div>
+        <div class="callout-body">
+          This business is a self-owned competitor that mirrors the AssureCall operating model for speed-to-market.
+          Financial statements (12 months) will be uploaded in the <strong>Roofing Appointments Financials</strong> section.
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Loan Terms Summary (from Roofing Packet)</h3>
+        <span class="panel-tag">Condensed</span>
+      </div>
+
+      <div class="uf-table" style="margin-top:12px;">
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Loan Type</div>
+          </div>
+          <div class="uf-amt">Growth Capital / Business Expansion Loan</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Borrower</div>
+          </div>
+          <div class="uf-amt">Roofing Appointments LLC (Year 1 Startup)</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Lender</div>
+          </div>
+          <div class="uf-amt">J&amp;J Investments of Florida LLC</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Principal Amount</div>
+          </div>
+          <div class="uf-amt">$30,000</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Interest Rate</div>
+          </div>
+          <div class="uf-amt">8% annual (fixed)</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Monthly Payment</div>
+          </div>
+          <div class="uf-amt">$2,075 ($200 interest + $1,875 principal)</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Term</div>
+          </div>
+          <div class="uf-amt">16 months</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">First Payment</div>
+          </div>
+          <div class="uf-amt">April 15, 2026</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Final Payment</div>
+          </div>
+          <div class="uf-amt">July 15, 2027</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Total Repayment</div>
+          </div>
+          <div class="uf-amt">$33,200</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Total Interest</div>
+          </div>
+          <div class="uf-amt">$3,200</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Effective APR</div>
+          </div>
+          <div class="uf-amt">~10.7%</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Payment Method</div>
+          </div>
+          <div class="uf-amt">Borrower-initiated ACH (15th of each month)</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Late Fee</div>
+          </div>
+          <div class="uf-amt">$100 (if payment &amp;gt; 5 days late)</div>
+        </div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Default Trigger</div>
+          </div>
+          <div class="uf-amt">Payment &amp;gt; 10 days late</div>
+        </div>
+      </div>
+
+      <div class="tiny-note">
+        If you want this to match your “13% / year paid monthly” language elsewhere, you can append an optional
+        structure note here; this table preserves the Roofing packet terms as-is.
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top:16px;">
+    <div class="chart-card">
+      <div class="chart-title">Use of Proceeds (High Level)</div>
+      <div class="chart-sub">Where the $30,000 is intended to go (placeholder — replace with your exact breakdown).</div>
+      <div class="uf-table">
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Hiring / Training</div><div class="uf-sub">Agents, onboarding, QA</div></div><div class="uf-amt">$—</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Marketing / Lead Flow</div><div class="uf-sub">Launch ramp + in-season volume</div></div><div class="uf-amt">$—</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Tools / Systems</div><div class="uf-sub">Dialer, CRM, tracking</div></div><div class="uf-amt">$—</div></div>
+        <div class="uf-row total"><div class="uf-left"><div class="uf-name">Total</div><div class="uf-sub">Roofing Appointments growth tranche</div></div><div class="uf-amt">$30,000</div></div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Operating Model (Summary)</div>
+      <div class="chart-sub">Mirrors AssureCall structure — built for predictable hiring, training, and fulfillment.</div>
+      <ul class="bullets" style="margin-top:10px;">
+        <li>Replicable agent ramp model with performance tracking</li>
+        <li>Quality assurance + coaching loops to stabilize conversion</li>
+        <li>Scaling plan aligns with seasonal demand curve</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 
     <section class="section" id="funding-structure" data-nav="Funding Structure">
       <div class="section-head">
@@ -1320,26 +1577,32 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       <div class="split">
         <div class="panel">
           <h3>Capital Stack Summary</h3>
-          <div class="metric-grid">
-            <div class="metric">
-              <div class="label">Existing liens paid off</div>
-              <div class="value">$787,844.07</div>
-              <div class="sub">≈ 69.5% of combined collateral value</div>
-            </div>
-            <div class="metric">
-              <div class="label">Operating + reserve allocation</div>
-              <div class="value">$257,479.54</div>
-              <div class="sub">Reserves + business growth capital + closing buffer</div>
-            </div>
-            <div class="metric">
-              <div class="label">Gross LTV (full commitment)</div>
-              <div class="value">92.1%</div>
-              <div class="sub">Straightforward collateralized profile
-<div class="metric">
-                <div class="label">Indicative payment structure</div>
-                <div class="value">13% / year paid monthly</div>
-                <div class="sub">Monthly factor: (8% / 12) Interest + (5% / 12) Principal curtailment applied to the outstanding balance.</div>
-              </div>
+         <div class="metric-grid">
+  <div class="metric">
+    <div class="label">Existing liens paid off</div>
+    <div class="value">$787,884.07</div>
+    <div class="sub">≈ 69.5% of combined collateral value</div>
+  </div>
+
+  <div class="metric">
+    <div class="label">Operating + reserve allocation</div>
+    <div class="value">$257,479.54</div>
+    <div class="sub">Reserves + business growth capital + closing buffer</div>
+  </div>
+
+  <div class="metric">
+    <div class="label">Gross LTV (full commitment)</div>
+    <div class="value">92.1%</div>
+    <div class="sub">Straightforward collateralized profile</div>
+  </div>
+
+  <div class="metric">
+    <div class="label">Indicative payment structure</div>
+    <div class="value">13% / year paid monthly</div>
+    <div class="sub">Monthly factor: (8% / 12) interest + (5% / 12) principal curtailment.</div>
+  </div>
+</div>
+
 </div>
 </div>
 </div>
@@ -1594,6 +1857,8 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       </div>
     </section>
 
+<!-- ✅ INSERT FINANCIAL SECTIONS HERE -->
+<!-- (paste Financial_Sections_Placeholders.html here) -->
     <section class="section appendix" id="appendix" data-nav="Appendix: Source Documents">
       <div class="section-head">
         <h2>Appendix: Source Documents</h2>
@@ -1665,15 +1930,15 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           </div>
         </a>
         
-         <a class="doc" href="docs/Borrower Experience & Operational Background.pdf" target="_blank" rel="noopener">
+         <a class="doc" href="docs/Borrower%20Experience%20%26%20Operational%20Background.pdf" target="_blank" rel="noopener">
           <div class="doc-ic">PDF</div>
           <div class="doc-meta">
-            <div class="doc-title">Borrower Experience & Operational Background</div>
+            <div class="doc-title">Borrower Experience & Operational Background.pdf/div>
             <div class="doc-sub">Summary of Business and Industry Experience.</div>
           </div>
         </a>
 
-        <a class="doc" href="docs/Borrower and Primary Guarantee.pdf" target="_blank" rel="noopener">
+        <a class="doc" href="docs/Borrower%20and%20Primary%20Guarantee.pdf" target="_blank" rel="noopener">
           <div class="doc-ic">PDF</div>
           <div class="doc-meta">
             <div class="doc-title">Borrower and Primary Guarantee</div>
@@ -1744,6 +2009,135 @@ html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       beforePrint();
       // small delay allows the browser to lay out overlays before print dialog captures
       setTimeout(function(){ window.print(); }, 180);
+    });
+  }
+})();
+</script>
+  
+<script>
+(function(){
+  // Helpers
+  function slugify(s){
+    return (s||"").toLowerCase().trim()
+      .replace(/&/g,"and")
+      .replace(/[^a-z0-9\s-:]/g,"")
+      .replace(/\s+/g,"-")
+      .replace(/-+/g,"-");
+  }
+
+  // Sticky header offset (topbar height-ish)
+  function scrollToEl(el){
+    if(!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 110;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+
+  // Build nav from [data-nav]
+  const nav = document.getElementById("navList");
+  const navWrap = document.getElementById("sideNav");
+  const sections = Array.from(document.querySelectorAll("[data-nav]"))
+    .filter(el => el.getAttribute("data-nav"));
+
+  if(nav && sections.length){
+    nav.innerHTML = "";
+
+    sections.forEach(el=>{
+      const label =
+        el.getAttribute("data-nav") ||
+        el.querySelector("h2,h1")?.textContent?.trim() ||
+        "Section";
+
+      if(!el.id){
+        el.id = slugify(label) || ("sec-" + Math.random().toString(16).slice(2));
+      }
+
+      const a = document.createElement("a");
+      a.href = "#" + el.id;
+      a.textContent = label;
+
+      a.addEventListener("click", (e)=>{
+        e.preventDefault();
+        const target = document.getElementById(el.id);
+        scrollToEl(target);
+        history.replaceState(null, "", "#" + el.id);
+      });
+
+      nav.appendChild(a);
+    });
+
+    // Active highlight
+    const links = Array.from(nav.querySelectorAll("a"));
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(ent=>{
+        if(!ent.isIntersecting) return;
+        const id = ent.target.id;
+        links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+      });
+    }, { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 });
+
+    sections.forEach(s => obs.observe(s));
+  }
+
+  // Side nav collapse toggle
+  const t = document.getElementById("navToggle");
+  if(t && navWrap){
+    // IMPORTANT: match your CSS. You already use ".sidenav.min" in your stylesheet.
+    const saved = localStorage.getItem("jj_nav_collapsed");
+    if(saved === "1"){
+      navWrap.classList.add("min");
+      t.setAttribute("aria-expanded","false");
+    }
+
+    t.addEventListener("click", ()=>{
+      navWrap.classList.toggle("min");
+      const collapsed = navWrap.classList.contains("min");
+      t.setAttribute("aria-expanded", String(!collapsed));
+      localStorage.setItem("jj_nav_collapsed", collapsed ? "1" : "0");
+    });
+  }
+
+  // Back to top
+  const upBtn = document.getElementById("upBtn");
+  if(upBtn){
+    const onScroll = ()=>{
+      upBtn.classList.toggle("show", window.scrollY > 420);
+    };
+    window.addEventListener("scroll", onScroll, {passive:true});
+    onScroll();
+    upBtn.addEventListener("click", ()=> window.scrollTo({top:0, behavior:"smooth"}));
+  }
+
+  // Theme toggles (IDs must match your HTML)
+  const htmlEl = document.documentElement;
+  const screenBtn = document.getElementById("screenThemeToggle"); // ✅ your actual id
+  const printThemeBtn = document.getElementById("printThemeToggle"); // ✅ your actual id
+
+  const savedTheme = localStorage.getItem("jj_theme") || "dark";
+  htmlEl.setAttribute("data-theme", savedTheme);
+
+  const savedPrintTheme = localStorage.getItem("jj_print_theme") || "dark";
+  htmlEl.setAttribute("data-print", savedPrintTheme);
+
+  if(screenBtn){
+    // Optional label update
+    screenBtn.textContent = (savedTheme === "dark") ? "🌙 Screen: Dark" : "☀️ Screen: Light";
+    screenBtn.addEventListener("click", ()=>{
+      const cur = htmlEl.getAttribute("data-theme") || "dark";
+      const next = (cur === "dark") ? "light" : "dark";
+      htmlEl.setAttribute("data-theme", next);
+      localStorage.setItem("jj_theme", next);
+      screenBtn.textContent = (next === "dark") ? "🌙 Screen: Dark" : "☀️ Screen: Light";
+    });
+  }
+
+  if(printThemeBtn){
+    printThemeBtn.textContent = (savedPrintTheme === "dark") ? "🖨️ Print: Dark" : "🖨️ Print: Light";
+    printThemeBtn.addEventListener("click", ()=>{
+      const cur = htmlEl.getAttribute("data-print") || "dark";
+      const next = (cur === "dark") ? "light" : "dark";
+      htmlEl.setAttribute("data-print", next);
+      localStorage.setItem("jj_print_theme", next);
+      printThemeBtn.textContent = (next === "dark") ? "🖨️ Print: Dark" : "🖨️ Print: Light";
     });
   }
 })();
