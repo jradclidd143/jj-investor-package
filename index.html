@@ -67,7 +67,6 @@
         linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
     }
-
     .bg-grid{
       position:fixed; inset:0;
       background-image:
@@ -78,7 +77,6 @@
       pointer-events:none;
       mask-image: radial-gradient(700px 420px at 30% 0%, black 35%, transparent 75%);
     }
-
   .topbar{
   position:sticky;
   top:0;
@@ -87,7 +85,6 @@
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
-
     .topbar-inner{
       max-width:1180px;
       margin:0 auto;
@@ -98,21 +95,18 @@
       justify-content:space-between;
       flex-wrap:wrap;
     }
-
     .jj-header{
       height:96px;
       width:auto;
       filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
       border-radius:12px;
     }
-
     .topbar-meta{
       display:flex;
       flex-direction:column;
       gap:8px;
       align-items:flex-end;
     }
-
     .pill{
       font-size:12px;
       letter-spacing:.10em;
@@ -123,7 +117,6 @@
       color: rgba(240,213,155,.92);
       white-space:nowrap;
     }
-
     /* ✅ Added (your HTML uses these) */
     .toggle-row{
       display:flex;
@@ -146,10 +139,8 @@
     }
     .pill-toggle:hover{ border-color: rgba(201,167,90,.35); background: rgba(201,167,90,.10); }
     .pill-toggle:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
-
     .meta-line{ font-size:13px; color:rgba(233,236,245,.70); }
     .dot{ margin:0 10px; opacity:.55; }
-
     .container{ max-width:1180px; margin:0 auto; padding: 26px 20px 60px; }
     
      /* Optional: create room for right-side nav on large screens */
@@ -163,7 +154,6 @@
       align-items:stretch;
       padding-top: 10px;
     }
-
     h1{ margin: 0 0 10px; font-size: 40px; line-height:1.06; letter-spacing: -0.02em; }
     .lead{ margin:0 0 18px; color:rgba(233,236,245,.72); font-size: 16px; line-height:1.55; max-width: 72ch; }
 
@@ -193,7 +183,6 @@
     .kpi-label{ font-size:12px; letter-spacing:.08em; color: rgba(233,236,245,.70); text-transform: uppercase; }
     .kpi-value{ margin-top:8px; font-size: 28px; font-weight: 750; letter-spacing: -0.02em; }
     .kpi-sub{ margin-top:6px; font-size: 13px; color: rgba(233,236,245,.66); }
-
     /* Glass executive summary */
     .glass-card{
       padding: 18px;
@@ -214,7 +203,6 @@
     }
     .glass-card > *{ position:relative; z-index:1; }
     .glass-title{ font-weight: 800; letter-spacing:-0.01em; margin-bottom:12px; }
-
     .sum-grid{ display:grid; gap: 10px; }
     .sum-item{
       display:flex; gap: 12px; align-items:center;
@@ -223,7 +211,6 @@
       border: 1px solid rgba(255,255,255,.08);
       background: rgba(255,255,255,.03);
     }
-
     .sum-ic{
       width: 42px; height: 42px; border-radius: 16px;
       border:1px solid rgba(201,167,90,.30);
@@ -238,11 +225,9 @@
       background: rgba(240,213,155,.92);
       mask-repeat:no-repeat; mask-position:center; mask-size:contain;
     }
-
     .ic-key::after{ mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M7 14a5 5 0 1 1 4.9-6h8.6l1.5 1.5-2 2L22 13l-2 2-1.5-1.5-1 1L16 13l-1 1-1.5-1.5-1 1H11.9A5 5 0 0 1 7 14zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'/%3E%3C/svg%3E"); }
     .ic-cash::after{ mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M2 7h20v10H2V7zm2 2v6h16V9H4zm8 5a3 3 0 1 1 0-6 3 3 0 0 1 0 6z'/%3E%3C/svg%3E"); }
     .ic-rocket::after{ mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2c4.4 0 8 3.6 8 8 0 1.4-.4 2.8-1 4l-3-3-2 2 3 3c-1.2.6-2.6 1-4 1-4.4 0-8-3.6-8-8 0-4.4 3.6-8 8-8zm-6 16l3-3 2 2-3 3H6v-2z'/%3E%3C/svg%3E"); }
-
     .sum-title{ font-weight: 800; }
     .sum-sub{ color: rgba(233,236,245,.70); font-size: 12.8px; margin-top: 2px; line-height:1.35; }
 /* Callout */
@@ -255,14 +240,12 @@
 }
 .callout-title{ font-weight:800; }
 .callout-body{ color: rgba(233,236,245,.72); margin-top: 4px; line-height:1.55; }
-    
 /* Section + layout */
 .section{ margin-top: 26px; padding: 18px 0 0; border-top: 1px solid rgba(255,255,255,.07); }
 .section-head h2{ margin:0; font-size: 22px; letter-spacing:-0.01em; }
 .section-head p{ margin: 8px 0 0; color: rgba(233,236,245,.72); line-height:1.6; }
 .grid-2{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; margin-top: 16px; }
 .charts-row{ margin-top: 16px; display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
   /* === Section header upgrade (drop-in) === */
 .section{
   margin-top: 34px;
@@ -271,7 +254,6 @@
   position: relative;
   scroll-margin-top: 120px;     /* helpful if you use anchor links */
 }
-
 /* Bold “start of section” rule */
 .section::before{
   content:"";
@@ -288,7 +270,6 @@
   );
   opacity:.95;
 }
-
 /* Turn the section head into a banner card */
 .section-head{
   margin: 0;
@@ -300,7 +281,6 @@
   position: relative;
   overflow: hidden;
 }
-
 /* Ambient glow behind the header */
 .section-head::after{
   content:"";
@@ -312,9 +292,7 @@
   pointer-events:none;
   opacity:.95;
 }
-
 .section-head > *{ position:relative; z-index:1; }
-
 /* Make the H2 itself feel like a “title bar” */
 .section-head h2{
   font-size: 24px;
@@ -325,7 +303,6 @@
   align-items:center;
   gap:10px;
 }
-
 /* Left accent “pill” so your eye instantly catches the section start */
 .section-head h2::before{
   content:"";
@@ -335,15 +312,12 @@
   background: linear-gradient(180deg, rgba(44,116,255,.95), rgba(201,167,90,.90));
   box-shadow: 0 10px 18px rgba(0,0,0,.35);
 }
-
 .section-head p{
   margin: 8px 0 0;
   color: rgba(233,236,245,.74);
   line-height: 1.55;
   max-width: 90ch;
-}
-
-  
+}  
 /* Property cards */
 .property-card{
   border-radius: 20px;
@@ -391,7 +365,6 @@
 .lender{ font-weight: 760; }
 .sub{ font-size: 12px; color: rgba(233,236,245,.66); margin-top: 4px; }
 .r{ text-align:right; }
-
 /* Charts */
 .chart-card{
   border-radius: 20px;
@@ -410,7 +383,6 @@
   border-color: rgba(217,60,60,.25);
   background: linear-gradient(180deg, rgba(217,60,60,.10), rgba(13,18,34,.55));
 }
-
 /* Funds flow */
 .funds-flow{
   margin-top: 16px;
@@ -446,7 +418,6 @@
 .ic-growth::after{ mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 19h16v2H4v-2zm1-4l5-5 3 3 6-6 1 1-7 7-3-3-4 4-1-1z'/%3E%3C/svg%3E"); }
 .flow-title{ margin-top: 10px; font-weight: 820; }
 .flow-sub{ margin-top: 4px; color: rgba(233,236,245,.72); font-size: 12.8px; line-height:1.45; }
-
 /* Panel */
 .panel{
   border-radius: 20px;
@@ -471,7 +442,6 @@
   color: rgba(240,213,155,.92);
 }
 .panel h3{ margin: 0; letter-spacing:-0.01em; }
-
 /* Use of funds table */
 .uf-table{ margin-top: 12px; display:grid; gap: 10px; }
 .uf-row{
@@ -486,7 +456,6 @@
 .uf-name{ font-weight: 820; }
 .uf-sub{ color: rgba(233,236,245,.68); font-size: 12.6px; line-height:1.35; }
 .uf-amt{ font-weight: 900; letter-spacing:-0.01em; }
-
 /* Option mini grid */
 .opt-grid{ margin-top: 12px; display:grid; gap: 12px; }
 .opt-mini{ padding: 12px; border-radius: 18px; border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.03); }
@@ -502,7 +471,6 @@
 .runway{
   margin-top: 12px;
 }
-
 .runway-bar{
   height: 42px;
   border-radius: 16px;
@@ -518,13 +486,11 @@
   font-weight: 900;
   letter-spacing: .02em;
 }
-
 .runway-sub{
   margin-top: 8px;
   color: rgba(233,236,245,.70);
   font-size: 12.6px;
 }
-
 /* Microcards (graphics) */
 .microcards{
   margin-top: 12px;
@@ -533,7 +499,6 @@
   gap: 10px;
   align-items: stretch;
 }
-
 .microcards .mcard{
   border-radius: 18px;
   border:1px solid rgba(255,255,255,.10);
@@ -559,7 +524,6 @@
 .ic-target::after{ mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M11 2v2a8 8 0 1 0 8 8h2A10 10 0 1 1 11 2zm1 6a4 4 0 1 0 4 4h-2a2 2 0 1 1-2-2V8zm9-3l-3 3-1-1 3-3 1 1z'/%3E%3C/svg%3E"); }
 .mcard-title{ margin-top: 10px; font-weight: 850; }
 .mcard-sub{ margin-top: 4px; color: rgba(233,236,245,.70); font-size: 12.6px; line-height:1.45; }
-
 /* Growth cards (equal 3-up, equal height) */
 .growth-grid-2{
   margin-top: 16px;
@@ -567,26 +531,22 @@
   grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 equal columns */
   gap: 16px;
   align-items: stretch; /* equal height per row */
-}
-    
+}    
 .growth-card{
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,.10);
   background: rgba(255,255,255,.03);
   padding: 12px;
-
   min-width: 0;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
-
 /* kill the old wide behavior */
 .growth-card.wide{
   grid-column: auto !important;
 }
-
 /* keep your existing inner styles */
 .gc-top{ display:flex; gap: 10px; align-items:center; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.08); }
 .gc-ic{ width: 44px; height:44px; border-radius: 16px; border:1px solid rgba(201,167,90,.25); background: rgba(201,167,90,.10); position:relative; }
@@ -604,18 +564,15 @@
 .lane.gold{ border-color: rgba(201,167,90,.30); background: rgba(201,167,90,.08); }
 .lane-title{ font-weight: 900; }
 .lane-sub{ color: rgba(233,236,245,.68); font-size: 12.5px; margin-top: 4px; line-height:1.45; }
-
 /* Optional: push the “blocks” down so bottoms align nicer */
 .growth-card .steps-3,
 .growth-card .lane-grid{
   margin-top: auto;
 }
-
 /* Responsive */
 @media (max-width: 1020px){
   .growth-grid-2{ grid-template-columns: 1fr; }
 }
-
 /* Options cards */
 .option-card{
   border-radius: 22px;
@@ -638,7 +595,6 @@
 .opt-badge.gold{ border-color: rgba(201,167,90,.30); background: rgba(201,167,90,.12); color: rgba(240,213,155,.95); }
 .option-head h3{ margin: 0; letter-spacing:-0.01em; }
 .option-card .sub{ margin-top: 6px; color: rgba(233,236,245,.70); font-size: 12.8px; }
-
 /* Split */
 .split{ margin-top: 16px; display:grid; grid-template-columns: 1.05fr .95fr; gap: 16px; align-items:stretch; }
 .metric-grid{ display:grid; gap: 12px; }
@@ -646,7 +602,6 @@
 .metric .label{ color: rgba(233,236,245,.70); font-size: 12px; letter-spacing:.08em; text-transform: uppercase; }
 .metric .value{ margin-top: 6px; font-size: 18px; font-weight: 900; }
 .metric .sub{ margin-top: 4px; color: rgba(233,236,245,.66); font-size: 12.6px; }
-
 /* Comparison */
 .section.contrast{ border-top: 1px solid rgba(217,60,60,.22); }
 .compare{ margin-top: 16px; display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -685,7 +640,6 @@
 .ic-alert::after{ mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z'/%3E%3C/svg%3E"); }
 .ic-clock::after{ mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 20a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-8V7h-2v6l5 3 1-1-4-2z'/%3E%3C/svg%3E"); }
 .ic-brief::after{ mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M10 4h4V2h2v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2h2v2zm9 4H5v12h14V8z'/%3E%3C/svg%3E"); }
-
 /* Appendix */
 .appendix .doc-list{ margin-top: 14px; display:grid; gap: 10px; }
 .doc{
@@ -749,15 +703,13 @@
   flex-direction: column;
   gap: 10px;
   overflow: hidden;
-}
-    
+}    
 /* Dock sidenav to the right edge of the centered document (not the browser edge)
    Set 1180px to match your .container max-width if different */
 @media (min-width: 1180px){
   .sidenav{
     right: calc((100vw - 1180px)/2 + 16px);
   }  
-}
 /* Collapse state your JS toggles: navWrap.classList.toggle("min") */
 .sidenav.min{
   width: 64px;
@@ -793,7 +745,6 @@
   color: rgba(233,236,245,.70);
   padding: 2px 6px;
 }
-
 /* Link list container (your HTML uses class="nav-list") */
 .nav-list{
   display: flex;
@@ -802,7 +753,6 @@
   overflow: auto;
   padding-right: 4px;
 }
-
 /* Links that your JS creates inside #navList */
 .nav-list a{
   text-decoration: none;
@@ -817,7 +767,6 @@
   border-color: rgba(255,255,255,.10);
   background: rgba(255,255,255,.03);
 }
-
 /* JS adds .active */
 .nav-list a.active{
   border-color: rgba(44,116,255,.40);
@@ -838,22 +787,19 @@
   box-shadow: var(--shadow2);
   cursor: pointer;
   z-index: 30;
-
+}
   /* hidden by default */
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
-
   transition: opacity .2s ease, transform .2s ease, border-color .2s ease, background .2s ease;
 }
-
 /* JS toggles .show */
 .up-btn.show{
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
-
 /* Move the up button left when nav is open */
 body.nav-open .up-btn{
   right: 280px;
@@ -867,7 +813,6 @@ body.nav-open .up-btn{
   outline-offset: 2px;
 }
 /* ===== End Back to Top ===== */
-
 @media (max-width: 1020px){
   .hero{ grid-template-columns: 1fr; }
   .grid-2{ grid-template-columns: 1fr; }
@@ -882,9 +827,6 @@ body.nav-open .up-btn{
   .topbar-inner{max-width:1180px;margin:0 auto;padding: 16px 20px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
   .topbar-meta{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
 }
-
-
-
 /* ===== RUNWAY (correct big bar style) ===== */
 .runway{
   margin-top: 12px;
@@ -893,7 +835,6 @@ body.nav-open .up-btn{
   background: rgba(255,255,255,.02);
   padding: 12px;
 }
-
 /* you don't need a progress fill for this design */
 .runway-fill{ display:none; }
 .runway-bar{
@@ -909,7 +850,6 @@ body.nav-open .up-btn{
   letter-spacing: .02em;
   overflow: visible;
 }
-
 .runway-sub{
   margin-top: 8px;
   color: rgba(233,236,245,.70);
@@ -932,7 +872,173 @@ body.nav-open .up-btn{
 /* Mobile */
 @media (max-width: 980px){
   .microcards{ grid-template-columns:1fr; }
-}   
+}  
+/* =========================================================
+   PRINT (ONE BLOCK ONLY) — replaces ALL other print CSS
+   Charts ALWAYS print. Background optional.
+   Paste at the VERY END of your CSS.
+   ========================================================= */
+
+/* Screen defaults (never block charts) */
+.print-bg{ display:none !important; }
+.print-card-bg{ display:none !important; }
+
+@media print {
+
+  /* Printer color handling (browser-dependent) */
+  *{
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Paper */
+  @page{
+    size: Letter landscape;
+    margin: 0.55in;
+  }
+
+  html, body{
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    color: #e9ecf5 !important;
+  }
+
+  /* Hide non-report UI */
+  .bg-grid,
+  .print-btn,
+  .sidenav,
+  .up-btn{
+    display:none !important;
+  }
+
+  /* Make sticky headers behave */
+  .topbar{
+    position: relative !important;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255,255,255,.18) !important;
+  }
+
+  /* Print layout width */
+  .container{
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  /* Stack grids in print to avoid squeeze */
+  .hero,
+  .grid-2,
+  .charts-row,
+  .split,
+  .compare,
+  .risk-grid,
+  .growth-grid-2,
+  .funds-flow,
+  .opt-grid{
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Keep KPI grid 2-up if you want */
+  .kpis{
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+  }
+
+  /* Prevent page splitting inside cards */
+  .kpi-card,
+  .panel,
+  .chart-card,
+  .property-card,
+  .compare-card,
+  .mcard,
+  .metric,
+  .opt-mini,
+  .callout,
+  .runway,
+  .glass-card{
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    box-shadow: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  /* ==== CHARTS: ALWAYS PRINT ==== */
+  .chart svg{
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:260px !important; /* adjust if needed */
+  }
+
+  /* Optional print page background image (behind everything) */
+  .print-bg{
+    display:block !important;
+    position: fixed !important;
+    inset: -0.55in !important;
+    width: calc(100% + 1.1in) !important;
+    height: calc(100% + 1.1in) !important;
+    object-fit: cover !important;
+    z-index: -10 !important;
+  }
+
+  /* Optional per-card overlay images (only if you have <img class="print-card-bg"> inside cards) */
+  .print-card-bg{
+    display:block !important;
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    object-fit: cover !important;
+    border-radius: inherit !important;
+    z-index: 1 !important;
+  }
+
+  /* Ensure card content sits above overlay */
+  .kpi-card > *,
+  .panel > *,
+  .chart-card > *,
+  .property-card > *,
+  .compare-card > *,
+  .mcard > *,
+  .metric > *,
+  .opt-mini > *,
+  .callout > *,
+  .runway > *,
+  .glass-card > *{
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  /* Section header print style (clean + predictable) */
+  .section{
+    margin-top: 18px !important;
+    padding-top: 14px !important;
+  }
+  .section::before{
+    height: 1px !important;
+    opacity: 1 !important;
+    background: rgba(255,255,255,.30) !important;
+  }
+  .section-head{
+    box-shadow: none !important;
+    border: 1px solid rgba(255,255,255,.20) !important;
+    background: rgba(0,0,0,.10) !important;
+  }
+  .section-head::after{ display:none !important; }
+
+  /* Typography sizing */
+  h1{
+    font-size: 26px !important;
+    line-height: 1.12 !important;
+  }
+  .jj-header{ height: 72px !important; }
+
+  /* IMPORTANT: Do NOT recolor your text to #444/#111
+     (that was making your “dark print theme” look wrong)
+     If you WANT light/white print, leave colors alone.
+  */
+  
+}    
 </style>
 </head>
 <body>
