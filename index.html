@@ -78,36 +78,44 @@
       mask-image: radial-gradient(700px 420px at 30% 0%, black 35%, transparent 75%);
     }
     
-  .topbar{
-  position:sticky;
-  top:0;
-  z-index:40; /* was 20 — must be higher than .sidenav (30) */
+ .topbar{
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: var(--topbar-h);
   background: linear-gradient(180deg, rgba(5,6,11,.85), rgba(5,6,11,.55));
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
     .topbar-inner{
-      max-width:1180px;
-      margin:0 auto;
-      padding: 16px 20px;
-      display:flex;
-      gap:18px;
-      align-items:center;
-      justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .jj-header{
-      height:96px;
-      width:auto;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
-      border-radius:12px;
-    }
-    .topbar-meta{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      align-items:flex-end;
-    }
+  max-width:1180px;
+  margin:0 auto;
+  height: var(--topbar-h);
+  padding: 16px 20px;
+  display:flex;
+  gap:18px;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap: nowrap;
+}
+
+.jj-header{
+  display:block;
+  height:96px;
+  width:auto;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+  border-radius:12px;
+}
+
+.topbar-meta{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  align-items:flex-end;
+  min-width: 260px;
+}
+    
     .pill{
       font-size:12px;
       letter-spacing:.10em;
@@ -118,6 +126,7 @@
       color: rgba(240,213,155,.92);
       white-space:nowrap;
     }
+    
     /* ✅ Added (your HTML uses these) */
     .toggle-row{
       display:flex;
@@ -126,6 +135,7 @@
       justify-content:flex-end;
       flex-wrap:wrap;
     }
+    
     .pill-toggle{
       font-size:12px;
       letter-spacing:.02em;
@@ -138,6 +148,7 @@
       cursor:pointer;
       user-select:none;
     }
+    
     .pill-toggle:hover{ border-color: rgba(201,167,90,.35); background: rgba(201,167,90,.10); }
     .pill-toggle:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
     .meta-line{ font-size:13px; color:rgba(233,236,245,.70); }
@@ -863,8 +874,6 @@ body.nav-open .up-btn{
   .growth-grid-2{ grid-template-columns: 1fr; }
   .funds-flow{ grid-template-columns: 1fr; gap: 12px; }
   .flow-arrow{ display:none; }
-  .topbar-inner{max-width:1180px;margin:0 auto;padding: 16px 20px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-  .topbar-meta{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
 }
     
 /* ===== RUNWAY (correct big bar style) ===== */
