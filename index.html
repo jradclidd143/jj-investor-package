@@ -255,6 +255,7 @@
 }
 .callout-title{ font-weight:800; }
 .callout-body{ color: rgba(233,236,245,.72); margin-top: 4px; line-height:1.55; }
+    
 /* Section + layout */
 .section{ margin-top: 26px; padding: 18px 0 0; border-top: 1px solid rgba(255,255,255,.07); }
 .section-head h2{ margin:0; font-size: 22px; letter-spacing:-0.01em; }
@@ -867,9 +868,6 @@ body.nav-open .up-btn{
 }
 /* ===== End Back to Top ===== */
 
-    @media print{
-  .sidenav, .up-btn{ display:none !important; }
-}
 @media (max-width: 1020px){
   .hero{ grid-template-columns: 1fr; }
   .grid-2{ grid-template-columns: 1fr; }
@@ -886,70 +884,7 @@ body.nav-open .up-btn{
 }
 
 
-/* ---------- PRINT LAYOUT (PDF-ready) ---------- */
-@media print {
-  @page { size: letter landscape; margin: 0.55in; }
-  html,body { -webkit-print-color-adjust: exact; print-color-adjust: exact; background:transparent !important; color:#e9ecf5 !important; }
-  .bg-grid, .print-btn { display:none !important; }
-  .topbar { position:relative !important; background:transparent !important; border-bottom:1px solid #ddd !important; }
-  .container { max-width:none !important; padding:0 !important; padding-top:0; }
-  .hero,.grid-2,.charts-row,.split,.compare,.risk-grid,.growth-grid-2,.funds-flow,.opt-grid { 
-  grid-template-columns:1fr !important; 
-}
-  .kpis { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
-  .chart svg { height:260px !important; }
-  .jj-header { height:72px; }
-  .print-bg { 
-    display:block !important; position:fixed; inset:-0.55in; width:calc(100% + 1.1in); height:calc(100% + 1.1in); object-fit:cover; z-index:-1; 
-  }
-  .print-card-bg {
-    display:block !important;
-    position:absolute; inset:0; width:100%; height:100%; z-index:1 !important; object-fit:cover; border-radius:inherit;
-  }
-  .kpi-card,.panel,.chart-card,.property-card,.compare-card,.mcard,.metric,.opt-mini,.callout,.runway,.glass-card {
-    break-inside:avoid; page-break-inside:avoid; background:transparent !important; box-shadow:none !important; position:relative; overflow:hidden;
-  }
-  .kpi-card > *, .panel > *, .chart-card > *, .property-card > *, .compare-card > *, .microcards .mcard > *, .metric > *, .opt-mini > *, .callout > *, .runway > *, .glass-card > * {
-    position:relative !important; z-index:2 !important;
-  }
-  .option-card::before, .compare-card::before, .property-card::before, .kpi-card::before, .glass-card::after { display:none !important; }
-  h1 { font-size:26px !important; line-height:1.12 !important; }
-  .lead, .section-head p, .kpi-sub, .sub, .chart-sub, .tiny-note, .rt-sub, .doc-sub, .disclaimer { color:#444 !important; }
-  .kpi-label { color:#444 !important; }
-  .kpi-value { color:#111 !important; }
-  .badge, .panel-tag { background:#f5f5f5 !important; border-color:#ddd !important; color:#111 !important; }
-  .badge.gold, .opt-badge.gold { background:#fff7e6 !important; border-color:#e7d3a5 !important; }
-  a { color:#111 !important; text-decoration:none !important; }
-  .footer { color:#666 !important; }
-}
-.print-btn{
-  margin-top: 8px;
-  padding: 9px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
-  color: rgba(233,236,245,.92);
-  font-weight: 700;
-  letter-spacing: .02em;
-  cursor: pointer;
-}
-.print-btn:hover{ border-color: rgba(201,167,90,.35); background: rgba(201,167,90,.10); }
-.print-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; } /* Added focus style */
-.chart svg{max-width:100%;height:300px;display:block}
-.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
-@media (max-width: 980px){.charts-row{grid-template-columns:1fr}}
-.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media (max-width: 980px){.opt-grid{grid-template-columns:1fr}}
-.opt-mini{border-radius:18px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);padding:14px}
-.opt-mini-kpis{margin-top:10px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-@media (max-width: 980px){.opt-mini-kpis{grid-template-columns:1fr}}
-.okpi{border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.02);padding:10px}
-.okpi span{display:block;font-size:11px;color:rgba(233,236,245,.62)}
-.okpi strong{display:block;margin-top:2px;font-size:12px}
-.print-btn{margin-left:auto;border-radius:999px;padding:10px 12px;border:1px solid rgba(201,167,90,.35);background:linear-gradient(180deg, rgba(201,167,90,.18), rgba(201,167,90,.08));color:rgba(240,213,155,.95);font-weight:650;cursor:pointer}
-.panel-head{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.panel-head h3{margin:0}
-.panel-tag{margin-left:0}
+
 /* ===== RUNWAY (correct big bar style) ===== */
 .runway{
   margin-top: 12px;
@@ -961,7 +896,6 @@ body.nav-open .up-btn{
 
 /* you don't need a progress fill for this design */
 .runway-fill{ display:none; }
-
 .runway-bar{
   margin-top: 0;
   height: 42px;
@@ -982,26 +916,7 @@ body.nav-open .up-btn{
   font-size: 12.6px;
 }
 /* ===== END RUNWAY ===== */
-@media print{.topbar{position:relative} .print-btn{display:none} .bg-grid{display:none} body{background:white;color:#111} .container{padding-top:0} .chart-card, .panel, .property-card, .compare-card{box-shadow:none} .chart svg{height:260px} }/* Capital Stack Summary: better use of space */
-.metric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.metric-grid .metric{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03)}
-.metric-grid .metric:nth-child(3),
-.metric-grid .metric:nth-child(4){grid-column:1 / -1}
-.metric .label{font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:rgba(233,236,245,.65)}
-.metric .value{margin-top:8px;font-size:22px;font-weight:800;letter-spacing:-0.01em}
-.metric .sub{margin-top:6px;color:rgba(233,236,245,.70);line-height:1.35;font-size:13px}
-@media (max-width: 980px){
-  .metric-grid{grid-template-columns:1fr}
-  .metric-grid .metric:nth-child(3), .metric-grid .metric:nth-child(4){grid-column:auto}
-}
-@media print{
-  .jj-header{height:72px}
-  .metric-grid{grid-template-columns:1fr}
-}@media (max-width: 860px){.topbar-meta{align-items:flex-start}.jj-header{height:84px}}/* Option A/B KPI tiles: prevent text bleed */
-.opt-mini-kpis{align-items:stretch}
-.okpi{min-height:92px;overflow:hidden}
-.okpi span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.okpi strong{white-space:normal;overflow-wrap:anywhere;word-break:break-word;line-height:1.25}
+
 /* Microcards: grid + card sizing (correct) */
 .microcards{
   margin-top: 12px;
@@ -1018,114 +933,6 @@ body.nav-open .up-btn{
 @media (max-width: 980px){
   .microcards{ grid-template-columns:1fr; }
 }   
-/* Print reliability */
-html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-@page{ size: Letter; margin: 0.6in; }
-@media print{
-  body{ background:#0b0f1a !important; color: #fff !important; }
-  .bg-grid{ display:none !important; }
-  .topbar{ position: relative !important; }
-  .print-btn{ display:none !important; }
-  /* stack option cards on print */
-  .opt-grid{ grid-template-columns: 1fr !important; }
-  .opt-mini{ break-inside: avoid; page-break-inside: avoid; }
-  /* prevent chart cards splitting */
-  .chart-card, .panel, .compare-card, .property-card, .callout, .mcard{ break-inside: avoid; page-break-inside: avoid; }
-  /* slightly smaller charts in print to reduce overflow */
-  .chart svg{ height: 260px !important; }
-}
-.print-bg{display:none}
-@media print{
-  html, body{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  @page{ size: Letter; margin: 0.55in; }
-  .print-bg{
-    display:block !important;
-    position: fixed;
-    top: -0.55in; left: -0.55in;
-    width: calc(100% + 1.1in);
-    height: calc(100% + 1.1in);
-    object-fit: cover;
-    z-index: -10;
-  }
-  /* Keep dark theme in print */
-  body{ background: transparent !important; color: rgba(233,236,245,0.92) !important; }
-  h1,h2,h3{ color: rgba(255,255,255,0.95) !important; }
-  .muted, .sub, .panel-sub, .chart-sub{ color: rgba(233,236,245,0.72) !important; }
-  /* Layout */
-  .topbar{ position: relative !important; }
-  .bg-grid{ display:none !important; }
-  .print-btn{ display:none !important; }
-  .container{ max-width: 7.6in !important; padding-top: 0 !important; }
-  /* Avoid bad breaks */
-  .panel, .chart-card, .compare-card, .property-card, .callout, .mcard{ break-inside: avoid; page-break-inside: avoid; }
-  /* Stack Option A/B in print */
-  .opt-grid{ grid-template-columns: 1fr !important; }
-  /* Charts */
-  .chart svg{ height: 260px !important; }
-}
-
-
-/* ===== Print Render Fix (does not affect screen layout) ===== */
-.print-card-bg{display:none}
-@media print {
-  /* Force color preservation as much as the browser allows */
-  *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  html, body{ margin:0 !important; padding:0 !important; background: transparent !important; color: rgba(233,236,245,0.92) !important; }
-  @page{ size: Letter; margin: 0.55in; }
-
-  /* Ensure the print background image sits behind content in print */
-  .print-bg{ z-index: 0 !important; }
-  .topbar, .container{ position: relative !important; z-index: 1 !important; }
-
-  /* Convert "backgrounds" into print-safe image overlays */
-  .kpi-card, .panel, .chart-card, .property-card, .compare-card, .mcard, .metric, .opt-mini, .callout, .runway {
-    background: transparent !important;
-    position: relative !important;
-    overflow: hidden !important;
-  }
-  .kpi-card > *, .panel > *, .chart-card > *, .property-card > *, .compare-card > *, .microcards .mcard > *, .metric > *, .opt-mini > *, .callout > *, .runway > * {
-    position: relative !important;
-    z-index: 2 !important;
-  }
-  .print-card-bg {
-    display:block !important;
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:1 !important;
-    object-fit: cover;
-    border-radius: inherit;
-  }
-
-  /* Keep layout stable in print */
-  .bg-grid{ display:none !important; }
-  .print-btn{ display:none !important; }
-  .panel, .chart-card, .compare-card, .property-card, .callout, .mcard, .kpi-card, .metric, .opt-mini { break-inside: avoid; page-break-inside: avoid; }
-  .chart svg{ height: 260px !important; }
-
-  /* Print: stack option cards so nothing squeezes */
-  .opt-grid{ grid-template-columns: 1fr !important; }
-}
-/* ===== End Print Render Fix ===== */
-
-
-    /* --- PRINT OVERRIDES --- */
-    @media print{
-      .section{ margin-top: 18px !important; padding-top: 14px !important; }
-      .section::before{ height:1px !important; opacity:1 !important; background:#bbb !important; }
-
-      .section-head{
-        box-shadow:none !important;
-        border:1px solid #ddd !important;
-        background:#fff !important;
-      }
-      .section-head::after{ display:none !important; }
-      .section-head h2{ color:#111 !important; }
-      .section-head h2::before{ background:#111 !important; box-shadow:none !important; }
-      .section-head p{ color:#444 !important; }
-    }
-
 </style>
 </head>
 <body>
