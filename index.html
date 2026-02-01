@@ -1487,7 +1487,7 @@
 
         <rect x="300" y="42" width="12" height="12" rx="4" fill="#7a6232" fill-opacity="0.30" stroke="#c9a75a"/>
         <text x="318" y="52" fill="rgba(233,236,245,0.82)" font-size="9.5">Payoff Liens (Clear Title)</text>
-        <text x="502" y="52" fill="rgba(233,236,245,0.60)" font-size="9.5" text-anchor="end">$792,520</text>
+        <text x="502" y="52" fill="rgba(233,236,245,0.60)" font-size="9.5" text-anchor="end">$787,884.07</text>
 
         <rect x="300" y="64" width="12" height="12" rx="4" fill="#1f4fd6" fill-opacity="0.30" stroke="#2c74ff"/>
         <text x="318" y="74" fill="rgba(233,236,245,0.82)" font-size="9.5">Financial Reserves</text>
@@ -1958,23 +1958,161 @@
           </div>
         </div>
 
-        <div class="chart-card danger">
-          <div class="chart-title">Cost of Delay</div>
-          <div class="chart-sub">Interest and Penalties Accelerate after Payoff Deadlines.</div>
-          <div class="chart">
-            <div class="chart-screen">
-              <!-- ... SVG ... -->
-            </div>
-            <div class="tiny-note">
-              PHH adds $2,792.25/month after 01/31; Synergy adds $54.17/day after 01/20; Skyway adds $130.68/day after deadline.
-            </div>
-            <div class="chart-print">
-              <!-- ... SVG ... -->
-            </div>
-          </div>
-        </div>
+       <section class="section contrast">
+  <div class="section-head">
+    <h2>Scenario Comparison: Security &amp; Completion</h2>
+    <p>A visual summary of why the complete lending solution is safer for the lender and better for J &amp; J Investments of Florida.</p>
+  </div>
+
+  <div class="compare">
+    <div class="compare-card good">
+      <div class="compare-head">
+        <div class="badge">Recommended</div>
+        <h3>Complete Lending Solution</h3>
       </div>
-    </section>
+      <ul class="bullets">
+        <li>All liens retired → consolidated first-position lien</li>
+        <li>Single lender reduces complexity and payoff re-quote risk</li>
+        <li>Operating capital enables revenue ramp (repayment strength)</li>
+        <li>Stops compounding penalties and protects timeline</li>
+      </ul>
+      <div class="mini-kpi">
+        <div><span>Pricing:</span> <strong>8% interest + 5% principal (paid monthly)</strong></div>
+        <div><span>Payments:</span> <strong>(13% / 12) of outstanding balance</strong></div>
+        <div><span>Security:</span> <strong>Cross-collateralized 1st lien on real estate</strong></div>
+      </div>
+    </div>
+
+    <div class="compare-card bad">
+      <div class="compare-head">
+        <div class="badge red">Not advised</div>
+        <h3>$300,000 Partial Funding</h3>
+      </div>
+      <ul class="bullets">
+        <li>Liens remain in place → multiple lenders + multiple default triggers</li>
+        <li>Deadlines + daily/monthly accrual continue to compound</li>
+        <li>Increased title/legal complexity + payoff re-quote risk</li>
+        <li>Underfunded growth slows hiring and sales capacity</li>
+      </ul>
+      <div class="mini-kpi">
+        <div><span>What remains:</span> <strong>$792,520 in liens outstanding</strong></div>
+        <div><span>Risk:</span> <strong>Compounding penalties + fragmented leverage</strong></div>
+        <div><span>Result:</span> <strong>Reduced completion certainty</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="charts-row">
+    <!-- CHART 1 -->
+    <div class="chart-card">
+      <div class="chart-title">Security &amp; Completion Scorecard</div>
+      <div class="chart-sub">Relative comparison (qualitative) of completion and stability.</div>
+
+      <div class="chart">
+        <svg viewBox="0 0 520 300"
+             xmlns="http://www.w3.org/2000/svg"
+             role="img"
+             aria-label="Security & Completion Scorecard"
+             style="width:100%;height:300px;display:block">
+          <defs>
+            <linearGradient id="bggrad-scorecard" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="520" height="300" rx="16" fill="url(#bggrad-scorecard)" stroke="rgba(255,255,255,0.10)"/>
+
+          <text x="44" y="28" fill="rgba(255,255,255,0.92)" font-size="13" font-weight="700">Complete Loan (Recommended)</text>
+          <text x="476" y="28" fill="rgba(255,255,255,0.92)" font-size="13" font-weight="700" text-anchor="end">$300k Partial Loan Only</text>
+
+          <text x="44" y="58" fill="rgba(233,236,245,0.62)" font-size="10">Clear Title / 1st Position</text>
+          <rect x="44" y="66" width="200" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+          <rect x="44" y="66" width="200" height="14" rx="8" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1"/>
+          <rect x="266" y="66" width="200" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+          <rect x="266" y="66" width="60" height="14" rx="8" fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1"/>
+
+          <text x="44" y="102" fill="rgba(233,236,245,0.62)" font-size="10">Closing Simplicity</text>
+          <rect x="44" y="110" width="200" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+          <rect x="44" y="110" width="184" height="14" rx="8" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1"/>
+          <rect x="266" y="110" width="200" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+          <rect x="266" y="110" width="90" height="14" rx="8" fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1"/>
+
+          <text x="44" y="146" fill="rgba(233,236,245,0.62)" font-size="10">Deadline / Re-quote Risk</text>
+          <rect x="44" y="154" width="200" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+          <rect x="44" y="154" width="170" height="14" rx="8" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1"/>
+          <rect x="266" y="154" width="200" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+          <rect x="266" y="154" width="70" height="14" rx="8" fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1"/>
+
+          <text x="44" y="190" fill="rgba(233,236,245,0.62)" font-size="10">Growth Capacity</text>
+          <rect x="44" y="198" width="200" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+          <rect x="44" y="198" width="180" height="14" rx="8" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1"/>
+          <rect x="266" y="198" width="200" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+          <rect x="266" y="198" width="50" height="14" rx="8" fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1"/>
+
+          <text x="44" y="234" fill="rgba(233,236,245,0.62)" font-size="10">Overall Stability</text>
+          <rect x="44" y="242" width="200" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+          <rect x="44" y="242" width="180" height="14" rx="8" fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1"/>
+          <rect x="266" y="242" width="200" height="14" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+          <rect x="266" y="242" width="80" height="14" rx="8" fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- CHART 2 -->
+    <div class="chart-card">
+      <div class="chart-title">Lien Status by Scenario</div>
+      <div class="chart-sub">Shows how partial funding leaves the full lien stack unresolved.</div>
+
+      <div class="chart">
+        <svg viewBox="0 0 520 300"
+             xmlns="http://www.w3.org/2000/svg"
+             role="img"
+             aria-label="Lien Status by Scenario"
+             style="width:100%;height:300px;display:block">
+          <defs>
+            <linearGradient id="bggrad-lien" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="520" height="300" rx="16" fill="url(#bggrad-lien)" stroke="rgba(255,255,255,0.10)"/>
+
+          <line x1="38" y1="38"  x2="482" y2="38"  stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <text x="10" y="42"  fill="rgba(233,236,245,0.62)" font-size="10">$871,773</text>
+
+          <line x1="38" y1="92"  x2="482" y2="92"  stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <text x="10" y="96"  fill="rgba(233,236,245,0.62)" font-size="10">$653,829</text>
+
+          <line x1="38" y1="146" x2="482" y2="146" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <text x="10" y="150" fill="rgba(233,236,245,0.62)" font-size="10">$435,886</text>
+
+          <line x1="38" y1="200" x2="482" y2="200" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <text x="10" y="204" fill="rgba(233,236,245,0.62)" font-size="10">$217,943</text>
+
+          <line x1="38" y1="254" x2="482" y2="254" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <text x="10" y="258" fill="rgba(233,236,245,0.62)" font-size="10">$0</text>
+
+          <!-- Complete loan: liens cleared -->
+          <rect x="102" y="254" width="160" height="0" rx="14"
+                fill="rgba(44,116,255,0.20)" stroke="rgba(44,116,255,0.85)" stroke-width="1.2"/>
+          <text x="182" y="272" fill="rgba(233,236,245,0.78)" font-size="10" text-anchor="middle">Complete Loan Requested</text>
+          <text x="182" y="244" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">$0.00</text>
+          <text x="182" y="288" fill="rgba(233,236,245,0.62)" font-size="10" text-anchor="middle">Liens Cleared</text>
+
+          <!-- Partial loan: liens remain -->
+          <rect x="326" y="57.6" width="160" height="196.4" rx="14"
+                fill="rgba(217,60,60,0.20)" stroke="rgba(217,60,60,0.85)" stroke-width="1.2"/>
+          <text x="406" y="272" fill="rgba(233,236,245,0.78)" font-size="10" text-anchor="middle">$300k Partial Loan</text>
+          <text x="406" y="47.6" fill="rgba(255,255,255,0.92)" font-size="11" text-anchor="middle">787,884.07</text>
+          <text x="406" y="288" fill="rgba(233,236,245,0.62)" font-size="10" text-anchor="middle">Liens Remain</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <!-- =========================================================
          Scenario Comparison (FIXED nesting)
