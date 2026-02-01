@@ -923,183 +923,12 @@ body.nav-open .up-btn{
 /* Mobile */
 @media (max-width: 980px){
   .microcards{ grid-template-columns:1fr; }
-}  
-    
-/* =========================================================
-   PRINT (ONE BLOCK ONLY) — replaces ALL other print CSS
-   ========================================================= */
-
-/* ✅ PASTE HERE (screen defaults) */
-.print-bg{ display:none !important; }
-.print-card-bg{ display:none !important; }
-
-    /* ==== CHARTS: ALWAYS PRINT ==== */
-.chart svg{
-  display:block !important;
-  width:100% !important;
-  max-width:100% !important;
-.print-card-bg{ display:none !important; }
-  height:260px !important; /* adjust if needed */}
-
-@media print {
-
-  /* Printer color handling (browser-dependent) */
-  *{
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  /* Paper */
-  @page{
-    size: Letter landscape;
-    margin: 0.55in;
-  }
-
-  html, body{
-    margin: 0 !important;
-    padding: 0 !important;
-    background: transparent !important;
-    color: #e9ecf5 !important;
-  }
-
-  /* Hide non-report UI */
-  .bg-grid,
-  .print-btn,
-  .sidenav,
-  .up-btn{
-    display:none !important;
-  }
-
-  /* Make sticky headers behave */
-  .topbar{
-    position: relative !important;
-    background: transparent !important;
-    border-bottom: 1px solid rgba(255,255,255,.18) !important;
-  }
-
-  /* Print layout width */
-  .container{
-    max-width: none !important;
-    padding: 0 !important;
-  }
-
-  /* Stack grids in print to avoid squeeze */
-  .hero,
-  .grid-2,
-  .charts-row,
-  .split,
-  .compare,
-  .risk-grid,
-  .growth-grid-2,
-  .funds-flow,
-  .opt-grid{
-    grid-template-columns: 1fr !important;
-  }
-
-  /* Keep KPI grid 2-up if you want */
-  .kpis{
-    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
-  }
-
-  /* Prevent page splitting inside cards */
-  .kpi-card,
-  .panel,
-  .chart-card,
-  .property-card,
-  .compare-card,
-  .mcard,
-  .metric,
-  .opt-mini,
-  .callout,
-  .runway,
-  .glass-card{
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-    box-shadow: none !important;
-    position: relative !important;
-    overflow: hidden !important;
-  }
-
-  /* Optional print page background image (behind everything) */
-  .print-bg{
-    display:block !important;
-    position: fixed !important;
-    inset: -0.55in !important;
-    width: calc(100% + 1.1in) !important;
-    height: calc(100% + 1.1in) !important;
-    object-fit: cover !important;
-    z-index: -10 !important;
-  }
-
-  /* Optional per-card overlay images (only if you have <img class="print-card-bg"> inside cards) */
-  .print-card-bg{
-    display:block !important;
-    position:absolute !important;
-    inset:0 !important;
-    width:100% !important;
-    height:100% !important;
-    object-fit: cover !important;
-    border-radius: inherit !important;
-    z-index: 1 !important;
-  }
-
-  /* Ensure card content sits above overlay */
-  .kpi-card > *,
-  .panel > *,
-  .chart-card > *,
-  .property-card > *,
-  .compare-card > *,
-  .mcard > *,
-  .metric > *,
-  .opt-mini > *,
-  .callout > *,
-  .runway > *,
-  .glass-card > *{
-    position: relative !important;
-    z-index: 2 !important;
-  }
-
-  /* Section header print style (clean + predictable) */
-  .section{
-    margin-top: 18px !important;
-    padding-top: 14px !important;
-  }
-  .section::before{
-    height: 1px !important;
-    opacity: 1 !important;
-    background: rgba(255,255,255,.30) !important;
-  }
-  .section-head{
-    box-shadow: none !important;
-    border: 1px solid rgba(255,255,255,.20) !important;
-    background: rgba(0,0,0,.10) !important;
-  }
-  .section-head::after{ display:none !important; }
-
-  /* Typography sizing */
-  h1{
-    font-size: 26px !important;
-    line-height: 1.12 !important;
-  }
-  .jj-header{ height: 72px !important; }
-
-  /* IMPORTANT: Do NOT recolor your text to #444/#111
-     (that was making your “dark print theme” look wrong)
-     If you WANT light/white print, leave colors alone.
-  */
-  
-}    
+}     
 </style>
 </head>
 <body>
 
   <!-- Background -->
-  <img
-    class="print-bg"
-    alt=""
-    aria-hidden="true"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjE2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDE2MDAiPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzBiMTAyMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNTA3MGQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9InIiIGN4PSIyNSUiIGN5PSIxOCUiIHI9IjY1JSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzEzMjI0YSIgc3RvcC1vcGFjaXR5PSIwLjU1Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzA1MDcwZCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSIxNjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMTYwMCIgZmlsbD0idXJsKCNyKSIvPgogIDxwYXRoIGQ9Ik0wIDI1MCBDIDI0MCAxODAsIDQ0MCAzMjAsIDc0MCAyNDAgQyA5NDAgMTg1LCAxMDQwIDEzMCwgMTIwMCAxNjUgTDEyMDAgMCBMMCAwIFoiIGZpbGw9IiMwZjE2MzAiIGZpbGwtb3BhY2l0eT0iMC41NSIvPgo8L3N2Zz4="
-  />
   <div class="bg-grid"></div>
 
   <!-- Side Navigation (ONLY ONE copy) -->
@@ -1132,9 +961,7 @@ body.nav-open .up-btn{
       <div class="topbar-meta">
         <div class="pill">CONFIDENTIAL • Lender Review Package</div>
 
-        <button class="print-btn" id="printBtn" type="button" aria-label="Print or Save as PDF">
-          Print / Save as PDF
-        </button>
+       
 
         <div class="toggle-row">
           <button
@@ -1145,16 +972,6 @@ body.nav-open .up-btn{
             title="Toggle screen theme"
           >
             🌙 Screen: Dark
-          </button>
-
-          <button
-            class="pill-toggle"
-            id="printThemeToggle"
-            type="button"
-            aria-pressed="true"
-            title="Toggle print theme"
-          >
-            🖨️ Print: Dark
           </button>
         </div>
 
@@ -1346,9 +1163,6 @@ body.nav-open .up-btn{
             <div class="chart-screen">
               <!-- ... SVG ... -->
             </div>
-            <div class="chart-print">
-              <!-- ... SVG ... -->
-            </div>
           </div>
         </div>
 
@@ -1357,9 +1171,6 @@ body.nav-open .up-btn{
           <div class="chart-sub">Payoffs Clear Title; Operating Capital drives expansion across three business lines.</div>
           <div class="chart">
             <div class="chart-screen">
-              <!-- ... SVG ... -->
-            </div>
-            <div class="chart-print">
               <!-- ... SVG ... -->
             </div>
           </div>
@@ -1814,9 +1625,6 @@ body.nav-open .up-btn{
             <div class="tiny-note">
               PHH adds $2,792.25/month after 01/31; Synergy adds $54.17/day after 01/20; Skyway adds $130.68/day after deadline.
             </div>
-            <div class="chart-print">
-              <!-- ... SVG ... -->
-            </div>
           </div>
         </div>
       </div>
@@ -1877,9 +1685,6 @@ body.nav-open .up-btn{
             <div class="chart-screen">
               <!-- ... SVG ... -->
             </div>
-            <div class="chart-print">
-              <!-- ... SVG ... -->
-            </div>
           </div>
         </div>
 
@@ -1888,9 +1693,6 @@ body.nav-open .up-btn{
           <div class="chart-sub">Shows how partial funding leaves the full lien stack unresolved.</div>
           <div class="chart">
             <div class="chart-screen">
-              <!-- ... SVG ... -->
-            </div>
-            <div class="chart-print">
               <!-- ... SVG ... -->
             </div>
           </div>
@@ -2047,43 +1849,6 @@ body.nav-open .up-btn{
   const targets = [
     '.kpi-card', '.panel', '.chart-card', '.property-card', '.compare-card', '.mcard', '.metric', '.opt-mini', '.callout', '.runway'
   ];
-  function ensureOverlays(){
-    targets.forEach(sel => {
-      document.querySelectorAll(sel).forEach(el => {
-        if(el.querySelector(':scope > img.print-card-bg')) return;
-        const img = document.createElement('img');
-        img.className = 'print-card-bg';
-        img.alt = '';
-        img.setAttribute('aria-hidden','true');
-        img.src = el.classList.contains('accent') ? ACCENT_BG : CARD_BG;
-        el.insertBefore(img, el.firstChild);
-      });
-    });
-  }
-  function removeOverlays(){
-    document.querySelectorAll('img.print-card-bg').forEach(img => img.remove());
-  }
-  function beforePrint(){
-    ensureOverlays();
-    document.documentElement.classList.add('printing');
-  }
-  function afterPrint(){
-    document.documentElement.classList.remove('printing');
-    removeOverlays();
-  }
-  window.addEventListener('beforeprint', beforePrint);
-  window.addEventListener('afterprint', afterPrint);
-
-  const btn = document.getElementById('printBtn');
-  if(btn){
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      beforePrint();
-      // small delay allows the browser to lay out overlays before print dialog captures
-      setTimeout(function(){ window.print(); }, 180);
-    });
-  }
-})();
 </script>
   
 <script>
@@ -2199,13 +1964,10 @@ body.nav-open .up-btn{
   // Theme toggles (IDs must match your HTML)
   const htmlEl = document.documentElement;
   const screenBtn = document.getElementById("screenThemeToggle");
-  const printThemeBtn = document.getElementById("printThemeToggle");
 
   const savedTheme = localStorage.getItem("jj_theme") || "dark";
   htmlEl.setAttribute("data-theme", savedTheme);
 
-  const savedPrintTheme = localStorage.getItem("jj_print_theme") || "dark";
-  htmlEl.setAttribute("data-print", savedPrintTheme);
 
   if(screenBtn){
     screenBtn.textContent = (savedTheme === "dark") ? "🌙 Screen: Dark" : "☀️ Screen: Light";
@@ -2215,17 +1977,6 @@ body.nav-open .up-btn{
       htmlEl.setAttribute("data-theme", next);
       localStorage.setItem("jj_theme", next);
       screenBtn.textContent = (next === "dark") ? "🌙 Screen: Dark" : "☀️ Screen: Light";
-    });
-  }
-
-  if(printThemeBtn){
-    printThemeBtn.textContent = (savedPrintTheme === "dark") ? "🖨️ Print: Dark" : "🖨️ Print: Light";
-    printThemeBtn.addEventListener("click", ()=>{
-      const cur = htmlEl.getAttribute("data-print") || "dark";
-      const next = (cur === "dark") ? "light" : "dark";
-      htmlEl.setAttribute("data-print", next);
-      localStorage.setItem("jj_print_theme", next);
-      printThemeBtn.textContent = (next === "dark") ? "🖨️ Print: Dark" : "🖨️ Print: Light";
     });
   }
 })();
