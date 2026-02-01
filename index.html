@@ -125,6 +125,7 @@
       white-space:nowrap;
     }
     
+    
     /* ✅ Added (your HTML uses these) */
     .toggle-row{
       display:flex;
@@ -926,13 +927,19 @@ body.nav-open .up-btn{
     
 /* =========================================================
    PRINT (ONE BLOCK ONLY) — replaces ALL other print CSS
-   Charts ALWAYS print. Background optional.
-   Paste at the VERY END of your CSS.
    ========================================================= */
 
-/* Screen defaults (never block charts) */
+/* ✅ PASTE HERE (screen defaults) */
 .print-bg{ display:none !important; }
 .print-card-bg{ display:none !important; }
+
+    /* ==== CHARTS: ALWAYS PRINT ==== */
+.chart svg{
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+.print-card-bg{ display:none !important; }
+  height:260px !important; /* adjust if needed */}
 
 @media print {
 
@@ -1011,14 +1018,6 @@ body.nav-open .up-btn{
     box-shadow: none !important;
     position: relative !important;
     overflow: hidden !important;
-  }
-
-  /* ==== CHARTS: ALWAYS PRINT ==== */
-  .chart svg{
-    display:block !important;
-    width:100% !important;
-    max-width:100% !important;
-    height:260px !important; /* adjust if needed */
   }
 
   /* Optional print page background image (behind everything) */
