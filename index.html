@@ -988,6 +988,49 @@ opacity: .90;                                     /* ↑ was .85 */
 .ic-clock::after { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 20a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-8V7h-2v6l5 3 1-1-4-2z'/%3E%3C/svg%3E"); }
 .ic-brief::after { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M10 4h4V2h2v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2h2v2zm9 4H5v12h14V8z'/%3E%3C/svg%3E"); }
 
+      /* ============================================================
+      RISK TILES
+      ============================================================ */
+...risk tile css...
+
+/* --- AssureCall Docs viewer helpers --- */
+.doc-group { margin-top: 16px; }
+.doc-group-title{
+  font-weight: 900;
+  color: var(--t1);
+  letter-spacing: -0.01em;
+  margin-top: 6px;
+}
+.doc-actions{
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.doc-btn{
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  color: var(--t1);
+  font-weight: 900;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, transform .15s ease;
+}
+.doc-btn:hover{
+  border-color: rgba(212,175,94,.40);
+  background: rgba(212,175,94,.14);
+  transform: translateY(-1px);
+}
+.doc-btn:focus-visible{
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+ /* ============================================================
+      APPENDIX
+      ============================================================ */
+.appendix .doc-list { ... }
+      
 /* ============================================================
       APPENDIX
       ============================================================ */
@@ -1881,6 +1924,411 @@ Financial statements (12 months) will be uploaded in the <strong>Roofing Appoint
 </div>
 </div>
 </section>
+
+      <!-- =========================================================
+     AssureCall — Company Overview & Operating Model (PASTE SECTION)
+========================================================== -->
+<section class="section" id="assurecall-overview" data-nav="AssureCall Overview">
+  <div class="section-head">
+    <h2>AssureCall — Company Overview &amp; Operating Model</h2>
+    <p>
+      Appointment setting + lead qualification + virtual sales delivery. AssureCall connects client partners with
+      qualified property owners seeking services across storm restoration, specialty trades, and home services.
+    </p>
+  </div>
+
+  <!-- ROW 1 -->
+  <div class="grid-2">
+    <!-- Company Snapshot -->
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Company Snapshot</h3>
+        <span class="panel-tag gold">Operating Services • Revenue-Producing</span>
+      </div>
+
+      <div class="jj-logo-row" style="margin-top:12px;">
+        <img class="jj-logo" src="assurecall_logo.jpg" alt="AssureCall logo" loading="lazy" decoding="async" />
+        <img class="jj-logo" src="storm911_logo.jpg" alt="Storm911 logo" loading="lazy" decoding="async" />
+        <img class="jj-logo" src="solar911_logo.jpg" alt="Solar911 logo" loading="lazy" decoding="async" />
+      </div>
+
+      <div class="uf-table" style="margin-top:12px;">
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Business Model</div>
+            <div class="uf-sub">Appointment setting + lead qualification + virtual sales teams</div>
+          </div>
+          <div class="uf-amt">Service Revenue</div>
+        </div>
+
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Owner / Operator</div>
+            <div class="uf-sub">Primary executive contact</div>
+          </div>
+          <div class="uf-amt">Joseph Radcliff</div>
+        </div>
+
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Phone</div>
+            <div class="uf-sub">Primary + alternate</div>
+          </div>
+          <div class="uf-amt">(407) 269-1299<br>(321) 483-5220</div>
+        </div>
+
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Email</div>
+            <div class="uf-sub">Primary + alternate</div>
+          </div>
+          <div class="uf-amt">jradcliff@storm911.com<br>sellthejob.co@gmail.com</div>
+        </div>
+
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Years in Business</div>
+            <div class="uf-sub">Update with exact value</div>
+          </div>
+          <div class="uf-amt"><strong>[ENTER YEARS]</strong></div>
+        </div>
+      </div>
+
+      <div class="tiny-note" style="margin-top:12px;">
+        Note: “Roofing Appointments” deposits are treated as AssureCall money and are included in AssureCall totals in the financial exhibits.
+      </div>
+    </div>
+
+    <!-- What We Do / Verticals -->
+    <div class="panel">
+      <div class="panel-head">
+        <h3>What AssureCall Does</h3>
+        <span class="panel-tag">Core Deliverables</span>
+      </div>
+
+      <ul class="bullets" style="margin-top:12px;">
+        <li><strong>Inbound + Outbound calling:</strong> scripted outreach, inbound handling, and multi-touch follow-up.</li>
+        <li><strong>Lead qualification:</strong> verify homeowner intent, property details, and readiness.</li>
+        <li><strong>Appointment booking:</strong> schedule inspections / consultations directly onto client calendars.</li>
+        <li><strong>Virtual sales teams:</strong> pipeline creation + nurture to increase close-rate for partners.</li>
+        <li><strong>Marketing support:</strong> email marketing + social media marketing to support lead flow.</li>
+      </ul>
+
+      <div class="lane-grid" style="margin-top:12px;">
+        <div class="lane gold">
+          <div class="lane-title">Storm / Hail Inspections</div>
+          <div class="lane-sub">Roofing replacements, inspections, storm restoration</div>
+        </div>
+        <div class="lane">
+          <div class="lane-title">Solar Solutions</div>
+          <div class="lane-sub">Solar consult appointments + follow-up sequences</div>
+        </div>
+        <div class="lane">
+          <div class="lane-title">Public Adjuster</div>
+          <div class="lane-sub">Claim intake + inspection/consult booking</div>
+        </div>
+        <div class="lane">
+          <div class="lane-title">Suppliers / Manufacturers</div>
+          <div class="lane-sub">Distribution + product partner appointment setting</div>
+        </div>
+        <div class="lane">
+          <div class="lane-title">Specialty Trade Contractors</div>
+          <div class="lane-sub">Virtual sales teams + booked appointments</div>
+        </div>
+        <div class="lane gold">
+          <div class="lane-title">Home Services</div>
+          <div class="lane-sub">Roof cleaning, power washing, garage doors + more</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="grid-2">
+    <!-- Operating Model -->
+    <div class="chart-card">
+      <div class="chart-title">Operating Model (Lender-Facing)</div>
+      <div class="chart-sub">Repeatable production workflow designed for scaling volume with QA controls.</div>
+
+      <div class="steps-3" style="margin-top:12px;">
+        <div class="step3">
+          <div class="step-n">1</div>
+          <div>
+            <div class="step-title">Intake &amp; Targeting</div>
+            <div class="step-sub">Campaign setup, scripts, lists, inbound routing, and KPI targets</div>
+          </div>
+        </div>
+
+        <div class="step3">
+          <div class="step-n">2</div>
+          <div>
+            <div class="step-title">Qualification</div>
+            <div class="step-sub">Verify service need, property details, homeowner intent, and timeframe</div>
+          </div>
+        </div>
+
+        <div class="step3">
+          <div class="step-n">3</div>
+          <div>
+            <div class="step-title">Appointment Booked</div>
+            <div class="step-sub">Calendar scheduling + confirmations (SMS/email) + reschedule handling</div>
+          </div>
+        </div>
+
+        <div class="step3">
+          <div class="step-n">4</div>
+          <div>
+            <div class="step-title">Follow-up &amp; Nurture</div>
+            <div class="step-sub">Multi-touch sequences to reduce no-shows and increase show-rate</div>
+          </div>
+        </div>
+
+        <div class="step3">
+          <div class="step-n">5</div>
+          <div>
+            <div class="step-title">QA / Coaching Loop</div>
+            <div class="step-sub">Call scoring, conversion reviews, coaching, and performance stabilization</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="microcards">
+        <div class="mcard">
+          <div class="mcard-ic ic-target"></div>
+          <div class="mcard-title">Conversion Focus</div>
+          <div class="mcard-sub">Qualification standards designed to protect client close-rate.</div>
+        </div>
+        <div class="mcard">
+          <div class="mcard-ic ic-phone"></div>
+          <div class="mcard-title">Volume Scaling</div>
+          <div class="mcard-sub">Hire/train lanes allow ramp without operational breakdown.</div>
+        </div>
+        <div class="mcard">
+          <div class="mcard-ic ic-roof"></div>
+          <div class="mcard-title">Vertical Flexibility</div>
+          <div class="mcard-sub">Storm, solar, trades, and home services without retooling the core workflow.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footprint + Delivery -->
+    <div class="chart-card">
+      <div class="chart-title">Footprint &amp; Delivery Capacity</div>
+      <div class="chart-sub">Distributed delivery supports consistent coverage and staffing flexibility.</div>
+
+      <div class="jj-media-grid" style="margin-top:12px;">
+        <figure class="jj-figure">
+          <img src="assurecall_footprint.jpg" alt="AssureCall operating footprint map" loading="lazy" decoding="async" />
+          <figcaption>Operating footprint (update labels as needed).</figcaption>
+        </figure>
+      </div>
+
+      <div class="tiny-note">
+        Capacity is expanded through hiring, training, and quality controls—supporting higher booked-appointment volume and revenue velocity.
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Inbound / Outbound Visuals -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <div class="chart-title">Inbound Call Center Functions</div>
+      <div class="chart-sub">Answering, customer care, scheduling, and service support.</div>
+      <div class="jj-media-grid" style="margin-top:12px;">
+        <figure class="jj-figure">
+          <img src="inbound_call_center.jpg" alt="Inbound call center functions" loading="lazy" decoding="async" />
+          <figcaption>Inbound workflows (service support + scheduling).</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Outbound Call Center Functions</div>
+      <div class="chart-sub">Lead generation, sales calls, follow-ups, and appointment booking.</div>
+      <div class="jj-media-grid" style="margin-top:12px;">
+        <figure class="jj-figure">
+          <img src="outbound_call_center.jpg" alt="Outbound call center functions" loading="lazy" decoding="async" />
+          <figcaption>Outbound workflows (lead gen + booked appointments).</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: Banking / Deposits Pointer -->
+  <div class="grid-2" style="margin-top:16px;">
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Banking &amp; Deposits (Financial Exhibits)</h3>
+        <span class="panel-tag">2025 Monthly Deposits</span>
+      </div>
+
+      <ul class="bullets" style="margin-top:12px;">
+        <li>All accounts shown by month with a final column totaling all deposits.</li>
+        <li>Includes Wells Fargo / Capital One / PayPal and related deposit sources.</li>
+        <li><strong>Roofing Appointments deposits</strong> are included in AssureCall totals (AssureCall-controlled funds).</li>
+      </ul>
+
+      <div class="callout" style="margin-top:12px;">
+        <div class="callout-title">Where to View</div>
+        <div class="callout-body">
+          See the “AssureCall Financials / Deposits” tables and exhibits in the Financials section of this package.
+          (If you have a specific section ID to link to, add it here.)
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Why This Matters to Repayment</h3>
+        <span class="panel-tag gold">Operational Strength</span>
+      </div>
+
+      <ul class="bullets" style="margin-top:12px;">
+        <li>Deposits reflect ongoing operating volume and revenue-producing activity.</li>
+        <li>Hiring + training increases capacity and stabilizes delivery (reduces churn risk).</li>
+        <li>Vertical diversity (storm, solar, trades, home services) supports steady production.</li>
+      </ul>
+
+      <div class="tiny-note">
+        This section is designed to brief the lender on the operating model; detailed bank-statement exhibits remain in the Financials/Appendix areas.
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+      
+<!-- =========================================================
+     AssureCall — Banking Statements (Viewer / Print)
+========================================================== -->
+<div class="panel" style="margin-top:16px;" id="assurecall-banking" data-nav="AssureCall Banking Statements">
+  <div class="panel-head">
+    <h3>AssureCall — Banking Statements (View / Print)</h3>
+    <span class="panel-tag gold">Source Docs • assurecall-docs/</span>
+  </div>
+
+  <div class="tiny-note" style="margin-top:10px;">
+    Click any statement to open in a new tab. Use <strong>Print</strong> to open-and-print the PDF.
+  </div>
+
+  <!-- Group: Wells Fargo -->
+  <div class="doc-group">
+    <div class="doc-group-title">Wells Fargo • Checking • 3909</div>
+    <div class="doc-list" style="margin-top:10px;">
+      <a class="doc" href="assurecall-docs/013125_WellsFargo_3909.pdf" target="_blank" rel="noopener">
+        <div class="doc-ic">PDF</div>
+        <div class="doc-meta">
+          <div class="doc-title">Jan 2025 — Wells Fargo Checking (3909)</div>
+          <div class="doc-sub">Monthly statement</div>
+        </div>
+        <div class="doc-actions">
+          <button class="doc-btn" type="button" data-print="assurecall-docs/013125_WellsFargo_3909.pdf">Print</button>
+        </div>
+      </a>
+
+      <a class="doc" href="assurecall-docs/022825_WellsFargo_3909.pdf" target="_blank" rel="noopener">
+        <div class="doc-ic">PDF</div>
+        <div class="doc-meta">
+          <div class="doc-title">Feb 2025 — Wells Fargo Checking (3909)</div>
+          <div class="doc-sub">Monthly statement</div>
+        </div>
+        <div class="doc-actions">
+          <button class="doc-btn" type="button" data-print="assurecall-docs/022825_WellsFargo_3909.pdf">Print</button>
+        </div>
+      </a>
+
+      <!-- Add more months as needed -->
+    </div>
+  </div>
+
+  <div class="doc-group">
+    <div class="doc-group-title">Wells Fargo • Savings • 7761</div>
+    <div class="doc-list" style="margin-top:10px;">
+      <a class="doc" href="assurecall-docs/013125_WellsFargo_7761.pdf" target="_blank" rel="noopener">
+        <div class="doc-ic">PDF</div>
+        <div class="doc-meta">
+          <div class="doc-title">Jan 2025 — Wells Fargo Savings (7761)</div>
+          <div class="doc-sub">Monthly statement</div>
+        </div>
+        <div class="doc-actions">
+          <button class="doc-btn" type="button" data-print="assurecall-docs/013125_WellsFargo_7761.pdf">Print</button>
+        </div>
+      </a>
+      <!-- Add more months as needed -->
+    </div>
+  </div>
+
+  <!-- Group: Capital One -->
+  <div class="doc-group">
+    <div class="doc-group-title">Capital One • Checking • 5614</div>
+    <div class="doc-list" style="margin-top:10px;">
+      <a class="doc" href="assurecall-docs/202509_CapitalOne_5614.pdf" target="_blank" rel="noopener">
+        <div class="doc-ic">PDF</div>
+        <div class="doc-meta">
+          <div class="doc-title">Sep 2025 — Capital One Checking (5614)</div>
+          <div class="doc-sub">Monthly statement</div>
+        </div>
+        <div class="doc-actions">
+          <button class="doc-btn" type="button" data-print="assurecall-docs/202509_CapitalOne_5614.pdf">Print</button>
+        </div>
+      </a>
+      <!-- Add more months as needed -->
+    </div>
+  </div>
+
+  <div class="doc-group">
+    <div class="doc-group-title">Capital One • Savings • 9006</div>
+    <div class="doc-list" style="margin-top:10px;">
+      <a class="doc" href="assurecall-docs/202509_CapitalOne_9006.pdf" target="_blank" rel="noopener">
+        <div class="doc-ic">PDF</div>
+        <div class="doc-meta">
+          <div class="doc-title">Sep 2025 — Capital One Savings (9006)</div>
+          <div class="doc-sub">Monthly statement</div>
+        </div>
+        <div class="doc-actions">
+          <button class="doc-btn" type="button" data-print="assurecall-docs/202509_CapitalOne_9006.pdf">Print</button>
+        </div>
+      </a>
+      <!-- Add more months as needed -->
+    </div>
+  </div>
+
+  <div class="doc-group">
+    <div class="doc-group-title">Capital One • Business • 8265</div>
+    <div class="doc-list" style="margin-top:10px;">
+      <a class="doc" href="assurecall-docs/202510_CapitalOneBiz_8265.pdf" target="_blank" rel="noopener">
+        <div class="doc-ic">PDF</div>
+        <div class="doc-meta">
+          <div class="doc-title">Oct 2025 — Capital One Business (8265)</div>
+          <div class="doc-sub">Operating account statement</div>
+        </div>
+        <div class="doc-actions">
+          <button class="doc-btn" type="button" data-print="assurecall-docs/202510_CapitalOneBiz_8265.pdf">Print</button>
+        </div>
+      </a>
+      <!-- Add more months as needed -->
+    </div>
+  </div>
+
+  <!-- Group: PayPal -->
+  <div class="doc-group">
+    <div class="doc-group-title">PayPal • Merchant</div>
+    <div class="doc-list" style="margin-top:10px;">
+      <a class="doc" href="assurecall-docs/202505_PayPal_Merchant.pdf" target="_blank" rel="noopener">
+        <div class="doc-ic">PDF</div>
+        <div class="doc-meta">
+          <div class="doc-title">May 2025 — PayPal Merchant Statement</div>
+          <div class="doc-sub">Deposits / processing</div>
+        </div>
+        <div class="doc-actions">
+          <button class="doc-btn" type="button" data-print="assurecall-docs/202505_PayPal_Merchant.pdf">Print</button>
+        </div>
+      </a>
+      <!-- Add more months as needed -->
+    </div>
+  </div>
+
+</div>
 
 <!-- =========================================================
         Funding Structure
