@@ -3496,103 +3496,157 @@ body.stmts-unlocked .acct-card.locked .stmt{
       </div>
     </article>
 
-    <!-- RIGHT: Donut + Legend (kept separate so it aligns like your “good” screenshot) -->
-    <article class="panel">
-      <div class="panel-head">
-        <h3>Use of Funds (Requested Commitment)</h3>
-        <span class="panel-tag">Allocation Mix</span>
-      </div>
-
-      <div class="chart-card alloc-card" style="margin-top:12px;">
-        <div class="chart-sub">Allocation mix across payoff, reserves, and operating growth capital.</div>
-
-        <div class="alloc-grid" role="img" aria-label="Use of funds allocation donut and legend">
-          <!-- Donut -->
-          <div class="alloc-donut-wrap">
-            <div
-              class="alloc-donut"
-              aria-hidden="true"
-              style="
-                --p-liens: 75.04;
-                --p-res: 9.97;
-                --p-assure: 8.57;
-                --p-roof: 2.86;
-                --p-bills: 1.90;
-                --p-mkt: 0.95;
-                --p-close: 0.71;
-              "
-            >
-              <div class="alloc-donut-center">
-                <div class="alloc-kicker">Total</div>
-                <div class="alloc-total">$1,050,000</div>
-                <div class="alloc-sub">Requested facility</div>
-              </div>
-            </div>
-            <div class="alloc-mini-note">Share of total requested commitment.</div>
-          </div>
-
-          <!-- Legend -->
-          <div class="alloc-legend">
-            <div class="alloc-legend-row">
-              <div class="alloc-left"><span class="alloc-dot c-liens"></span><span class="alloc-name">Payoff Existing Liens</span></div>
-              <div class="alloc-pct">75.04%</div>
-              <div class="alloc-amt">$787,884.07</div>
-            </div>
-
-            <div class="alloc-legend-row">
-              <div class="alloc-left"><span class="alloc-dot c-res"></span><span class="alloc-name">Financial Reserves</span></div>
-              <div class="alloc-pct">9.97%</div>
-              <div class="alloc-amt">$104,636.00</div>
-            </div>
-
-            <div class="alloc-legend-row">
-              <div class="alloc-left"><span class="alloc-dot c-assure"></span><span class="alloc-name">AssureCall Growth Capital</span></div>
-              <div class="alloc-pct">8.57%</div>
-              <div class="alloc-amt">$90,000.00</div>
-            </div>
-
-            <div class="alloc-legend-row">
-              <div class="alloc-left"><span class="alloc-dot c-roof"></span><span class="alloc-name">Roofing Appointments Growth</span></div>
-              <div class="alloc-pct">2.86%</div>
-              <div class="alloc-amt">$30,000.00</div>
-            </div>
-
-            <div class="alloc-legend-row">
-              <div class="alloc-left"><span class="alloc-dot c-bills"></span><span class="alloc-name">Personal Bills Payoff</span></div>
-              <div class="alloc-pct">1.90%</div>
-              <div class="alloc-amt">$20,000.00</div>
-            </div>
-
-            <div class="alloc-legend-row">
-              <div class="alloc-left"><span class="alloc-dot c-mkt"></span><span class="alloc-name">J&amp;J Marketing</span></div>
-              <div class="alloc-pct">0.95%</div>
-              <div class="alloc-amt">$10,000.00</div>
-            </div>
-
-            <div class="alloc-legend-row">
-              <div class="alloc-left"><span class="alloc-dot c-close"></span><span class="alloc-name">Closing / Legal / Buffer</span></div>
-              <div class="alloc-pct">0.71%</div>
-              <div class="alloc-amt">$7,479.54</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="alloc-sharebar" aria-hidden="true">
-          <span class="alloc-seg c-liens" style="width:75.04%"></span>
-          <span class="alloc-seg c-res" style="width:9.97%"></span>
-          <span class="alloc-seg c-assure" style="width:8.57%"></span>
-          <span class="alloc-seg c-roof" style="width:2.86%"></span>
-          <span class="alloc-seg c-bills" style="width:1.90%"></span>
-          <span class="alloc-seg c-mkt" style="width:0.95%"></span>
-          <span class="alloc-seg c-close" style="width:0.71%"></span>
-        </div>
-
-        <div class="tiny-note" style="margin-top:10px;">
-          Payoff clears title into a clean 1st-position structure; reserves and growth capital strengthen payment stability and operating throughput.
-        </div>
-      </div>
-    </article>
+  <!-- RIGHT: Simplified allocation visualization -->
+<article class="panel">
+  <div class="panel-head">
+    <h3>Use of Funds (Requested Commitment)</h3>
+    <span class="panel-tag">Allocation Mix</span>
   </div>
+
+  <div style="margin-top:12px;">
+    <div class="chart-sub" style="margin-bottom:18px;">
+      Allocation mix across payoff, reserves, and operating growth capital.
+    </div>
+
+    <!-- Simplified 3-category visual -->
+    <div style="display:grid; grid-template-columns: 200px 1fr; gap:20px; align-items:center; margin-bottom:24px;">
+      <!-- Mini donut (simplified to 3 segments) -->
+      <div style="position:relative; width:200px; height:200px; margin:0 auto;">
+        <svg viewBox="0 0 200 200" style="width:100%; height:100%;">
+          <!-- Background circle -->
+          <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="32"/>
+          
+          <!-- Segment 1: Liens (75%) - Gold -->
+          <circle cx="100" cy="100" r="80" fill="none" 
+            stroke="rgba(212,175,94,0.35)" stroke-width="32"
+            stroke-dasharray="377 503" stroke-dashoffset="0"
+            transform="rotate(-90 100 100)"/>
+          
+          <!-- Segment 2: Reserves (10%) - Blue -->
+          <circle cx="100" cy="100" r="80" fill="none" 
+            stroke="rgba(59,130,255,0.35)" stroke-width="32"
+            stroke-dasharray="50.3 503" stroke-dashoffset="-377"
+            transform="rotate(-90 100 100)"/>
+          
+          <!-- Segment 3: Growth (15%) - White -->
+          <circle cx="100" cy="100" r="80" fill="none" 
+            stroke="rgba(255,255,255,0.25)" stroke-width="32"
+            stroke-dasharray="75.45 503" stroke-dashoffset="-427.3"
+            transform="rotate(-90 100 100)"/>
+          
+          <!-- Center label -->
+          <text x="100" y="90" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="11" font-weight="700">TOTAL</text>
+          <text x="100" y="108" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-size="16" font-weight="900">$1.05M</text>
+        </svg>
+      </div>
+
+      <!-- 3-category legend -->
+      <div style="display:grid; gap:12px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:14px; height:14px; border-radius:4px; background:rgba(212,175,94,0.35); border:1px solid rgba(212,175,94,0.6); flex-shrink:0;"></div>
+          <div style="flex:1;">
+            <div style="font-weight:800; color:var(--t1); font-size:14px;">Payoff Existing Liens</div>
+            <div style="color:var(--t4); font-size:12px; margin-top:2px;">Clear title to 1st position</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-weight:900; color:var(--t1); font-size:14px;">$787,884</div>
+            <div style="color:var(--t4); font-size:11px;">75%</div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:14px; height:14px; border-radius:4px; background:rgba(59,130,255,0.35); border:1px solid rgba(59,130,255,0.6); flex-shrink:0;"></div>
+          <div style="flex:1;">
+            <div style="font-weight:800; color:var(--t1); font-size:14px;">Financial Reserves</div>
+            <div style="color:var(--t4); font-size:12px; margin-top:2px;">Operating stability buffer</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-weight:900; color:var(--t1); font-size:14px;">$104,636</div>
+            <div style="color:var(--t4); font-size:11px;">10%</div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:14px; height:14px; border-radius:4px; background:rgba(255,255,255,0.25); border:1px solid rgba(255,255,255,0.4); flex-shrink:0;"></div>
+          <div style="flex:1;">
+            <div style="font-weight:800; color:var(--t1); font-size:14px;">Growth Capital</div>
+            <div style="color:var(--t4); font-size:12px; margin-top:2px;">All expansion categories</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-weight:900; color:var(--t1); font-size:14px;">$157,480</div>
+            <div style="color:var(--t4); font-size:11px;">15%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detailed breakdown table -->
+    <div style="border-top:1px solid rgba(255,255,255,0.10); padding-top:16px;">
+      <div style="font-weight:800; color:var(--t1); margin-bottom:10px; font-size:13px; letter-spacing:0.05em; text-transform:uppercase; color:var(--t4);">Growth Capital Breakdown</div>
+      
+      <div style="display:grid; gap:8px;">
+        <div style="display:grid; grid-template-columns:1fr auto; gap:10px; padding:8px 10px; border-radius:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+          <div>
+            <div style="font-weight:750; color:var(--t2); font-size:13px;">AssureCall Growth Capital</div>
+            <div style="color:var(--t4); font-size:11.5px; margin-top:2px;">Hiring + training + systems expansion</div>
+          </div>
+          <div style="text-align:right; white-space:nowrap;">
+            <div style="font-weight:900; color:var(--t1); font-size:13px;">$90,000</div>
+            <div style="color:var(--t4); font-size:10.5px;">8.6%</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr auto; gap:10px; padding:8px 10px; border-radius:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+          <div>
+            <div style="font-weight:750; color:var(--t2); font-size:13px;">Roofing Appointments Growth</div>
+            <div style="color:var(--t4); font-size:11.5px; margin-top:2px;">Speed-to-market expansion</div>
+          </div>
+          <div style="text-align:right; white-space:nowrap;">
+            <div style="font-weight:900; color:var(--t1); font-size:13px;">$30,000</div>
+            <div style="color:var(--t4); font-size:10.5px;">2.9%</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr auto; gap:10px; padding:8px 10px; border-radius:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+          <div>
+            <div style="font-weight:750; color:var(--t2); font-size:13px;">Personal Bills Payoff</div>
+            <div style="color:var(--t4); font-size:11.5px; margin-top:2px;">Stability cleanup</div>
+          </div>
+          <div style="text-align:right; white-space:nowrap;">
+            <div style="font-weight:900; color:var(--t1); font-size:13px;">$20,000</div>
+            <div style="color:var(--t4); font-size:10.5px;">1.9%</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr auto; gap:10px; padding:8px 10px; border-radius:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+          <div>
+            <div style="font-weight:750; color:var(--t2); font-size:13px;">J&amp;J Marketing</div>
+            <div style="color:var(--t4); font-size:11.5px; margin-top:2px;">Property acquisition pipeline</div>
+          </div>
+          <div style="text-align:right; white-space:nowrap;">
+            <div style="font-weight:900; color:var(--t1); font-size:13px;">$10,000</div>
+            <div style="color:var(--t4); font-size:10.5px;">1.0%</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr auto; gap:10px; padding:8px 10px; border-radius:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+          <div>
+            <div style="font-weight:750; color:var(--t2); font-size:13px;">Closing / Legal / Buffer</div>
+            <div style="color:var(--t4); font-size:11.5px; margin-top:2px;">Title, legal, timing buffer</div>
+          </div>
+          <div style="text-align:right; white-space:nowrap;">
+            <div style="font-weight:900; color:var(--t1); font-size:13px;">$7,480</div>
+            <div style="color:var(--t4); font-size:10.5px;">0.7%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tiny-note" style="margin-top:14px;">
+      Payoff clears title into clean 1st-position structure; reserves and growth capital strengthen payment stability and operating throughput.
+    </div>
+  </div>
+</article>
 
   <!-- ROW 2: Payment strategy (LEFT) + Waterfall/metrics (RIGHT) -->
   <div class="grid-2" style="margin-top:18px;">
