@@ -1925,6 +1925,30 @@ outline-offset: 2px;
   overflow: hidden; /* critical: stops the "bleed off to the right" */
 }
 
+/* =========================================================
+   FIX: Roofing Appointments layout
+========================================================= */
+#roofing-appointments .grid-2{
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important;
+  gap: 18px;
+  align-items: start;
+}
+
+#roofing-appointments .panel,
+#roofing-appointments .chart-card,
+#roofing-appointments .uf-table{
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Only collapse on truly mobile screens */
+@media (max-width: 760px){
+  #roofing-appointments .grid-2{
+    grid-template-columns: 1fr !important;
+  }    
+
 /* Donut + legend layout inside the chart card */
 #jj-funding-strategy .alloc-grid{
   display:grid;
@@ -1974,6 +1998,7 @@ outline-offset: 2px;
     grid-template-columns: 1fr !important;
   }
 }
+    
       
 /* ============================================================
       RESPONSIVE BREAKPOINTS
