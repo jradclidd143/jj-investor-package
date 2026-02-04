@@ -1403,6 +1403,142 @@ outline-offset: 2px;
   font-size: 13px;
   color: var(--t3);
 }
+      
+/* ============================================================
+   ALLOCATION DONUT (Use of Funds) — CSS for alloc-card
+   ============================================================ */
+.alloc-grid{
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.alloc-donut-wrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.alloc-donut{
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: var(--shadow2);
+  position: relative;
+
+  /* conic-gradient built from your % variables */
+  background: conic-gradient(
+    rgba(212,175,94,.35) 0% calc(var(--p-liens)*1%),
+    rgba(59,130,255,.30) calc(var(--p-liens)*1%) calc((var(--p-liens) + var(--p-res))*1%),
+    rgba(255,255,255,.22) calc((var(--p-liens) + var(--p-res))*1%) calc((var(--p-liens) + var(--p-res) + var(--p-assure))*1%),
+    rgba(224,69,69,.30) calc((var(--p-liens) + var(--p-res) + var(--p-assure))*1%) calc((var(--p-liens) + var(--p-res) + var(--p-assure) + var(--p-roof))*1%),
+    rgba(59,130,255,.22) calc((var(--p-liens) + var(--p-res) + var(--p-assure) + var(--p-roof))*1%) calc((var(--p-liens) + var(--p-res) + var(--p-assure) + var(--p-roof) + var(--p-bills))*1%),
+    rgba(212,175,94,.22) calc((var(--p-liens) + var(--p-res) + var(--p-assure) + var(--p-roof) + var(--p-bills))*1%) calc((var(--p-liens) + var(--p-res) + var(--p-assure) + var(--p-roof) + var(--p-bills) + var(--p-mkt))*1%),
+    rgba(212,175,94,.18) calc((var(--p-liens) + var(--p-res) + var(--p-assure) + var(--p-roof) + var(--p-bills) + var(--p-mkt))*1%) 100%
+  );
+}
+
+.alloc-donut::after{
+  content:"";
+  position:absolute;
+  inset: 18px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(13,18,34,.82), rgba(11,16,32,.70));
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+.alloc-donut-center{
+  position:absolute;
+  inset: 0;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  z-index: 2;
+  padding: 12px;
+}
+
+.alloc-kicker{ color: var(--t4); font-size: 12px; letter-spacing:.10em; text-transform: uppercase; font-weight: 800; }
+.alloc-total{ color: var(--t1); font-size: 20px; font-weight: 950; letter-spacing:-.01em; margin-top: 6px; }
+.alloc-sub{ color: var(--t3); font-size: 12.6px; margin-top: 4px; }
+
+.alloc-mini-note{ color: var(--t4); font-size: 12px; text-align:center; }
+
+.alloc-legend{
+  display: grid;
+  gap: 10px;
+}
+
+.alloc-legend-row{
+  display: grid;
+  grid-template-columns: 1fr 80px 140px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+}
+
+.alloc-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width: 0;
+}
+
+.alloc-name{
+  color: var(--t2);
+  font-weight: 800;
+  font-size: 12.8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alloc-pct{ color: var(--t4); font-weight: 900; font-size: 12px; text-align:right; }
+.alloc-amt{ color: var(--t2); font-weight: 900; font-size: 12.8px; text-align:right; white-space: nowrap; }
+
+.alloc-dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,.18);
+  flex: 0 0 auto;
+}
+
+/* color mapping (matches donut order) */
+.c-liens{ background: rgba(212,175,94,.35); }
+.c-res{ background: rgba(59,130,255,.30); }
+.c-assure{ background: rgba(255,255,255,.22); }
+.c-roof{ background: rgba(224,69,69,.30); }
+.c-bills{ background: rgba(59,130,255,.22); }
+.c-mkt{ background: rgba(212,175,94,.22); }
+.c-close{ background: rgba(212,175,94,.18); }
+
+.alloc-sharebar{
+  margin-top: 14px;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  display: flex;
+}
+
+.alloc-seg{ height: 100%; }
+
+/* responsive */
+@media (max-width: 900px){
+  .alloc-grid{ grid-template-columns: 1fr; }
+  .alloc-donut{ width: 220px; height: 220px; }
+  .alloc-legend-row{ grid-template-columns: 1fr 80px 120px; }
+}
 
 /* ============================================================
       RESPONSIVE BREAKPOINTS
@@ -2271,7 +2407,7 @@ outline-offset: 2px;
   </div>
 </section>
 
-</div><!-- end container -->
+<!-- end container -->
 
 
 <!-- =========================================================
@@ -2707,7 +2843,7 @@ outline-offset: 2px;
 </section>
 
 
-<<!-- =========================================================
+<!-- =========================================================
      J&J — Funding Request & Repayment Strategy
 ========================================================== -->
 <section class="section" id="jj-funding-strategy" data-nav="J&amp;J Funding &amp; Repayment">
@@ -3182,7 +3318,7 @@ outline-offset: 2px;
       <div class="doc-ic">PDF</div>
       <div class="doc-meta"><div class="doc-title">Lease — 13324 Sunkiss Loop</div><div class="doc-sub">Supports Rental Income Assumption.</div></div>
     </a>
-    <a class="doc" href=" docs/Lease_131_Ormond_Shore_(Provided).pdf" target="_blank" rel="noopener">
+    <a class="doc" href="docs/Lease_131_Ormond_Shore_(Provided).pdf" target="_blank" rel="noopener">
       <div class="doc-ic">PDF</div>
       <div class="doc-meta"><div class="doc-title">Lease_131_Ormond_Shore_(Provided)</div><div class="doc-sub">Supports Rental Income Assumption.</div></div>
     </a>
@@ -3578,5 +3714,152 @@ outline-offset: 2px;
 
 })();
 </script>
+<script>
+(function(){
+  const root = document.documentElement;
+  const topbar = document.querySelector('.topbar');
+  const sideNav = document.getElementById('sideNav');
+  const navList = document.getElementById('navList');
+  const navToggle = document.getElementById('navToggle');
+  const upBtn = document.getElementById('upBtn');
+  const themeBtn = document.getElementById('screenThemeToggle');
+
+  // --- keep --topbar-h accurate (your sidenav uses it) ---
+  function syncTopbarHeight(){
+    if(!topbar) return;
+    const h = Math.ceil(topbar.getBoundingClientRect().height);
+    root.style.setProperty('--topbar-h', h + 'px');
+  }
+  window.addEventListener('resize', syncTopbarHeight, {passive:true});
+  window.addEventListener('load', syncTopbarHeight);
+  syncTopbarHeight();
+
+  // --- build side navigation from section[data-nav] ---
+  function slugify(s){
+    return String(s||'')
+      .toLowerCase()
+      .trim()
+      .replace(/&/g,'and')
+      .replace(/[^a-z0-9]+/g,'-')
+      .replace(/(^-|-$)/g,'');
+  }
+
+  const sections = Array.from(document.querySelectorAll('section[data-nav]'));
+  const links = [];
+
+  if(navList && sections.length){
+    navList.innerHTML = '';
+    sections.forEach(sec => {
+      const label = sec.getAttribute('data-nav') || sec.querySelector('h2')?.textContent || 'Section';
+      if(!sec.id) sec.id = slugify(label) || ('sec-' + Math.random().toString(16).slice(2));
+
+      const a = document.createElement('a');
+      a.href = '#' + sec.id;
+      a.textContent = label;
+      a.addEventListener('click', (e) => {
+        // Smooth scroll while respecting scroll-margin-top (already in your CSS)
+        e.preventDefault();
+        document.getElementById(sec.id)?.scrollIntoView({behavior:'smooth', block:'start'});
+        history.replaceState(null, '', '#' + sec.id);
+      });
+
+      navList.appendChild(a);
+      links.push({sec, a});
+    });
+  }
+
+  // --- highlight active section ---
+  const setActive = (id) => {
+    links.forEach(({sec, a}) => {
+      const on = sec.id === id;
+      a.classList.toggle('active', on);
+      if(on) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  };
+
+  if('IntersectionObserver' in window && links.length){
+    const io = new IntersectionObserver((entries) => {
+      // choose the most-visible intersecting section
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if(visible?.target?.id) setActive(visible.target.id);
+    }, {
+      root: null,
+      // keep it stable under a sticky header
+      rootMargin: `-${Math.max(90, parseInt(getComputedStyle(root).getPropertyValue('--topbar-h'))||110)}px 0px -60% 0px`,
+      threshold: [0.10, 0.20, 0.35, 0.50, 0.65]
+    });
+
+    links.forEach(({sec}) => io.observe(sec));
+  } else {
+    // fallback: activate based on hash
+    window.addEventListener('hashchange', () => {
+      const id = location.hash.replace('#','');
+      if(id) setActive(id);
+    });
+  }
+
+  // activate current hash on load
+  window.addEventListener('load', () => {
+    const id = location.hash.replace('#','') || (links[0]?.sec?.id);
+    if(id) setActive(id);
+  });
+
+  // --- sidenav collapse/expand ---
+  if(navToggle && sideNav){
+    navToggle.addEventListener('click', () => {
+      const isMin = sideNav.classList.toggle('min');
+      const expanded = !isMin;
+      navToggle.setAttribute('aria-expanded', String(expanded));
+    });
+  }
+
+  // --- back to top button ---
+  function onScroll(){
+    const y = window.scrollY || document.documentElement.scrollTop || 0;
+    if(upBtn){
+      upBtn.classList.toggle('show', y > 600);
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  if(upBtn){
+    upBtn.addEventListener('click', () => {
+      document.getElementById('top')?.scrollIntoView({behavior:'smooth', block:'start'});
+      history.replaceState(null, '', '#top');
+    });
+  }
+
+  // --- theme toggle (screen only) ---
+  function setTheme(mode){
+    if(mode === 'light') root.setAttribute('data-theme','light');
+    else root.removeAttribute('data-theme');
+
+    const isDark = mode !== 'light';
+    if(themeBtn){
+      themeBtn.setAttribute('aria-pressed', String(isDark));
+      themeBtn.textContent = isDark ? '🌙 Screen: Dark' : '☀️ Screen: Light';
+      themeBtn.title = 'Toggle screen theme';
+    }
+    try{ localStorage.setItem('jj_theme', mode); }catch(e){}
+  }
+
+  // init theme from storage
+  let saved = 'dark';
+  try{ saved = localStorage.getItem('jj_theme') || 'dark'; }catch(e){}
+  setTheme(saved);
+
+  if(themeBtn){
+    themeBtn.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      setTheme(current === 'light' ? 'dark' : 'light');
+    });
+  }
+})();
+</script>      
+</main>
 </body>
 </html>
