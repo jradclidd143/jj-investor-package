@@ -3890,299 +3890,87 @@ body.stmts-unlocked .acct-card.locked .stmt{
 </section>
 
 <!-- =========================================================
-     Appendix: AssureCall Bank Statements (LOCKED INDEX)
-     (Paste BELOW your existing Appendix section)
+     Appendix: AssureCall Bank Statements (Rebuilt to Match J&J)
 ========================================================== -->
 <section class="section appendix" id="assurecall-bank-statements" data-nav="Appendix: AssureCall Bank Statements">
   <div class="section-head">
-    <h2>Appendix: AssureCall Bank Statements (Index)</h2>
+    <h2>Appendix: AssureCall Bank Statements</h2>
     <p>
-      Bank statements are included in the repository for underwriting recordkeeping.
-      This report view intentionally lists them as a <strong>locked, non-clickable index</strong>.
+      Bank statements supporting AssureCall's deposit history and operational activity.
+      <strong>Statements are locked by default</strong> for lender-facing review.
     </p>
+
+    <!-- Lock/Unlock Controls -->
+    <div class="jj-strip" role="note" aria-label="AssureCall document strip" style="margin-top:14px;">
+      <div class="jj-strip-left">
+        <div class="jj-mark" style="background: rgba(59,130,255,.10); border-color: rgba(59,130,255,.28);">AC</div>
+        <div class="jj-strip-text">
+          <div class="jj-strip-title">AssureCall LLC — Bank Statements Index</div>
+          <div class="jj-strip-sub">Operating accounts • Deposit verification • 37 statements</div>
+        </div>
+      </div>
+      <div class="jj-strip-badges">
+        <span class="jj-pill" id="assureLockPill">🔒 LOCKED</span>
+        <button class="doc-btn" id="assureLockToggle" type="button" style="margin-left:10px;">
+          Unlock Statements
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div class="acct-grid-4">
-
-    <!-- =========================
-         COLUMN 1 — Wells Operating
-         ========================= -->
-    <article class="acct-card">
-      <div class="acct-head">
-        <div>
-          <div class="acct-title">Wells Fargo — Operating</div>
-          <div class="acct-sub">Operating statement index (including “RF” copies).</div>
-        </div>
-        <div class="acct-pill">LOCKED</div>
+  <div class="grid-2">
+    <!-- LEFT: Statement Index -->
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Statement Index</h3>
+        <span class="panel-tag">AssureCall • Verified PDFs</span>
       </div>
 
-      <div class="subacct">
-        <div class="subacct-title">Wells Operating</div>
-        <div class="subacct-path">assurecall-docs/wells operating/</div>
-        <div class="stmt-list">
-          <div class="stmt"><div class="name">123124 WellsFargo.pdf</div><div class="tag">Dec 2024</div></div>
-          <div class="stmt"><div class="name">013125 WellsFargo.pdf</div><div class="tag">Jan 2025</div></div>
-          <div class="stmt"><div class="name">022825 WellsFargo.pdf</div><div class="tag">Feb 2025</div></div>
-          <div class="stmt"><div class="name">033125 WellsFargo.pdf</div><div class="tag">Mar 2025</div></div>
-          <div class="stmt"><div class="name">043025 WellsFargo.pdf</div><div class="tag">Apr 2025</div></div>
-          <div class="stmt"><div class="name">053125 WellsFargo.pdf</div><div class="tag">May 2025</div></div>
-          <div class="stmt"><div class="name">063025 WellsFargo.pdf</div><div class="tag">Jun 2025</div></div>
-          <div class="stmt"><div class="name">073125 WellsFargo.pdf</div><div class="tag">Jul 2025</div></div>
-          <div class="stmt"><div class="name">083125 WellsFargo.pdf</div><div class="tag">Aug 2025</div></div>
-          <div class="stmt"><div class="name">093025 WellsFargo.pdf</div><div class="tag">Sep 2025</div></div>
-          <div class="stmt"><div class="name">103125 WellsFargo.pdf</div><div class="tag">Oct 2025</div></div>
-          <div class="stmt"><div class="name">113025 WellsFargo.pdf</div><div class="tag">Nov 2025</div></div>
-          <div class="stmt"><div class="name">123125 WellsFargo.pdf</div><div class="tag">Dec 2025</div></div>
+      <!-- Search + Count -->
+      <div class="stmt-tools">
+        <div class="stmt-search">
+          <span class="stmt-icon" aria-hidden="true">⌕</span>
+          <input id="assureStmtSearch" type="search" placeholder="Search: Wells, Capital One, Operating, Savings, May 2025..." />
         </div>
+        <div class="stmt-meta-pill" id="assureMetaPill">Loading…</div>
       </div>
 
-      <div class="subacct">
-        <div class="subacct-title">Wells Operating (RF)</div>
-        <div class="subacct-path">assurecall-docs/wells operating rf/</div>
-        <div class="stmt-list">
-          <div class="stmt"><div class="name">123124 WellsFargo.pdf</div><div class="tag">Dec 2024</div></div>
-          <div class="stmt"><div class="name">013125 WellsFargo.pdf</div><div class="tag">Jan 2025</div></div>
-          <div class="stmt"><div class="name">022825 WellsFargo.pdf</div><div class="tag">Feb 2025</div></div>
-          <div class="stmt"><div class="name">033125 WellsFargo.pdf</div><div class="tag">Mar 2025</div></div>
-          <div class="stmt"><div class="name">043025 WellsFargo.pdf</div><div class="tag">Apr 2025</div></div>
-          <div class="stmt"><div class="name">053125 WellsFargo.pdf</div><div class="tag">May 2025</div></div>
-          <div class="stmt"><div class="name">063025 WellsFargo.pdf</div><div class="tag">Jun 2025</div></div>
-          <div class="stmt"><div class="name">073125 WellsFargo.pdf</div><div class="tag">Jul 2025</div></div>
-          <div class="stmt"><div class="name">083125 WellsFargo.pdf</div><div class="tag">Aug 2025</div></div>
-          <div class="stmt"><div class="name">093025 WellsFargo.pdf</div><div class="tag">Sep 2025</div></div>
-          <div class="stmt"><div class="name">103125 WellsFargo.pdf</div><div class="tag">Oct 2025</div></div>
-          <div class="stmt"><div class="name">113025 WellsFargo.pdf</div><div class="tag">Nov 2025</div></div>
-          <div class="stmt"><div class="name">123125 WellsFargo.pdf</div><div class="tag">Dec 2025</div></div>
-        </div>
-      </div>
-    </article>
+      <div id="assureStmtIndex" class="stmt-index" style="margin-top:12px;"></div>
 
-    <!-- =========================
-         COLUMN 2 — Wells Savings
-         ========================= -->
-  <article class="acct-card">
-      <div class="acct-head">
-        <div>
-          <div class="acct-title">Wells Fargo — Savings</div>
-          <div class="acct-sub">Savings statement index (including “RF” copies).</div>
-        </div>
-        <div class="acct-pill">LOCKED</div>
+      <div class="tiny-note" style="margin-top:10px;">
+        Statements are hosted in <code>/assurecall-docs</code>. Links are <strong>locked by default</strong> and become clickable when unlocked.
+      </div>
+    </div>
+
+    <!-- RIGHT: Controls & Notes -->
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Access Controls</h3>
+        <span class="panel-tag">Lender Review</span>
       </div>
 
-      <div class="subacct">
-        <div class="subacct-title">Wells Savings</div>
-        <div class="subacct-path">assurecall-docs/wells savings/</div>
-        <div class="stmt-list">
-          <!-- NOTE: update filenames/paths to match your repo exactly -->
-          <a class="stmt" href="assurecall-docs/wells%20savings/123124%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">123124 WellsFargo_Savings.pdf</div><div class="tag">Dec 2024</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings/013125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">013125 WellsFargo_Savings.pdf</div><div class="tag">Jan 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings/022825%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">022825 WellsFargo_Savings.pdf</div><div class="tag">Feb 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings/033125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">033125 WellsFargo_Savings.pdf</div><div class="tag">Mar 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings/043025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">043025 WellsFargo_Savings.pdf</div><div class="tag">Apr 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings/053125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">053125 WellsFargo_Savings.pdf</div><div class="tag">May 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings/063025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">063025 WellsFargo_Savings.pdf</div><div class="tag">Jun 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings/073125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">073125 WellsFargo_Savings.pdf</div><div class="tag">Jul 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings/083125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">083125 WellsFargo_Savings.pdf</div><div class="tag">Aug 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings/093025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">093025 WellsFargo_Savings.pdf</div><div class="tag">Sep 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings/103125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">103125 WellsFargo_Savings.pdf</div><div class="tag">Oct 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings/113025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">113025 WellsFargo_Savings.pdf</div><div class="tag">Nov 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings/123125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">123125 WellsFargo_Savings.pdf</div><div class="tag">Dec 2025</div>
-          </a>
+      <div class="callout" style="margin-top:12px;">
+        <div class="callout-title">Lock/Unlock Behavior</div>
+        <div class="callout-body">
+          Statements are <strong>locked by default</strong> for secure lender-facing presentation.
+          Click <strong>"Unlock Statements"</strong> above to enable PDF links. Your preference is saved.
         </div>
       </div>
 
-      <div class="subacct">
-        <div class="subacct-title">Wells Savings (RF)</div>
-        <div class="subacct-path">assurecall-docs/wells savings rf/</div>
-        <div class="stmt-list">
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/123124%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">123124 WellsFargo_Savings.pdf</div><div class="tag">Dec 2024</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/013125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">013125 WellsFargo_Savings.pdf</div><div class="tag">Jan 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/022825%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">022825 WellsFargo_Savings.pdf</div><div class="tag">Feb 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/033125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">033125 WellsFargo_Savings.pdf</div><div class="tag">Mar 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/043025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">043025 WellsFargo_Savings.pdf</div><div class="tag">Apr 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/053125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">053125 WellsFargo_Savings.pdf</div><div class="tag">May 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/063025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">063025 WellsFargo_Savings.pdf</div><div class="tag">Jun 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/073125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">073125 WellsFargo_Savings.pdf</div><div class="tag">Jul 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/083125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">083125 WellsFargo_Savings.pdf</div><div class="tag">Aug 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/093025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">093025 WellsFargo_Savings.pdf</div><div class="tag">Sep 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/103125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">103125 WellsFargo_Savings.pdf</div><div class="tag">Oct 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/113025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">113025 WellsFargo_Savings.pdf</div><div class="tag">Nov 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/123125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
-            <div class="name">123125 WellsFargo_Savings.pdf</div><div class="tag">Dec 2025</div>
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <!-- =========================
-         COLUMN 3 — Capital One
-         ========================= -->
-   <article class="acct-card">
-      <div class="acct-head">
-        <div>
-          <div class="acct-title">Capital One — Business</div>
-          <div class="acct-sub">Business checking / operating statements.</div>
-        </div>
-        <div class="acct-pill">LOCKED</div>
-      </div>
-
-      <div class="subacct">
-        <div class="subacct-title">Capital One Business Checking</div>
-        <div class="subacct-path">assurecall-docs/capital one business/</div>
-        <div class="stmt-list">
-          <!-- Update filenames/paths to your repo -->
-          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-01%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-01 CapitalOne_Business.pdf</div><div class="tag">Jan 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-02%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-02 CapitalOne_Business.pdf</div><div class="tag">Feb 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-03%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-03 CapitalOne_Business.pdf</div><div class="tag">Mar 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-04%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-04 CapitalOne_Business.pdf</div><div class="tag">Apr 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-05%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-05 CapitalOne_Business.pdf</div><div class="tag">May 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-06%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-06 CapitalOne_Business.pdf</div><div class="tag">Jun 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-07%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-07 CapitalOne_Business.pdf</div><div class="tag">Jul 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-08%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-08 CapitalOne_Business.pdf</div><div class="tag">Aug 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-09%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-09 CapitalOne_Business.pdf</div><div class="tag">Sep 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-10%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-10 CapitalOne_Business.pdf</div><div class="tag">Oct 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-11%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-11 CapitalOne_Business.pdf</div><div class="tag">Nov 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-12%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-12 CapitalOne_Business.pdf</div><div class="tag">Dec 2025</div>
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <!-- =========================
-         COLUMN 4 — PayPal / Capital One 360
-         ========================= -->
-   <article class="acct-card">
-      <div class="acct-head">
-        <div>
-          <div class="acct-title">PayPal / Capital One 360</div>
-          <div class="acct-sub">Merchant processing + secondary flows.</div>
-        </div>
-        <div class="acct-pill">LOCKED</div>
-      </div>
-
-      <div class="subacct">
-        <div class="subacct-title">PayPal Merchant</div>
-        <div class="subacct-path">assurecall-docs/paypal/</div>
-        <div class="stmt-list">
-          <a class="stmt" href="assurecall-docs/paypal/2025-05%20PayPal.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-05 PayPal.pdf</div><div class="tag">May 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/paypal/2025-06%20PayPal.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-06 PayPal.pdf</div><div class="tag">Jun 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/paypal/2025-07%20PayPal.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-07 PayPal.pdf</div><div class="tag">Jul 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/paypal/2025-08%20PayPal.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-08 PayPal.pdf</div><div class="tag">Aug 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/paypal/2025-09%20PayPal.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-09 PayPal.pdf</div><div class="tag">Sep 2025</div>
-          </a>
+      <div class="callout" style="margin-top:12px;">
+        <div class="callout-title">Document Organization</div>
+        <div class="callout-body">
+          Statements are organized by bank and account type. Expand a category to view available months.
+          When unlocked, click <strong>Open PDF</strong> to view each statement in a new tab.
         </div>
       </div>
 
-      <div class="subacct">
-        <div class="subacct-title">Capital One 360</div>
-        <div class="subacct-path">assurecall-docs/capital one 360/</div>
-        <div class="stmt-list">
-          <a class="stmt" href="assurecall-docs/capital%20one%20360/2025-01%20CapitalOne360.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-01 CapitalOne360.pdf</div><div class="tag">Jan 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20360/2025-02%20CapitalOne360.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-02 CapitalOne360.pdf</div><div class="tag">Feb 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20360/2025-03%20CapitalOne360.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-03 CapitalOne360.pdf</div><div class="tag">Mar 2025</div>
-          </a>
-          <a class="stmt" href="assurecall-docs/capital%20one%20360/2025-04%20CapitalOne360.pdf" target="_blank" rel="noopener">
-            <div class="name">2025-04 CapitalOne360.pdf</div><div class="tag">Apr 2025</div>
-          </a>
-        </div>
+      <div class="metric" style="margin-top:14px;">
+        <div class="label">Coverage Period</div>
+        <div class="value">6+ Months</div>
+        <div class="sub">Wells Fargo (Operating/Savings), Capital One Business, Capital One 360, PayPal Merchant</div>
       </div>
-    </article>
-
-  </div><!-- /.acct-grid-4 -->
-
-  <div class="stmt-tools">
-    <button class="doc-btn" id="stmtLinksToggle" type="button">🔒 Statements: Locked</button>
-  </div>
-
-  <div class="disclaimer">
-    <strong>Note:</strong> This index supports underwriting organization. Links are <strong>locked by default</strong> for lender-facing review.
-    Use the button above to unlock links when you are reviewing internally.
+    </div>
   </div>
 </section>
 
@@ -4277,16 +4065,13 @@ body.stmts-unlocked .acct-card.locked .stmt{
 
 <script>
 /* ============================================================
-   ✅ WORKING NAV + ACTIVE HIGHLIGHT + TOPBAR HEIGHT SYNC
-   ✅ THEME TOGGLE + BACK TO TOP
-   ✅ STATEMENT LINK LOCK/UNLOCK
-   ✅ J&J BANK STATEMENTS INDEX BUILDER
+   ✅ NAVIGATION + THEME + BACK TO TOP + STATEMENT INDEXES
 ============================================================ */
 (() => {
   const root = document.documentElement;
   const topbar = document.querySelector('.topbar');
 
-  // Keep --topbar-h accurate for scroll offsets + sidenav positioning
+  // Topbar height sync
   const syncTopbarHeight = () => {
     const h = topbar ? topbar.getBoundingClientRect().height : 110;
     root.style.setProperty('--topbar-h', `${Math.ceil(h)}px`);
@@ -4294,13 +4079,12 @@ body.stmts-unlocked .acct-card.locked .stmt{
   syncTopbarHeight();
   window.addEventListener('resize', syncTopbarHeight, { passive: true });
 
-  // Theme toggle (screen)
+  // Theme toggle
   const themeBtn = document.getElementById('screenThemeToggle');
   const THEME_KEY = 'jj_theme';
   const applyTheme = (mode) => {
     if (mode === 'light') root.setAttribute('data-theme', 'light');
     else root.removeAttribute('data-theme');
-
     if (themeBtn) {
       const isLight = root.getAttribute('data-theme') === 'light';
       themeBtn.textContent = isLight ? '☀️ Screen: Light' : '🌙 Screen: Dark';
@@ -4308,7 +4092,6 @@ body.stmts-unlocked .acct-card.locked .stmt{
     }
   };
   applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
-
   themeBtn?.addEventListener('click', () => {
     const isLight = root.getAttribute('data-theme') === 'light';
     const next = isLight ? 'dark' : 'light';
@@ -4316,23 +4099,20 @@ body.stmts-unlocked .acct-card.locked .stmt{
     applyTheme(next);
   });
 
-  // Build sidenav from sections
+  // Build sidenav
   const navList = document.getElementById('navList');
   const sideNav = document.getElementById('sideNav');
   const navToggle = document.getElementById('navToggle');
   const sections = Array.from(document.querySelectorAll('[data-nav][id]'));
-
-  const esc = (s) => (s || '').replace(/[&<>"']/g, m => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  }[m]));
+  const esc = (s) => (s || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
   if (navList && sections.length) {
-    navList.innerHTML = sections
-      .map(sec => `<a href="#${encodeURIComponent(sec.id)}">${esc(sec.getAttribute('data-nav') || sec.id)}</a>`)
-      .join('');
+    navList.innerHTML = sections.map(sec => 
+      `<a href="#${encodeURIComponent(sec.id)}">${esc(sec.getAttribute('data-nav') || sec.id)}</a>`
+    ).join('');
   }
 
-  // SideNav minimize toggle (persist)
+  // SideNav minimize
   const NAV_KEY = 'jj_nav_min';
   const setNavMin = (min) => {
     if (!sideNav) return;
@@ -4341,24 +4121,20 @@ body.stmts-unlocked .acct-card.locked .stmt{
     navToggle?.setAttribute('aria-expanded', String(!min));
   };
   setNavMin(localStorage.getItem(NAV_KEY) === '1');
-
   navToggle?.addEventListener('click', () => {
-    const min = sideNav?.classList.contains('min');
-    setNavMin(!min);
+    setNavMin(!sideNav?.classList.contains('min'));
   });
 
-  // Smooth scroll with topbar offset
+  // Smooth scroll
   navList?.addEventListener('click', (e) => {
     const a = e.target.closest('a');
     if (!a) return;
     const href = a.getAttribute('href') || '';
     if (!href.startsWith('#')) return;
-
     e.preventDefault();
     const id = decodeURIComponent(href.slice(1));
     const el = document.getElementById(id);
     if (!el) return;
-
     const topbarH = topbar ? topbar.getBoundingClientRect().height : 110;
     const y = window.scrollY + el.getBoundingClientRect().top - topbarH - 18;
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
@@ -4367,7 +4143,6 @@ body.stmts-unlocked .acct-card.locked .stmt{
   // Active link highlighting
   const links = Array.from(navList?.querySelectorAll('a') || []);
   const linkById = new Map(links.map(a => [decodeURIComponent((a.getAttribute('href') || '').slice(1)), a]));
-
   const clearActive = () => links.forEach(a => a.classList.remove('active'));
   const setActive = (id) => {
     clearActive();
@@ -4377,10 +4152,7 @@ body.stmts-unlocked .acct-card.locked .stmt{
 
   const topbarHForObs = () => (topbar ? Math.ceil(topbar.getBoundingClientRect().height) : 110);
   const makeObserver = () => new IntersectionObserver((entries) => {
-    const visible = entries
-      .filter(en => en.isIntersecting)
-      .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
-
+    const visible = entries.filter(en => en.isIntersecting).sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
     if (visible?.target?.id) setActive(visible.target.id);
   }, {
     root: null,
@@ -4398,151 +4170,269 @@ body.stmts-unlocked .acct-card.locked .stmt{
 
   // Back to top
   const upBtn = document.getElementById('upBtn');
-  const onScroll = () => {
-    const show = window.scrollY > 650;
-    upBtn?.classList.toggle('show', show);
-  };
+  const onScroll = () => upBtn?.classList.toggle('show', window.scrollY > 650);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
   upBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // Statement links lock/unlock (persist)
-  const STMT_KEY = 'jj_stmt_unlocked';
-  const stmtBtn = document.getElementById('stmtLinksToggle');
+  /* ============================================================
+     ASSURE CALL — STATEMENT LOCK/UNLOCK + INDEX BUILDER
+  ============================================================ */
+  const ASSURE_LOCK_KEY = 'jj_assure_unlocked';
+  const assureLockBtn = document.getElementById('assureLockToggle');
+  const assureLockPill = document.getElementById('assureLockPill');
+  const assureMount = document.getElementById('assureStmtIndex');
+  const assureSearch = document.getElementById('assureStmtSearch');
+  const assureMeta = document.getElementById('assureMetaPill');
 
-  const setStmtUnlocked = (unlocked) => {
-    document.body.classList.toggle('stmts-unlocked', !!unlocked);
-    localStorage.setItem(STMT_KEY, unlocked ? '1' : '0');
+  let assureUnlocked = localStorage.getItem(ASSURE_LOCK_KEY) === '1';
 
-    if (stmtBtn) stmtBtn.textContent = unlocked ? '🔓 Statements: Unlocked' : '🔒 Statements: Locked';
-
-    document.querySelectorAll('.acct-card .acct-pill').forEach(p => {
-      p.textContent = unlocked ? 'OPEN' : 'LOCKED';
-      p.style.borderColor = unlocked ? 'rgba(59,130,255,.40)' : 'rgba(224,69,69,.35)';
-      p.style.background = unlocked ? 'rgba(59,130,255,.14)' : 'rgba(224,69,69,.14)';
-    });
+  const updateAssureLockUI = () => {
+    if (assureLockBtn) {
+      assureLockBtn.textContent = assureUnlocked ? '🔓 Lock Statements' : '🔒 Unlock Statements';
+    }
+    if (assureLockPill) {
+      assureLockPill.textContent = assureUnlocked ? '🔓 UNLOCKED' : '🔒 LOCKED';
+      assureLockPill.style.borderColor = assureUnlocked ? 'rgba(59,130,255,.35)' : 'rgba(224,69,69,.35)';
+      assureLockPill.style.background = assureUnlocked ? 'rgba(59,130,255,.10)' : 'rgba(224,69,69,.10)';
+    }
+    // Re-render index to update link states
+    renderAssureIndex();
   };
 
-  setStmtUnlocked(localStorage.getItem(STMT_KEY) === '1');
-  stmtBtn?.addEventListener('click', () => {
-    const isUnlocked = document.body.classList.contains('stmts-unlocked');
-    setStmtUnlocked(!isUnlocked);
+  assureLockBtn?.addEventListener('click', () => {
+    assureUnlocked = !assureUnlocked;
+    localStorage.setItem(ASSURE_LOCK_KEY, assureUnlocked ? '1' : '0');
+    updateAssureLockUI();
   });
 
-  // J&J Bank Statements Index Builder
-  (function(){
-    const BASE = "jandjstatements";
-    const encPath = (p) => p.split("/").map(seg => encodeURIComponent(seg)).join("/");
-    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-    
-    function monthLabelFromFilename(file){
-      const m = String(file).match(/^(\d{6})/);
-      if(!m) return "Statement";
-      const mm = Number(m[1].slice(0,2));
-      const yy = Number(m[1].slice(4,6));
-      const year = 2000 + yy;
-      return `${months[mm-1] || "Month"} ${year}`;
+  // AssureCall statement groups
+  const BASE_ASSURE = "assurecall-docs";
+  const encPath = (p) => p.split("/").map(seg => encodeURIComponent(seg)).join("/");
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  
+  const monthLabel = (file) => {
+    const m = String(file).match(/^(\d{6})/);
+    if (!m) return file.replace(/\.(pdf|PDF)$/i, '');
+    const mm = Number(m[1].slice(0,2));
+    const yy = Number(m[1].slice(4,6));
+    return `${months[mm-1] || "Month"} ${2000 + yy}`;
+  };
+
+  const assureGroups = [
+    {
+      bank: "Wells Fargo",
+      acct: "Operating",
+      folder: "wells operating",
+      files: [
+        "123124 WellsFargo.pdf","013125 WellsFargo.pdf","022825 WellsFargo.pdf",
+        "033125 WellsFargo.pdf","043025 WellsFargo.pdf","053125 WellsFargo.pdf",
+        "063025 WellsFargo.pdf","073125 WellsFargo.pdf","083125 WellsFargo.pdf",
+        "093025 WellsFargo.pdf","103125 WellsFargo.pdf","113025 WellsFargo.pdf",
+        "123125 WellsFargo.pdf"
+      ]
+    },
+    {
+      bank: "Wells Fargo",
+      acct: "Savings",
+      folder: "wells savings",
+      files: [
+        "123124 WellsFargo_Savings.pdf","013125 WellsFargo_Savings.pdf","022825 WellsFargo_Savings.pdf",
+        "033125 WellsFargo_Savings.pdf","043025 WellsFargo_Savings.pdf","053125 WellsFargo_Savings.pdf",
+        "063025 WellsFargo_Savings.pdf","073125 WellsFargo_Savings.pdf","083125 WellsFargo_Savings.pdf",
+        "093025 WellsFargo_Savings.pdf","103125 WellsFargo_Savings.pdf","113025 WellsFargo_Savings.pdf",
+        "123125 WellsFargo_Savings.pdf"
+      ]
+    },
+    {
+      bank: "Capital One",
+      acct: "Business",
+      folder: "capital one business",
+      files: [
+        "2025-01 CapitalOne_Business.pdf","2025-02 CapitalOne_Business.pdf","2025-03 CapitalOne_Business.pdf",
+        "2025-04 CapitalOne_Business.pdf","2025-05 CapitalOne_Business.pdf","2025-06 CapitalOne_Business.pdf",
+        "2025-07 CapitalOne_Business.pdf","2025-08 CapitalOne_Business.pdf","2025-09 CapitalOne_Business.pdf",
+        "2025-10 CapitalOne_Business.pdf","2025-11 CapitalOne_Business.pdf","2025-12 CapitalOne_Business.pdf"
+      ]
+    },
+    {
+      bank: "Capital One",
+      acct: "360 Personal",
+      folder: "capital one 360",
+      files: [
+        "2025-01 CapitalOne360.pdf","2025-02 CapitalOne360.pdf",
+        "2025-03 CapitalOne360.pdf","2025-04 CapitalOne360.pdf"
+      ]
+    },
+    {
+      bank: "PayPal",
+      acct: "Merchant",
+      folder: "paypal",
+      files: [
+        "2025-05 PayPal.pdf","2025-06 PayPal.pdf","2025-07 PayPal.pdf",
+        "2025-08 PayPal.pdf","2025-09 PayPal.pdf"
+      ]
     }
+  ];
 
-    const groups = [
-      {
-        bank: "Capital One",
-        acct: "Operating (…0489)",
-        folder: "CAP OPERATING",
-        files: ["J_and_J_Operating...0489_DEC_2025 (3).pdf"]
-      },
-      {
-        bank: "Capital One",
-        acct: "Savings (…7312)",
-        folder: "cap savings",
-        files: ["J_and_J_Savings...7312_DEC_2025 (1).pdf"]
-      },
-      {
-        bank: "Wells Fargo",
-        acct: "Operating",
-        folder: "wells  operating",
-        files: [
-          "123124 WellsFargo.pdf", "013125 WellsFargo.pdf", "022825 WellsFargo.pdf",
-          "033125 WellsFargo.pdf", "043025 WellsFargo.pdf", "053125 WellsFargo.pdf",
-          "063025 WellsFargo.pdf", "073125 WellsFargo.pdf", "083125 WellsFargo.pdf",
-          "093025 WellsFargo.pdf", "103125 WellsFargo.pdf", "113025 WellsFargo.pdf",
-          "123125 WellsFargo.pdf"
-        ]
-      },
-      {
-        bank: "Wells Fargo",
-        acct: "Savings",
-        folder: "wells savings",
-        files: [
-          "123124 WellsFargo (1).pdf", "013125 WellsFargo.pdf", "022825 WellsFargo.pdf",
-          "033125 WellsFargo.pdf", "043025 WellsFargo.pdf", "053125 WellsFargo.pdf",
-          "063025 WellsFargo.pdf", "073125 WellsFargo.pdf", "083125 WellsFargo.pdf",
-          "093025 WellsFargo.pdf", "103125 WellsFargo.pdf", "113025 WellsFargo.pdf",
-          "123125 WellsFargo.pdf"
-        ]
-      }
-    ];
+  const totalAssure = assureGroups.reduce((sum,g) => sum + g.files.length, 0);
+  if (assureMeta) assureMeta.textContent = `${assureGroups.length} accounts • ${totalAssure} PDFs`;
 
-    const mount = document.getElementById("stmtIndex");
-    const searchEl = document.getElementById("stmtSearch");
-    const metaPill = document.getElementById("stmtMetaPill");
-    if(!mount) return;
+  function renderAssureIndex(filter = "") {
+    if (!assureMount) return;
+    const q = filter.trim().toLowerCase();
 
-    const totalFiles = groups.reduce((sum,g)=>sum + g.files.length, 0);
-    if(metaPill) metaPill.textContent = `${groups.length} groups • ${totalFiles} PDFs`;
+    assureMount.innerHTML = assureGroups.map((g, idx) => {
+      const safeFolder = encPath(`${BASE_ASSURE}/${g.folder}`);
+      const rows = g.files.map(file => {
+        const href = `${safeFolder}/${encodeURIComponent(file)}`;
+        const label = monthLabel(file);
+        const hay = `${g.bank} ${g.acct} ${g.folder} ${file} ${label}`.toLowerCase();
+        return { file, href, label, visible: !q || hay.includes(q) };
+      }).filter(x => x.visible);
 
-    function render(filter=""){
-      const q = filter.trim().toLowerCase();
+      if (q && rows.length === 0) return "";
 
-      mount.innerHTML = groups.map((g, idx) => {
-        const safeFolder = encPath(`${BASE}/${g.folder}`);
-        const rows = g.files
-          .map(file => {
-            const href = `${safeFolder}/${encodeURIComponent(file)}`;
-            const label = monthLabelFromFilename(file);
-            const hay = `${g.bank} ${g.acct} ${g.folder} ${file} ${label}`.toLowerCase();
-            const visible = !q || hay.includes(q);
-            return { file, href, label, visible };
-          })
-          .filter(x => x.visible);
-
-        if(q && rows.length === 0) return "";
-
-        const count = rows.length;
-        const htmlRows = rows.map(x => `
-          <a class="stmt-row" href="${x.href}" target="_blank" rel="noopener">
-            <div class="stmt-left">
-              <div class="stmt-name">${x.label}</div>
-              <div class="stmt-meta">${x.file}</div>
-            </div>
-            <div class="stmt-open">Open PDF ↗</div>
-          </a>
-        `).join("");
-
-        const openDefault = (!q && idx < 2) ? "open" : (q ? "open" : "");
-
-        return `
-          <details class="stmt-group" ${openDefault}>
-            <summary>
-              <div class="stmt-group-title">
-                <strong>${g.bank}</strong>
-                <span>${g.acct} • ${g.folder}</span>
+      const htmlRows = rows.map(x => {
+        if (assureUnlocked) {
+          return `
+            <a class="stmt-row" href="${x.href}" target="_blank" rel="noopener">
+              <div class="stmt-left">
+                <div class="stmt-name">${x.label}</div>
+                <div class="stmt-meta">${x.file}</div>
               </div>
-              <div class="stmt-count">${count} PDF${count===1?"":"s"}</div>
-            </summary>
-            <div class="stmt-list">${htmlRows}</div>
-          </details>
-        `;
-      }).join("") || `
-        <div class="tiny-note" style="opacity:.85; padding: 10px 2px;">
-          No statements match your search.
-        </div>
-      `;
-    }
+              <div class="stmt-open">Open PDF ↗</div>
+            </a>
+          `;
+        } else {
+          return `
+            <div class="stmt-row" style="opacity:0.6; cursor:not-allowed; pointer-events:none;">
+              <div class="stmt-left">
+                <div class="stmt-name">${x.label}</div>
+                <div class="stmt-meta">${x.file}</div>
+              </div>
+              <div class="stmt-open" style="opacity:0.5;">🔒 Locked</div>
+            </div>
+          `;
+        }
+      }).join("");
 
-    render("");
-    if(searchEl) searchEl.addEventListener("input", (e) => render(e.target.value));
-  })();
+      const openDefault = (!q && idx < 2) ? "open" : (q ? "open" : "");
+
+      return `
+        <details class="stmt-group" ${openDefault}>
+          <summary>
+            <div class="stmt-group-title">
+              <strong>${g.bank}</strong>
+              <span>${g.acct} • ${g.folder}</span>
+            </div>
+            <div class="stmt-count">${rows.length} PDF${rows.length===1?"":"s"}</div>
+          </summary>
+          <div class="stmt-list">${htmlRows}</div>
+        </details>
+      `;
+    }).join("") || `<div class="tiny-note" style="padding:10px 2px;">No statements match your search.</div>`;
+  }
+
+  renderAssureIndex();
+  updateAssureLockUI();
+  assureSearch?.addEventListener("input", (e) => renderAssureIndex(e.target.value));
+
+  /* ============================================================
+     J&J — BANK STATEMENTS INDEX BUILDER
+  ============================================================ */
+  const jjMount = document.getElementById("stmtIndex");
+  const jjSearch = document.getElementById("stmtSearch");
+  const jjMeta = document.getElementById("stmtMetaPill");
+
+  const BASE_JJ = "jandjstatements";
+
+  const jjGroups = [
+    {
+      bank: "Capital One",
+      acct: "Operating (…0489)",
+      folder: "CAP OPERATING",
+      files: ["J_and_J_Operating...0489_DEC_2025 (3).pdf"]
+    },
+    {
+      bank: "Capital One",
+      acct: "Savings (…7312)",
+      folder: "cap savings",
+      files: ["J_and_J_Savings...7312_DEC_2025 (1).pdf"]
+    },
+    {
+      bank: "Wells Fargo",
+      acct: "Operating",
+      folder: "wells  operating",
+      files: [
+        "123124 WellsFargo.pdf","013125 WellsFargo.pdf","022825 WellsFargo.pdf",
+        "033125 WellsFargo.pdf","043025 WellsFargo.pdf","053125 WellsFargo.pdf",
+        "063025 WellsFargo.pdf","073125 WellsFargo.pdf","083125 WellsFargo.pdf",
+        "093025 WellsFargo.pdf","103125 WellsFargo.pdf","113025 WellsFargo.pdf",
+        "123125 WellsFargo.pdf"
+      ]
+    },
+    {
+      bank: "Wells Fargo",
+      acct: "Savings",
+      folder: "wells savings",
+      files: [
+        "123124 WellsFargo (1).pdf","013125 WellsFargo.pdf","022825 WellsFargo.pdf",
+        "033125 WellsFargo.pdf","043025 WellsFargo.pdf","053125 WellsFargo.pdf",
+        "063025 WellsFargo.pdf","073125 WellsFargo.pdf","083125 WellsFargo.pdf",
+        "093025 WellsFargo.pdf","103125 WellsFargo.pdf","113025 WellsFargo.pdf",
+        "123125 WellsFargo.pdf"
+      ]
+    }
+  ];
+
+  const totalJJ = jjGroups.reduce((sum,g) => sum + g.files.length, 0);
+  if (jjMeta) jjMeta.textContent = `${jjGroups.length} groups • ${totalJJ} PDFs`;
+
+  function renderJJIndex(filter = "") {
+    if (!jjMount) return;
+    const q = filter.trim().toLowerCase();
+
+    jjMount.innerHTML = jjGroups.map((g, idx) => {
+      const safeFolder = encPath(`${BASE_JJ}/${g.folder}`);
+      const rows = g.files.map(file => {
+        const href = `${safeFolder}/${encodeURIComponent(file)}`;
+        const label = monthLabel(file);
+        const hay = `${g.bank} ${g.acct} ${g.folder} ${file} ${label}`.toLowerCase();
+        return { file, href, label, visible: !q || hay.includes(q) };
+      }).filter(x => x.visible);
+
+      if (q && rows.length === 0) return "";
+
+      const htmlRows = rows.map(x => `
+        <a class="stmt-row" href="${x.href}" target="_blank" rel="noopener">
+          <div class="stmt-left">
+            <div class="stmt-name">${x.label}</div>
+            <div class="stmt-meta">${x.file}</div>
+          </div>
+          <div class="stmt-open">Open PDF ↗</div>
+        </a>
+      `).join("");
+
+      const openDefault = (!q && idx < 2) ? "open" : (q ? "open" : "");
+
+      return `
+        <details class="stmt-group" ${openDefault}>
+          <summary>
+            <div class="stmt-group-title">
+              <strong>${g.bank}</strong>
+              <span>${g.acct} • ${g.folder}</span>
+            </div>
+            <div class="stmt-count">${rows.length} PDF${rows.length===1?"":"s"}</div>
+          </summary>
+          <div class="stmt-list">${htmlRows}</div>
+        </details>
+      `;
+    }).join("") || `<div class="tiny-note" style="padding:10px 2px;">No statements match your search.</div>`;
+  }
+
+  renderJJIndex();
+  jjSearch?.addEventListener("input", (e) => renderJJIndex(e.target.value));
 })();
 </script>
 </body>
