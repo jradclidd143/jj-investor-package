@@ -1936,11 +1936,31 @@ outline-offset: 2px;
 }
 
 #roofing-appointments .panel,
-#roofing-appointments .chart-card,
+#roofing-appointments .chart-card{
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Allow text wrapping in Roofing table */
 #roofing-appointments .uf-table{
   min-width: 0;
   max-width: 100%;
-  overflow: hidden;
+}
+
+#roofing-appointments .uf-amt{
+  white-space: normal;
+  word-wrap: break-word;
+  text-align: right;
+}
+
+#roofing-appointments .uf-left{
+  min-width: 0;
+}
+
+#roofing-appointments .uf-name,
+#roofing-appointments .uf-sub{
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 /* Only collapse on truly mobile screens */
