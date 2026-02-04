@@ -3648,65 +3648,163 @@ body.stmts-unlocked .acct-card.locked .stmt{
   </div>
 </article>
 
-  <!-- ROW 2: Payment strategy (LEFT) + Waterfall/metrics (RIGHT) -->
-  <div class="grid-2" style="margin-top:18px;">
-    <article class="panel">
-      <div class="panel-head">
-        <h3>Payment Strategy (8% Interest + 5% Principal)</h3>
-        <span class="panel-tag">Paid Monthly</span>
-      </div>
+<!-- ROW 2: Payment strategy (LEFT) + Waterfall/metrics (RIGHT) -->
+<div class="grid-2" style="margin-top:18px;">
+  <!-- LEFT: Payment Strategy -->
+  <article class="panel">
+    <div class="panel-head">
+      <h3>Payment Strategy (8% Interest + 5% Principal)</h3>
+      <span class="panel-tag">Paid Monthly</span>
+    </div>
 
-      <div class="uf-table" style="margin-top:12px;">
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Total Facility / Principal</div><div class="uf-sub">Requested commitment</div></div><div class="uf-amt">$1,050,000.00</div></div>
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Interest Rate</div><div class="uf-sub">8% annual (fixed) charged on outstanding balance</div></div><div class="uf-amt">8% / year</div></div>
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Principal Curtailment</div><div class="uf-sub">5% annual (fixed) based on original principal, paid monthly</div></div><div class="uf-amt">5% / year</div></div>
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Monthly Principal Payment (Fixed)</div><div class="uf-sub">(5% ÷ 12) × $1,050,000</div></div><div class="uf-amt">$4,375.00</div></div>
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Month 1 Interest Example</div><div class="uf-sub">(8% ÷ 12) × $1,050,000</div></div><div class="uf-amt">$7,000.00</div></div>
-        <div class="uf-row total"><div class="uf-left"><div class="uf-name">Month 1 Total Payment (Example)</div><div class="uf-sub">Interest + fixed principal</div></div><div class="uf-amt">$11,375.00</div></div>
-      </div>
-
-      <div class="callout" style="margin-top:14px;">
-        <div class="callout-title">Key Behavior</div>
-        <div class="callout-body">
-          The <strong>principal payment stays fixed</strong> at $4,375/mo (5% of original paid monthly), while
-          <strong>interest declines</strong> over time as the outstanding balance decreases.
+    <div style="margin-top:16px; display:grid; gap:14px;">
+      <!-- Total Facility -->
+      <div style="padding:14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.10);">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+          <div>
+            <div style="font-weight:800; color:var(--t1); font-size:13px;">Total Facility / Principal</div>
+            <div style="color:var(--t4); font-size:11.5px; margin-top:3px;">Requested commitment</div>
+          </div>
+          <div style="font-weight:900; color:var(--t1); font-size:18px; white-space:nowrap;">$1,050,000.00</div>
         </div>
       </div>
-    </article>
 
-    <article class="panel">
-      <div class="panel-head">
-        <h3>Payment Waterfall (Contribution Sources)</h3>
-        <span class="panel-tag">Sources</span>
+      <!-- Interest Rate -->
+      <div style="padding:14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.10);">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+          <div>
+            <div style="font-weight:800; color:var(--t1); font-size:13px;">Interest Rate</div>
+            <div style="color:var(--t4); font-size:11.5px; margin-top:3px;">8% annual (fixed) charged on outstanding balance</div>
+          </div>
+          <div style="font-weight:900; color:var(--t1); font-size:18px; white-space:nowrap;">8% / year</div>
+        </div>
       </div>
 
-      <div class="chart-card" style="margin-top:12px;">
-        <div class="chart-sub">
+      <!-- Principal Curtailment -->
+      <div style="padding:14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.10);">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+          <div>
+            <div style="font-weight:800; color:var(--t1); font-size:13px;">Principal Curtailment</div>
+            <div style="color:var(--t4); font-size:11.5px; margin-top:3px;">5% annual (fixed) based on original principal, paid monthly</div>
+          </div>
+          <div style="font-weight:900; color:var(--t1); font-size:18px; white-space:nowrap;">5% / year</div>
+        </div>
+      </div>
+
+      <!-- Monthly Principal Payment -->
+      <div style="padding:14px; border-radius:14px; background:rgba(59,130,255,0.06); border:1px solid rgba(59,130,255,0.20);">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+          <div>
+            <div style="font-weight:800; color:var(--t1); font-size:13px;">Monthly Principal Payment (Fixed)</div>
+            <div style="color:var(--t4); font-size:11.5px; margin-top:3px;">(5% ÷ 12) × $1,050,000</div>
+          </div>
+          <div style="font-weight:900; color:var(--t1); font-size:18px; white-space:nowrap;">$4,375.00</div>
+        </div>
+      </div>
+
+      <!-- Month 1 Interest Example -->
+      <div style="padding:14px; border-radius:14px; background:rgba(212,175,94,0.06); border:1px solid rgba(212,175,94,0.20);">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+          <div>
+            <div style="font-weight:800; color:var(--t1); font-size:13px;">Month 1 Interest Example</div>
+            <div style="color:var(--t4); font-size:11.5px; margin-top:3px;">(8% ÷ 12) × $1,050,000</div>
+          </div>
+          <div style="font-weight:900; color:var(--t1); font-size:18px; white-space:nowrap;">$7,000.00</div>
+        </div>
+      </div>
+
+      <!-- Month 1 Total Payment -->
+      <div style="padding:16px; border-radius:14px; background:linear-gradient(135deg, rgba(59,130,255,0.12), rgba(212,175,94,0.12)); border:1px solid rgba(212,175,94,0.30);">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+          <div>
+            <div style="font-weight:900; color:var(--t1); font-size:14px;">Month 1 Total Payment (Example)</div>
+            <div style="color:var(--t3); font-size:11.5px; margin-top:3px;">Interest + fixed principal</div>
+          </div>
+          <div style="font-weight:900; color:var(--t1); font-size:20px; white-space:nowrap;">$11,375.00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      <div class="callout-title">Key Behavior</div>
+      <div class="callout-body">
+        The <strong>principal payment stays fixed</strong> at $4,375/mo (5% of original paid monthly), while
+        <strong>interest declines</strong> over time as the outstanding balance decreases.
+      </div>
+    </div>
+  </article>
+
+  <!-- RIGHT: Payment Waterfall -->
+  <article class="panel">
+    <div class="panel-head">
+      <h3>Payment Waterfall (Contribution Sources)</h3>
+      <span class="panel-tag">Sources</span>
+    </div>
+
+    <div style="margin-top:16px;">
+      <div class="callout" style="margin-bottom:16px;">
+        <div class="callout-body">
           <strong>J&amp;J Investments</strong> makes all loan payments directly to the lender. Payment sources include property rental income
           and monthly contributions from AssureCall LLC and Roofing Appointments LLC to assist with debt service.
         </div>
+      </div>
 
-        <div class="uf-table" style="margin-top:12px;">
-          <div class="uf-row"><div class="uf-left"><div class="uf-name">Gross Rents (2 properties)</div><div class="uf-sub">Property cashflow → J&amp;J</div></div><div class="uf-amt">$5,370.00 / mo</div></div>
-          <div class="uf-row"><div class="uf-left"><div class="uf-name">Roofing Appointments Contribution</div><div class="uf-sub">Monthly payment to J&amp;J (15th of each month)</div></div><div class="uf-amt">$2,075.00 / mo</div></div>
-          <div class="uf-row total"><div class="uf-left"><div class="uf-name">AssureCall Contribution (Remainder)</div><div class="uf-sub">Monthly payment to J&amp;J for debt service (Month 1 example)</div></div><div class="uf-amt">$3,930.00 / mo*</div></div>
+      <div style="display:grid; gap:12px;">
+        <!-- Gross Rents -->
+        <div style="padding:14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.10);">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+            <div>
+              <div style="font-weight:800; color:var(--t1); font-size:13px;">Gross Rents (2 properties)</div>
+              <div style="color:var(--t4); font-size:11.5px; margin-top:3px;">Property cashflow → J&amp;J</div>
+            </div>
+            <div style="font-weight:900; color:var(--t1); font-size:17px; white-space:nowrap;">$5,370.00 / mo</div>
+          </div>
         </div>
 
-        <div class="tiny-note">
-          *Remainder example: $11,375.00 total payment − ($5,370.00 rents + $2,075.00 Roofing) = $3,930.00.
-          <strong>J&amp;J Investments consolidates all sources and makes the monthly payment to the lender.</strong>
-          If additional principal is paid or draws change (Option A), the total payment adjusts accordingly.
+        <!-- Roofing Appointments -->
+        <div style="padding:14px; border-radius:14px; background:rgba(224,69,69,0.06); border:1px solid rgba(224,69,69,0.18);">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+            <div>
+              <div style="font-weight:800; color:var(--t1); font-size:13px;">Roofing Appointments Contribution</div>
+              <div style="color:var(--t4); font-size:11.5px; margin-top:3px;">Monthly payment to J&amp;J (15th of each month)</div>
+            </div>
+            <div style="font-weight:900; color:var(--t1); font-size:17px; white-space:nowrap;">$2,075.00 / mo</div>
+          </div>
+        </div>
+
+        <!-- AssureCall Contribution -->
+        <div style="padding:16px; border-radius:14px; background:linear-gradient(135deg, rgba(59,130,255,0.10), rgba(255,255,255,0.03)); border:1px solid rgba(59,130,255,0.24);">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+            <div>
+              <div style="font-weight:900; color:var(--t1); font-size:14px;">AssureCall Contribution (Remainder)</div>
+              <div style="color:var(--t3); font-size:11.5px; margin-top:3px;">Monthly payment to J&amp;J for debt service (Month 1 example)</div>
+            </div>
+            <div style="font-weight:900; color:var(--t1); font-size:18px; white-space:nowrap;">$3,930.00 / mo*</div>
+          </div>
         </div>
       </div>
 
-      <div class="metric" style="margin-top:14px;">
-        <div class="label">Estimated Payoff Horizon (If only fixed principal is paid)</div>
-        <div class="value">240 months (≈ 20 years)</div>
-        <div class="sub">Based on fixed principal curtailment: $1,050,000 ÷ $4,375/month = 240 months. Interest declines as balance declines.</div>
+      <div class="tiny-note" style="margin-top:12px;">
+        *Remainder example: $11,375.00 total payment − ($5,370.00 rents + $2,075.00 Roofing) = $3,930.00.
+        <strong>J&amp;J Investments consolidates all sources and makes the monthly payment to the lender.</strong>
+        If additional principal is paid or draws change (Option A), the total payment adjusts accordingly.
       </div>
-    </article>
-  </div>
-</section>
+    </div>
+
+    <!-- Payoff Horizon Metric -->
+    <div style="margin-top:18px; padding:16px; border-radius:16px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.03);">
+      <div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--t4); font-weight:700; margin-bottom:8px;">
+        ESTIMATED PAYOFF HORIZON
+      </div>
+      <div style="font-size:22px; font-weight:900; color:var(--t1); margin-bottom:6px;">
+        240 months (≈ 20 years)
+      </div>
+      <div style="color:var(--t3); font-size:12px; line-height:1.5;">
+        Based on fixed principal curtailment: $1,050,000 ÷ $4,375/month = 240 months. Interest declines as balance declines.
+      </div>
+    </div>
+  </article>
+</div>
 
 <!-- =========================================================
         Funding Structure
