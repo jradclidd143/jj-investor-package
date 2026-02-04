@@ -1183,6 +1183,323 @@ font-size: 12px;
   background: rgba(255,255,255,.03);
 }     
 
+ /* =========================================================
+   Appendix Statements Index (no overflow / no bleed)
+========================================================= */
+.stmt-index,
+.stmt-group,
+.stmt-row,
+.stmt-left,
+.stmt-name { min-width:0; }
+
+.stmt-group{
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(10,14,24,.55);
+  margin-bottom: 12px;
+}
+
+.stmt-group summary{
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+  user-select:none;
+}
+.stmt-group summary::-webkit-details-marker{ display:none; }
+
+.stmt-group .stmt-group-title{
+  display:flex;
+  flex-direction:column;
+  gap: 2px;
+  min-width:0;
+}
+.stmt-group .stmt-group-title strong{
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+.stmt-group .stmt-group-title span{
+  opacity:.8;
+  font-size: .9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stmt-count{
+  flex: 0 0 auto;
+  font-size: .85rem;
+  opacity:.85;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+}
+
+.stmt-list{
+  padding: 6px 8px 10px;
+}
+
+.stmt-row{
+  display:grid;
+  grid-template-columns: minmax(0,1fr) 120px;
+  gap: 10px;
+  align-items:center;
+  padding: 10px 10px;
+  border-radius: 12px;
+  text-decoration:none;
+  color: inherit;
+}
+.stmt-row:hover{
+  background: rgba(255,255,255,.04);
+}
+
+.stmt-left{
+  display:flex;
+  flex-direction:column;
+  gap: 2px;
+  overflow:hidden;
+}
+.stmt-name{
+  font-weight: 800;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+.stmt-meta{
+  opacity:.78;
+  font-size:.9rem;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+
+.stmt-open{
+  justify-self:end;
+  white-space: nowrap;
+  font-size:.9rem;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+}    
+
+ /* =========================================================
+   J&J Branded Strip (Appendix header block)
+========================================================= */
+.jj-strip{
+  margin-top: 12px;
+  border-radius: 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background:
+    radial-gradient(900px 160px at 20% 0%, rgba(255,215,130,.10), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+}
+
+.jj-strip-left{ display:flex; align-items:center; gap: 12px; min-width:0; }
+
+.jj-mark{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 900;
+  letter-spacing: .6px;
+  border: 1px solid rgba(255,215,130,.28);
+  background: rgba(255,215,130,.10);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  flex: 0 0 auto;
+}
+
+.jj-strip-text{ min-width:0; }
+.jj-strip-title{ font-weight: 900; letter-spacing: .2px; }
+.jj-strip-sub{
+  opacity:.80;
+  font-size: .92rem;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+
+.jj-strip-badges{ display:flex; gap: 8px; flex-wrap: wrap; justify-content:flex-end; }
+.jj-pill{
+  font-size: .78rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  white-space: nowrap;
+}
+.jj-pill.gold{
+  border-color: rgba(255,215,130,.35);
+  background: rgba(255,215,130,.10);
+}
+
+/* =========================================================
+   Statement tools (search + count pill)
+========================================================= */
+.stmt-tools{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+.stmt-search{
+  flex: 1 1 auto;
+  min-width: 0;
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+}
+.stmt-search input{
+  width: 100%;
+  min-width:0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: inherit;
+  font: inherit;
+}
+.stmt-icon{ opacity:.75; flex:0 0 auto; }
+
+.stmt-meta-pill{
+  flex: 0 0 auto;
+  font-size: .85rem;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,215,130,.28);
+  background: rgba(255,215,130,.08);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   Statement Index (Branded, no overflow / no bleed)
+========================================================= */
+.stmt-index,
+.stmt-group,
+.stmt-row,
+.stmt-left,
+.stmt-name { min-width:0; }
+
+.stmt-group{
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(10,14,24,.55);
+  margin-bottom: 12px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.18);
+}
+
+.stmt-group summary{
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+  user-select:none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+}
+.stmt-group summary::-webkit-details-marker{ display:none; }
+
+.stmt-group .stmt-group-title{
+  display:flex;
+  flex-direction:column;
+  gap: 2px;
+  min-width:0;
+}
+.stmt-group .stmt-group-title strong{
+  font-weight: 900;
+  letter-spacing: .2px;
+}
+.stmt-group .stmt-group-title span{
+  opacity:.82;
+  font-size: .9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stmt-count{
+  flex: 0 0 auto;
+  font-size: .82rem;
+  opacity:.90;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+}
+
+.stmt-list{ padding: 6px 8px 10px; }
+
+.stmt-row{
+  display:grid;
+  grid-template-columns: minmax(0,1fr) 132px;
+  gap: 10px;
+  align-items:center;
+  padding: 10px 10px;
+  border-radius: 14px;
+  text-decoration:none;
+  color: inherit;
+}
+.stmt-row:hover{ background: rgba(255,215,130,.06); }
+
+.stmt-left{
+  display:flex;
+  flex-direction:column;
+  gap: 2px;
+  overflow:hidden;
+}
+.stmt-name{
+  font-weight: 900;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+.stmt-meta{
+  opacity:.78;
+  font-size:.9rem;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+
+.stmt-open{
+  justify-self:end;
+  white-space: nowrap;
+  font-size:.88rem;
+  padding: 8px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,215,130,.24);
+  background: rgba(255,215,130,.08);
+}
+
+/* Mobile: prevent tight squeeze */
+@media (max-width: 560px){
+  .stmt-row{ grid-template-columns: minmax(0,1fr); }
+  .stmt-open{ justify-self:start; width: fit-content; }
+  .stmt-tools{ flex-direction:column; align-items:stretch; }
+  .stmt-meta-pill{ align-self:flex-start; }
+}     
+
 /* ============================================================
       SIDE NAVIGATION
       ============================================================ */
@@ -1580,7 +1897,77 @@ outline-offset: 2px;
 @media (max-width: 1100px){
   #jj-funding-strategy .usefunds-wrap{ grid-template-columns: 1fr; }
 }     
+      
+/* =========================================================
+   FIX: J&J Funding layout + prevent right-side bleed
+========================================================= */
+#jj-funding-strategy .grid-2{
+  display:grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 18px;
+  align-items:start;
+}
 
+/* Make sure grid children can shrink (prevents overflow) */
+#jj-funding-strategy .panel,
+#jj-funding-strategy .chart-card,
+#jj-funding-strategy .alloc-grid,
+#jj-funding-strategy .alloc-legend,
+#jj-funding-strategy .alloc-legend-row,
+#jj-funding-strategy .alloc-left,
+#jj-funding-strategy .alloc-name{
+  min-width: 0;
+}
+
+#jj-funding-strategy .panel,
+#jj-funding-strategy .chart-card{
+  max-width: 100%;
+  overflow: hidden; /* critical: stops the “bleed off to the right” */
+}
+
+/* Donut + legend layout inside the chart card */
+#jj-funding-strategy .alloc-grid{
+  display:grid;
+  grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
+  gap: 16px;
+  align-items:start;
+}
+
+/* Legend rows: name | pct | amount */
+#jj-funding-strategy .alloc-legend-row{
+  display:grid;
+  grid-template-columns: minmax(0,1fr) 76px 140px;
+  gap: 10px;
+  align-items:center;
+}
+
+/* Keep text from pushing the row wider than the container */
+#jj-funding-strategy .alloc-left{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  overflow:hidden;
+}
+
+#jj-funding-strategy .alloc-name{
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#jj-funding-strategy .alloc-pct,
+#jj-funding-strategy .alloc-amt{
+  justify-self:end;
+  white-space: nowrap;
+}
+
+/* Responsive stack */
+@media (max-width: 980px){
+  #jj-funding-strategy .grid-2{ grid-template-columns: 1fr; }
+  #jj-funding-strategy .alloc-grid{ grid-template-columns: 1fr; }
+  #jj-funding-strategy .alloc-legend-row{ grid-template-columns: minmax(0,1fr) 72px 128px; }
+}
+      
 /* ============================================================
       RESPONSIVE BREAKPOINTS
       ============================================================ */
@@ -3016,7 +3403,7 @@ body.stmts-unlocked .acct-card.locked .stmt{
 
 
 <!-- =========================================================
-     J&J — Funding Request & Repayment Strategy
+     J&J — Funding Request & Repayment Strategy (LAYOUT FIXED)
 ========================================================== -->
 <section class="section" id="jj-funding-strategy" data-nav="J&amp;J Funding &amp; Repayment">
   <div class="section-head">
@@ -3028,9 +3415,10 @@ body.stmts-unlocked .acct-card.locked .stmt{
     </p>
   </div>
 
+  <!-- ROW 1: Allocation list (LEFT) + Donut/Legend (RIGHT) -->
   <div class="grid-2">
-    <!-- LEFT: Funding request + allocation + chart -->
-    <div class="panel" id="jjFundingLeft">
+    <!-- LEFT: Allocation detail -->
+    <article class="panel">
       <div class="panel-head">
         <h3>Requested Commitment + Allocation Detail</h3>
         <span class="panel-tag gold">Total Requested: $1,050,000.00</span>
@@ -3106,16 +3494,21 @@ body.stmts-unlocked .acct-card.locked .stmt{
         Growth capital allocations above (AssureCall + Roofing Appointments) are designed to increase revenue velocity and strengthen
         monthly debt-service reliability through expanded capacity and consistent lead flow.
       </div>
+    </article>
 
-      <!-- Allocation Chart -->
-      <div class="chart-card alloc-card" style="margin-top:14px;">
-        <div class="chart-title">Use of Funds (Requested Commitment)</div>
+    <!-- RIGHT: Donut + Legend (kept separate so it aligns like your “good” screenshot) -->
+    <article class="panel">
+      <div class="panel-head">
+        <h3>Use of Funds (Requested Commitment)</h3>
+        <span class="panel-tag">Allocation Mix</span>
+      </div>
+
+      <div class="chart-card alloc-card" style="margin-top:12px;">
         <div class="chart-sub">Allocation mix across payoff, reserves, and operating growth capital.</div>
 
-        <!-- shrink-safe chart + legend wrapper -->
-        <div class="usefunds-wrap" role="img" aria-label="Use of funds allocation donut and legend">
+        <div class="alloc-grid" role="img" aria-label="Use of funds allocation donut and legend">
           <!-- Donut -->
-          <div class="donut-area">
+          <div class="alloc-donut-wrap">
             <div
               class="alloc-donut"
               aria-hidden="true"
@@ -3130,7 +3523,7 @@ body.stmts-unlocked .acct-card.locked .stmt{
               "
             >
               <div class="alloc-donut-center">
-                <div class="alloc-kicker">TOTAL</div>
+                <div class="alloc-kicker">Total</div>
                 <div class="alloc-total">$1,050,000</div>
                 <div class="alloc-sub">Requested facility</div>
               </div>
@@ -3138,53 +3531,52 @@ body.stmts-unlocked .acct-card.locked .stmt{
             <div class="alloc-mini-note">Share of total requested commitment.</div>
           </div>
 
-          <!-- Legend (bleed-proof rows) -->
-          <div class="usefunds-rows">
-            <div class="row">
-              <span class="dot alloc-dot c-liens"></span>
-              <span class="label">Payoff Existing Liens</span>
-              <span class="val"><span class="pct">75.04%</span>&nbsp;&nbsp;$787,884.07</span>
+          <!-- Legend -->
+          <div class="alloc-legend">
+            <div class="alloc-legend-row">
+              <div class="alloc-left"><span class="alloc-dot c-liens"></span><span class="alloc-name">Payoff Existing Liens</span></div>
+              <div class="alloc-pct">75.04%</div>
+              <div class="alloc-amt">$787,884.07</div>
             </div>
 
-            <div class="row">
-              <span class="dot alloc-dot c-res"></span>
-              <span class="label">Financial Reserves</span>
-              <span class="val"><span class="pct">9.97%</span>&nbsp;&nbsp;$104,636.00</span>
+            <div class="alloc-legend-row">
+              <div class="alloc-left"><span class="alloc-dot c-res"></span><span class="alloc-name">Financial Reserves</span></div>
+              <div class="alloc-pct">9.97%</div>
+              <div class="alloc-amt">$104,636.00</div>
             </div>
 
-            <div class="row">
-              <span class="dot alloc-dot c-assure"></span>
-              <span class="label">AssureCall Growth Capital</span>
-              <span class="val"><span class="pct">8.57%</span>&nbsp;&nbsp;$90,000.00</span>
+            <div class="alloc-legend-row">
+              <div class="alloc-left"><span class="alloc-dot c-assure"></span><span class="alloc-name">AssureCall Growth Capital</span></div>
+              <div class="alloc-pct">8.57%</div>
+              <div class="alloc-amt">$90,000.00</div>
             </div>
 
-            <div class="row">
-              <span class="dot alloc-dot c-roof"></span>
-              <span class="label">Roofing Appointments Growth</span>
-              <span class="val"><span class="pct">2.86%</span>&nbsp;&nbsp;$30,000.00</span>
+            <div class="alloc-legend-row">
+              <div class="alloc-left"><span class="alloc-dot c-roof"></span><span class="alloc-name">Roofing Appointments Growth</span></div>
+              <div class="alloc-pct">2.86%</div>
+              <div class="alloc-amt">$30,000.00</div>
             </div>
 
-            <div class="row">
-              <span class="dot alloc-dot c-bills"></span>
-              <span class="label">Personal Bills Payoff</span>
-              <span class="val"><span class="pct">1.90%</span>&nbsp;&nbsp;$20,000.00</span>
+            <div class="alloc-legend-row">
+              <div class="alloc-left"><span class="alloc-dot c-bills"></span><span class="alloc-name">Personal Bills Payoff</span></div>
+              <div class="alloc-pct">1.90%</div>
+              <div class="alloc-amt">$20,000.00</div>
             </div>
 
-            <div class="row">
-              <span class="dot alloc-dot c-mkt"></span>
-              <span class="label">J&amp;J Marketing</span>
-              <span class="val"><span class="pct">0.95%</span>&nbsp;&nbsp;$10,000.00</span>
+            <div class="alloc-legend-row">
+              <div class="alloc-left"><span class="alloc-dot c-mkt"></span><span class="alloc-name">J&amp;J Marketing</span></div>
+              <div class="alloc-pct">0.95%</div>
+              <div class="alloc-amt">$10,000.00</div>
             </div>
 
-            <div class="row">
-              <span class="dot alloc-dot c-close"></span>
-              <span class="label">Closing / Legal / Buffer</span>
-              <span class="val"><span class="pct">0.71%</span>&nbsp;&nbsp;$7,479.54</span>
+            <div class="alloc-legend-row">
+              <div class="alloc-left"><span class="alloc-dot c-close"></span><span class="alloc-name">Closing / Legal / Buffer</span></div>
+              <div class="alloc-pct">0.71%</div>
+              <div class="alloc-amt">$7,479.54</div>
             </div>
           </div>
         </div>
 
-        <!-- Bottom stacked share bar -->
         <div class="alloc-sharebar" aria-hidden="true">
           <span class="alloc-seg c-liens" style="width:75.04%"></span>
           <span class="alloc-seg c-res" style="width:9.97%"></span>
@@ -3199,63 +3591,24 @@ body.stmts-unlocked .acct-card.locked .stmt{
           Payoff clears title into a clean 1st-position structure; reserves and growth capital strengthen payment stability and operating throughput.
         </div>
       </div>
-    </div>
+    </article>
+  </div>
 
-    <!-- RIGHT: Payment strategy -->
-    <div class="panel" id="jjFundingRight">
+  <!-- ROW 2: Payment strategy (LEFT) + Waterfall/metrics (RIGHT) -->
+  <div class="grid-2" style="margin-top:18px;">
+    <article class="panel">
       <div class="panel-head">
         <h3>Payment Strategy (8% Interest + 5% Principal)</h3>
         <span class="panel-tag">Paid Monthly</span>
       </div>
 
       <div class="uf-table" style="margin-top:12px;">
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Total Facility / Principal</div>
-            <div class="uf-sub">Requested commitment</div>
-          </div>
-          <div class="uf-amt">$1,050,000.00</div>
-        </div>
-
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Interest Rate</div>
-            <div class="uf-sub">8% annual (fixed) charged on outstanding balance</div>
-          </div>
-          <div class="uf-amt">8% / year</div>
-        </div>
-
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Principal Curtailment</div>
-            <div class="uf-sub">5% annual (fixed) based on original principal, paid monthly</div>
-          </div>
-          <div class="uf-amt">5% / year</div>
-        </div>
-
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Monthly Principal Payment (Fixed)</div>
-            <div class="uf-sub">(5% ÷ 12) × $1,050,000</div>
-          </div>
-          <div class="uf-amt">$4,375.00</div>
-        </div>
-
-        <div class="uf-row">
-          <div class="uf-left">
-            <div class="uf-name">Month 1 Interest Example</div>
-            <div class="uf-sub">(8% ÷ 12) × $1,050,000</div>
-          </div>
-          <div class="uf-amt">$7,000.00</div>
-        </div>
-
-        <div class="uf-row total">
-          <div class="uf-left">
-            <div class="uf-name">Month 1 Total Payment (Example)</div>
-            <div class="uf-sub">Interest + fixed principal</div>
-          </div>
-          <div class="uf-amt">$11,375.00</div>
-        </div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Total Facility / Principal</div><div class="uf-sub">Requested commitment</div></div><div class="uf-amt">$1,050,000.00</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Interest Rate</div><div class="uf-sub">8% annual (fixed) charged on outstanding balance</div></div><div class="uf-amt">8% / year</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Principal Curtailment</div><div class="uf-sub">5% annual (fixed) based on original principal, paid monthly</div></div><div class="uf-amt">5% / year</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Monthly Principal Payment (Fixed)</div><div class="uf-sub">(5% ÷ 12) × $1,050,000</div></div><div class="uf-amt">$4,375.00</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Month 1 Interest Example</div><div class="uf-sub">(8% ÷ 12) × $1,050,000</div></div><div class="uf-amt">$7,000.00</div></div>
+        <div class="uf-row total"><div class="uf-left"><div class="uf-name">Month 1 Total Payment (Example)</div><div class="uf-sub">Interest + fixed principal</div></div><div class="uf-amt">$11,375.00</div></div>
       </div>
 
       <div class="callout" style="margin-top:14px;">
@@ -3265,38 +3618,24 @@ body.stmts-unlocked .acct-card.locked .stmt{
           <strong>interest declines</strong> over time as the outstanding balance decreases.
         </div>
       </div>
+    </article>
 
-      <div class="chart-card" style="margin-top:14px;">
-        <div class="chart-title">Payment Waterfall (Contribution Sources)</div>
+    <article class="panel">
+      <div class="panel-head">
+        <h3>Payment Waterfall (Contribution Sources)</h3>
+        <span class="panel-tag">Sources</span>
+      </div>
+
+      <div class="chart-card" style="margin-top:12px;">
         <div class="chart-sub">
           <strong>J&amp;J Investments</strong> makes all loan payments directly to the lender. Payment sources include property rental income
           and monthly contributions from AssureCall LLC and Roofing Appointments LLC to assist with debt service.
         </div>
 
         <div class="uf-table" style="margin-top:12px;">
-          <div class="uf-row">
-            <div class="uf-left">
-              <div class="uf-name">Gross Rents (2 properties)</div>
-              <div class="uf-sub">Property cashflow → J&amp;J</div>
-            </div>
-            <div class="uf-amt">$5,370.00 / mo</div>
-          </div>
-
-          <div class="uf-row">
-            <div class="uf-left">
-              <div class="uf-name">Roofing Appointments Contribution</div>
-              <div class="uf-sub">Monthly payment to J&amp;J (15th of each month)</div>
-            </div>
-            <div class="uf-amt">$2,075.00 / mo</div>
-          </div>
-
-          <div class="uf-row total">
-            <div class="uf-left">
-              <div class="uf-name">AssureCall Contribution (Remainder)</div>
-              <div class="uf-sub">Monthly payment to J&amp;J for debt service (Month 1 example)</div>
-            </div>
-            <div class="uf-amt">$3,930.00 / mo*</div>
-          </div>
+          <div class="uf-row"><div class="uf-left"><div class="uf-name">Gross Rents (2 properties)</div><div class="uf-sub">Property cashflow → J&amp;J</div></div><div class="uf-amt">$5,370.00 / mo</div></div>
+          <div class="uf-row"><div class="uf-left"><div class="uf-name">Roofing Appointments Contribution</div><div class="uf-sub">Monthly payment to J&amp;J (15th of each month)</div></div><div class="uf-amt">$2,075.00 / mo</div></div>
+          <div class="uf-row total"><div class="uf-left"><div class="uf-name">AssureCall Contribution (Remainder)</div><div class="uf-sub">Monthly payment to J&amp;J for debt service (Month 1 example)</div></div><div class="uf-amt">$3,930.00 / mo*</div></div>
         </div>
 
         <div class="tiny-note">
@@ -3309,11 +3648,9 @@ body.stmts-unlocked .acct-card.locked .stmt{
       <div class="metric" style="margin-top:14px;">
         <div class="label">Estimated Payoff Horizon (If only fixed principal is paid)</div>
         <div class="value">240 months (≈ 20 years)</div>
-        <div class="sub">
-          Based on fixed principal curtailment: $1,050,000 ÷ $4,375/month = 240 months. Interest declines as balance declines.
-        </div>
+        <div class="sub">Based on fixed principal curtailment: $1,050,000 ÷ $4,375/month = 240 months. Interest declines as balance declines.</div>
       </div>
-    </div>
+    </article>
   </div>
 </section>
 
@@ -3857,6 +4194,90 @@ body.stmts-unlocked .acct-card.locked .stmt{
 </main>
 
 <script>
+
+      <!-- =========================================================
+     J&J — Appendix: Bank Statements (Branded)
+========================================================= -->
+<section class="section" id="appendix-statements" data-nav="Appendix: Bank Statements">
+  <div class="section-head">
+    <h2>J&amp;J Investments of Florida — Bank Statements Appendix</h2>
+    <p>
+      Official source documents supporting <strong>deposit history</strong>, <strong>operating activity</strong>, and
+      <strong>account reserves</strong>. Select a category below to open statements in a new tab.
+    </p>
+
+    <!-- branded strip -->
+    <div class="jj-strip" role="note" aria-label="J&J document strip">
+      <div class="jj-strip-left">
+        <div class="jj-mark">J&amp;J</div>
+        <div class="jj-strip-text">
+          <div class="jj-strip-title">Source Documents • Bank Statements</div>
+          <div class="jj-strip-sub">J&amp;J Investments of Florida, LLC — Lender Review Package</div>
+        </div>
+      </div>
+      <div class="jj-strip-badges">
+        <span class="jj-pill gold">CONFIDENTIAL</span>
+        <span class="jj-pill">PDF APPENDIX</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- LEFT: Statement Index -->
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Statement Index</h3>
+        <span class="panel-tag gold">J&amp;J • Verified PDFs</span>
+      </div>
+
+      <!-- optional filter row -->
+      <div class="stmt-tools">
+        <div class="stmt-search">
+          <span class="stmt-icon" aria-hidden="true">⌕</span>
+          <input id="stmtSearch" type="search" placeholder="Search: Wells, Capital One, Operating, Savings, Apr 2025..." />
+        </div>
+        <div class="stmt-meta-pill" id="stmtMetaPill">Loading…</div>
+      </div>
+
+      <div id="stmtIndex" class="stmt-index" style="margin-top:12px;"></div>
+
+      <div class="tiny-note" style="margin-top:10px;">
+        Hosted in <code>/jandjstatements</code> (GitHub Pages). Links are encoded for spaces/parentheses to prevent 404 errors.
+      </div>
+    </div>
+
+    <!-- RIGHT: Branded Notes / Controls -->
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Document Notes</h3>
+        <span class="panel-tag">Appendix</span>
+      </div>
+
+      <div class="callout" style="margin-top:12px;">
+        <div class="callout-title">How to Use</div>
+        <div class="callout-body">
+          Expand a bank + account category, then click <strong>Open PDF</strong>. Each file opens in a new tab for review,
+          download, or printing.
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:12px;">
+        <div class="callout-title">Integrity Check</div>
+        <div class="callout-body">
+          If any link fails, confirm the file name (spaces, capitalization, parentheses) matches the repository exactly.
+        </div>
+      </div>
+
+      <div class="metric" style="margin-top:14px;">
+        <div class="label">Borrower</div>
+        <div class="value">J&amp;J Investments of Florida, LLC</div>
+        <div class="sub">Statements are provided as lender-supporting source documents.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      
 /* ============================================================
    ✅ WORKING NAV + ACTIVE HIGHLIGHT + TOPBAR HEIGHT SYNC
    ✅ THEME TOGGLE + BACK TO TOP
@@ -3927,6 +4348,7 @@ body.stmts-unlocked .acct-card.locked .stmt{
     setNavMin(!min);
   });
 
+      
   // Smooth scroll with topbar offset so sections are not hidden
   navList?.addEventListener('click', (e) => {
     const a = e.target.closest('a');
@@ -4012,6 +4434,142 @@ body.stmts-unlocked .acct-card.locked .stmt{
     setStmtUnlocked(!isUnlocked);
   });
 
+(function(){
+  const BASE = "jandjstatements";
+
+  const encPath = (p) => p.split("/").map(seg => encodeURIComponent(seg)).join("/");
+
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function monthLabelFromFilename(file){
+    const m = String(file).match(/^(\d{6})/);
+    if(!m) return "Statement";
+    const mm = Number(m[1].slice(0,2));
+    const yy = Number(m[1].slice(4,6));
+    const year = 2000 + yy;
+    return `${months[mm-1] || "Month"} ${year}`;
+  }
+
+  const groups = [
+    {
+      bank: "Capital One",
+      acct: "Operating (…0489)",
+      folder: "CAP OPERATING",
+      files: ["J_and_J_Operating...0489_DEC_2025 (3).pdf"]
+    },
+    {
+      bank: "Capital One",
+      acct: "Savings (…7312)",
+      folder: "cap savings",
+      files: ["J_and_J_Savings...7312_DEC_2025 (1).pdf"]
+    },
+    {
+      bank: "Wells Fargo",
+      acct: "Operating",
+      folder: "wells  operating",
+      files: [
+        "123124 WellsFargo.pdf",
+        "013125 WellsFargo.pdf",
+        "022825 WellsFargo.pdf",
+        "033125 WellsFargo.pdf",
+        "043025 WellsFargo.pdf",
+        "053125 WellsFargo.pdf",
+        "063025 WellsFargo.pdf",
+        "073125 WellsFargo.pdf",
+        "083125 WellsFargo.pdf",
+        "093025 WellsFargo.pdf",
+        "103125 WellsFargo.pdf",
+        "113025 WellsFargo.pdf",
+        "123125 WellsFargo.pdf"
+      ]
+    },
+    {
+      bank: "Wells Fargo",
+      acct: "Savings",
+      folder: "wells savings",
+      files: [
+        "123124 WellsFargo (1).pdf",
+        "013125 WellsFargo.pdf",
+        "022825 WellsFargo.pdf",
+        "033125 WellsFargo.pdf",
+        "043025 WellsFargo.pdf",
+        "053125 WellsFargo.pdf",
+        "063025 WellsFargo.pdf",
+        "073125 WellsFargo.pdf",
+        "083125 WellsFargo.pdf",
+        "093025 WellsFargo.pdf",
+        "103125 WellsFargo.pdf",
+        "113025 WellsFargo.pdf",
+        "123125 WellsFargo.pdf"
+      ]
+    }
+  ];
+
+  const mount = document.getElementById("stmtIndex");
+  const searchEl = document.getElementById("stmtSearch");
+  const metaPill = document.getElementById("stmtMetaPill");
+  if(!mount) return;
+
+  // Build a flat list count for meta pill
+  const totalFiles = groups.reduce((sum,g)=>sum + g.files.length, 0);
+  if(metaPill) metaPill.textContent = `${groups.length} groups • ${totalFiles} PDFs`;
+
+  function render(filter=""){
+    const q = filter.trim().toLowerCase();
+
+    mount.innerHTML = groups.map((g, idx) => {
+      const safeFolder = encPath(`${BASE}/${g.folder}`);
+
+      const rows = g.files
+        .map(file => {
+          const href = `${safeFolder}/${encodeURIComponent(file)}`;
+          const label = monthLabelFromFilename(file);
+          const hay = `${g.bank} ${g.acct} ${g.folder} ${file} ${label}`.toLowerCase();
+          const visible = !q || hay.includes(q);
+          return { file, href, label, visible };
+        })
+        .filter(x => x.visible);
+
+      // Hide whole group if nothing matches search
+      if(q && rows.length === 0) return "";
+
+      const count = rows.length;
+
+      const htmlRows = rows.map(x => `
+        <a class="stmt-row" href="${x.href}" target="_blank" rel="noopener">
+          <div class="stmt-left">
+            <div class="stmt-name">${x.label}</div>
+            <div class="stmt-meta">${x.file}</div>
+          </div>
+          <div class="stmt-open">Open PDF ↗</div>
+        </a>
+      `).join("");
+
+      const openDefault = (!q && idx < 2) ? "open" : (q ? "open" : "");
+
+      return `
+        <details class="stmt-group" ${openDefault}>
+          <summary>
+            <div class="stmt-group-title">
+              <strong>${g.bank}</strong>
+              <span>${g.acct} • ${g.folder}</span>
+            </div>
+            <div class="stmt-count">${count} PDF${count===1?"":"s"}</div>
+          </summary>
+          <div class="stmt-list">${htmlRows}</div>
+        </details>
+      `;
+    }).join("") || `
+      <div class="tiny-note" style="opacity:.85; padding: 10px 2px;">
+        No statements match your search.
+      </div>
+    `;
+  }
+
+  render("");
+
+  if(searchEl){
+    searchEl.addEventListener("input", (e) => render(e.target.value));
+  }
 })();
 </script>
 </body>
