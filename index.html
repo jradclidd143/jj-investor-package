@@ -4268,7 +4268,7 @@ body.stmts-unlocked .acct-card.locked .stmt{
   </div>
 </section>
 
-      <footer class="footer">
+<footer class="footer">
   <div>© 2026 J&amp;J Investments of Florida, LLC</div>
   <div>Confidential • Lender Review Package</div>
 </footer>
@@ -4276,12 +4276,11 @@ body.stmts-unlocked .acct-card.locked .stmt{
 </main>
 
 <script>
-
-      
 /* ============================================================
    ✅ WORKING NAV + ACTIVE HIGHLIGHT + TOPBAR HEIGHT SYNC
    ✅ THEME TOGGLE + BACK TO TOP
    ✅ STATEMENT LINK LOCK/UNLOCK
+   ✅ J&J BANK STATEMENTS INDEX BUILDER
 ============================================================ */
 (() => {
   const root = document.documentElement;
@@ -4348,8 +4347,7 @@ body.stmts-unlocked .acct-card.locked .stmt{
     setNavMin(!min);
   });
 
-      
-  // Smooth scroll with topbar offset so sections are not hidden
+  // Smooth scroll with topbar offset
   navList?.addEventListener('click', (e) => {
     const a = e.target.closest('a');
     if (!a) return;
@@ -4379,7 +4377,6 @@ body.stmts-unlocked .acct-card.locked .stmt{
 
   const topbarHForObs = () => (topbar ? Math.ceil(topbar.getBoundingClientRect().height) : 110);
   const makeObserver = () => new IntersectionObserver((entries) => {
-    // choose the most visible intersecting section
     const visible = entries
       .filter(en => en.isIntersecting)
       .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
@@ -4417,11 +4414,9 @@ body.stmts-unlocked .acct-card.locked .stmt{
     document.body.classList.toggle('stmts-unlocked', !!unlocked);
     localStorage.setItem(STMT_KEY, unlocked ? '1' : '0');
 
-    // Update button label
     if (stmtBtn) stmtBtn.textContent = unlocked ? '🔓 Statements: Unlocked' : '🔒 Statements: Locked';
 
-    // Update pills
-    document.querySelectorAll('[data-acct] .acct-pill').forEach(p => {
+    document.querySelectorAll('.acct-card .acct-pill').forEach(p => {
       p.textContent = unlocked ? 'OPEN' : 'LOCKED';
       p.style.borderColor = unlocked ? 'rgba(59,130,255,.40)' : 'rgba(224,69,69,.35)';
       p.style.background = unlocked ? 'rgba(59,130,255,.14)' : 'rgba(224,69,69,.14)';
@@ -4434,142 +4429,120 @@ body.stmts-unlocked .acct-card.locked .stmt{
     setStmtUnlocked(!isUnlocked);
   });
 
-(function(){
-  const BASE = "jandjstatements";
-
-  const encPath = (p) => p.split("/").map(seg => encodeURIComponent(seg)).join("/");
-
-  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  function monthLabelFromFilename(file){
-    const m = String(file).match(/^(\d{6})/);
-    if(!m) return "Statement";
-    const mm = Number(m[1].slice(0,2));
-    const yy = Number(m[1].slice(4,6));
-    const year = 2000 + yy;
-    return `${months[mm-1] || "Month"} ${year}`;
-  }
-
-  const groups = [
-    {
-      bank: "Capital One",
-      acct: "Operating (…0489)",
-      folder: "CAP OPERATING",
-      files: ["J_and_J_Operating...0489_DEC_2025 (3).pdf"]
-    },
-    {
-      bank: "Capital One",
-      acct: "Savings (…7312)",
-      folder: "cap savings",
-      files: ["J_and_J_Savings...7312_DEC_2025 (1).pdf"]
-    },
-    {
-      bank: "Wells Fargo",
-      acct: "Operating",
-      folder: "wells  operating",
-      files: [
-        "123124 WellsFargo.pdf",
-        "013125 WellsFargo.pdf",
-        "022825 WellsFargo.pdf",
-        "033125 WellsFargo.pdf",
-        "043025 WellsFargo.pdf",
-        "053125 WellsFargo.pdf",
-        "063025 WellsFargo.pdf",
-        "073125 WellsFargo.pdf",
-        "083125 WellsFargo.pdf",
-        "093025 WellsFargo.pdf",
-        "103125 WellsFargo.pdf",
-        "113025 WellsFargo.pdf",
-        "123125 WellsFargo.pdf"
-      ]
-    },
-    {
-      bank: "Wells Fargo",
-      acct: "Savings",
-      folder: "wells savings",
-      files: [
-        "123124 WellsFargo (1).pdf",
-        "013125 WellsFargo.pdf",
-        "022825 WellsFargo.pdf",
-        "033125 WellsFargo.pdf",
-        "043025 WellsFargo.pdf",
-        "053125 WellsFargo.pdf",
-        "063025 WellsFargo.pdf",
-        "073125 WellsFargo.pdf",
-        "083125 WellsFargo.pdf",
-        "093025 WellsFargo.pdf",
-        "103125 WellsFargo.pdf",
-        "113025 WellsFargo.pdf",
-        "123125 WellsFargo.pdf"
-      ]
+  // J&J Bank Statements Index Builder
+  (function(){
+    const BASE = "jandjstatements";
+    const encPath = (p) => p.split("/").map(seg => encodeURIComponent(seg)).join("/");
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    
+    function monthLabelFromFilename(file){
+      const m = String(file).match(/^(\d{6})/);
+      if(!m) return "Statement";
+      const mm = Number(m[1].slice(0,2));
+      const yy = Number(m[1].slice(4,6));
+      const year = 2000 + yy;
+      return `${months[mm-1] || "Month"} ${year}`;
     }
-  ];
 
-  const mount = document.getElementById("stmtIndex");
-  const searchEl = document.getElementById("stmtSearch");
-  const metaPill = document.getElementById("stmtMetaPill");
-  if(!mount) return;
+    const groups = [
+      {
+        bank: "Capital One",
+        acct: "Operating (…0489)",
+        folder: "CAP OPERATING",
+        files: ["J_and_J_Operating...0489_DEC_2025 (3).pdf"]
+      },
+      {
+        bank: "Capital One",
+        acct: "Savings (…7312)",
+        folder: "cap savings",
+        files: ["J_and_J_Savings...7312_DEC_2025 (1).pdf"]
+      },
+      {
+        bank: "Wells Fargo",
+        acct: "Operating",
+        folder: "wells  operating",
+        files: [
+          "123124 WellsFargo.pdf", "013125 WellsFargo.pdf", "022825 WellsFargo.pdf",
+          "033125 WellsFargo.pdf", "043025 WellsFargo.pdf", "053125 WellsFargo.pdf",
+          "063025 WellsFargo.pdf", "073125 WellsFargo.pdf", "083125 WellsFargo.pdf",
+          "093025 WellsFargo.pdf", "103125 WellsFargo.pdf", "113025 WellsFargo.pdf",
+          "123125 WellsFargo.pdf"
+        ]
+      },
+      {
+        bank: "Wells Fargo",
+        acct: "Savings",
+        folder: "wells savings",
+        files: [
+          "123124 WellsFargo (1).pdf", "013125 WellsFargo.pdf", "022825 WellsFargo.pdf",
+          "033125 WellsFargo.pdf", "043025 WellsFargo.pdf", "053125 WellsFargo.pdf",
+          "063025 WellsFargo.pdf", "073125 WellsFargo.pdf", "083125 WellsFargo.pdf",
+          "093025 WellsFargo.pdf", "103125 WellsFargo.pdf", "113025 WellsFargo.pdf",
+          "123125 WellsFargo.pdf"
+        ]
+      }
+    ];
 
-  // Build a flat list count for meta pill
-  const totalFiles = groups.reduce((sum,g)=>sum + g.files.length, 0);
-  if(metaPill) metaPill.textContent = `${groups.length} groups • ${totalFiles} PDFs`;
+    const mount = document.getElementById("stmtIndex");
+    const searchEl = document.getElementById("stmtSearch");
+    const metaPill = document.getElementById("stmtMetaPill");
+    if(!mount) return;
 
-  function render(filter=""){
-    const q = filter.trim().toLowerCase();
+    const totalFiles = groups.reduce((sum,g)=>sum + g.files.length, 0);
+    if(metaPill) metaPill.textContent = `${groups.length} groups • ${totalFiles} PDFs`;
 
-    mount.innerHTML = groups.map((g, idx) => {
-      const safeFolder = encPath(`${BASE}/${g.folder}`);
+    function render(filter=""){
+      const q = filter.trim().toLowerCase();
 
-      const rows = g.files
-        .map(file => {
-          const href = `${safeFolder}/${encodeURIComponent(file)}`;
-          const label = monthLabelFromFilename(file);
-          const hay = `${g.bank} ${g.acct} ${g.folder} ${file} ${label}`.toLowerCase();
-          const visible = !q || hay.includes(q);
-          return { file, href, label, visible };
-        })
-        .filter(x => x.visible);
+      mount.innerHTML = groups.map((g, idx) => {
+        const safeFolder = encPath(`${BASE}/${g.folder}`);
+        const rows = g.files
+          .map(file => {
+            const href = `${safeFolder}/${encodeURIComponent(file)}`;
+            const label = monthLabelFromFilename(file);
+            const hay = `${g.bank} ${g.acct} ${g.folder} ${file} ${label}`.toLowerCase();
+            const visible = !q || hay.includes(q);
+            return { file, href, label, visible };
+          })
+          .filter(x => x.visible);
 
-      // Hide whole group if nothing matches search
-      if(q && rows.length === 0) return "";
+        if(q && rows.length === 0) return "";
 
-      const count = rows.length;
-
-      const htmlRows = rows.map(x => `
-        <a class="stmt-row" href="${x.href}" target="_blank" rel="noopener">
-          <div class="stmt-left">
-            <div class="stmt-name">${x.label}</div>
-            <div class="stmt-meta">${x.file}</div>
-          </div>
-          <div class="stmt-open">Open PDF ↗</div>
-        </a>
-      `).join("");
-
-      const openDefault = (!q && idx < 2) ? "open" : (q ? "open" : "");
-
-      return `
-        <details class="stmt-group" ${openDefault}>
-          <summary>
-            <div class="stmt-group-title">
-              <strong>${g.bank}</strong>
-              <span>${g.acct} • ${g.folder}</span>
+        const count = rows.length;
+        const htmlRows = rows.map(x => `
+          <a class="stmt-row" href="${x.href}" target="_blank" rel="noopener">
+            <div class="stmt-left">
+              <div class="stmt-name">${x.label}</div>
+              <div class="stmt-meta">${x.file}</div>
             </div>
-            <div class="stmt-count">${count} PDF${count===1?"":"s"}</div>
-          </summary>
-          <div class="stmt-list">${htmlRows}</div>
-        </details>
+            <div class="stmt-open">Open PDF ↗</div>
+          </a>
+        `).join("");
+
+        const openDefault = (!q && idx < 2) ? "open" : (q ? "open" : "");
+
+        return `
+          <details class="stmt-group" ${openDefault}>
+            <summary>
+              <div class="stmt-group-title">
+                <strong>${g.bank}</strong>
+                <span>${g.acct} • ${g.folder}</span>
+              </div>
+              <div class="stmt-count">${count} PDF${count===1?"":"s"}</div>
+            </summary>
+            <div class="stmt-list">${htmlRows}</div>
+          </details>
+        `;
+      }).join("") || `
+        <div class="tiny-note" style="opacity:.85; padding: 10px 2px;">
+          No statements match your search.
+        </div>
       `;
-    }).join("") || `
-      <div class="tiny-note" style="opacity:.85; padding: 10px 2px;">
-        No statements match your search.
-      </div>
-    `;
-  }
+    }
 
-  render("");
-
-  if(searchEl){
-    searchEl.addEventListener("input", (e) => render(e.target.value));
-  }
+    render("");
+    if(searchEl) searchEl.addEventListener("input", (e) => render(e.target.value));
+  })();
 })();
 </script>
 </body>
