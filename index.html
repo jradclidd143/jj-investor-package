@@ -1565,6 +1565,134 @@ outline-offset: 2px;
 .jj-figure img { max-height: 300px; padding: 8px; }
 .kpis { grid-template-columns: 1fr; }
 }
+
+<!-- =========================================================
+  ✅ PATCH 1 — Add this CSS at the VERY END of your
+========================================================== -->
+
+/* ---- PATCH: stop “leaving the container” / horizontal overflow ---- */
+.hero > *, .grid-2 > *, .charts-row > *, .split > *, .compare > *,
+.risk-grid > *, .growth-grid-2 > *, .acct-grid-4 > * { min-width: 0; }
+
+/* Make SVG charts fully responsive inside cards */
+.chart svg { width: 100%; height: auto; display: block; max-width: 100%; }
+
+/* Borrower Experience 4-metric strip: responsive + no overflow */
+.metric-strip{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+@media (max-width: 1020px){
+  .metric-strip{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 640px){
+  .metric-strip{ grid-template-columns: 1fr; }
+}
+
+/* Statement rows: allow link styling (locked by default, unlockable via JS toggle) */
+.stmt{
+  text-decoration: none;
+  color: inherit;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.stmt:hover{
+  transform: translateY(-1px);
+  border-color: rgba(212,175,94,.34);
+  background: rgba(212,175,94,.08);
+}
+
+/* Locked behavior (default) */
+.acct-card.locked .stmt{
+  pointer-events: none;
+  cursor: default;
+  transform: none !important;
+}
+
+/* When unlocked, allow clicks */
+body.stmts-unlocked .acct-card.locked .stmt{
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Small header row to host the unlock button */
+.stmt-tools{
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ================================
+   FIX: Funding section formatting
+   ================================ */
+#funding-repayment .grid-2{
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 18px;
+  align-items: start;
+}
+#funding-repayment .grid-2 > *{ min-width: 0; }
+
+@media (max-width: 980px){
+  #funding-repayment .grid-2{ grid-template-columns: 1fr; }
+}
+
+
+/* =========================================
+   FIX: Side navigation placement + toggle
+   ========================================= */
+:root{
+  --side-nav-w: 260px;
+  --side-nav-w-collapsed: 62px;
+  --side-nav-top: 92px;        /* adjust if header height differs */
+  --side-nav-right: 18px;      /* moves nav to the RIGHT so it stops covering */
+}
+
+#sideNav{
+  position: fixed; /* <- key change: removes it from the content container */
+  top: var(--side-nav-top);
+  right: max(var(--side-nav-right), env(safe-area-inset-right));
+  width: var(--side-nav-w);
+  max-height: calc(100vh - var(--side-nav-top) - 16px);
+  overflow: auto;
+  z-index: 9999;
+}
+
+/* collapsed (closed) state */
+#sideNav.is-collapsed{
+  width: var(--side-nav-w-collapsed);
+}
+#sideNav.is-collapsed .nav-text{
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* optional: keep the toggle nicely centered in collapsed mode */
+#sideNav.is-collapsed .nav-toggle{
+  justify-content: center;
+}
+
+/* Backdrop for mobile/tablet overlay */
+#navBackdrop{
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,.45);
+}
+
+/* Only show backdrop on smaller screens */
+@media (min-width: 980px){
+  #navBackdrop{ display: none !important; }
+}
+
+/* Never print nav */
+@media print{
+  #sideNav, #navBackdrop{ display: none !important; }
+}      
 </style>
 </head>
 <body>
@@ -2090,29 +2218,32 @@ outline-offset: 2px;
     </p>
   </div>
 
-  <!-- Key Metrics Strip -->
-  <div class="grid-2" style="grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px;">
-    <div class="metric">
-      <div class="label">Properties Restored</div>
-      <div class="value" style="font-size: 24px;">26,000+</div>
-      <div class="sub">Residential & commercial across U.S.</div>
-    </div>
-    <div class="metric">
-      <div class="label">Multi-State Operations</div>
-      <div class="value" style="font-size: 24px;">16 States</div>
-      <div class="sub">12 jurisdictions with active/prior licensure</div>
-    </div>
-    <div class="metric">
-      <div class="label">Peak Annual Revenue</div>
-      <div class="value" style="font-size: 24px;">$40M+</div>
-      <div class="sub">Institutional-scale operations achieved</div>
-    </div>
-    <div class="metric">
-      <div class="label">Legal Precedent</div>
-      <div class="value" style="font-size: 24px;">$17.5M+</div>
-      <div class="sub">Judgment vs. State Farm (upheld)</div>
-    </div>
+<!-- =========================================================
+  ✅ PATCH 2 — Replace your Borrower Experience “4 metrics strip” DIV with this
+  (Find the div that currently has: class="grid-2" style="grid-template-columns: repeat(4, 1fr)...")
+========================================================== -->
+<div class="metric-strip">
+  <div class="metric">
+    <div class="label">Properties Restored</div>
+    <div class="value" style="font-size: 24px;">26,000+</div>
+    <div class="sub">Residential & commercial across U.S.</div>
   </div>
+  <div class="metric">
+    <div class="label">Multi-State Operations</div>
+    <div class="value" style="font-size: 24px;">16 States</div>
+    <div class="sub">12 jurisdictions with active/prior licensure</div>
+  </div>
+  <div class="metric">
+    <div class="label">Peak Annual Revenue</div>
+    <div class="value" style="font-size: 24px;">$40M+</div>
+    <div class="sub">Institutional-scale operations achieved</div>
+  </div>
+  <div class="metric">
+    <div class="label">Legal Precedent</div>
+    <div class="value" style="font-size: 24px;">$17.5M+</div>
+    <div class="sub">Judgment vs. State Farm (upheld)</div>
+  </div>
+</div>
 
   <!-- Professional Foundation -->
   <div class="grid-2">
@@ -3405,10 +3536,17 @@ outline-offset: 2px;
       </div>
     </article>
 
+  <!-- =========================================================
+  ✅ PATCH 3 — Replace EVERYTHING starting at:
+      <!-- COLUMN 2 — Wells Savings -->
+  through the END OF FILE with the block below.
+  (Your code was cut off at </... — this completes it + adds working navigation + topbar height sync.)
+========================================================== -->
+
     <!-- =========================
          COLUMN 2 — Wells Savings
          ========================= -->
-    <article class="acct-card">
+    <article class="acct-card locked" data-acct>
       <div class="acct-head">
         <div>
           <div class="acct-title">Wells Fargo — Savings</div>
@@ -3421,19 +3559,46 @@ outline-offset: 2px;
         <div class="subacct-title">Wells Savings</div>
         <div class="subacct-path">assurecall-docs/wells savings/</div>
         <div class="stmt-list">
-          <div class="stmt"><div class="name">123124 WellsFargo (1).pdf</div><div class="tag">Dec 2024</div></div>
-          <div class="stmt"><div class="name">013125 WellsFargo.pdf</div><div class="tag">Jan 2025</div></div>
-          <div class="stmt"><div class="name">022825 WellsFargo.pdf</div><div class="tag">Feb 2025</div></div>
-          <div class="stmt"><div class="name">033125 WellsFargo.pdf</div><div class="tag">Mar 2025</div></div>
-          <div class="stmt"><div class="name">033125 WellsFargo (1).pdf</div><div class="tag">Mar 2025</div></div>
-          <div class="stmt"><div class="name">053125 WellsFargo.pdf</div><div class="tag">May 2025</div></div>
-          <div class="stmt"><div class="name">063025 WellsFargo.pdf</div><div class="tag">Jun 2025</div></div>
-          <div class="stmt"><div class="name">073125 WellsFargo.pdf</div><div class="tag">Jul 2025</div></div>
-          <div class="stmt"><div class="name">083125 WellsFargo.pdf</div><div class="tag">Aug 2025</div></div>
-          <div class="stmt"><div class="name">093025 WellsFargo.pdf</div><div class="tag">Sep 2025</div></div>
-          <div class="stmt"><div class="name">103125 WellsFargo.pdf</div><div class="tag">Oct 2025</div></div>
-          <div class="stmt"><div class="name">113025 WellsFargo.pdf</div><div class="tag">Nov 2025</div></div>
-          <div class="stmt"><div class="name">123125 WellsFargo.pdf</div><div class="tag">Dec 2025</div></div>
+          <!-- NOTE: update filenames/paths to match your repo exactly -->
+          <a class="stmt" href="assurecall-docs/wells%20savings/123124%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">123124 WellsFargo_Savings.pdf</div><div class="tag">Dec 2024</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings/013125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">013125 WellsFargo_Savings.pdf</div><div class="tag">Jan 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings/022825%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">022825 WellsFargo_Savings.pdf</div><div class="tag">Feb 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings/033125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">033125 WellsFargo_Savings.pdf</div><div class="tag">Mar 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings/043025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">043025 WellsFargo_Savings.pdf</div><div class="tag">Apr 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings/053125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">053125 WellsFargo_Savings.pdf</div><div class="tag">May 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings/063025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">063025 WellsFargo_Savings.pdf</div><div class="tag">Jun 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings/073125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">073125 WellsFargo_Savings.pdf</div><div class="tag">Jul 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings/083125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">083125 WellsFargo_Savings.pdf</div><div class="tag">Aug 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings/093025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">093025 WellsFargo_Savings.pdf</div><div class="tag">Sep 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings/103125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">103125 WellsFargo_Savings.pdf</div><div class="tag">Oct 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings/113025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">113025 WellsFargo_Savings.pdf</div><div class="tag">Nov 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings/123125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">123125 WellsFargo_Savings.pdf</div><div class="tag">Dec 2025</div>
+          </a>
         </div>
       </div>
 
@@ -3441,425 +3606,337 @@ outline-offset: 2px;
         <div class="subacct-title">Wells Savings (RF)</div>
         <div class="subacct-path">assurecall-docs/wells savings rf/</div>
         <div class="stmt-list">
-          <div class="stmt"><div class="name">123124 WellsFargo (1).pdf</div><div class="tag">Dec 2024</div></div>
-          <div class="stmt"><div class="name">013125 WellsFargo.pdf</div><div class="tag">Jan 2025</div></div>
-          <div class="stmt"><div class="name">022825 WellsFargo.pdf</div><div class="tag">Feb 2025</div></div>
-          <div class="stmt"><div class="name">033125 WellsFargo.pdf</div><div class="tag">Mar 2025</div></div>
-          <div class="stmt"><div class="name">043025 WellsFargo.pdf</div><div class="tag">Apr 2025</div></div>
-          <div class="stmt"><div class="name">053125 WellsFargo.pdf</div><div class="tag">May 2025</div></div>
-          <div class="stmt"><div class="name">063025 WellsFargo.pdf</div><div class="tag">Jun 2025</div></div>
-          <div class="stmt"><div class="name">073125 WellsFargo.pdf</div><div class="tag">Jul 2025</div></div>
-          <div class="stmt"><div class="name">083125 WellsFargo.pdf</div><div class="tag">Aug 2025</div></div>
-          <div class="stmt"><div class="name">093025 WellsFargo.pdf</div><div class="tag">Sep 2025</div></div>
-          <div class="stmt"><div class="name">113025 WellsFargo.pdf</div><div class="tag">Nov 2025</div></div>
-          <div class="stmt"><div class="name">123125 WellsFargo.pdf</div><div class="tag">Dec 2025</div></div>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/123124%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">123124 WellsFargo_Savings.pdf</div><div class="tag">Dec 2024</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/013125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">013125 WellsFargo_Savings.pdf</div><div class="tag">Jan 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/022825%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">022825 WellsFargo_Savings.pdf</div><div class="tag">Feb 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/033125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">033125 WellsFargo_Savings.pdf</div><div class="tag">Mar 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/043025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">043025 WellsFargo_Savings.pdf</div><div class="tag">Apr 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/053125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">053125 WellsFargo_Savings.pdf</div><div class="tag">May 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/063025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">063025 WellsFargo_Savings.pdf</div><div class="tag">Jun 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/073125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">073125 WellsFargo_Savings.pdf</div><div class="tag">Jul 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/083125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">083125 WellsFargo_Savings.pdf</div><div class="tag">Aug 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/093025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">093025 WellsFargo_Savings.pdf</div><div class="tag">Sep 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/103125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">103125 WellsFargo_Savings.pdf</div><div class="tag">Oct 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/113025%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">113025 WellsFargo_Savings.pdf</div><div class="tag">Nov 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/wells%20savings%20rf/123125%20WellsFargo_Savings.pdf" target="_blank" rel="noopener">
+            <div class="name">123125 WellsFargo_Savings.pdf</div><div class="tag">Dec 2025</div>
+          </a>
         </div>
       </div>
     </article>
 
     <!-- =========================
-         COLUMN 3 — PayPal
+         COLUMN 3 — Capital One
          ========================= -->
-    <article class="acct-card">
+    <article class="acct-card locked" data-acct>
       <div class="acct-head">
         <div>
-          <div class="acct-title">PayPal — Merchant Statements</div>
-          <div class="acct-sub">Monthly merchant statement exports.</div>
+          <div class="acct-title">Capital One — Business</div>
+          <div class="acct-sub">Business checking / operating statements.</div>
         </div>
         <div class="acct-pill">LOCKED</div>
       </div>
 
       <div class="subacct">
-        <div class="subacct-title">PayPal</div>
+        <div class="subacct-title">Capital One Business Checking</div>
+        <div class="subacct-path">assurecall-docs/capital one business/</div>
+        <div class="stmt-list">
+          <!-- Update filenames/paths to your repo -->
+          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-01%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-01 CapitalOne_Business.pdf</div><div class="tag">Jan 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-02%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-02 CapitalOne_Business.pdf</div><div class="tag">Feb 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-03%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-03 CapitalOne_Business.pdf</div><div class="tag">Mar 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-04%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-04 CapitalOne_Business.pdf</div><div class="tag">Apr 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-05%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-05 CapitalOne_Business.pdf</div><div class="tag">May 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-06%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-06 CapitalOne_Business.pdf</div><div class="tag">Jun 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-07%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-07 CapitalOne_Business.pdf</div><div class="tag">Jul 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-08%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-08 CapitalOne_Business.pdf</div><div class="tag">Aug 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-09%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-09 CapitalOne_Business.pdf</div><div class="tag">Sep 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-10%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-10 CapitalOne_Business.pdf</div><div class="tag">Oct 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-11%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-11 CapitalOne_Business.pdf</div><div class="tag">Nov 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20business/2025-12%20CapitalOne_Business.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-12 CapitalOne_Business.pdf</div><div class="tag">Dec 2025</div>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- =========================
+         COLUMN 4 — PayPal / Capital One 360
+         ========================= -->
+    <article class="acct-card locked" data-acct>
+      <div class="acct-head">
+        <div>
+          <div class="acct-title">PayPal / Capital One 360</div>
+          <div class="acct-sub">Merchant processing + secondary flows.</div>
+        </div>
+        <div class="acct-pill">LOCKED</div>
+      </div>
+
+      <div class="subacct">
+        <div class="subacct-title">PayPal Merchant</div>
         <div class="subacct-path">assurecall-docs/paypal/</div>
         <div class="stmt-list">
-          <div class="stmt"><div class="name">UHHZMNBCMTCTE-MSR-20250201000000-20250228235959.pdf</div><div class="tag">Feb 2025</div></div>
-          <div class="stmt"><div class="name">UHHZMNBCMTCTE-MSR-20250301000000-20250331235959.pdf</div><div class="tag">Mar 2025</div></div>
-          <div class="stmt"><div class="name">UHHZMNBCMTCTE-MSR-20250401000000-20250430235959.pdf</div><div class="tag">Apr 2025</div></div>
-          <div class="stmt"><div class="name">UHHZMNBCMTCTE-MSR-20250501000000-20250531235959.pdf</div><div class="tag">May 2025</div></div>
-          <div class="stmt"><div class="name">UHHZMNBCMTCTE-MSR-20250601000000-20250630235959.pdf</div><div class="tag">Jun 2025</div></div>
-          <div class="stmt"><div class="name">UHHZMNBCMTCTE-MSR-20250701000000-20250731235959.pdf</div><div class="tag">Jul 2025</div></div>
+          <a class="stmt" href="assurecall-docs/paypal/2025-05%20PayPal.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-05 PayPal.pdf</div><div class="tag">May 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/paypal/2025-06%20PayPal.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-06 PayPal.pdf</div><div class="tag">Jun 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/paypal/2025-07%20PayPal.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-07 PayPal.pdf</div><div class="tag">Jul 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/paypal/2025-08%20PayPal.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-08 PayPal.pdf</div><div class="tag">Aug 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/paypal/2025-09%20PayPal.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-09 PayPal.pdf</div><div class="tag">Sep 2025</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subacct">
+        <div class="subacct-title">Capital One 360</div>
+        <div class="subacct-path">assurecall-docs/capital one 360/</div>
+        <div class="stmt-list">
+          <a class="stmt" href="assurecall-docs/capital%20one%20360/2025-01%20CapitalOne360.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-01 CapitalOne360.pdf</div><div class="tag">Jan 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20360/2025-02%20CapitalOne360.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-02 CapitalOne360.pdf</div><div class="tag">Feb 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20360/2025-03%20CapitalOne360.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-03 CapitalOne360.pdf</div><div class="tag">Mar 2025</div>
+          </a>
+          <a class="stmt" href="assurecall-docs/capital%20one%20360/2025-04%20CapitalOne360.pdf" target="_blank" rel="noopener">
+            <div class="name">2025-04 CapitalOne360.pdf</div><div class="tag">Apr 2025</div>
+          </a>
         </div>
       </div>
     </article>
 
-    <!-- =========================
-         COLUMN 4 — Capital One
-         ========================= -->
-    <article class="acct-card">
-      <div class="acct-head">
-        <div>
-          <div class="acct-title">Capital One — Accounts</div>
-          <div class="acct-sub">Operating + personal + savings/personal + payroll.</div>
-        </div>
-        <div class="acct-pill">LOCKED</div>
-      </div>
+  </div><!-- /.acct-grid-4 -->
 
-      <div class="subacct">
-        <div class="subacct-title">CAP Operating</div>
-        <div class="subacct-path">assurecall-docs/cap operTING/</div>
-        <div class="stmt-list">
-          <div class="stmt"><div class="name">AssureCall_Operating...8265_SEP_2025 (3).pdf</div><div class="tag">Sep 2025</div></div>
-          <div class="stmt"><div class="name">AssureCall_Operating...8265_OCT_2025 (2).pdf</div><div class="tag">Oct 2025</div></div>
-          <div class="stmt"><div class="name">AssureCall_Operating...8265_NOV_2025 (2).pdf</div><div class="tag">Nov 2025</div></div>
-          <div class="stmt"><div class="name">AssureCall_Operating...8265_DEC_2025 (2).pdf</div><div class="tag">Dec 2025</div></div>
-        </div>
-      </div>
-
-      <div class="subacct">
-        <div class="subacct-title">CAP Payroll</div>
-        <div class="subacct-path">assurecall-docs/CAP PAYROLL/</div>
-        <div class="stmt-list">
-          <div class="stmt"><div class="name">AssureCall_Payroll...8101_DEC_2025.pdf</div><div class="tag">Dec 2025</div></div>
-        </div>
-      </div>
-
-      <div class="subacct">
-        <div class="subacct-title">CAP Personal (2025)</div>
-        <div class="subacct-path">assurecall-docs/CAP PER 2025/</div>
-        <div class="stmt-list">
-          <div class="stmt"><div class="name">20250301-Bank statement (2).pdf</div><div class="tag">Mar 2025</div></div>
-          <div class="stmt"><div class="name">20250601-Bank statement (2).pdf</div><div class="tag">Jun 2025</div></div>
-          <div class="stmt"><div class="name">20250701-Bank statement (4).pdf</div><div class="tag">Jul 2025</div></div>
-          <div class="stmt"><div class="name">20250801-Bank statement (3).pdf</div><div class="tag">Aug 2025</div></div>
-          <div class="stmt"><div class="name">20250901-Bank statement (4).pdf</div><div class="tag">Sep 2025</div></div>
-          <div class="stmt"><div class="name">20251001-Bank statement (4).pdf</div><div class="tag">Oct 2025</div></div>
-          <div class="stmt"><div class="name">20251101-Bank statement (5).pdf</div><div class="tag">Nov 2025</div></div>
-          <div class="stmt"><div class="name">20251201-Bank statement (5).pdf</div><div class="tag">Dec 2025</div></div>
-        </div>
-      </div>
-
-      <div class="subacct">
-        <div class="subacct-title">CAP Savings / Personal (2025)</div>
-        <div class="subacct-path">assurecall-docs/CAP SAVE PER 2025/</div>
-        <div class="stmt-list">
-          <div class="stmt"><div class="name">20250301-Bank statement (3).pdf</div><div class="tag">Mar 2025</div></div>
-          <div class="stmt"><div class="name">20250601-Bank statement (3).pdf</div><div class="tag">Jun 2025</div></div>
-          <div class="stmt"><div class="name">20250701-Bank statement (5).pdf</div><div class="tag">Jul 2025</div></div>
-          <div class="stmt"><div class="name">20250801-Bank statement (4).pdf</div><div class="tag">Aug 2025</div></div>
-          <div class="stmt"><div class="name">20250901-Bank statement (5).pdf</div><div class="tag">Sep 2025</div></div>
-          <div class="stmt"><div class="name">20251001-Bank statement (5).pdf</div><div class="tag">Oct 2025</div></div>
-          <div class="stmt"><div class="name">20251101-Bank statement (6).pdf</div><div class="tag">Nov 2025</div></div>
-          <div class="stmt"><div class="name">20251201-Bank statement (6).pdf</div><div class="tag">Dec 2025</div></div>
-        </div>
-      </div>
-
-    </article>
-
+  <div class="stmt-tools">
+    <button class="doc-btn" id="stmtLinksToggle" type="button">🔒 Statements: Locked</button>
   </div>
 
   <div class="disclaimer">
-    <strong>Access Control Note:</strong> This appendix is an index only. Statements are intentionally not linked/openable from inside this report view.
+    <strong>Note:</strong> This index supports underwriting organization. Links are <strong>locked by default</strong> for lender-facing review.
+    Use the button above to unlock links when you are reviewing internally.
   </div>
-</section>      
+</section>
 
 <footer class="footer">
-  <div>© 2026 J&amp;J Investments of Florida, LLC. All Rights Reserved.</div>
-  <div>Prepared for Lender Review • Confidential</div>
+  <div>© 2026 J&amp;J Investments of Florida, LLC</div>
+  <div>Confidential • Lender Review Package</div>
 </footer>
+
 </main>
 
-<!-- ============================================================
-     SCRIPT — Navigation, Theme, Back-to-Top (FULLY FIXED)
-     ============================================================ -->
 <script>
-(function(){
-  "use strict";
-
-  /* --------------------------------------------------------
-     1. TOPBAR HEIGHT → CSS var (used by sidenav + scroll offset)
-     -------------------------------------------------------- */
-  var topbar = document.querySelector(".topbar");
-
-  function setTopbarH(){
-    var h = topbar ? Math.ceil(topbar.getBoundingClientRect().height) : 110;
-    document.documentElement.style.setProperty("--topbar-h", h + "px");
-    return h;
-  }
-  window.addEventListener("load",   setTopbarH);
-  window.addEventListener("resize", setTopbarH, { passive: true });
-  setTopbarH();                                   // immediate
-
-  /* --------------------------------------------------------
-     2. SMOOTH SCROLL helper (respects sticky header)
-     -------------------------------------------------------- */
-  function scrollToEl(el){
-    if(!el) return;
-    var offset = setTopbarH() + 14;               // topbar + gap
-    var y = el.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top: y, behavior: "smooth" });
-  }
-
-  /* --------------------------------------------------------
-     3. SLUGIFY helper
-     -------------------------------------------------------- */
-  function slugify(str){
-    return (str || "")
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "")
-      .replace(/\s+/g, "-")
-      .replace(/-+/g, "-")
-      .trim();
-  }
-
-  /* --------------------------------------------------------
-     4. BUILD SIDE-NAV from [data-nav] sections
-     -------------------------------------------------------- */
-  var navList   = document.getElementById("navList");
-  var sideNav   = document.getElementById("sideNav");
-  var sections  = Array.from(document.querySelectorAll("[data-nav]"))
-                        .filter(function(el){ return el.getAttribute("data-nav"); });
-
-  if(navList && sections.length){
-    navList.innerHTML = "";
-
-    sections.forEach(function(el){
-      var label = el.getAttribute("data-nav") ||
-                  (el.querySelector("h2,h1") || {}).textContent || "Section";
-      label = label.trim();
-
-      if(!el.id){
-        el.id = slugify(label) || ("sec-" + Math.random().toString(16).slice(2,8));
-      }
-
-      var a       = document.createElement("a");
-      a.href      = "#" + el.id;
-      a.textContent = label;
-
-      a.addEventListener("click", function(e){
-        e.preventDefault();
-        var target = document.getElementById(el.id);
-        scrollToEl(target);
-        history.replaceState(null, "", "#" + el.id);
-      });
-
-      navList.appendChild(a);
-    });
-
-    /* --- Active-link highlight via IntersectionObserver --- */
-    var links = Array.from(navList.querySelectorAll("a"));
-
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(ent){
-        if(!ent.isIntersecting) return;
-        var id = ent.target.id;
-        links.forEach(function(a){
-          a.classList.toggle("active", a.getAttribute("href") === "#" + id);
-        });
-      });
-    }, { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 });
-
-    sections.forEach(function(s){ obs.observe(s); });
-  }
-
-  /* --------------------------------------------------------
-     5. SIDE-NAV COLLAPSE TOGGLE (persists via localStorage)
-     -------------------------------------------------------- */
-  var navToggle = document.getElementById("navToggle");
-  if(navToggle && sideNav){
-    // Restore saved state
-    if(localStorage.getItem("jj_nav_collapsed") === "1"){
-      sideNav.classList.add("min");
-      navToggle.setAttribute("aria-expanded", "false");
-    } else {
-      sideNav.classList.remove("min");
-      navToggle.setAttribute("aria-expanded", "true");
-    }
-
-    navToggle.addEventListener("click", function(){
-      sideNav.classList.toggle("min");
-      var collapsed = sideNav.classList.contains("min");
-      navToggle.setAttribute("aria-expanded", String(!collapsed));
-      localStorage.setItem("jj_nav_collapsed", collapsed ? "1" : "0");
-    });
-  }
-
-  /* --------------------------------------------------------
-     6. BACK-TO-TOP BUTTON
-     -------------------------------------------------------- */
-  var upBtn = document.getElementById("upBtn");
-  if(upBtn){
-    function onScroll(){
-      upBtn.classList.toggle("show", window.scrollY > 420);
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();                                   // initial state
-
-    upBtn.addEventListener("click", function(){
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
-  /* --------------------------------------------------------
-     7. SCREEN THEME TOGGLE (Dark ↔ Light)
-     -------------------------------------------------------- */
-  var htmlEl      = document.documentElement;
-  var screenBtn   = document.getElementById("screenThemeToggle");
-
-  // Restore saved theme
-  var savedTheme  = localStorage.getItem("jj_theme") || "dark";
-  htmlEl.setAttribute("data-theme", savedTheme);
-
-  if(screenBtn){
-    screenBtn.textContent = (savedTheme === "dark") ? "🌙 Screen: Dark" : "☀️ Screen: Light";
-
-    screenBtn.addEventListener("click", function(){
-      var cur  = htmlEl.getAttribute("data-theme") || "dark";
-      var next = (cur === "dark") ? "light" : "dark";
-      htmlEl.setAttribute("data-theme", next);
-      localStorage.setItem("jj_theme", next);
-      screenBtn.textContent = (next === "dark") ? "🌙 Screen: Dark" : "☀️ Screen: Light";
-    });
-  }
-
-})();
-</script>
-<script>
-(function(){
+/* ============================================================
+   ✅ WORKING NAV + ACTIVE HIGHLIGHT + TOPBAR HEIGHT SYNC
+   ✅ THEME TOGGLE + BACK TO TOP
+   ✅ STATEMENT LINK LOCK/UNLOCK
+============================================================ */
+(() => {
   const root = document.documentElement;
   const topbar = document.querySelector('.topbar');
-  const sideNav = document.getElementById('sideNav');
-  const navList = document.getElementById('navList');
-  const navToggle = document.getElementById('navToggle');
-  const upBtn = document.getElementById('upBtn');
-  const themeBtn = document.getElementById('screenThemeToggle');
 
-  // --- keep --topbar-h accurate (your sidenav uses it) ---
-  function syncTopbarHeight(){
-    if(!topbar) return;
-    const h = Math.ceil(topbar.getBoundingClientRect().height);
-    root.style.setProperty('--topbar-h', h + 'px');
-  }
-  window.addEventListener('resize', syncTopbarHeight, {passive:true});
-  window.addEventListener('load', syncTopbarHeight);
+  // Keep --topbar-h accurate for scroll offsets + sidenav positioning
+  const syncTopbarHeight = () => {
+    const h = topbar ? topbar.getBoundingClientRect().height : 110;
+    root.style.setProperty('--topbar-h', `${Math.ceil(h)}px`);
+  };
   syncTopbarHeight();
+  window.addEventListener('resize', syncTopbarHeight, { passive: true });
 
-  // --- build side navigation from section[data-nav] ---
-  function slugify(s){
-    return String(s||'')
-      .toLowerCase()
-      .trim()
-      .replace(/&/g,'and')
-      .replace(/[^a-z0-9]+/g,'-')
-      .replace(/(^-|-$)/g,'');
+  // Theme toggle (screen)
+  const themeBtn = document.getElementById('screenThemeToggle');
+  const THEME_KEY = 'jj_theme';
+  const applyTheme = (mode) => {
+    if (mode === 'light') root.setAttribute('data-theme', 'light');
+    else root.removeAttribute('data-theme');
+
+    if (themeBtn) {
+      const isLight = root.getAttribute('data-theme') === 'light';
+      themeBtn.textContent = isLight ? '☀️ Screen: Light' : '🌙 Screen: Dark';
+      themeBtn.setAttribute('aria-pressed', String(!isLight));
+    }
+  };
+  applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+
+  themeBtn?.addEventListener('click', () => {
+    const isLight = root.getAttribute('data-theme') === 'light';
+    const next = isLight ? 'dark' : 'light';
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+  });
+
+  // Build sidenav from sections
+  const navList = document.getElementById('navList');
+  const sideNav = document.getElementById('sideNav');
+  const navToggle = document.getElementById('navToggle');
+  const sections = Array.from(document.querySelectorAll('[data-nav][id]'));
+
+  const esc = (s) => (s || '').replace(/[&<>"']/g, m => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[m]));
+
+  if (navList && sections.length) {
+    navList.innerHTML = sections
+      .map(sec => `<a href="#${encodeURIComponent(sec.id)}">${esc(sec.getAttribute('data-nav') || sec.id)}</a>`)
+      .join('');
   }
 
-  const sections = Array.from(document.querySelectorAll('section[data-nav]'));
-  const links = [];
+  // SideNav minimize toggle (persist)
+  const NAV_KEY = 'jj_nav_min';
+  const setNavMin = (min) => {
+    if (!sideNav) return;
+    sideNav.classList.toggle('min', !!min);
+    localStorage.setItem(NAV_KEY, min ? '1' : '0');
+    navToggle?.setAttribute('aria-expanded', String(!min));
+  };
+  setNavMin(localStorage.getItem(NAV_KEY) === '1');
 
-  if(navList && sections.length){
-    navList.innerHTML = '';
-    sections.forEach(sec => {
-      const label = sec.getAttribute('data-nav') || sec.querySelector('h2')?.textContent || 'Section';
-      if(!sec.id) sec.id = slugify(label) || ('sec-' + Math.random().toString(16).slice(2));
+  navToggle?.addEventListener('click', () => {
+    const min = sideNav?.classList.contains('min');
+    setNavMin(!min);
+  });
 
-      const a = document.createElement('a');
-      a.href = '#' + sec.id;
-      a.textContent = label;
-      a.addEventListener('click', (e) => {
-        // Smooth scroll while respecting scroll-margin-top (already in your CSS)
-        e.preventDefault();
-        document.getElementById(sec.id)?.scrollIntoView({behavior:'smooth', block:'start'});
-        history.replaceState(null, '', '#' + sec.id);
-      });
+  // Smooth scroll with topbar offset so sections are not hidden
+  navList?.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    if (!href.startsWith('#')) return;
 
-      navList.appendChild(a);
-      links.push({sec, a});
-    });
-  }
+    e.preventDefault();
+    const id = decodeURIComponent(href.slice(1));
+    const el = document.getElementById(id);
+    if (!el) return;
 
-  // --- highlight active section ---
+    const topbarH = topbar ? topbar.getBoundingClientRect().height : 110;
+    const y = window.scrollY + el.getBoundingClientRect().top - topbarH - 18;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  });
+
+  // Active link highlighting
+  const links = Array.from(navList?.querySelectorAll('a') || []);
+  const linkById = new Map(links.map(a => [decodeURIComponent((a.getAttribute('href') || '').slice(1)), a]));
+
+  const clearActive = () => links.forEach(a => a.classList.remove('active'));
   const setActive = (id) => {
-    links.forEach(({sec, a}) => {
-      const on = sec.id === id;
-      a.classList.toggle('active', on);
-      if(on) a.setAttribute('aria-current', 'true');
-      else a.removeAttribute('aria-current');
+    clearActive();
+    const a = linkById.get(id);
+    if (a) a.classList.add('active');
+  };
+
+  const topbarHForObs = () => (topbar ? Math.ceil(topbar.getBoundingClientRect().height) : 110);
+  const makeObserver = () => new IntersectionObserver((entries) => {
+    // choose the most visible intersecting section
+    const visible = entries
+      .filter(en => en.isIntersecting)
+      .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
+
+    if (visible?.target?.id) setActive(visible.target.id);
+  }, {
+    root: null,
+    threshold: [0.15, 0.25, 0.35, 0.5, 0.65],
+    rootMargin: `-${topbarHForObs() + 10}px 0px -55% 0px`
+  });
+
+  let observer = makeObserver();
+  sections.forEach(s => observer.observe(s));
+  window.addEventListener('resize', () => {
+    observer.disconnect();
+    observer = makeObserver();
+    sections.forEach(s => observer.observe(s));
+  }, { passive: true });
+
+  // Back to top
+  const upBtn = document.getElementById('upBtn');
+  const onScroll = () => {
+    const show = window.scrollY > 650;
+    upBtn?.classList.toggle('show', show);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  upBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Statement links lock/unlock (persist)
+  const STMT_KEY = 'jj_stmt_unlocked';
+  const stmtBtn = document.getElementById('stmtLinksToggle');
+
+  const setStmtUnlocked = (unlocked) => {
+    document.body.classList.toggle('stmts-unlocked', !!unlocked);
+    localStorage.setItem(STMT_KEY, unlocked ? '1' : '0');
+
+    // Update button label
+    if (stmtBtn) stmtBtn.textContent = unlocked ? '🔓 Statements: Unlocked' : '🔒 Statements: Locked';
+
+    // Update pills
+    document.querySelectorAll('[data-acct] .acct-pill').forEach(p => {
+      p.textContent = unlocked ? 'OPEN' : 'LOCKED';
+      p.style.borderColor = unlocked ? 'rgba(59,130,255,.40)' : 'rgba(224,69,69,.35)';
+      p.style.background = unlocked ? 'rgba(59,130,255,.14)' : 'rgba(224,69,69,.14)';
     });
   };
 
-  if('IntersectionObserver' in window && links.length){
-    const io = new IntersectionObserver((entries) => {
-      // choose the most-visible intersecting section
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if(visible?.target?.id) setActive(visible.target.id);
-    }, {
-      root: null,
-      // keep it stable under a sticky header
-      rootMargin: `-${Math.max(90, parseInt(getComputedStyle(root).getPropertyValue('--topbar-h'))||110)}px 0px -60% 0px`,
-      threshold: [0.10, 0.20, 0.35, 0.50, 0.65]
-    });
-
-    links.forEach(({sec}) => io.observe(sec));
-  } else {
-    // fallback: activate based on hash
-    window.addEventListener('hashchange', () => {
-      const id = location.hash.replace('#','');
-      if(id) setActive(id);
-    });
-  }
-
-  // activate current hash on load
-  window.addEventListener('load', () => {
-    const id = location.hash.replace('#','') || (links[0]?.sec?.id);
-    if(id) setActive(id);
+  setStmtUnlocked(localStorage.getItem(STMT_KEY) === '1');
+  stmtBtn?.addEventListener('click', () => {
+    const isUnlocked = document.body.classList.contains('stmts-unlocked');
+    setStmtUnlocked(!isUnlocked);
   });
 
-  // --- sidenav collapse/expand ---
-  if(navToggle && sideNav){
-    navToggle.addEventListener('click', () => {
-      const isMin = sideNav.classList.toggle('min');
-      const expanded = !isMin;
-      navToggle.setAttribute('aria-expanded', String(expanded));
-    });
-  }
-
-  // --- back to top button ---
-  function onScroll(){
-    const y = window.scrollY || document.documentElement.scrollTop || 0;
-    if(upBtn){
-      upBtn.classList.toggle('show', y > 600);
-    }
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
-
-  if(upBtn){
-    upBtn.addEventListener('click', () => {
-      document.getElementById('top')?.scrollIntoView({behavior:'smooth', block:'start'});
-      history.replaceState(null, '', '#top');
-    });
-  }
-
-  // --- theme toggle (screen only) ---
-  function setTheme(mode){
-    if(mode === 'light') root.setAttribute('data-theme','light');
-    else root.removeAttribute('data-theme');
-
-    const isDark = mode !== 'light';
-    if(themeBtn){
-      themeBtn.setAttribute('aria-pressed', String(isDark));
-      themeBtn.textContent = isDark ? '🌙 Screen: Dark' : '☀️ Screen: Light';
-      themeBtn.title = 'Toggle screen theme';
-    }
-    try{ localStorage.setItem('jj_theme', mode); }catch(e){}
-  }
-
-  // init theme from storage
-  let saved = 'dark';
-  try{ saved = localStorage.getItem('jj_theme') || 'dark'; }catch(e){}
-  setTheme(saved);
-
-  if(themeBtn){
-    themeBtn.addEventListener('click', () => {
-      const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-      setTheme(current === 'light' ? 'dark' : 'light');
-    });
-  }
 })();
-</script>      
-</main>
+</script>
+
 </body>
 </html>
