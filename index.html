@@ -1540,6 +1540,47 @@ outline-offset: 2px;
   .alloc-legend-row{ grid-template-columns: 1fr 80px 120px; }
 }
 
+ /* Prevent grid children from forcing horizontal overflow */
+#jj-funding-strategy .grid-2 > * { min-width: 0; }
+
+/* Use of Funds: donut + legend wrapper */
+#jj-funding-strategy .usefunds-wrap{
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(280px, 360px);
+  gap: 18px;
+  align-items: center;
+  min-width: 0;
+}
+#jj-funding-strategy .usefunds-wrap > *{ min-width: 0; }
+
+/* Legend rows: label can shrink, values never wrap */
+#jj-funding-strategy .usefunds-rows{ min-width: 0; max-width: 100%; }
+#jj-funding-strategy .usefunds-rows .row{
+  display: grid;
+  grid-template-columns: 18px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+#jj-funding-strategy .usefunds-rows .label{
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#jj-funding-strategy .usefunds-rows .val{
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+#jj-funding-strategy .usefunds-rows .pct{ opacity: .85; }
+
+/* Stack on smaller screens */
+@media (max-width: 1100px){
+  #jj-funding-strategy .usefunds-wrap{ grid-template-columns: 1fr; }
+}     
+
 /* ============================================================
       RESPONSIVE BREAKPOINTS
       ============================================================ */
@@ -2988,8 +3029,8 @@ body.stmts-unlocked .acct-card.locked .stmt{
   </div>
 
   <div class="grid-2">
-    <!-- LEFT: Funding request + allocation (AssureCall allocation callout removed) -->
-    <div class="panel">
+    <!-- LEFT: Funding request + allocation + chart -->
+    <div class="panel" id="jjFundingLeft">
       <div class="panel-head">
         <h3>Requested Commitment + Allocation Detail</h3>
         <span class="panel-tag gold">Total Requested: $1,050,000.00</span>
@@ -3065,135 +3106,156 @@ body.stmts-unlocked .acct-card.locked .stmt{
         Growth capital allocations above (AssureCall + Roofing Appointments) are designed to increase revenue velocity and strengthen
         monthly debt-service reliability through expanded capacity and consistent lead flow.
       </div>
-          
-     <!-- Allocation Chart (fills the lower-left blank area) -->
-<div class="chart-card alloc-card" style="margin-top:14px;">
-  <div class="chart-title">Use of Funds (Requested Commitment)</div>
-  <div class="chart-sub">Allocation mix across payoff, reserves, and operating growth capital.</div>
 
-  <div class="alloc-grid" role="img" aria-label="Use of funds allocation donut and legend">
-    <!-- Donut -->
-    <div class="alloc-donut-wrap">
-      <div
-        class="alloc-donut"
-        aria-hidden="true"
-        style="
-          --p-liens: 75.04;
-          --p-res: 9.97;
-          --p-assure: 8.57;
-          --p-roof: 2.86;
-          --p-bills: 1.90;
-          --p-mkt: 0.95;
-          --p-close: 0.71;
-        "
-      >
-        <div class="alloc-donut-center">
-          <div class="alloc-kicker">Total</div>
-          <div class="alloc-total">$1,050,000</div>
-          <div class="alloc-sub">Requested facility</div>
-        </div>
-      </div>
-      <div class="alloc-mini-note">Share of total requested commitment.</div>
-    </div>
+      <!-- Allocation Chart -->
+      <div class="chart-card alloc-card" style="margin-top:14px;">
+        <div class="chart-title">Use of Funds (Requested Commitment)</div>
+        <div class="chart-sub">Allocation mix across payoff, reserves, and operating growth capital.</div>
 
-    <!-- Legend -->
-    <div class="alloc-legend">
-      <div class="alloc-legend-row">
-        <div class="alloc-left">
-          <span class="alloc-dot c-liens"></span>
-          <span class="alloc-name">Payoff Existing Liens</span>
-        </div>
-        <div class="alloc-pct">75.04%</div>
-        <div class="alloc-amt">$787,884.07</div>
-      </div>
+        <!-- shrink-safe chart + legend wrapper -->
+        <div class="usefunds-wrap" role="img" aria-label="Use of funds allocation donut and legend">
+          <!-- Donut -->
+          <div class="donut-area">
+            <div
+              class="alloc-donut"
+              aria-hidden="true"
+              style="
+                --p-liens: 75.04;
+                --p-res: 9.97;
+                --p-assure: 8.57;
+                --p-roof: 2.86;
+                --p-bills: 1.90;
+                --p-mkt: 0.95;
+                --p-close: 0.71;
+              "
+            >
+              <div class="alloc-donut-center">
+                <div class="alloc-kicker">TOTAL</div>
+                <div class="alloc-total">$1,050,000</div>
+                <div class="alloc-sub">Requested facility</div>
+              </div>
+            </div>
+            <div class="alloc-mini-note">Share of total requested commitment.</div>
+          </div>
 
-      <div class="alloc-legend-row">
-        <div class="alloc-left">
-          <span class="alloc-dot c-res"></span>
-          <span class="alloc-name">Financial Reserves</span>
-        </div>
-        <div class="alloc-pct">9.97%</div>
-        <div class="alloc-amt">$104,636.00</div>
-      </div>
+          <!-- Legend (bleed-proof rows) -->
+          <div class="usefunds-rows">
+            <div class="row">
+              <span class="dot alloc-dot c-liens"></span>
+              <span class="label">Payoff Existing Liens</span>
+              <span class="val"><span class="pct">75.04%</span>&nbsp;&nbsp;$787,884.07</span>
+            </div>
 
-      <div class="alloc-legend-row">
-        <div class="alloc-left">
-          <span class="alloc-dot c-assure"></span>
-          <span class="alloc-name">AssureCall Growth Capital</span>
-        </div>
-        <div class="alloc-pct">8.57%</div>
-        <div class="alloc-amt">$90,000.00</div>
-      </div>
+            <div class="row">
+              <span class="dot alloc-dot c-res"></span>
+              <span class="label">Financial Reserves</span>
+              <span class="val"><span class="pct">9.97%</span>&nbsp;&nbsp;$104,636.00</span>
+            </div>
 
-      <div class="alloc-legend-row">
-        <div class="alloc-left">
-          <span class="alloc-dot c-roof"></span>
-          <span class="alloc-name">Roofing Appointments Growth</span>
-        </div>
-        <div class="alloc-pct">2.86%</div>
-        <div class="alloc-amt">$30,000.00</div>
-      </div>
+            <div class="row">
+              <span class="dot alloc-dot c-assure"></span>
+              <span class="label">AssureCall Growth Capital</span>
+              <span class="val"><span class="pct">8.57%</span>&nbsp;&nbsp;$90,000.00</span>
+            </div>
 
-      <div class="alloc-legend-row">
-        <div class="alloc-left">
-          <span class="alloc-dot c-bills"></span>
-          <span class="alloc-name">Personal Bills Payoff</span>
-        </div>
-        <div class="alloc-pct">1.90%</div>
-        <div class="alloc-amt">$20,000.00</div>
-      </div>
+            <div class="row">
+              <span class="dot alloc-dot c-roof"></span>
+              <span class="label">Roofing Appointments Growth</span>
+              <span class="val"><span class="pct">2.86%</span>&nbsp;&nbsp;$30,000.00</span>
+            </div>
 
-      <div class="alloc-legend-row">
-        <div class="alloc-left">
-          <span class="alloc-dot c-mkt"></span>
-          <span class="alloc-name">J&amp;J Marketing</span>
-        </div>
-        <div class="alloc-pct">0.95%</div>
-        <div class="alloc-amt">$10,000.00</div>
-      </div>
+            <div class="row">
+              <span class="dot alloc-dot c-bills"></span>
+              <span class="label">Personal Bills Payoff</span>
+              <span class="val"><span class="pct">1.90%</span>&nbsp;&nbsp;$20,000.00</span>
+            </div>
 
-      <div class="alloc-legend-row">
-        <div class="alloc-left">
-          <span class="alloc-dot c-close"></span>
-          <span class="alloc-name">Closing / Legal / Buffer</span>
+            <div class="row">
+              <span class="dot alloc-dot c-mkt"></span>
+              <span class="label">J&amp;J Marketing</span>
+              <span class="val"><span class="pct">0.95%</span>&nbsp;&nbsp;$10,000.00</span>
+            </div>
+
+            <div class="row">
+              <span class="dot alloc-dot c-close"></span>
+              <span class="label">Closing / Legal / Buffer</span>
+              <span class="val"><span class="pct">0.71%</span>&nbsp;&nbsp;$7,479.54</span>
+            </div>
+          </div>
         </div>
-        <div class="alloc-pct">0.71%</div>
-        <div class="alloc-amt">$7,479.54</div>
+
+        <!-- Bottom stacked share bar -->
+        <div class="alloc-sharebar" aria-hidden="true">
+          <span class="alloc-seg c-liens" style="width:75.04%"></span>
+          <span class="alloc-seg c-res" style="width:9.97%"></span>
+          <span class="alloc-seg c-assure" style="width:8.57%"></span>
+          <span class="alloc-seg c-roof" style="width:2.86%"></span>
+          <span class="alloc-seg c-bills" style="width:1.90%"></span>
+          <span class="alloc-seg c-mkt" style="width:0.95%"></span>
+          <span class="alloc-seg c-close" style="width:0.71%"></span>
+        </div>
+
+        <div class="tiny-note" style="margin-top:10px;">
+          Payoff clears title into a clean 1st-position structure; reserves and growth capital strengthen payment stability and operating throughput.
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- Bottom stacked share bar (matches donut order) -->
-  <div class="alloc-sharebar" aria-hidden="true">
-    <span class="alloc-seg c-liens" style="width:75.04%"></span>
-    <span class="alloc-seg c-res" style="width:9.97%"></span>
-    <span class="alloc-seg c-assure" style="width:8.57%"></span>
-    <span class="alloc-seg c-roof" style="width:2.86%"></span>
-    <span class="alloc-seg c-bills" style="width:1.90%"></span>
-    <span class="alloc-seg c-mkt" style="width:0.95%"></span>
-    <span class="alloc-seg c-close" style="width:0.71%"></span>
-  </div>
-
-  <div class="tiny-note" style="margin-top:10px;">
-    Payoff clears title into a clean 1st-position structure; reserves and growth capital strengthen payment stability and operating throughput.
-  </div>
-</div>
-</div>                
 
     <!-- RIGHT: Payment strategy -->
-    <div class="panel">
+    <div class="panel" id="jjFundingRight">
       <div class="panel-head">
         <h3>Payment Strategy (8% Interest + 5% Principal)</h3>
         <span class="panel-tag">Paid Monthly</span>
       </div>
 
       <div class="uf-table" style="margin-top:12px;">
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Total Facility / Principal</div><div class="uf-sub">Requested commitment</div></div><div class="uf-amt">$1,050,000.00</div></div>
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Interest Rate</div><div class="uf-sub">8% annual (fixed) charged on outstanding balance</div></div><div class="uf-amt">8% / year</div></div>
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Principal Curtailment</div><div class="uf-sub">5% annual (fixed) based on original principal, paid monthly</div></div><div class="uf-amt">5% / year</div></div>
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Monthly Principal Payment (Fixed)</div><div class="uf-sub">(5% ÷ 12) × $1,050,000</div></div><div class="uf-amt">$4,375.00</div></div>
-        <div class="uf-row"><div class="uf-left"><div class="uf-name">Month 1 Interest Example</div><div class="uf-sub">(8% ÷ 12) × $1,050,000</div></div><div class="uf-amt">$7,000.00</div></div>
-        <div class="uf-row total"><div class="uf-left"><div class="uf-name">Month 1 Total Payment (Example)</div><div class="uf-sub">Interest + fixed principal</div></div><div class="uf-amt">$11,375.00</div></div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Total Facility / Principal</div>
+            <div class="uf-sub">Requested commitment</div>
+          </div>
+          <div class="uf-amt">$1,050,000.00</div>
+        </div>
+
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Interest Rate</div>
+            <div class="uf-sub">8% annual (fixed) charged on outstanding balance</div>
+          </div>
+          <div class="uf-amt">8% / year</div>
+        </div>
+
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Principal Curtailment</div>
+            <div class="uf-sub">5% annual (fixed) based on original principal, paid monthly</div>
+          </div>
+          <div class="uf-amt">5% / year</div>
+        </div>
+
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Monthly Principal Payment (Fixed)</div>
+            <div class="uf-sub">(5% ÷ 12) × $1,050,000</div>
+          </div>
+          <div class="uf-amt">$4,375.00</div>
+        </div>
+
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Month 1 Interest Example</div>
+            <div class="uf-sub">(8% ÷ 12) × $1,050,000</div>
+          </div>
+          <div class="uf-amt">$7,000.00</div>
+        </div>
+
+        <div class="uf-row total">
+          <div class="uf-left">
+            <div class="uf-name">Month 1 Total Payment (Example)</div>
+            <div class="uf-sub">Interest + fixed principal</div>
+          </div>
+          <div class="uf-amt">$11,375.00</div>
+        </div>
       </div>
 
       <div class="callout" style="margin-top:14px;">
@@ -3212,9 +3274,29 @@ body.stmts-unlocked .acct-card.locked .stmt{
         </div>
 
         <div class="uf-table" style="margin-top:12px;">
-          <div class="uf-row"><div class="uf-left"><div class="uf-name">Gross Rents (2 properties)</div><div class="uf-sub">Property cashflow → J&amp;J</div></div><div class="uf-amt">$5,370.00 / mo</div></div>
-          <div class="uf-row"><div class="uf-left"><div class="uf-name">Roofing Appointments Contribution</div><div class="uf-sub">Monthly payment to J&amp;J (15th of each month)</div></div><div class="uf-amt">$2,075.00 / mo</div></div>
-          <div class="uf-row total"><div class="uf-left"><div class="uf-name">AssureCall Contribution (Remainder)</div><div class="uf-sub">Monthly payment to J&amp;J for debt service (Month 1 example)</div></div><div class="uf-amt">$3,930.00 / mo*</div></div>
+          <div class="uf-row">
+            <div class="uf-left">
+              <div class="uf-name">Gross Rents (2 properties)</div>
+              <div class="uf-sub">Property cashflow → J&amp;J</div>
+            </div>
+            <div class="uf-amt">$5,370.00 / mo</div>
+          </div>
+
+          <div class="uf-row">
+            <div class="uf-left">
+              <div class="uf-name">Roofing Appointments Contribution</div>
+              <div class="uf-sub">Monthly payment to J&amp;J (15th of each month)</div>
+            </div>
+            <div class="uf-amt">$2,075.00 / mo</div>
+          </div>
+
+          <div class="uf-row total">
+            <div class="uf-left">
+              <div class="uf-name">AssureCall Contribution (Remainder)</div>
+              <div class="uf-sub">Monthly payment to J&amp;J for debt service (Month 1 example)</div>
+            </div>
+            <div class="uf-amt">$3,930.00 / mo*</div>
+          </div>
         </div>
 
         <div class="tiny-note">
@@ -3227,7 +3309,9 @@ body.stmts-unlocked .acct-card.locked .stmt{
       <div class="metric" style="margin-top:14px;">
         <div class="label">Estimated Payoff Horizon (If only fixed principal is paid)</div>
         <div class="value">240 months (≈ 20 years)</div>
-        <div class="sub">Based on fixed principal curtailment: $1,050,000 ÷ $4,375/month = 240 months. Interest declines as balance declines.</div>
+        <div class="sub">
+          Based on fixed principal curtailment: $1,050,000 ÷ $4,375/month = 240 months. Interest declines as balance declines.
+        </div>
       </div>
     </div>
   </div>
