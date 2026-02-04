@@ -4444,7 +4444,8 @@ body.stmts-unlocked .acct-card.locked .stmt{
         }
       }).join("");
 
-      const openDefault = (!q && idx < 2) ? "open" : (q ? "open" : "");
+      // ✅ FIXED: All folders closed by default, only open when searching
+      const openDefault = q ? "open" : "";
 
       return `
         <details class="stmt-group" ${openDefault}>
@@ -4541,7 +4542,8 @@ body.stmts-unlocked .acct-card.locked .stmt{
         </a>
       `).join("");
 
-      const openDefault = (!q && idx < 2) ? "open" : (q ? "open" : "");
+      // ✅ FIXED: All folders closed by default, only open when searching
+      const openDefault = q ? "open" : "";
 
       return `
         <details class="stmt-group" ${openDefault}>
