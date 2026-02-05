@@ -4823,315 +4823,313 @@ a[href^="http"]:after {
       </div>
     </article>
 
- <!-- =========================================================
-     INTERACTIVE PAYMENT CALCULATOR
-========================================================== -->
-<article class="panel">
-<div class="panel" style="margin-top: 20px;" id="payment-calculator">
-  <div class="panel-head">
-    <h3>Payment Calculator — Interactive Model</h3>
-    <span class="panel-tag gold">Live Calculation</span>
-  </div>
-
-  <div style="padding: 20px;">
-    <!-- Balance Slider -->
-    <div style="margin-bottom: 24px;">
-      <label style="display: block; font-weight: 800; color: var(--t1); margin-bottom: 12px;">
-        Outstanding Balance:
-      </label>
-      
-      <input 
-        type="range" 
-        id="calcBalance" 
-        min="500000" 
-        max="1050000" 
-        step="10000" 
-        value="1050000"
-        style="
-          width: 100%;
-          height: 8px;
-          border-radius: 5px;
-          background: linear-gradient(90deg, var(--blue), var(--gold));
-          outline: none;
-          -webkit-appearance: none;
-          margin: 16px 0;
-        "
-        aria-label="Loan balance slider"
-      />
-      
-      <div style="
-        text-align: center;
-        font-size: 36px;
-        font-weight: 900;
-        color: var(--t1);
-        margin-top: 12px;
-        letter-spacing: -0.02em;
-      ">
-        $<span id="calcBalanceDisplay">1,050,000</span>
-      </div>
-      
-      <div style="
-        display: flex;
-        justify-content: space-between;
-        font-size: 12px;
-        color: var(--t4);
-        margin-top: 8px;
-      ">
-        <span>Min: $500,000</span>
-        <span>Max: $1,050,000</span>
-      </div>
-    </div>
-
-    <!-- Results Grid -->
-    <div style="
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    ">
-      <!-- Interest Component -->
-      <div class="metric" style="
-        padding: 16px;
-        border-radius: 16px;
-        border: 1px solid rgba(59,130,255,.30);
-        background: linear-gradient(180deg, rgba(59,130,255,.12), rgba(59,130,255,.06));
-      ">
-        <div class="label" style="color: var(--t4);">Interest Component</div>
-        <div class="value" id="calcInterest" style="color: var(--blue); font-size: 28px;">$7,000</div>
-        <div class="sub" style="color: var(--t3);">8% annual ÷ 12 months</div>
-      </div>
-
-      <!-- Principal Component -->
-      <div class="metric" style="
-        padding: 16px;
-        border-radius: 16px;
-        border: 1px solid rgba(212,175,94,.30);
-        background: linear-gradient(180deg, rgba(212,175,94,.12), rgba(212,175,94,.06));
-      ">
-        <div class="label" style="color: var(--t4);">Principal Component</div>
-        <div class="value" style="color: var(--gold); font-size: 28px;">$4,375</div>
-        <div class="sub" style="color: var(--t3);">Fixed (5% annual ÷ 12)</div>
-      </div>
-
-      <!-- Total Payment -->
-      <div class="metric" style="
-        padding: 16px;
-        border-radius: 16px;
-        border: 1px solid rgba(255,255,255,.20);
-        background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
-      ">
-        <div class="label" style="color: var(--t4);">Total Monthly Payment</div>
-        <div class="value" id="calcTotal" style="color: var(--t1); font-size: 28px;">$11,375</div>
-        <div class="sub" style="color: var(--t3);">Interest + Principal</div>
-      </div>
-    </div>
-
-    <!-- Detailed Breakdown -->
-    <div style="
-      margin-top: 24px;
-      padding: 16px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.03);
-    ">
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; font-size: 13px;">
-        <div>
-          <div style="color: var(--t4); margin-bottom: 4px;">Annual Interest:</div>
-          <div style="font-weight: 900; color: var(--t1);" id="calcAnnualInterest">$84,000</div>
-        </div>
-        <div>
-          <div style="color: var(--t4); margin-bottom: 4px;">Annual Principal:</div>
-          <div style="font-weight: 900; color: var(--t1);">$52,500</div>
-        </div>
-        <div>
-          <div style="color: var(--t4); margin-bottom: 4px;">Year 1 Total:</div>
-          <div style="font-weight: 900; color: var(--t1);" id="calcYear1Total">$136,500</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Payment Projection Chart -->
-    <div style="margin-top: 24px;">
-      <h4 style="font-weight: 900; color: var(--t1); margin-bottom: 12px;">12-Month Payment Projection</h4>
-      <div id="paymentChart" style="
-        height: 180px;
-        border-radius: 12px;
-        border: 1px solid var(--line);
-        background: rgba(255,255,255,.02);
-        padding: 16px;
-        overflow: hidden;
-      "></div>
-    </div>
-
-    <!-- Explanation -->
-    <div class="callout" style="margin-top: 20px;">
-      <div class="callout-title">How It Works</div>
-      <div class="callout-body">
-        The <strong>interest component</strong> is calculated monthly based on the <strong>outstanding balance</strong> 
-        (8% annual rate). The <strong>principal component</strong> remains <strong>fixed at $4,375/month</strong> 
-        (5% of original $1,050,000 paid annually). As principal is paid down, the outstanding balance decreases, 
-        causing monthly interest to decline while principal stays constant.
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Add to existing <style> block -->
-<style>
-/* Range Slider Styling */
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--gold);
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(212,175,94,0.4);
-  border: 3px solid var(--bg0);
-}
-
-input[type="range"]::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--gold);
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(212,175,94,0.4);
-  border: 3px solid var(--bg0);
-}
-
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(212,175,94,0.6);
-}
-
-input[type="range"]::-moz-range-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(212,175,94,0.6);
-}
-
-/* Responsive adjustments */
-@media (max-width: 640px) {
-  #payment-calculator .metric {
-    font-size: 0.9em;
-  }
-  
-  #payment-calculator .value {
-    font-size: 22px !important;
-  }
-}
-</style>
-
-<!-- Add to existing <script> block at bottom -->
-<script>
-// Payment Calculator Logic
-(() => {
-  const calcBalance = document.getElementById('calcBalance');
-  const calcBalanceDisplay = document.getElementById('calcBalanceDisplay');
-  const calcInterest = document.getElementById('calcInterest');
-  const calcTotal = document.getElementById('calcTotal');
-  const calcAnnualInterest = document.getElementById('calcAnnualInterest');
-  const calcYear1Total = document.getElementById('calcYear1Total');
-  const paymentChart = document.getElementById('paymentChart');
-
-  const PRINCIPAL_MONTHLY = 4375; // Fixed
-  const INTEREST_RATE = 0.08;
-
-  function formatCurrency(num) {
-    return num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-  }
-
-  function updateCalculator() {
-    const balance = parseFloat(calcBalance.value);
-    const interestMonthly = (balance * INTEREST_RATE / 12);
-    const totalMonthly = interestMonthly + PRINCIPAL_MONTHLY;
-    const annualInterest = interestMonthly * 12;
-    const annualTotal = totalMonthly * 12;
-
-    // Update displays
-    if (calcBalanceDisplay) calcBalanceDisplay.textContent = formatCurrency(balance);
-    if (calcInterest) calcInterest.textContent = '$' + formatCurrency(Math.round(interestMonthly));
-    if (calcTotal) calcTotal.textContent = '$' + formatCurrency(Math.round(totalMonthly));
-    if (calcAnnualInterest) calcAnnualInterest.textContent = '$' + formatCurrency(Math.round(annualInterest));
-    if (calcYear1Total) calcYear1Total.textContent = '$' + formatCurrency(Math.round(annualTotal));
-
-    // Update chart
-    renderPaymentChart(balance);
-  }
-
-  function renderPaymentChart(startingBalance) {
-    if (!paymentChart) return;
-
-    let balance = startingBalance;
-    const months = [];
-    
-    // Calculate 12 months
-    for (let i = 1; i <= 12; i++) {
-      const interest = (balance * INTEREST_RATE / 12);
-      const total = interest + PRINCIPAL_MONTHLY;
-      months.push({ month: i, interest, principal: PRINCIPAL_MONTHLY, total, balance });
-      balance -= PRINCIPAL_MONTHLY;
-    }
-
-    const maxPayment = months[0].total;
-
-    // Simple bar chart with HTML/CSS
-    const bars = months.map((m, idx) => {
-      const interestHeight = (m.interest / maxPayment) * 100;
-      const principalHeight = (m.principal / maxPayment) * 100;
-      
-      return `
-        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;">
-          <div style="width: 100%; display: flex; flex-direction: column-reverse; height: 120px; gap: 1px;">
-            <div style="
-              width: 100%;
-              height: ${principalHeight}%;
-              background: var(--gold);
-              border-radius: 4px 4px 0 0;
-              opacity: 0.8;
-            " title="Principal: $${formatCurrency(Math.round(m.principal))}"></div>
-            <div style="
-              width: 100%;
-              height: ${interestHeight}%;
-              background: var(--blue);
-              border-radius: 0 0 4px 4px;
-              opacity: 0.8;
-            " title="Interest: $${formatCurrency(Math.round(m.interest))}"></div>
-          </div>
-          <div style="font-size: 10px; color: var(--t4);">M${m.month}</div>
-        </div>
-      `;
-    }).join('');
-
-    paymentChart.innerHTML = `
-      <div style="display: flex; gap: 4px; height: 100%; align-items: flex-end;">
-        ${bars}
-      </div>
-      <div style="display: flex; gap: 12px; justify-content: center; margin-top: 12px; font-size: 11px;">
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <div style="width: 12px; height: 12px; background: var(--blue); border-radius: 2px; opacity: 0.8;"></div>
-          <span style="color: var(--t3);">Interest (decreasing)</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <div style="width: 12px; height: 12px; background: var(--gold); border-radius: 2px; opacity: 0.8;"></div>
-          <span style="color: var(--t3);">Principal (fixed)</span>
-        </div>
-      </div>
-    `;
-  }
-
-  // Initial calculation
-  updateCalculator();
-
-  // Update on slider change
-  calcBalance?.addEventListener('input', updateCalculator);
-})();
-</script>      
-          
-    </article>        
+html  </div>
+  <!-- END ROW 2 (Payment Strategy Grid) -->
 </section>
+
+<!-- =========================================================
+     INTERACTIVE PAYMENT CALCULATOR — FULL WIDTH SPAN
+========================================================== -->
+<section class="section" style="margin-top: 0; padding-top: 0; border-top: none;">
+  <div class="panel" id="payment-calculator" style="margin-top: 28px;">
+    <div class="panel-head">
+      <h3>💰 Interactive Payment Calculator — Model Your Own Scenario</h3>
+      <span class="panel-tag gold">Live Calculation Engine</span>
+    </div>
+
+    <div style="padding: 24px;">
       
+      <!-- Balance Slider Section -->
+      <div style="
+        padding: 24px;
+        border-radius: 20px;
+        background: linear-gradient(180deg, rgba(59,130,255,.08), rgba(212,175,94,.06));
+        border: 1px solid rgba(255,255,255,.10);
+        margin-bottom: 28px;
+      ">
+        <label style="
+          display: block;
+          font-weight: 900;
+          color: var(--t1);
+          margin-bottom: 16px;
+          font-size: 18px;
+          letter-spacing: -0.01em;
+        ">
+          📊 Adjust Outstanding Balance:
+        </label>
+        
+        <input 
+          type="range" 
+          id="calcBalance" 
+          min="500000" 
+          max="1050000" 
+          step="10000" 
+          value="1050000"
+          style="
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #3b82ff, #d4af5e);
+            outline: none;
+            -webkit-appearance: none;
+            margin: 20px 0;
+            cursor: pointer;
+          "
+          aria-label="Loan balance slider"
+        />
+        
+        <div style="
+          text-align: center;
+          font-size: 48px;
+          font-weight: 900;
+          color: var(--t1);
+          margin-top: 16px;
+          letter-spacing: -0.02em;
+          text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        ">
+          $<span id="calcBalanceDisplay">1,050,000</span>
+        </div>
+        
+        <div style="
+          display: flex;
+          justify-content: space-between;
+          font-size: 13px;
+          color: var(--t4);
+          margin-top: 12px;
+          padding: 0 8px;
+        ">
+          <span>← Min: $500,000</span>
+          <span>Current Balance</span>
+          <span>Max: $1,050,000 →</span>
+        </div>
+      </div>
+
+      <!-- Three-Column Results Grid -->
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 28px;
+      ">
+        <!-- Interest Component -->
+        <div style="
+          padding: 20px;
+          border-radius: 18px;
+          border: 1px solid rgba(59,130,255,.35);
+          background: linear-gradient(180deg, rgba(59,130,255,.14), rgba(59,130,255,.06));
+          position: relative;
+          overflow: hidden;
+        ">
+          <div style="
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59,130,255,.2), transparent);
+            pointer-events: none;
+          "></div>
+          <div style="position: relative; z-index: 1;">
+            <div style="
+              color: var(--t4);
+              font-size: 12px;
+              letter-spacing: .08em;
+              text-transform: uppercase;
+              font-weight: 700;
+              margin-bottom: 10px;
+            ">Interest Component</div>
+            <div id="calcInterest" style="
+              color: #5da3ff;
+              font-size: 36px;
+              font-weight: 900;
+              letter-spacing: -0.02em;
+              margin-bottom: 8px;
+            ">$7,000</div>
+            <div style="color: var(--t3); font-size: 13px;">
+              8% annual ÷ 12 months<br>
+              <span style="opacity: 0.7;">(Decreases as balance drops)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Principal Component -->
+        <div style="
+          padding: 20px;
+          border-radius: 18px;
+          border: 1px solid rgba(212,175,94,.35);
+          background: linear-gradient(180deg, rgba(212,175,94,.14), rgba(212,175,94,.06));
+          position: relative;
+          overflow: hidden;
+        ">
+          <div style="
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,175,94,.2), transparent);
+            pointer-events: none;
+          "></div>
+          <div style="position: relative; z-index: 1;">
+            <div style="
+              color: var(--t4);
+              font-size: 12px;
+              letter-spacing: .08em;
+              text-transform: uppercase;
+              font-weight: 700;
+              margin-bottom: 10px;
+            ">Principal Component</div>
+            <div style="
+              color: var(--gold2);
+              font-size: 36px;
+              font-weight: 900;
+              letter-spacing: -0.02em;
+              margin-bottom: 8px;
+            ">$4,375</div>
+            <div style="color: var(--t3); font-size: 13px;">
+              Fixed monthly amount<br>
+              <span style="opacity: 0.7;">(5% annual ÷ 12 months)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total Payment -->
+        <div style="
+          padding: 20px;
+          border-radius: 18px;
+          border: 1px solid rgba(255,255,255,.25);
+          background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+          position: relative;
+          overflow: hidden;
+        ">
+          <div style="
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,.15), transparent);
+            pointer-events: none;
+          "></div>
+          <div style="position: relative; z-index: 1;">
+            <div style="
+              color: var(--t4);
+              font-size: 12px;
+              letter-spacing: .08em;
+              text-transform: uppercase;
+              font-weight: 700;
+              margin-bottom: 10px;
+            ">Total Monthly Payment</div>
+            <div id="calcTotal" style="
+              color: var(--t1);
+              font-size: 36px;
+              font-weight: 900;
+              letter-spacing: -0.02em;
+              margin-bottom: 8px;
+            ">$11,375</div>
+            <div style="color: var(--t3); font-size: 13px;">
+              Interest + Principal<br>
+              <span style="opacity: 0.7;">(13% annual ÷ 12 months)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annual Totals Bar -->
+      <div style="
+        padding: 20px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+        margin-bottom: 28px;
+      ">
+        <div style="
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 24px;
+          font-size: 14px;
+        ">
+          <div>
+            <div style="color: var(--t4); margin-bottom: 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em;">Annual Interest</div>
+            <div style="font-weight: 900; color: var(--t1); font-size: 20px;" id="calcAnnualInterest">$84,000</div>
+          </div>
+          <div>
+            <div style="color: var(--t4); margin-bottom: 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em;">Annual Principal</div>
+            <div style="font-weight: 900; color: var(--t1); font-size: 20px;">$52,500</div>
+          </div>
+          <div>
+            <div style="color: var(--t4); margin-bottom: 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em;">Year 1 Total</div>
+            <div style="font-weight: 900; color: var(--t1); font-size: 20px;" id="calcYear1Total">$136,500</div>
+          </div>
+          <div>
+            <div style="color: var(--t4); margin-bottom: 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em;">Remaining Balance</div>
+            <div style="font-weight: 900; color: var(--t1); font-size: 20px;" id="calcRemainingBalance">$997,500</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12-Month Payment Projection Chart -->
+      <div style="
+        padding: 24px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+      ">
+        <h4 style="
+          font-weight: 900;
+          color: var(--t1);
+          margin: 0 0 20px 0;
+          font-size: 18px;
+          letter-spacing: -0.01em;
+        ">📈 12-Month Payment Projection</h4>
+        
+        <div id="paymentChart" style="
+          height: 200px;
+          border-radius: 12px;
+          border: 1px solid rgba(255,255,255,.08);
+          background: rgba(0,0,0,.15);
+          padding: 20px;
+          overflow: hidden;
+        "></div>
+        
+        <div style="
+          display: flex;
+          gap: 24px;
+          justify-content: center;
+          margin-top: 16px;
+          font-size: 13px;
+        ">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 16px; height: 16px; background: var(--blue); border-radius: 3px; opacity: 0.8;"></div>
+            <span style="color: var(--t3);">Interest (decreasing each month)</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 16px; height: 16px; background: var(--gold); border-radius: 3px; opacity: 0.8;"></div>
+            <span style="color: var(--t3);">Principal (fixed at $4,375/mo)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Explanation Callout -->
+      <div class="callout" style="margin-top: 24px;">
+        <div class="callout-title">💡 How the Calculator Works</div>
+        <div class="callout-body">
+          The <strong style="color: var(--blue);">interest component</strong> is calculated monthly based on the 
+          <strong>current outstanding balance</strong> (8% annual rate). The <strong style="color: var(--gold2);">principal component</strong> 
+          remains <strong>fixed at $4,375/month</strong> (5% of the original $1,050,000 paid annually = $52,500/year ÷ 12 months). 
+          As principal is paid down each month, the outstanding balance decreases, causing the monthly interest charge to decline 
+          while the principal payment stays constant. This structure provides <strong>predictable principal reduction</strong> 
+          with <strong>declining total payments over time</strong>.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- =========================================================
         Funding Structure
    ========================================================== -->
