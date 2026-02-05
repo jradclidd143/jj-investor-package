@@ -8,6 +8,10 @@
 <meta name="color-scheme" content="light dark">
 <title>J&J Investments of Florida — Lender Review Package</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://raw.githubusercontent.com">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/jradclidd143/jj-investor-package/d8ff1b39af1f21e0c4def828687bf8fc83f5c90e/JJ_header_updated-LOAN%20STRUCTURE%20SUBMISSIONA.png">
+
 <link rel="icon" href="favicon.ico?v=1">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=1">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=1">
@@ -55,6 +59,12 @@ color-scheme: light;
 --line: rgba(0,0,0,.12);
 --text: #0b1020;
 --muted: rgba(11,16,32,.72);
+--gold: #c9a75a;
+--gold2: #d4af5e;
+--gold-glow: rgba(201,167,90,.28);
+--red: #d93c3c;
+--blue: #3b82ff;
+--blue-glow: rgba(59,130,255,.18);
 --shadow: 0 22px 60px rgba(0,0,0,.16);
 --shadow2: 0 10px 30px rgba(0,0,0,.12);
 --t1: rgba(11,16,32,1.00);
@@ -66,7 +76,17 @@ color-scheme: light;
 /* ============================================================
       RESET & BASE
       ============================================================ */
-* { box-sizing: border-box; }
+* { 
+  box-sizing: border-box;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+code, a, pre {
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
 html, body { height: 100%; }
 body {
 margin: 0;
@@ -90,6 +110,51 @@ background-size: 48px 48px;
 opacity: .10;
 pointer-events: none;
 mask-image: radial-gradient(700px 420px at 30% 0%, black 35%, transparent 75%);
+}
+
+/* Skip to content for accessibility */
+.skip-to-content {
+position: absolute;
+top: -100px;
+left: 0;
+background: var(--gold);
+color: var(--bg0);
+padding: 12px 20px;
+text-decoration: none;
+font-weight: 700;
+z-index: 9999;
+border-radius: 0 0 8px 0;
+}
+
+.skip-to-content:focus {
+top: 0;
+}
+
+/* ============================================================
+      FOCUS STATES - ACCESSIBILITY
+      ============================================================ */
+*:focus {
+outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+details summary:focus-visible,
+[tabindex]:focus-visible {
+outline: 2px solid var(--gold);
+outline-offset: 2px;
+border-radius: 4px;
+}
+
+.doc:focus-visible,
+.stmt-row:focus-visible,
+.kpi-card:focus-visible {
+outline: 2px solid var(--gold);
+outline-offset: 3px;
+box-shadow: 0 0 0 4px var(--gold-glow);
 }
 
 /* ============================================================
@@ -409,6 +474,9 @@ color: var(--t1);
 display: flex;
 align-items: center;
 gap: 10px;
+overflow-wrap: break-word;
+word-wrap: break-word;
+hyphens: auto;
 }
 
 .section-head h2::before {
@@ -429,8 +497,21 @@ max-width: 90ch;
 }
 
 /* ============================================================
-      GRID HELPERS
+      CONSOLIDATED GRID FIXES
       ============================================================ */
+.hero > *, 
+.grid-2 > *, 
+.charts-row > *, 
+.split > *, 
+.compare > *,
+.risk-grid > *, 
+.growth-grid-2 > *, 
+.acct-grid-4 > *,
+.funds-flow > *,
+.alloc-grid > * { 
+  min-width: 0; 
+}
+
 .grid-2 {
 display: grid;
 grid-template-columns: repeat(2, minmax(0,1fr));
@@ -443,6 +524,29 @@ margin-top: 16px;
 display: grid;
 grid-template-columns: 1fr 1fr;
 gap: 16px;
+}
+
+/* Section-specific grid overrides */
+#jj-funding-strategy .grid-2,
+#funding-repayment .grid-2,
+#roofing-appointments .grid-2 {
+display: grid !important;
+grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+gap: 18px;
+align-items: start;
+}
+
+/* Ensure panels and cards can shrink */
+.panel,
+.chart-card,
+.option-card,
+.property-card,
+.alloc-grid,
+.alloc-legend,
+.alloc-legend-row {
+min-width: 0;
+max-width: 100%;
+overflow: hidden;
 }
 
 /* ============================================================
@@ -474,7 +578,8 @@ font-weight: 820;
 letter-spacing: -0.01em;
 margin-bottom: 10px;
 color: var(--t1);
-word-break: break-word;
+overflow-wrap: break-word;
+word-wrap: break-word;
 hyphens: auto;
 }
 
@@ -502,13 +607,14 @@ color: rgba(255,140,140,.92);
 }
 
 .property-body { padding: 12px 16px 16px; }
-.mini-table { width: 100%; }
+.mini-table { width: 100%; min-width: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .mini-row {
 display: grid;
-grid-template-columns: 1.1fr .6fr .8fr;
+grid-template-columns: minmax(0, 1fr) minmax(80px, auto) minmax(100px, auto);
 gap: 12px;
 padding: 10px 0;
 border-bottom: 1px solid rgba(255,255,255,.08);
+align-items: start;
 }
 
 .mini-row:last-child { border-bottom: none; }
@@ -537,7 +643,14 @@ position: relative;
 overflow: hidden;
 }
 
-.chart-title { font-weight: 820; letter-spacing: -0.01em; color: var(--t1); }
+.chart-title { 
+  font-weight: 820; 
+  letter-spacing: -0.01em; 
+  color: var(--t1);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 .chart-sub { color: var(--t3); margin-top: 6px; font-size: 13px; line-height: 1.5; }
 .chart { margin-top: 12px; }
 .tiny-note { margin-top: 10px; color: var(--t4); font-size: 12px; line-height: 1.55; }
@@ -586,7 +699,14 @@ mask-repeat: no-repeat; mask-position: center; mask-size: contain;
 .ic-shield::after { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2l7 4v6c0 5-3 9-7 10C8 21 5 17 5 12V6l7-4z'/%3E%3C/svg%3E"); }
 .ic-growth::after { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 19h16v2H4v-2zm1-4l5-5 3 3 6-6 1 1-7 7-3-3-4 4-1-1z'/%3E%3C/svg%3E"); }
 
-.flow-title { margin-top: 10px; font-weight: 820; color: var(--t1); }
+.flow-title { 
+  margin-top: 10px; 
+  font-weight: 820; 
+  color: var(--t1);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 .flow-sub { margin-top: 4px; color: var(--t3); font-size: 12.8px; line-height: 1.45; }
 
 /* ============================================================
@@ -614,12 +734,19 @@ border-color: rgba(212,175,94,.38);
 background: rgba(212,175,94,.14);
 color: var(--gold2);
 }
-.panel h3 { margin: 0; letter-spacing: -0.01em; color: var(--t1); }
+.panel h3 { 
+  margin: 0; 
+  letter-spacing: -0.01em; 
+  color: var(--t1);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 
 /* ============================================================
       USE-OF-FUNDS TABLE
       ============================================================ */
-.uf-table { margin-top: 12px; display: grid; gap: 10px; }
+.uf-table { margin-top: 12px; display: grid; gap: 10px; min-width: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .uf-row {
 display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;
 padding: 12px;
@@ -631,8 +758,14 @@ background: rgba(255,255,255,.04);
 border-color: rgba(212,175,94,.30);
 background: rgba(212,175,94,.09);
 }
-.uf-left { display: flex; flex-direction: column; gap: 4px; }
-.uf-name { font-weight: 820; color: var(--t1); }
+.uf-left { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.uf-name { 
+  font-weight: 820; 
+  color: var(--t1);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 .uf-sub { color: var(--t3); font-size: 12.6px; line-height: 1.35; }
 .uf-amt { font-weight: 900; letter-spacing: -0.01em; color: var(--t1); white-space: nowrap; }
 
@@ -739,7 +872,14 @@ mask-repeat: no-repeat; mask-position: center; mask-size: contain;
 .ic-roof::after   { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3l10 9h-3v9h-6v-6H11v6H5v-9H2l10-9z'/%3E%3C/svg%3E"); }
 .ic-target::after { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M11 2v2a8 8 0 1 0 8 8h2A10 10 0 1 1 11 2zm1 6a4 4 0 1 0 4 4h-2a2 2 0 1 1-2-2V8zm9-3l-3 3-1-1 3-3 1 1z'/%3E%3C/svg%3E"); }
 
-.mcard-title { margin-top: 10px; font-weight: 850; color: var(--t1); }
+.mcard-title { 
+  margin-top: 10px; 
+  font-weight: 850; 
+  color: var(--t1);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 .mcard-sub { margin-top: 4px; color: var(--t3); font-size: 12.6px; line-height: 1.45; }
 
 /* ============================================================
@@ -784,7 +924,14 @@ border-radius: 12px;
 background: var(--gold2);
 mask-repeat: no-repeat; mask-position: center; mask-size: contain;
 }
-.gc-title { font-weight: 900; letter-spacing: -0.01em; color: var(--t1); }
+.gc-title { 
+  font-weight: 900; 
+  letter-spacing: -0.01em; 
+  color: var(--t1);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 .gc-sub { color: var(--t3); font-size: 12.8px; margin-top: 2px; line-height: 1.35; }
 
 .bullets { margin: 10px 0 0; padding-left: 18px; color: var(--t3); line-height: 1.7; }
@@ -825,7 +972,13 @@ padding: 10px;
 border-color: rgba(212,175,94,.34);
 background: rgba(212,175,94,.10);
 }
-.lane-title { font-weight: 900; color: var(--t1); }
+.lane-title { 
+  font-weight: 900; 
+  color: var(--t1);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 .lane-sub { color: var(--t3); font-size: 12.5px; margin-top: 4px; line-height: 1.45; }
 
 .growth-card .steps-3,
@@ -867,7 +1020,14 @@ border-color: rgba(212,175,94,.36);
 background: rgba(212,175,94,.16);
 color: var(--gold2);
 }
-.option-head h3 { margin: 0; letter-spacing: -0.01em; color: var(--t1); }
+.option-head h3 { 
+  margin: 0; 
+  letter-spacing: -0.01em; 
+  color: var(--t1);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 .option-card .sub { margin-top: 6px; color: var(--t3); font-size: 12.8px; }
 
 /* ============================================================
@@ -890,6 +1050,13 @@ background: rgba(255,255,255,.04);
 .metric .label { color: var(--t4); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
 .metric .value { margin-top: 6px; font-size: 18px; font-weight: 900; color: var(--t1); }
 .metric .sub { margin-top: 4px; color: var(--t3); font-size: 12.6px; }
+
+.metric-strip {
+display: grid;
+grid-template-columns: repeat(4, minmax(0,1fr));
+gap: 14px;
+margin-bottom: 28px;
+}
 
 /* ============================================================
       COMPARISON CARDS
@@ -968,7 +1135,6 @@ opacity: .90;
 .ic-clock::after { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 20a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-8V7h-2v6l5 3 1-1-4-2z'/%3E%3C/svg%3E"); }
 .ic-brief::after { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M10 4h4V2h2v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2h2v2zm9 4H5v12h14V8z'/%3E%3C/svg%3E"); }
 
-/* --- Doc viewer helpers --- */
 .doc-group { margin-top: 16px; }
 .doc-group-title{
   font-weight: 900;
@@ -1031,7 +1197,13 @@ font-weight: 900;
 letter-spacing: .06em;
 flex-shrink: 0;
 }
-.doc-title { font-weight: 820; color: var(--t1); }
+.doc-title { 
+  font-weight: 820; 
+  color: var(--t1);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 .doc-sub { margin-top: 4px; color: var(--t3); font-size: 12.5px; }
 
 .disclaimer {
@@ -1055,23 +1227,14 @@ justify-content: space-between;
 font-size: 12px;
 }
 
- /* ============================================================
+/* ============================================================
    ASSURECALL — BANK STATEMENTS APPENDIX (LOCKED INDEX)
-   4-column account grid + sub-containers + non-clickable rows
    ============================================================ */
-
 .acct-grid-4{
   margin-top: 14px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
-}
-
-@media (max-width: 1200px){
-  .acct-grid-4{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 680px){
-  .acct-grid-4{ grid-template-columns: 1fr; }
 }
 
 .acct-card{
@@ -1160,6 +1323,15 @@ font-size: 12px;
   justify-content: space-between;
   gap: 10px;
   align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.stmt:hover{
+  transform: translateY(-1px);
+  border-color: rgba(212,175,94,.34);
+  background: rgba(212,175,94,.08);
 }
 
 .stmt .name{
@@ -1181,216 +1353,29 @@ font-size: 12px;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,.10);
   background: rgba(255,255,255,.03);
-}     
-
- /* =========================================================
-   Appendix Statements Index (no overflow / no bleed)
-========================================================= */
-.stmt-index,
-.stmt-group,
-.stmt-row,
-.stmt-left,
-.stmt-name { min-width:0; }
-
-.stmt-group{
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 14px;
-  overflow: hidden;
-  background: rgba(10,14,24,.55);
-  margin-bottom: 12px;
 }
 
-.stmt-group summary{
-  list-style: none;
+/* Locked behavior */
+.acct-card.locked .stmt{
+  pointer-events: none;
+  cursor: default;
+  transform: none !important;
+}
+
+body.stmts-unlocked .acct-card.locked .stmt{
+  pointer-events: auto;
   cursor: pointer;
-  padding: 12px 12px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 10px;
-  user-select:none;
-}
-.stmt-group summary::-webkit-details-marker{ display:none; }
-
-.stmt-group .stmt-group-title{
-  display:flex;
-  flex-direction:column;
-  gap: 2px;
-  min-width:0;
-}
-.stmt-group .stmt-group-title strong{
-  font-weight: 800;
-  letter-spacing: .2px;
-}
-.stmt-group .stmt-group-title span{
-  opacity:.8;
-  font-size: .9rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.stmt-count{
-  flex: 0 0 auto;
-  font-size: .85rem;
-  opacity:.85;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.04);
-}
-
-.stmt-list{
-  padding: 6px 8px 10px;
-}
-
-.stmt-row{
-  display:grid;
-  grid-template-columns: minmax(0,1fr) 120px;
-  gap: 10px;
-  align-items:center;
-  padding: 10px 10px;
-  border-radius: 12px;
-  text-decoration:none;
-  color: inherit;
-}
-.stmt-row:hover{
-  background: rgba(255,255,255,.04);
-}
-
-.stmt-left{
-  display:flex;
-  flex-direction:column;
-  gap: 2px;
-  overflow:hidden;
-}
-.stmt-name{
-  font-weight: 800;
-  white-space: nowrap;
-  overflow:hidden;
-  text-overflow: ellipsis;
-}
-.stmt-meta{
-  opacity:.78;
-  font-size:.9rem;
-  white-space: nowrap;
-  overflow:hidden;
-  text-overflow: ellipsis;
-}
-
-.stmt-open{
-  justify-self:end;
-  white-space: nowrap;
-  font-size:.9rem;
-  padding: 8px 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.04);
-}    
-
- /* =========================================================
-   J&J Branded Strip (Appendix header block)
-========================================================= */
-.jj-strip{
-  margin-top: 12px;
-  border-radius: 18px;
-  padding: 12px 14px;
-  border: 1px solid rgba(255,255,255,.10);
-  background:
-    radial-gradient(900px 160px at 20% 0%, rgba(255,215,130,.10), transparent 60%),
-    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 12px;
-}
-
-.jj-strip-left{ display:flex; align-items:center; gap: 12px; min-width:0; }
-
-.jj-mark{
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight: 900;
-  letter-spacing: .6px;
-  border: 1px solid rgba(255,215,130,.28);
-  background: rgba(255,215,130,.10);
-  box-shadow: 0 10px 30px rgba(0,0,0,.25);
-  flex: 0 0 auto;
-}
-
-.jj-strip-text{ min-width:0; }
-.jj-strip-title{ font-weight: 900; letter-spacing: .2px; }
-.jj-strip-sub{
-  opacity:.80;
-  font-size: .92rem;
-  white-space: nowrap;
-  overflow:hidden;
-  text-overflow: ellipsis;
-}
-
-.jj-strip-badges{ display:flex; gap: 8px; flex-wrap: wrap; justify-content:flex-end; }
-.jj-pill{
-  font-size: .78rem;
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.04);
-  white-space: nowrap;
-}
-.jj-pill.gold{
-  border-color: rgba(255,215,130,.35);
-  background: rgba(255,215,130,.10);
-}
-
-/* =========================================================
-   Statement tools (search + count pill)
-========================================================= */
 .stmt-tools{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 10px;
   margin-top: 12px;
-}
-.stmt-search{
-  flex: 1 1 auto;
-  min-width: 0;
-  display:flex;
-  align-items:center;
-  gap: 8px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.03);
-}
-.stmt-search input{
-  width: 100%;
-  min-width:0;
-  background: transparent;
-  border: 0;
-  outline: 0;
-  color: inherit;
-  font: inherit;
-}
-.stmt-icon{ opacity:.75; flex:0 0 auto; }
-
-.stmt-meta-pill{
-  flex: 0 0 auto;
-  font-size: .85rem;
-  padding: 8px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,215,130,.28);
-  background: rgba(255,215,130,.08);
-  white-space: nowrap;
+  display: flex;
+  justify-content: flex-end;
 }
 
-/* =========================================================
+/* ============================================================
    Statement Index (Branded, no overflow / no bleed)
-========================================================= */
+   ============================================================ */
 .stmt-index,
 .stmt-group,
 .stmt-row,
@@ -1459,6 +1444,7 @@ font-size: 12px;
   border-radius: 14px;
   text-decoration:none;
   color: inherit;
+  transition: background .15s ease;
 }
 .stmt-row:hover{ background: rgba(255,215,130,.06); }
 
@@ -1492,13 +1478,106 @@ font-size: 12px;
   background: rgba(255,215,130,.08);
 }
 
-/* Mobile: prevent tight squeeze */
-@media (max-width: 560px){
-  .stmt-row{ grid-template-columns: minmax(0,1fr); }
-  .stmt-open{ justify-self:start; width: fit-content; }
-  .stmt-tools{ flex-direction:column; align-items:stretch; }
-  .stmt-meta-pill{ align-self:flex-start; }
-}     
+/* ============================================================
+   J&J Branded Strip (Appendix header block)
+   ============================================================ */
+.jj-strip{
+  margin-top: 12px;
+  border-radius: 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background:
+    radial-gradient(900px 160px at 20% 0%, rgba(255,215,130,.10), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+}
+
+.jj-strip-left{ display:flex; align-items:center; gap: 12px; min-width:0; }
+
+.jj-mark{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 900;
+  letter-spacing: .6px;
+  border: 1px solid rgba(255,215,130,.28);
+  background: rgba(255,215,130,.10);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  flex: 0 0 auto;
+}
+
+.jj-strip-text{ min-width:0; }
+.jj-strip-title{ font-weight: 900; letter-spacing: .2px; }
+.jj-strip-sub{
+  opacity:.80;
+  font-size: .92rem;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+
+.jj-strip-badges{ display:flex; gap: 8px; flex-wrap: wrap; justify-content:flex-end; }
+.jj-pill{
+  font-size: .78rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  white-space: nowrap;
+}
+.jj-pill.gold{
+  border-color: rgba(255,215,130,.35);
+  background: rgba(255,215,130,.10);
+}
+
+/* ============================================================
+   Statement tools (search + count pill)
+   ============================================================ */
+.stmt-tools{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+.stmt-search{
+  flex: 1 1 auto;
+  min-width: 0;
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+  position: relative;
+}
+.stmt-search input{
+  width: 100%;
+  min-width:0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: inherit;
+  font: inherit;
+}
+.stmt-icon{ opacity:.75; flex:0 0 auto; }
+
+.stmt-meta-pill{
+  flex: 0 0 auto;
+  font-size: .85rem;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,215,130,.28);
+  background: rgba(255,215,130,.08);
+  white-space: nowrap;
+}
 
 /* ============================================================
       SIDE NAVIGATION
@@ -1626,17 +1705,17 @@ outline-offset: 2px;
 }
 
 /* ============================================================
-      IMAGE & MEDIA STYLES
+      IMAGE & MEDIA STYLES - FULL CONTAINER UTILIZATION
       ============================================================ */
 .brands-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px;
+  padding: 20px;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 12px;
-  max-width: 600px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -1644,7 +1723,7 @@ outline-offset: 2px;
   display: block;
   width: 100%;
   height: auto;
-  max-height: 300px;
+  max-height: 180px;
   object-fit: contain;
 }
 
@@ -1669,17 +1748,20 @@ outline-offset: 2px;
   display: block;
   width: 100%;
   height: auto;
-  max-height: 500px;
-  object-fit: contain;
+  min-height: 280px;
+  max-height: 600px;
+  object-fit: cover;
+  object-position: center;
   background: var(--bg1);
-  padding: 20px;
+  padding: 0;
 }
 
 .jj-figure figcaption {
-  padding: 12px 16px;
+  padding: 14px 18px;
   font-size: 13px;
+  line-height: 1.5;
   color: var(--t3);
-  text-align: center;
+  text-align: left;
   border-top: 1px solid var(--line);
   background: var(--card2);
 }
@@ -1688,15 +1770,18 @@ outline-offset: 2px;
   display: block;
   width: 100%;
   height: auto;
+  min-height: 200px;
   border-radius: 8px;
   border: 1px solid var(--line);
   margin-top: 12px;
   background: var(--card);
+  object-fit: contain;
+  object-position: center top;
 }
 
 .deposits-charts {
   display: grid;
-  gap: 20px;
+  gap: 24px;
   margin-top: 16px;
 }
 
@@ -1704,32 +1789,53 @@ outline-offset: 2px;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 16px;
-  padding: 20px;
+  padding: 24px;
   box-shadow: var(--shadow2);
 }
 
 .chart-card-lg h4 {
-  margin: 0 0 8px 0;
-  font-size: 16px;
+  margin: 0 0 10px 0;
+  font-size: 17px;
   font-weight: 700;
   color: var(--t1);
 }
 
 .chart-card-lg .chart-sub {
-  margin: 0 0 16px 0;
-  font-size: 13px;
+  margin: 0 0 18px 0;
+  font-size: 14px;
+  line-height: 1.6;
   color: var(--t3);
+}
+
+.property-card img,
+.option-card img {
+  width: 100%;
+  height: auto;
+  min-height: 320px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.chart svg,
+.chart-card svg,
+svg[role="img"] {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
 }
       
 /* ============================================================
-   ALLOCATION DONUT (Use of Funds) — CSS for alloc-card
+   ALLOCATION DONUT - Constrained Container
    ============================================================ */
 .alloc-grid{
   margin-top: 14px;
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
   gap: 16px;
   align-items: start;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .alloc-donut-wrap{
@@ -1737,17 +1843,19 @@ outline-offset: 2px;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  min-width: 0;
+  max-width: 280px;
+  margin: 0 auto;
 }
 
 .alloc-donut{
-  width: 240px;
-  height: 240px;
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 1;
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,.12);
   box-shadow: var(--shadow2);
   position: relative;
-
-  /* conic-gradient built from your % variables */
   background: conic-gradient(
     rgba(212,175,94,.35) 0% calc(var(--p-liens)*1%),
     rgba(59,130,255,.30) calc(var(--p-liens)*1%) calc((var(--p-liens) + var(--p-res))*1%),
@@ -1789,11 +1897,12 @@ outline-offset: 2px;
 .alloc-legend{
   display: grid;
   gap: 10px;
+  min-width: 0;
 }
 
 .alloc-legend-row{
   display: grid;
-  grid-template-columns: 1fr 80px 140px;
+  grid-template-columns: minmax(0, 1fr) 80px 140px;
   gap: 10px;
   align-items: center;
   padding: 10px 12px;
@@ -1807,6 +1916,7 @@ outline-offset: 2px;
   align-items:center;
   gap:10px;
   min-width: 0;
+  overflow: hidden;
 }
 
 .alloc-name{
@@ -1818,8 +1928,22 @@ outline-offset: 2px;
   white-space: nowrap;
 }
 
-.alloc-pct{ color: var(--t4); font-weight: 900; font-size: 12px; text-align:right; }
-.alloc-amt{ color: var(--t2); font-weight: 900; font-size: 12.8px; text-align:right; white-space: nowrap; }
+.alloc-pct{ 
+  color: var(--t4); 
+  font-weight: 900; 
+  font-size: 12px; 
+  text-align:right;
+  justify-self: end;
+  white-space: nowrap;
+}
+.alloc-amt{ 
+  color: var(--t2); 
+  font-weight: 900; 
+  font-size: 12.8px; 
+  text-align:right; 
+  white-space: nowrap;
+  justify-self: end;
+}
 
 .alloc-dot{
   width: 12px;
@@ -1829,7 +1953,6 @@ outline-offset: 2px;
   flex: 0 0 auto;
 }
 
-/* color mapping (matches donut order) */
 .c-liens{ background: rgba(212,175,94,.35); }
 .c-res{ background: rgba(59,130,255,.30); }
 .c-assure{ background: rgba(255,255,255,.22); }
@@ -1850,17 +1973,8 @@ outline-offset: 2px;
 
 .alloc-seg{ height: 100%; }
 
-/* responsive */
-@media (max-width: 900px){
-  .alloc-grid{ grid-template-columns: 1fr; }
-  .alloc-donut{ width: 220px; height: 220px; }
-  .alloc-legend-row{ grid-template-columns: 1fr 80px 120px; }
-}
-
- /* Prevent grid children from forcing horizontal overflow */
 #jj-funding-strategy .grid-2 > * { min-width: 0; }
 
-/* Use of Funds: donut + legend wrapper */
 #jj-funding-strategy .usefunds-wrap{
   display: grid;
   grid-template-columns: minmax(260px, 1fr) minmax(280px, 360px);
@@ -1870,7 +1984,6 @@ outline-offset: 2px;
 }
 #jj-funding-strategy .usefunds-wrap > *{ min-width: 0; }
 
-/* Legend rows: label can shrink, values never wrap */
 #jj-funding-strategy .usefunds-rows{ min-width: 0; max-width: 100%; }
 #jj-funding-strategy .usefunds-rows .row{
   display: grid;
@@ -1893,60 +2006,6 @@ outline-offset: 2px;
 }
 #jj-funding-strategy .usefunds-rows .pct{ opacity: .85; }
 
-/* Stack on smaller screens */
-@media (max-width: 1100px){
-  #jj-funding-strategy .usefunds-wrap{ grid-template-columns: 1fr; }
-}     
-      
-/* =========================================================
-   FIX: J&J Funding layout + prevent right-side bleed
-========================================================= */
-#jj-funding-strategy .grid-2{
-  display: grid !important;
-  grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important;
-  gap: 18px;
-  align-items: start;
-}
-
-/* Make sure grid children can shrink (prevents overflow) */
-#jj-funding-strategy .panel,
-#jj-funding-strategy .chart-card,
-#jj-funding-strategy .alloc-grid,
-#jj-funding-strategy .alloc-legend,
-#jj-funding-strategy .alloc-legend-row,
-#jj-funding-strategy .alloc-left,
-#jj-funding-strategy .alloc-name{
-  min-width: 0;
-}
-
-#jj-funding-strategy .panel,
-#jj-funding-strategy .chart-card{
-  max-width: 100%;
-  overflow: hidden; /* critical: stops the "bleed off to the right" */
-}
-
-/* =========================================================
-   FIX: Roofing Appointments layout
-========================================================= */
-#roofing-appointments .grid-2{
-  display: grid !important;
-  grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important;
-  gap: 18px;
-  align-items: start;
-}
-
-#roofing-appointments .panel,
-#roofing-appointments .chart-card{
-  min-width: 0;
-  max-width: 100%;
-}
-
-/* Allow text wrapping in Roofing table */
-#roofing-appointments .uf-table{
-  min-width: 0;
-  max-width: 100%;
-}
-
 #roofing-appointments .uf-amt{
   white-space: normal;
   word-wrap: break-word;
@@ -1962,63 +2021,6 @@ outline-offset: 2px;
   white-space: normal;
   word-wrap: break-word;
 }
-
-/* Only collapse on truly mobile screens */
-@media (max-width: 760px){
-  #roofing-appointments .grid-2{
-    grid-template-columns: 1fr !important;
-  }    
-
-/* Donut + legend layout inside the chart card */
-#jj-funding-strategy .alloc-grid{
-  display:grid;
-  grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
-  gap: 16px;
-  align-items:start;
-}
-
-/* Legend rows: name | pct | amount */
-#jj-funding-strategy .alloc-legend-row{
-  display:grid;
-  grid-template-columns: minmax(0,1fr) 76px 140px;
-  gap: 10px;
-  align-items:center;
-}
-
-/* Keep text from pushing the row wider than the container */
-#jj-funding-strategy .alloc-left{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-  overflow:hidden;
-}
-
-#jj-funding-strategy .alloc-name{
-  overflow:hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-#jj-funding-strategy .alloc-pct,
-#jj-funding-strategy .alloc-amt{
-  justify-self:end;
-  white-space: nowrap;
-}
-
-/* Responsive stack */
-@media (max-width: 980px){
-  #jj-funding-strategy .grid-2{ grid-template-columns: 1fr; }
-  #jj-funding-strategy .alloc-grid{ grid-template-columns: 1fr; }
-  #jj-funding-strategy .alloc-legend-row{ grid-template-columns: minmax(0,1fr) 72px 128px; }
-}
-
-      /* Only collapse on truly mobile screens */
-@media (max-width: 760px){
-  #jj-funding-strategy .grid-2{
-    grid-template-columns: 1fr !important;
-  }
-}
-    
       
 /* ============================================================
       RESPONSIVE BREAKPOINTS
@@ -2036,146 +2038,105 @@ outline-offset: 2px;
 .flow-arrow         { display: none; }
 .sidenav            { display: none; }
 .container          { padding-right: 20px !important; }
-.brands-img         { max-height: 200px; }
-.jj-figure img      { max-height: 400px; padding: 12px; }
+.jj-figure img      { max-height: 450px; min-height: 240px; }
+.chart-img          { min-height: 180px; }
+.acct-grid-4        { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.alloc-grid         { grid-template-columns: 1fr; }
+.alloc-donut-wrap   { max-width: 220px; }
+.alloc-legend-row   { grid-template-columns: minmax(0, 1fr) 72px 128px; }
+#jj-funding-strategy .usefunds-wrap { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+#jj-funding-strategy .grid-2,
+#roofing-appointments .grid-2 { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 680px) {
+.acct-grid-4 { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
-.brands-img  { max-height: 150px; }
-.jj-figure img { max-height: 300px; padding: 8px; }
-.kpis { grid-template-columns: 1fr; }
+.jj-figure img  { max-height: 350px; min-height: 200px; }
+.chart-img      { min-height: 150px; }
+.brands-img     { max-height: 120px; }
+.kpis           { grid-template-columns: 1fr; }
+.metric-strip   { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.mini-row,
+.uf-row {
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+.mini-row .r,
+.uf-row .r {
+  text-align: left;
+  justify-self: start;
+}
+.uf-amt {
+  white-space: normal;
+  word-break: break-word;
+}
+.stmt-row { grid-template-columns: minmax(0,1fr); }
+.stmt-open { justify-self:start; width: fit-content; }
+.stmt-tools { flex-direction:column; align-items:stretch; }
+.stmt-meta-pill { align-self:flex-start; }
 }
 
-<!-- =========================================================
-  ✅ PATCH 1 — Add this CSS at the VERY END of your
-========================================================== -->
-
-/* ---- PATCH: stop “leaving the container” / horizontal overflow ---- */
-.hero > *, .grid-2 > *, .charts-row > *, .split > *, .compare > *,
-.risk-grid > *, .growth-grid-2 > *, .acct-grid-4 > * { min-width: 0; }
-
-/* Make SVG charts fully responsive inside cards */
-.chart svg { width: 100%; height: auto; display: block; max-width: 100%; }
-
-/* Borrower Experience 4-metric strip: responsive + no overflow */
-.metric-strip{
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0,1fr));
-  gap: 14px;
-  margin-bottom: 28px;
-}
-@media (max-width: 1020px){
-  .metric-strip{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-}
-@media (max-width: 640px){
-  .metric-strip{ grid-template-columns: 1fr; }
+@media (max-width: 560px) {
+.metric-strip { grid-template-columns: 1fr; }
 }
 
-/* Statement rows: allow link styling (locked by default, unlockable via JS toggle) */
-.stmt{
-  text-decoration: none;
-  color: inherit;
-  transition: transform .15s ease, border-color .15s ease, background .15s ease;
-}
-.stmt:hover{
-  transform: translateY(-1px);
-  border-color: rgba(212,175,94,.34);
-  background: rgba(212,175,94,.08);
-}
-
-/* Locked behavior (default) */
-.acct-card.locked .stmt{
-  pointer-events: none;
-  cursor: default;
-  transform: none !important;
+/* ============================================================
+      PRINT STYLES
+      ============================================================ */
+@media print {
+.topbar,
+.sidenav,
+.up-btn,
+.nav-toggle,
+.pill-toggle,
+.doc-btn,
+#navBackdrop,
+.bg-grid {
+  display: none !important;
 }
 
-/* When unlocked, allow clicks */
-body.stmts-unlocked .acct-card.locked .stmt{
-  pointer-events: auto;
-  cursor: pointer;
+body {
+  background: white;
+  color: black;
 }
 
-/* Small header row to host the unlock button */
-.stmt-tools{
-  margin-top: 12px;
-  display: flex;
-  justify-content: flex-end;
+.container {
+  padding-right: 20px !important;
+  max-width: 100%;
 }
 
-/* ================================
-   FIX: Funding section formatting
-   ================================ */
-#funding-repayment .grid-2{
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: 18px;
-  align-items: start;
-}
-#funding-repayment .grid-2 > *{ min-width: 0; }
-
-@media (max-width: 980px){
-  #funding-repayment .grid-2{ grid-template-columns: 1fr; }
+.section {
+  page-break-inside: avoid;
 }
 
-
-/* =========================================
-   FIX: Side navigation placement + toggle
-   ========================================= */
-:root{
-  --side-nav-w: 260px;
-  --side-nav-w-collapsed: 62px;
-  --side-nav-top: 92px;        /* adjust if header height differs */
-  --side-nav-right: 18px;      /* moves nav to the RIGHT so it stops covering */
+.chart-card,
+.panel,
+.property-card {
+  page-break-inside: avoid;
 }
 
-#sideNav{
-  position: fixed; /* <- key change: removes it from the content container */
-  top: var(--side-nav-top);
-  right: max(var(--side-nav-right), env(safe-area-inset-right));
-  width: var(--side-nav-w);
-  max-height: calc(100vh - var(--side-nav-top) - 16px);
-  overflow: auto;
-  z-index: 9999;
+a {
+  color: black;
+  text-decoration: underline;
 }
 
-/* collapsed (closed) state */
-#sideNav.is-collapsed{
-  width: var(--side-nav-w-collapsed);
+a[href^="http"]:after {
+  content: " (" attr(href) ")";
+  font-size: 0.8em;
+  font-weight: normal;
 }
-#sideNav.is-collapsed .nav-text{
-  opacity: 0;
-  width: 0;
-  overflow: hidden;
-  pointer-events: none;
-  white-space: nowrap;
 }
-
-/* optional: keep the toggle nicely centered in collapsed mode */
-#sideNav.is-collapsed .nav-toggle{
-  justify-content: center;
-}
-
-/* Backdrop for mobile/tablet overlay */
-#navBackdrop{
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  background: rgba(0,0,0,.45);
-}
-
-/* Only show backdrop on smaller screens */
-@media (min-width: 980px){
-  #navBackdrop{ display: none !important; }
-}
-
-/* Never print nav */
-@media print{
-  #sideNav, #navBackdrop{ display: none !important; }
-}      
 </style>
 </head>
 <body>
+
+<a href="#top" class="skip-to-content">Skip to content</a>
 
 <!-- Background -->
 <div class="bg-grid"></div>
@@ -2188,6 +2149,7 @@ body.stmts-unlocked .acct-card.locked .stmt{
     type="button"
     aria-expanded="false"
     aria-controls="navList"
+    aria-label="Toggle navigation menu"
     title="Toggle navigation"
   >☰</button>
   <div class="nav-title">NAVIGATION</div>
@@ -2215,6 +2177,7 @@ body.stmts-unlocked .acct-card.locked .stmt{
           id="screenThemeToggle"
           type="button"
           aria-pressed="true"
+          aria-label="Toggle screen theme"
           title="Toggle screen theme"
         >🌙 Screen: Dark</button>
       </div>
