@@ -2021,6 +2021,96 @@ svg[role="img"] {
   white-space: normal;
   word-wrap: break-word;
 }
+/* ============================================================
+   PAYMENT CALCULATOR — ENHANCED STYLES
+============================================================ */
+
+/* Range Slider Custom Styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(212,175,94,0.5), 0 0 0 4px rgba(212,175,94,0.2);
+  border: 3px solid var(--bg0);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(212,175,94,0.5), 0 0 0 4px rgba(212,175,94,0.2);
+  border: 3px solid var(--bg0);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 6px 20px rgba(212,175,94,0.7), 0 0 0 6px rgba(212,175,94,0.3);
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 6px 20px rgba(212,175,94,0.7), 0 0 0 6px rgba(212,175,94,0.3);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(1.05);
+}
+
+input[type="range"]::-moz-range-thumb:active {
+  transform: scale(1.05);
+}
+
+/* Chart bars animation */
+@keyframes barGrow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.chart-bar {
+  animation: barGrow 0.5s ease-out;
+  transform-origin: bottom;
+}
+
+/* Responsive adjustments for calculator */
+@media (max-width: 1020px) {
+  #payment-calculator .grid-template-columns {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #payment-calculator h3 {
+    font-size: 18px !important;
+  }
+  
+  #payment-calculator [style*="font-size: 48px"] {
+    font-size: 36px !important;
+  }
+  
+  #payment-calculator [style*="font-size: 36px"] {
+    font-size: 28px !important;
+  }
+  
+  #payment-calculator [style*="grid-template-columns: repeat(3"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  #payment-calculator [style*="grid-template-columns: repeat(4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
       
 /* ============================================================
       RESPONSIVE BREAKPOINTS
