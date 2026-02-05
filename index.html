@@ -2136,6 +2136,56 @@ a[href^="http"]:after {
 </head>
 <body>
 
+<!-- =========================================================
+     PROGRESS BAR — SCROLL INDICATOR
+========================================================== -->
+<div id="scrollProgress" style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 10000;
+  background: rgba(0,0,0,0.05);
+  pointer-events: none;
+" role="progressbar" aria-label="Reading progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+  <div id="progressBar" style="
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #3b82ff, #d4af5e);
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 10px rgba(59,130,255,0.5);
+  "></div>
+</div>
+
+<!-- Add to existing <script> block at bottom -->
+<script>
+// Progress Bar Update
+(() => {
+  const progressBar = document.getElementById('progressBar');
+  const scrollProgress = document.getElementById('scrollProgress');
+  
+  const updateProgress = () => {
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight - windowHeight;
+    const scrolled = window.scrollY;
+    const progress = Math.min((scrolled / documentHeight) * 100, 100);
+    
+    if (progressBar) {
+      progressBar.style.width = progress + '%';
+    }
+    
+    if (scrollProgress) {
+      scrollProgress.setAttribute('aria-valuenow', Math.round(progress));
+    }
+  };
+  
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
+  updateProgress();
+})();
+</script>
+      
 <a href="#top" class="skip-to-content">Skip to content</a>
 
 <!-- Background -->
