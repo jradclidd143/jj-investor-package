@@ -2335,34 +2335,6 @@ a[href^="http"]:after {
     box-shadow: 0 0 10px rgba(59,130,255,0.5);
   "></div>
 </div>
-
-<!-- Add to existing <script> block at bottom -->
-<script>
-// Progress Bar Update
-(() => {
-  const progressBar = document.getElementById('progressBar');
-  const scrollProgress = document.getElementById('scrollProgress');
-  
-  const updateProgress = () => {
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight - windowHeight;
-    const scrolled = window.scrollY;
-    const progress = Math.min((scrolled / documentHeight) * 100, 100);
-    
-    if (progressBar) {
-      progressBar.style.width = progress + '%';
-    }
-    
-    if (scrollProgress) {
-      scrollProgress.setAttribute('aria-valuenow', Math.round(progress));
-    }
-  };
-  
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  window.addEventListener('resize', updateProgress, { passive: true });
-  updateProgress();
-})();
-</script>
       
 <a href="#top" class="skip-to-content">Skip to content</a>
 
@@ -6017,20 +5989,6 @@ a[href^="http"]:after {
     localStorage.setItem(THEME_KEY, next);
     applyTheme(next);
   });
-// Executive One-Pager Print Function
-function printOnePager() {
-  // Populate date and URL
-  const dateEl = document.getElementById('onePagerDate');
-  const urlEl = document.getElementById('onePagerURL');
-  
-  if (dateEl) {
-    const now = new Date();
-    dateEl.textContent = now.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    });
-  }
   
   if (urlEl) {
     urlEl.textContent = window.location.href;
