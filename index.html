@@ -6043,42 +6043,88 @@ window.printOnePager = function() {
           box-sizing: border-box;
           margin: 0;
           padding: 0;
+          color: #000 !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
         }
         
         body {
           font-family: 'Inter', system-ui, -apple-system, sans-serif;
-          background: white;
-          color: #000;
+          background: white !important;
+          color: #000 !important;
           padding: 14mm 16mm;
           line-height: 1.4;
           font-size: 12px;
+          font-weight: 500;
         }
         
+        /* Force ALL text elements to pure black */
+        h1, h2, h3, h4, h5, h6,
+        p, span, div, li, td, th,
+        strong, b, em, i, a,
+        .sum-title, .sum-sub,
+        .callout-title, .callout-body,
+        .kpi-label, .kpi-value, .kpi-sub {
+          color: #000 !important;
+          font-weight: 600 !important;
+        }
+        
+        /* Headings - extra bold and black */
         h2 {
           font-size: 24px !important;
           margin-bottom: 8px !important;
           line-height: 1.2 !important;
+          font-weight: 900 !important;
+          color: #000 !important;
         }
         
         h3 {
           font-size: 16px !important;
           margin-bottom: 12px !important;
           line-height: 1.3 !important;
+          font-weight: 800 !important;
+          color: #000 !important;
         }
         
         h4 {
           font-size: 14px !important;
           margin-bottom: 10px !important;
           line-height: 1.3 !important;
-        }
-        
-        h2, h3, h4, strong {
+          font-weight: 800 !important;
           color: #000 !important;
         }
         
-        /* Force all text to black */
-        * {
+        /* Strong/bold text */
+        strong, b {
+          font-weight: 800 !important;
           color: #000 !important;
+        }
+        
+        /* Labels and metadata - dark gray instead of light gray */
+        [style*="color: var(--t4)"],
+        [style*="color: rgba(238,241,248,.58)"],
+        [style*="opacity:.78"],
+        [style*="opacity:.82"] {
+          color: #333 !important;
+          opacity: 1 !important;
+          font-weight: 600 !important;
+        }
+        
+        /* Secondary text - medium gray instead of light */
+        [style*="color: var(--t3)"],
+        [style*="color: rgba(238,241,248,.74)"] {
+          color: #222 !important;
+          opacity: 1 !important;
+          font-weight: 500 !important;
+        }
+        
+        /* Primary text - pure black */
+        [style*="color: var(--t1)"],
+        [style*="color: var(--t2)"],
+        [style*="color: rgba(238,241,248,1.00)"],
+        [style*="color: rgba(238,241,248,.88)"] {
+          color: #000 !important;
+          opacity: 1 !important;
         }
         
         /* Preserve structure */
@@ -6151,75 +6197,96 @@ window.printOnePager = function() {
         [style*="font-size: 32px"] {
           font-size: 26px !important;
           line-height: 1.2 !important;
+          font-weight: 900 !important;
         }
         
         [style*="font-size: 26px"] {
           font-size: 22px !important;
           line-height: 1.2 !important;
+          font-weight: 900 !important;
         }
         
         [style*="font-size: 24px"] {
           font-size: 20px !important;
           line-height: 1.2 !important;
+          font-weight: 800 !important;
         }
         
         [style*="font-size: 20px"] {
           font-size: 16px !important;
           line-height: 1.3 !important;
+          font-weight: 700 !important;
         }
         
         [style*="font-size: 18px"] {
           font-size: 15px !important;
           line-height: 1.3 !important;
+          font-weight: 700 !important;
         }
         
         [style*="font-size: 16px"] {
           font-size: 14px !important;
           line-height: 1.4 !important;
+          font-weight: 600 !important;
         }
         
         [style*="font-size: 14px"] {
           font-size: 12px !important;
           line-height: 1.4 !important;
+          font-weight: 600 !important;
         }
         
         [style*="font-size: 13px"] {
           font-size: 11.5px !important;
           line-height: 1.4 !important;
+          font-weight: 500 !important;
         }
         
         [style*="font-size: 12px"] {
           font-size: 11px !important;
           line-height: 1.4 !important;
+          font-weight: 500 !important;
         }
         
         [style*="font-size: 11px"] {
           font-size: 10px !important;
           line-height: 1.4 !important;
+          font-weight: 500 !important;
         }
         
-        /* Gold accents - darker for print */
+        /* Gold accents - dark amber for print visibility */
         .gold,
         [style*="color: var(--gold"],
         [style*="color:#d4af5e"],
         [style*="color: #d4af5e"],
-        [style*="color: rgb(212, 175, 94)"] {
-          color: #996600 !important;
+        [style*="color: rgb(212, 175, 94)"],
+        [style*="color: #f5dfa0"],
+        [style*="color: rgba(212,175,94"] {
+          color: #855C00 !important;
+          font-weight: 700 !important;
         }
         
-        /* Preserve backgrounds but lighten */
-        [style*="background:"],
-        [style*="background-color:"] {
-          opacity: 0.25 !important;
+        /* Borders - dark and visible */
+        [style*="border:"],
+        [style*="border-bottom:"],
+        [style*="border-top:"] {
+          border-color: #666 !important;
+        }
+        
+        /* Backgrounds - subtle but visible */
+        [style*="background: linear-gradient"],
+        [style*="background: rgba"] {
+          background: #f5f5f5 !important;
+          border: 1px solid #ccc !important;
         }
         
         /* Panel styling */
         .panel-head {
-          border-bottom: 1px solid #ccc !important;
+          border-bottom: 2px solid #666 !important;
           padding-bottom: 12px !important;
         }
         
-        /* Compact lists but readable */
+        /* Lists */
         ul {
           margin: 8px 0 !important;
           padding-left: 18px !important;
@@ -6228,6 +6295,8 @@ window.printOnePager = function() {
         li {
           margin-bottom: 4px !important;
           line-height: 1.5 !important;
+          font-weight: 500 !important;
+          color: #000 !important;
         }
         
         /* Adjust border radius for print */
@@ -6240,20 +6309,32 @@ window.printOnePager = function() {
           gap: 14px !important;
         }
         
-        /* Print setup - use more of the page */
+        /* Print setup */
         @page {
           size: letter portrait;
           margin: 0.45in 0.5in;
         }
         
         @media print {
+          * {
+            color: #000 !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          
           body {
             padding: 0 !important;
             background: white !important;
+            font-weight: 500 !important;
           }
           
-          * {
+          h1, h2, h3, h4, h5, h6 {
             color: #000 !important;
+            font-weight: 900 !important;
+          }
+          
+          strong, b {
+            font-weight: 800 !important;
           }
           
           .gold,
@@ -6261,7 +6342,8 @@ window.printOnePager = function() {
           [style*="color:#d4af5e"],
           [style*="color: #d4af5e"],
           [style*="color: rgb(212, 175, 94)"] {
-            color: #996600 !important;
+            color: #855C00 !important;
+            font-weight: 700 !important;
           }
           
           /* Force single page */
