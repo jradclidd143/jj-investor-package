@@ -2178,20 +2178,91 @@ input[type="range"]::-moz-range-thumb:active {
 
 /* Executive One-Pager Print Styles */
 @media print {
-  body.printing-one-pager > *:not(#executive-one-pager) {
+  /* Hide EVERYTHING when printing one-pager */
+  body.printing-one-pager * {
+    display: none !important;
+  }
+  
+  /* Show ONLY the one-pager and its parent containers */
+  body.printing-one-pager,
+  body.printing-one-pager .container,
+  body.printing-one-pager .section,
+  body.printing-one-pager #executive-one-pager,
+  body.printing-one-pager #executive-one-pager * {
+    display: block !important;
+  }
+  
+  /* Keep panel structure intact */
+  body.printing-one-pager #executive-one-pager .panel {
+    display: block !important;
+  }
+  
+  /* Preserve grid layouts in one-pager */
+  body.printing-one-pager #executive-one-pager [style*="display: grid"],
+  body.printing-one-pager #executive-one-pager [style*="display:grid"] {
+    display: grid !important;
+  }
+  
+  body.printing-one-pager #executive-one-pager [style*="display: flex"],
+  body.printing-one-pager #executive-one-pager [style*="display:flex"] {
+    display: flex !important;
+  }
+  
+  /* Reset margins/padding for print */
+  body.printing-one-pager {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  body.printing-one-pager .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  body.printing-one-pager .section {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+  
+  body.printing-one-pager .section::before {
     display: none !important;
   }
   
   body.printing-one-pager #executive-one-pager {
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 20px !important;
     box-shadow: none !important;
-    border: none !important;
+    border: 1px solid #ddd !important;
+    border-radius: 0 !important;
+    background: white !important;
   }
   
-  #executive-one-pager .doc-btn {
+  body.printing-one-pager #executive-one-pager .panel {
+    background: white !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Hide the print button itself */
+  body.printing-one-pager #executive-one-pager .doc-btn {
     display: none !important;
-  }      
+  }
+  
+  /* Ensure text is black for print */
+  body.printing-one-pager #executive-one-pager,
+  body.printing-one-pager #executive-one-pager * {
+    color: #000 !important;
+  }
+  
+  /* Keep specific colored elements */
+  body.printing-one-pager #executive-one-pager .gold,
+  body.printing-one-pager #executive-one-pager [style*="color: var(--gold"],
+  body.printing-one-pager #executive-one-pager [style*="color:var(--gold"] {
+    color: #c9a75a !important;
+  }
+}    
 
 /* ============================================================
       PRINT STYLES
