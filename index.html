@@ -5882,6 +5882,40 @@ a[href^="http"]:after {
    ✅ NAVIGATION + THEME + BACK TO TOP + STATEMENT INDEXES
 ============================================================ */
 (() => {
+  
+  // ============================================================
+  // EXECUTIVE ONE-PAGER PRINT FUNCTION (GLOBAL)
+  // ============================================================
+  window.printOnePager = function() {
+    // Populate date and URL
+    const dateEl = document.getElementById('onePagerDate');
+    const urlEl = document.getElementById('onePagerURL');
+    
+    if (dateEl) {
+      const now = new Date();
+      dateEl.textContent = now.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    }
+    
+    if (urlEl) {
+      urlEl.textContent = window.location.href;
+    }
+    
+    // Add print class to body
+    document.body.classList.add('printing-one-pager');
+    
+    // Trigger print
+    window.print();
+    
+    // Remove class after print dialog closes
+    setTimeout(() => {
+      document.body.classList.remove('printing-one-pager');
+    }, 100);
+  };
+      
   const root = document.documentElement;
   const topbar = document.querySelector('.topbar');
 
