@@ -6385,3 +6385,177 @@ input[type="range"]::-moz-range-thumb:active {
 
 </main>
 
+<script>
+console.log('🚀 Script loading...');
+
+// Print one-pager function
+window.printOnePager = function() {
+  console.log('🖨️ Print initiated');
+  window.print();
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('✅ DOM Ready');
+  
+  // Calculator
+  (function() {
+    var calc = {
+      slider: document.getElementById('calcBalance'),
+      display: document.getElementById('calcBalanceDisplay'),
+      interest: document.getElementById('calcInterest'),
+      total: document.getElementById('calcTotal'),
+      annualInterest: document.getElementById('calcAnnualInterest'),
+      year1Total: document.getElementById('calcYear1Total'),
+      remaining: document.getElementById('calcRemainingBalance'),
+      chart: document.getElementById('paymentChart')
+    };
+    
+    if (!calc.slider || !calc.display) {
+      console.error('❌ Calculator missing');
+      return;
+    }
+    
+    var PRINCIPAL = 4375;
+    var RATE = 0.08;
+    
+    function format(n) {
+      return Math.round(n).toLocaleString('en-US');
+    }
+    
+    function update() {
+      var balance = parseFloat(calc.slider.value) || 1050000;
+      var interest = (balance * RATE) / 12;
+      var total = interest + PRINCIPAL;
+      var annual = total * 12;
+      var remaining = Math.max(0, balance - (PRINCIPAL * 12));
+      
+      calc.display.textContent = format(balance);
+      if (calc.interest) calc.interest.textContent = '$' + format(interest);
+      if (calc.total) calc.total.textContent = '$' + format(total);
+      if (calc.annualInterest) calc.annualInterest.textContent = '$' + format(interest * 12);
+      if (calc.year1Total) calc.year1Total.textContent = '$' + format(annual);
+      if (calc.remaining) calc.remaining.textContent = '$' + format(remaining);
+      
+      if (calc.chart) {
+        var bal = balance;
+        var html = '<div style="display:flex;gap:6px;height:100%;align-items:flex-end;">';
+        
+        for (var i = 0; i < 12; i++) {
+          var int = (bal * RATE) / 12;
+          var tot = int + PRINCIPAL;
+          var intH = (int / tot) * 100;
+          var prinH = (PRINCIPAL / tot) * 100;
+          
+          html += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;">';
+          html += '<div style="font-size:11px;color:var(--t3);font-weight:700;">$' + format(tot) + '</div>';
+          html += '<div style="width:100%;height:120px;display:flex;flex-direction:column;">';
+          html += '<div style="height:' + intH + '%;background:linear-gradient(180deg,#5da3ff,#3b82ff);border-radius:6px 6px 0 0;opacity:0.85;"></div>';
+          html += '<div style="height:' + prinH + '%;background:linear-gradient(180deg,#d4af5e,#c9a75a);border-radius:0 0 6px 6px;opacity:0.85;"></div>';
+          html += '</div>';
+          html += '<div style="font-size:10px;color:var(--t4);font-weight:600;">M' + (i+1) + '</div>';
+          html += '</div>';
+          
+          bal = Math.max(0, bal - PRINCIPAL);
+        }
+        
+        html += '</div>';
+        calc.chart.innerHTML = html;
+      }
+    }
+    
+    calc.slider.addEventListener('input', update);
+    update();
+    console.log('✅ Calculator OK');
+  })();
+  
+  // Navigation
+  (function() {
+    var navList = document.getElementById('navList');
+    var navToggle = document.getElementById('navToggle');
+    var sideNav = document.getElementById('sideNav');
+    var sections = document.querySelectorAll('[data-nav][id]');
+    
+    if (!navList || sections.length === 0) {
+      console.error('❌ Navigation missing');
+      return;
+    }
+    
+    navList.innerHTML = '';
+    for (var i = 0; i < sections.length; i++) {
+      var section = sections[i];
+      var link = document.createElement('a');
+      link.href = '#' + section.id;
+      link.textContent = section.getAttribute('data-nav') || section.id;
+      navList.appendChild(link);
+    }
+    
+    if (navToggle && sideNav) {
+      navToggle.addEventListener('click', function() {
+        sideNav.classList.toggle('min');
+      });
+    }
+    
+    function updateActive() {
+      var scrollPos = window.scrollY + 200;
+      var current = '';
+      
+      for (var i = 0; i < sections.length; i++) {
+        var section = sections[i];
+        var top = section.offsetTop;
+        var height = section.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          current = section.id;
+        }
+      }
+      
+      var links = navList.querySelectorAll('a');
+      for (var i = 0; i < links.length; i++) {
+        links[i].classList.remove('active');
+        if (links[i].getAttribute('href') === '#' + current) {
+          links[i].classList.add('active');
+        }
+      }
+    }
+    
+    window.addEventListener('scroll', updateActive);
+    updateActive();
+    console.log('✅ Navigation OK');
+  })();
+  
+  // Back to top, progress bar, theme
+  var upBtn = document.getElementById('upBtn');
+  if (upBtn) {
+    function check() { upBtn.classList.toggle('show', window.scrollY > 300); }
+    window.addEventListener('scroll', check);
+    upBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    check();
+  }
+  
+  var bar = document.getElementById('progressBar');
+  if (bar) {
+    function update() {
+      var scroll = document.documentElement.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = ((scroll / height) * 100) + '%';
+    }
+    window.addEventListener('scroll', update);
+    update();
+  }
+  
+  var themeBtn = document.getElementById('screenThemeToggle');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function() {
+      var current = document.documentElement.getAttribute('data-theme');
+      var next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      themeBtn.textContent = next === 'dark' ? '🌙 Screen: Dark' : '☀️ Screen: Light';
+    });
+  }
+  
+  console.log('✅ All initialized');
+});
+
+console.log('✅ Script loaded');
+</script>
+</body>
+</html>
