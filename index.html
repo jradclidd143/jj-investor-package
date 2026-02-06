@@ -2409,6 +2409,237 @@ a[href^="http"]:after {
 </section>
 
 <!-- =========================================================
+     EXECUTIVE ONE-PAGER (Print-Optimized Summary)
+========================================================== -->
+<section class="section" style="margin-top: 28px; padding-top: 0; border-top: none;">
+  <div class="panel" id="executive-one-pager" style="
+    background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
+    border: 1px solid rgba(255,255,255,.16);
+    box-shadow: var(--shadow);
+    page-break-inside: avoid;
+  ">
+    <div class="panel-head" style="border-bottom: 2px solid rgba(212,175,94,.35);">
+      <h3>📄 Executive One-Pager — Lender Summary</h3>
+      <button 
+        onclick="printOnePager()" 
+        class="doc-btn"
+        type="button"
+        style="background: linear-gradient(135deg, var(--gold), var(--gold2)); color: var(--bg0); border-color: var(--gold);"
+      >
+        🖨️ Print Summary
+      </button>
+    </div>
+
+    <div style="padding: 32px 28px;">
+      <!-- Header Block -->
+      <div style="text-align: center; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 2px solid var(--line);">
+        <h2 style="margin: 0 0 8px 0; font-size: 26px; font-weight: 900; color: var(--t1);">
+          J&J Investments of Florida — Consolidation Loan Request
+        </h2>
+        <div style="color: var(--t3); font-size: 14px; margin-top: 8px;">
+          <span id="onePagerDate"></span> • <span id="onePagerURL"></span>
+        </div>
+      </div>
+
+      <!-- Three-Column Grid -->
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-bottom: 28px;
+      ">
+        <!-- Column 1: The Ask -->
+        <div style="
+          padding: 20px;
+          border-radius: 16px;
+          border: 1px solid rgba(212,175,94,.35);
+          background: linear-gradient(180deg, rgba(212,175,94,.12), rgba(212,175,94,.04));
+        ">
+          <h3 style="
+            margin: 0 0 16px 0;
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--gold2);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+          ">💰 The Ask</h3>
+          
+          <div style="margin-bottom: 14px;">
+            <div style="color: var(--t4); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px;">Requested Commitment</div>
+            <div style="font-size: 32px; font-weight: 900; color: var(--t1); letter-spacing: -0.02em;">$1,050,000</div>
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <div style="color: var(--t4); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px;">Interest Rate</div>
+            <div style="font-size: 20px; font-weight: 900; color: var(--t1);">8% annual</div>
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <div style="color: var(--t4); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px;">Principal Curtailment</div>
+            <div style="font-size: 20px; font-weight: 900; color: var(--t1);">5% annual</div>
+          </div>
+
+          <div>
+            <div style="color: var(--t4); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px;">Security</div>
+            <div style="font-size: 14px; font-weight: 750; color: var(--t2); line-height: 1.4;">
+              Cross-collateralized 1st lien on two Florida properties
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Purpose -->
+        <div style="
+          padding: 20px;
+          border-radius: 16px;
+          border: 1px solid rgba(59,130,255,.35);
+          background: linear-gradient(180deg, rgba(59,130,255,.12), rgba(59,130,255,.04));
+        ">
+          <h3 style="
+            margin: 0 0 16px 0;
+            font-size: 18px;
+            font-weight: 900;
+            color: #5da3ff;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+          ">🎯 Purpose</h3>
+          
+          <div style="color: var(--t2); font-size: 13px; line-height: 1.6; margin-bottom: 12px;">
+            <strong style="color: var(--t1);">Payoff Existing Liens:</strong> $787,884.07
+          </div>
+          
+          <div style="color: var(--t3); font-size: 12px; line-height: 1.5; margin-bottom: 10px;">
+            Clear title across both properties and consolidate to single first-position lien
+          </div>
+
+          <div style="color: var(--t2); font-size: 13px; line-height: 1.6; margin-bottom: 12px;">
+            <strong style="color: var(--t1);">Operating Growth Capital:</strong> $157,480
+          </div>
+          
+          <div style="color: var(--t3); font-size: 12px; line-height: 1.5; margin-bottom: 10px;">
+            AssureCall expansion ($90K), Roofing Appointments launch ($30K), J&J marketing ($10K), bill payoff ($20K), closing costs ($7.5K)
+          </div>
+
+          <div style="color: var(--t2); font-size: 13px; line-height: 1.6; margin-bottom: 12px;">
+            <strong style="color: var(--t1);">Financial Reserves:</strong> $104,636
+          </div>
+          
+          <div style="color: var(--t3); font-size: 12px; line-height: 1.5;">
+            Liquidity buffer for operational stability
+          </div>
+        </div>
+
+        <!-- Column 3: Security -->
+        <div style="
+          padding: 20px;
+          border-radius: 16px;
+          border: 1px solid rgba(255,255,255,.25);
+          background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+        ">
+          <h3 style="
+            margin: 0 0 16px 0;
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--t1);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+          ">🏠 Security</h3>
+          
+          <div style="margin-bottom: 16px;">
+            <div style="color: var(--t4); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px;">Combined Collateral Value</div>
+            <div style="font-size: 24px; font-weight: 900; color: var(--t1);">$1,141,000</div>
+          </div>
+
+          <div style="margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,.10);">
+            <div style="color: var(--t3); font-size: 12px; font-weight: 750; margin-bottom: 6px;">
+              13324 Sunkiss Loop, Windermere
+            </div>
+            <div style="color: var(--t4); font-size: 11px;">
+              Value: $680,000 • Rent: $2,500/mo
+            </div>
+          </div>
+
+          <div style="margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,.10);">
+            <div style="color: var(--t3); font-size: 12px; font-weight: 750; margin-bottom: 6px;">
+              131 Ormond Shores Dr, Ormond Beach
+            </div>
+            <div style="color: var(--t4); font-size: 11px;">
+              Value: $461,000 • Rent: $2,870/mo
+            </div>
+          </div>
+
+          <div style="margin-top: 16px;">
+            <div style="color: var(--t4); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px;">Gross LTV</div>
+            <div style="font-size: 20px; font-weight: 900; color: var(--t1);">92.1%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Sources Breakdown -->
+      <div style="
+        padding: 20px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,.03);
+        margin-bottom: 24px;
+      ">
+        <h4 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 900; color: var(--t1);">
+          💳 Monthly Payment Sources ($11,375/mo Month 1)
+        </h4>
+        <div style="
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        ">
+          <div>
+            <div style="color: var(--t4); font-size: 11px; margin-bottom: 4px;">Property Rents</div>
+            <div style="font-size: 20px; font-weight: 900; color: var(--t1);">$5,370</div>
+          </div>
+          <div>
+            <div style="color: var(--t4); font-size: 11px; margin-bottom: 4px;">AssureCall Contribution</div>
+            <div style="font-size: 20px; font-weight: 900; color: var(--t1);">$3,930</div>
+          </div>
+          <div>
+            <div style="color: var(--t4); font-size: 11px; margin-bottom: 4px;">Roofing Appointments</div>
+            <div style="font-size: 20px; font-weight: 900; color: var(--t1);">$2,075</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Highlights -->
+      <div style="
+        padding: 16px 20px;
+        border-radius: 12px;
+        border: 1px solid rgba(212,175,94,.25);
+        background: rgba(212,175,94,.06);
+      ">
+        <h4 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 900; color: var(--gold2);">
+          ✨ Key Highlights
+        </h4>
+        <ul style="margin: 0; padding-left: 20px; color: var(--t2); font-size: 12px; line-height: 1.8;">
+          <li><strong>Clear Title:</strong> Single 1st-position lien eliminates deadline-driven re-quotes</li>
+          <li><strong>Strong Coverage:</strong> 10.9x payment coverage from AssureCall ($42.7K avg monthly deposits)</li>
+          <li><strong>Proven Operator:</strong> 26,000+ properties managed, 12+ years AssureCall operations</li>
+          <li><strong>Diversified Income:</strong> Rents + two operating businesses supporting debt service</li>
+        </ul>
+      </div>
+
+      <!-- Footer -->
+      <div style="
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 2px solid var(--line);
+        text-align: center;
+        color: var(--t4);
+        font-size: 11px;
+      ">
+        <strong>J&J Investments of Florida, LLC</strong> • Confidential Lender Review Package<br>
+        Contact: Joseph Radcliff • (407) 269-1299 • joseph@assurecall.com
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
         Collateral Overview
    ========================================================== -->
 <section class="section" id="collateral" data-nav="Collateral Overview">
