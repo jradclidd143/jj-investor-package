@@ -6755,469 +6755,364 @@ window.printOnePager = function() {
     }, 250);
   };
   
-  console.log('✅ Print window opened');
-
+console.log('🚀 Script loading...');
 
 // ============================================================
-// MAIN INITIALIZATION - REST OF JS CONTINUES UNCHANGED
+// MAIN INITIALIZATION
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM Ready - Initializing...');
+  console.log('✅ DOM Ready - Initializing...');
   
-  const root = document.documentElement;
-  const topbar = document.querySelector('.topbar');
-
-  // Topbar height sync
-  const syncTopbarHeight = () => {
-    const h = topbar ? topbar.getBoundingClientRect().height : 110;
-    root.style.setProperty('--topbar-h', `${Math.ceil(h)}px`);
-  };
-  syncTopbarHeight();
-  window.addEventListener('resize', syncTopbarHeight, { passive: true });
-
-  // Theme toggle
-  const themeBtn = document.getElementById('screenThemeToggle');
-  const THEME_KEY = 'jj_theme';
-  const applyTheme = (mode) => {
-    if (mode === 'light') root.setAttribute('data-theme', 'light');
-    else root.removeAttribute('data-theme');
-    if (themeBtn) {
-      const isLight = root.getAttribute('data-theme') === 'light';
-      themeBtn.textContent = isLight ? '☀️ Screen: Light' : '🌙 Screen: Dark';
-      themeBtn.setAttribute('aria-pressed', String(!isLight));
+  // ============================================================
+  // CALCULATOR
+  // ============================================================
+  (function() {
+    console.log('🧮 Calculator: Starting...');
+    
+    const calc = {
+      slider: document.getElementById('calcBalance'),
+      display: document.getElementById('calcBalanceDisplay'),
+      interest: document.getElementById('calcInterest'),
+      total: document.getElementById('calcTotal'),
+      annualInterest: document.getElementById('calcAnnualInterest'),
+      year1Total: document.getElementById('calcYear1Total'),
+      remaining: document.getElementById('calcRemainingBalance'),
+      chart: document.getElementById('paymentChart')
+    };
+    
+    if (!calc.slider || !calc.display) {
+      console.error('❌ Calculator: Missing required elements');
+      return;
     }
-  };
-  applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
-  themeBtn?.addEventListener('click', () => {
-    const isLight = root.getAttribute('data-theme') === 'light';
-    const next = isLight ? 'dark' : 'light';
-    localStorage.setItem(THEME_KEY, next);
-    applyTheme(next);
-  });
-
+    
+    console.log('✅ Calculator: Elements found');
+    
+    const PRINCIPAL = 4375;
+    const RATE = 0.08;
+    
+    function format(n) {
+      return Math.round(n).toLocaleString('en-US');
+    }
+    
+    function update() {
+      const balance = parseFloat(calc.slider.value) || 1050000;
+      const interest = (balance * RATE) / 12;
+      const total = interest + PRINCIPAL;
+      const annual = total * 12;
+      const remaining = Math.max(0, balance - (PRINCIPAL * 12));
+      
+      calc.display.textContent = format(balance);
+      if (calc.interest) calc.interest.textContent = '$' + format(interest);
+      if (calc.total) calc.total.textContent = '$' + format(total);
+      if (calc.annualInterest) calc.annualInterest.textContent = '$' + format(interest * 12);
+      if (calc.year1Total) calc.year1Total.textContent = '$' + format(annual);
+      if (calc.remaining) calc.remaining.textContent = '$' + format(remaining);
+      
+      drawChart(balance);
+    }
+    
+    function drawChart(start) {
+      if (!calc.chart) return;
+      
+      let bal = start;
+      let html = '<div style="display:flex;gap:6px;height:100%;align-items:flex-end;">';
+      
+      for (let i = 0; i < 12; i++) {
+        const int = (bal * RATE) / 12;
+        const tot = int + PRINCIPAL;
+        const intH = (int / tot) * 100;
+        const prinH = (PRINCIPAL / tot) * 100;
+        
+        html += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;">';
+        html += '<div style="font-size:11px;color:var(--t3);font-weight:700;">$' + format(tot) + '</div>';
+        html += '<div style="width:100%;height:120px;display:flex;flex-direction:column;">';
+        html += '<div style="height:' + intH + '%;background:linear-gradient(180deg,#5da3ff,#3b82ff);border-radius:6px 6px 0 0;opacity:0.85;"></div>';
+        html += '<div style="height:' + prinH + '%;background:linear-gradient(180deg,#d4af5e,#c9a75a);border-radius:0 0 6px 6px;opacity:0.85;"></div>';
+        html += '</div>';
+        html += '<div style="font-size:10px;color:var(--t4);font-weight:600;">M' + (i+1) + '</div>';
+        html += '</div>';
+        
+        bal = Math.max(0, bal - PRINCIPAL);
+      }
+      
+      html += '</div>';
+      calc.chart.innerHTML = html;
+    }
+    
+    calc.slider.addEventListener('input', update);
+    update();
+    
+    console.log('✅ Calculator: Initialized!');
+  })();
+  
   // ============================================================
-  // NAVIGATION SYSTEM
+  // NAVIGATION
   // ============================================================
-  const navList = document.getElementById('navList');
-  const sideNav = document.getElementById('sideNav');
-  const navToggle = document.getElementById('navToggle');
-  const sections = Array.from(document.querySelectorAll('[data-nav][id]'));
-  const esc = (s) => (s || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-
-  console.log('Found sections:', sections.length);
-
-  if (navList && sections.length) {
-    navList.innerHTML = sections.map(sec => 
-      `<a href="#${encodeURIComponent(sec.id)}">${esc(sec.getAttribute('data-nav') || sec.id)}</a>`
-    ).join('');
-    console.log('Navigation built successfully');
-  }
-
-  // SideNav minimize
-  const NAV_KEY = 'jj_nav_min';
-  const setNavMin = (min) => {
-    if (!sideNav) return;
-    sideNav.classList.toggle('min', !!min);
-    localStorage.setItem(NAV_KEY, min ? '1' : '0');
-    navToggle?.setAttribute('aria-expanded', String(!min));
-  };
-  setNavMin(localStorage.getItem(NAV_KEY) === '1');
-  navToggle?.addEventListener('click', () => {
-    setNavMin(!sideNav?.classList.contains('min'));
-  });
-
-  // Smooth scroll
-  navList?.addEventListener('click', (e) => {
-    const a = e.target.closest('a');
-    if (!a) return;
-    const href = a.getAttribute('href') || '';
-    if (!href.startsWith('#')) return;
-    e.preventDefault();
-    const id = decodeURIComponent(href.slice(1));
-    const el = document.getElementById(id);
-    if (!el) return;
-    const topbarH = topbar ? topbar.getBoundingClientRect().height : 110;
-    const y = window.scrollY + el.getBoundingClientRect().top - topbarH - 18;
-    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-  });
-
-  // Active link highlighting
-  const links = Array.from(navList?.querySelectorAll('a') || []);
-  const linkById = new Map(links.map(a => [decodeURIComponent((a.getAttribute('href') || '').slice(1)), a]));
-  const clearActive = () => links.forEach(a => a.classList.remove('active'));
-  const setActive = (id) => {
-    clearActive();
-    const a = linkById.get(id);
-    if (a) a.classList.add('active');
-  };
-
-  const topbarHForObs = () => (topbar ? Math.ceil(topbar.getBoundingClientRect().height) : 110);
-  const makeObserver = () => new IntersectionObserver((entries) => {
-    const visible = entries.filter(en => en.isIntersecting).sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
-    if (visible?.target?.id) setActive(visible.target.id);
-  }, {
-    root: null,
-    threshold: [0.15, 0.25, 0.35, 0.5, 0.65],
-    rootMargin: `-${topbarHForObs() + 10}px 0px -55% 0px`
-  });
-
-  let observer = makeObserver();
-  sections.forEach(s => observer.observe(s));
-  window.addEventListener('resize', () => {
-    observer.disconnect();
-    observer = makeObserver();
-    sections.forEach(s => observer.observe(s));
-  }, { passive: true });
-
-  // Back to top
-  const upBtn = document.getElementById('upBtn');
-  const onScroll = () => upBtn?.classList.toggle('show', window.scrollY > 650);
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-  upBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
- // ============================================================
-// PAYMENT CALCULATOR - COMPLETE REWRITE
-// ============================================================
-(function initializeCalculator() {
-  console.log('🧮 Initializing Payment Calculator...');
-  
-  // Find all calculator elements
-  const elements = {
-    slider: document.getElementById('calcBalance'),
-    balanceDisplay: document.getElementById('calcBalanceDisplay'),
-    interest: document.getElementById('calcInterest'),
-    total: document.getElementById('calcTotal'),
-    annualInterest: document.getElementById('calcAnnualInterest'),
-    year1Total: document.getElementById('calcYear1Total'),
-    remainingBalance: document.getElementById('calcRemainingBalance'),
-    chart: document.getElementById('paymentChart')
-  };
-  
-  // Debug: Show what we found
-  console.log('Calculator elements found:', {
-    slider: !!elements.slider,
-    balanceDisplay: !!elements.balanceDisplay,
-    interest: !!elements.interest,
-    total: !!elements.total,
-    chart: !!elements.chart
-  });
-  
-  // Check if we have minimum required elements
-  if (!elements.slider || !elements.balanceDisplay) {
-    console.error('❌ Calculator missing required elements (slider or display)');
-    return;
-  }
-  
-  // Calculator constants
-  const PRINCIPAL_MONTHLY = 4375;
-  const INTEREST_RATE = 0.08;
-  const ORIGINAL_LOAN = 1050000;
-  
-  // Utility: Format numbers as currency
-  function formatCurrency(num) {
-    return num.toLocaleString('en-US', {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
+  (function() {
+    console.log('🧭 Navigation: Starting...');
+    
+    const navList = document.getElementById('navList');
+    const navToggle = document.getElementById('navToggle');
+    const sideNav = document.getElementById('sideNav');
+    const sections = document.querySelectorAll('[data-nav][id]');
+    
+    if (!navList || sections.length === 0) {
+      console.error('❌ Navigation: Missing elements');
+      return;
+    }
+    
+    console.log('✅ Navigation: Building menu with', sections.length, 'sections');
+    
+    // Build navigation
+    navList.innerHTML = '';
+    sections.forEach(function(section) {
+      const link = document.createElement('a');
+      link.href = '#' + section.id;
+      link.textContent = section.getAttribute('data-nav') || section.id;
+      navList.appendChild(link);
     });
-  }
-  
-  // Main calculation function
-  function calculatePayment() {
-    try {
-      // Get current balance from slider
-      const balance = parseFloat(elements.slider.value) || ORIGINAL_LOAN;
+    
+    // Toggle sidebar
+    if (navToggle && sideNav) {
+      navToggle.addEventListener('click', function() {
+        sideNav.classList.toggle('min');
+      });
+    }
+    
+    // Active link highlighting
+    function updateActive() {
+      const scrollPos = window.scrollY + 200;
+      let current = '';
       
-      // Calculate monthly values
-      const interestMonthly = (balance * INTEREST_RATE) / 12;
-      const principalMonthly = PRINCIPAL_MONTHLY;
-      const totalMonthly = interestMonthly + principalMonthly;
-      
-      // Calculate annual values
-      const annualInterest = interestMonthly * 12;
-      const annualPrincipal = principalMonthly * 12;
-      const annualTotal = totalMonthly * 12;
-      const remainingAfterYear = Math.max(0, balance - annualPrincipal);
-      
-      // Update all displays (only if elements exist)
-      elements.balanceDisplay.textContent = formatCurrency(balance);
-      
-      if (elements.interest) {
-        elements.interest.textContent = '$' + formatCurrency(Math.round(interestMonthly));
-      }
-      
-      if (elements.total) {
-        elements.total.textContent = '$' + formatCurrency(Math.round(totalMonthly));
-      }
-      
-      if (elements.annualInterest) {
-        elements.annualInterest.textContent = '$' + formatCurrency(Math.round(annualInterest));
-      }
-      
-      if (elements.year1Total) {
-        elements.year1Total.textContent = '$' + formatCurrency(Math.round(annualTotal));
-      }
-      
-      if (elements.remainingBalance) {
-        elements.remainingBalance.textContent = '$' + formatCurrency(Math.round(remainingAfterYear));
-      }
-      
-      // Update chart if element exists
-      if (elements.chart) {
-        renderChart(balance);
-      }
-      
-      console.log('Calculator updated:', {
-        balance: formatCurrency(balance),
-        monthly: formatCurrency(Math.round(totalMonthly))
+      sections.forEach(function(section) {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          current = section.id;
+        }
       });
       
-    } catch (error) {
-      console.error('❌ Calculator error:', error);
+      navList.querySelectorAll('a').forEach(function(link) {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
     }
-  }
-  
-  // Chart rendering function
-  function renderChart(startingBalance) {
-    if (!elements.chart) return;
     
-    try {
-      let balance = startingBalance;
-      const months = [];
-      
-      // Calculate 12 months of payments
-      for (let i = 1; i <= 12; i++) {
-        const interest = (balance * INTEREST_RATE) / 12;
-        const principal = PRINCIPAL_MONTHLY;
-        const total = interest + principal;
-        
-        months.push({
-          month: i,
-          interest: interest,
-          principal: principal,
-          total: total,
-          balance: balance
-        });
-        
-        balance = Math.max(0, balance - principal);
-      }
-      
-      // Find max payment for scaling
-      const maxPayment = months[0].total;
-      
-      // Generate chart bars
-      const chartHTML = months.map(m => {
-        const interestHeight = (m.interest / maxPayment) * 100;
-        const principalHeight = (m.principal / maxPayment) * 100;
-        
-        return `
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;">
-            <div style="font-size:11px;color:var(--t3);font-weight:700;margin-bottom:4px;">
-              $${formatCurrency(Math.round(m.total))}
-            </div>
-            <div style="width:100%;display:flex;flex-direction:column;height:120px;gap:0;">
-              <div style="
-                width:100%;
-                height:${interestHeight}%;
-                background:linear-gradient(180deg,#5da3ff,#3b82ff);
-                border-radius:6px 6px 0 0;
-                opacity:0.85;
-                transition:opacity 0.2s;
-                cursor:pointer;
-              " 
-              onmouseover="this.style.opacity='1'" 
-              onmouseout="this.style.opacity='0.85'"
-              title="Month ${m.month} Interest: $${formatCurrency(Math.round(m.interest))}">
-              </div>
-              <div style="
-                width:100%;
-                height:${principalHeight}%;
-                background:linear-gradient(180deg,#d4af5e,#c9a75a);
-                border-radius:0 0 6px 6px;
-                opacity:0.85;
-                transition:opacity 0.2s;
-                cursor:pointer;
-              "
-              onmouseover="this.style.opacity='1'" 
-              onmouseout="this.style.opacity='0.85'"
-              title="Month ${m.month} Principal: $${formatCurrency(Math.round(m.principal))}">
-              </div>
-            </div>
-            <div style="font-size:10px;color:var(--t4);font-weight:600;">
-              M${m.month}
-            </div>
-          </div>
-        `;
-      }).join('');
-      
-      // Update chart container
-      elements.chart.innerHTML = `
-        <div style="display:flex;gap:6px;height:100%;align-items:flex-end;justify-content:space-between;">
-          ${chartHTML}
-        </div>
-      `;
-      
-      console.log('✅ Chart rendered successfully');
-      
-    } catch (error) {
-      console.error('❌ Chart rendering error:', error);
+    window.addEventListener('scroll', updateActive);
+    updateActive();
+    
+    console.log('✅ Navigation: Initialized!');
+  })();
+  
+  // ============================================================
+  // BACK TO TOP
+  // ============================================================
+  (function() {
+    const btn = document.getElementById('upBtn');
+    if (!btn) return;
+    
+    function check() {
+      btn.classList.toggle('show', window.scrollY > 300);
     }
-  }
+    
+    window.addEventListener('scroll', check);
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    check();
+    console.log('✅ Back to top: Initialized');
+  })();
   
-  // Attach event listener to slider
-  elements.slider.addEventListener('input', calculatePayment);
+  // ============================================================
+  // PROGRESS BAR
+  // ============================================================
+  (function() {
+    const bar = document.getElementById('progressBar');
+    if (!bar) return;
+    
+    function update() {
+      const scroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = (scroll / height) * 100;
+      bar.style.width = pct + '%';
+    }
+    
+    window.addEventListener('scroll', update);
+    update();
+    console.log('✅ Progress bar: Initialized');
+  })();
   
-  // Run initial calculation
-  calculatePayment();
+  // ============================================================
+  // THEME TOGGLE
+  // ============================================================
+  (function() {
+    const btn = document.getElementById('screenThemeToggle');
+    if (!btn) return;
+    
+    const html = document.documentElement;
+    
+    btn.addEventListener('click', function() {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      btn.textContent = next === 'dark' ? '🌙 Screen: Dark' : '☀️ Screen: Light';
+    });
+    
+    console.log('✅ Theme toggle: Initialized');
+  })();
   
-  console.log('✅ Calculator initialized successfully');
-})();
-
   // ============================================================
   // ASSURE CALL STATEMENTS
   // ============================================================
-  const ASSURE_LOCK_KEY = 'jj_assure_unlocked';
-  const assureLockBtn = document.getElementById('assureLockToggle');
-  const assureLockPill = document.getElementById('assureLockPill');
-  const assureMount = document.getElementById('assureStmtIndex');
-  const assureSearch = document.getElementById('assureStmtSearch');
-  const assureMeta = document.getElementById('assureMetaPill');
-
-  let assureUnlocked = localStorage.getItem(ASSURE_LOCK_KEY) === '1';
-
-  const updateAssureLockUI = () => {
-    if (assureLockBtn) assureLockBtn.textContent = assureUnlocked ? '🔓 Lock Statements' : '🔒 Unlock Statements';
-    if (assureLockPill) {
-      assureLockPill.textContent = assureUnlocked ? '🔓 UNLOCKED' : '🔒 LOCKED';
-      assureLockPill.style.borderColor = assureUnlocked ? 'rgba(59,130,255,.35)' : 'rgba(224,69,69,.35)';
-      assureLockPill.style.background = assureUnlocked ? 'rgba(59,130,255,.10)' : 'rgba(224,69,69,.10)';
+  (function() {
+    const LOCK_KEY = 'jj_assure_unlocked';
+    const btn = document.getElementById('assureLockToggle');
+    const pill = document.getElementById('assureLockPill');
+    const mount = document.getElementById('assureStmtIndex');
+    const search = document.getElementById('assureStmtSearch');
+    const meta = document.getElementById('assureMetaPill');
+    
+    if (!btn || !mount) return;
+    
+    let unlocked = localStorage.getItem(LOCK_KEY) === '1';
+    
+    const BASE = 'assurecall-docs';
+    const groups = [
+      {bank:'Wells Fargo',acct:'Operating',folder:'wells operating',files:['123124 WellsFargo.pdf','013125 WellsFargo.pdf','022825 WellsFargo.pdf','033125 WellsFargo.pdf','043025 WellsFargo.pdf','053125 WellsFargo.pdf','063025 WellsFargo.pdf','073125 WellsFargo.pdf','083125 WellsFargo.pdf','093025 WellsFargo.pdf','103125 WellsFargo.pdf','113025 WellsFargo.pdf','123125 WellsFargo.pdf']},
+      {bank:'Wells Fargo',acct:'Savings',folder:'wells savings',files:['123124 WellsFargo_Savings.pdf','013125 WellsFargo_Savings.pdf','022825 WellsFargo_Savings.pdf','033125 WellsFargo_Savings.pdf','043025 WellsFargo_Savings.pdf','053125 WellsFargo_Savings.pdf','063025 WellsFargo_Savings.pdf','073125 WellsFargo_Savings.pdf','083125 WellsFargo_Savings.pdf','093025 WellsFargo_Savings.pdf','103125 WellsFargo_Savings.pdf','113025 WellsFargo_Savings.pdf','123125 WellsFargo_Savings.pdf']},
+      {bank:'Capital One',acct:'Business',folder:'capital one business',files:['2025-01 CapitalOne_Business.pdf','2025-02 CapitalOne_Business.pdf','2025-03 CapitalOne_Business.pdf','2025-04 CapitalOne_Business.pdf','2025-05 CapitalOne_Business.pdf','2025-06 CapitalOne_Business.pdf','2025-07 CapitalOne_Business.pdf','2025-08 CapitalOne_Business.pdf','2025-09 CapitalOne_Business.pdf','2025-10 CapitalOne_Business.pdf','2025-11 CapitalOne_Business.pdf','2025-12 CapitalOne_Business.pdf']},
+      {bank:'Capital One',acct:'360 Personal',folder:'capital one 360',files:['2025-01 CapitalOne360.pdf','2025-02 CapitalOne360.pdf','2025-03 CapitalOne360.pdf','2025-04 CapitalOne360.pdf']},
+      {bank:'PayPal',acct:'Merchant',folder:'paypal',files:['2025-05 PayPal.pdf','2025-06 PayPal.pdf','2025-07 PayPal.pdf','2025-08 PayPal.pdf','2025-09 PayPal.pdf']}
+    ];
+    
+    const total = groups.reduce(function(sum, g) { return sum + g.files.length; }, 0);
+    if (meta) meta.textContent = groups.length + ' accounts • ' + total + ' PDFs';
+    
+    function render(filter) {
+      const q = (filter || '').toLowerCase();
+      let html = '';
+      
+      groups.forEach(function(g) {
+        const rows = g.files.filter(function(f) {
+          if (!q) return true;
+          const hay = (g.bank + ' ' + g.acct + ' ' + f).toLowerCase();
+          return hay.includes(q);
+        });
+        
+        if (rows.length === 0) return;
+        
+        let rowsHtml = '';
+        rows.forEach(function(file) {
+          const path = BASE + '/' + g.folder + '/' + encodeURIComponent(file);
+          if (unlocked) {
+            rowsHtml += '<a class="stmt-row" href="' + path + '" target="_blank"><div class="stmt-left"><div class="stmt-name">' + file + '</div></div><div class="stmt-open">Open PDF ↗</div></a>';
+          } else {
+            rowsHtml += '<div class="stmt-row" style="opacity:0.6;cursor:not-allowed;"><div class="stmt-left"><div class="stmt-name">' + file + '</div></div><div class="stmt-open">🔒 Locked</div></div>';
+          }
+        });
+        
+        html += '<details class="stmt-group"><summary><div class="stmt-group-title"><strong>' + g.bank + '</strong><span>' + g.acct + '</span></div><div class="stmt-count">' + rows.length + ' PDFs</div></summary><div class="stmt-list">' + rowsHtml + '</div></details>';
+      });
+      
+      mount.innerHTML = html || '<div style="padding:10px;">No matches</div>';
     }
-    renderAssureIndex();
-  };
-
-  assureLockBtn?.addEventListener('click', () => {
-    assureUnlocked = !assureUnlocked;
-    localStorage.setItem(ASSURE_LOCK_KEY, assureUnlocked ? '1' : '0');
-    updateAssureLockUI();
-  });
-
-  const BASE_ASSURE = "assurecall-docs";
-  const encPath = (p) => p.split("/").map(seg => encodeURIComponent(seg)).join("/");
-  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    
+    function updateUI() {
+      btn.textContent = unlocked ? '🔓 Lock Statements' : '🔒 Unlock Statements';
+      if (pill) {
+        pill.textContent = unlocked ? '🔓 UNLOCKED' : '🔒 LOCKED';
+        pill.style.borderColor = unlocked ? 'rgba(59,130,255,.35)' : 'rgba(224,69,69,.35)';
+        pill.style.background = unlocked ? 'rgba(59,130,255,.10)' : 'rgba(224,69,69,.10)';
+      }
+      render('');
+    }
+    
+    btn.addEventListener('click', function() {
+      unlocked = !unlocked;
+      localStorage.setItem(LOCK_KEY, unlocked ? '1' : '0');
+      updateUI();
+    });
+    
+    if (search) {
+      search.addEventListener('input', function(e) {
+        render(e.target.value);
+      });
+    }
+    
+    updateUI();
+    console.log('✅ AssureCall statements: Initialized');
+  })();
   
-  const monthLabel = (file) => {
-    const m = String(file).match(/^(\d{6})/);
-    if (!m) return file.replace(/\.(pdf|PDF)$/i, '');
-    const mm = Number(m[1].slice(0,2));
-    const yy = Number(m[1].slice(4,6));
-    return `${months[mm-1] || "Month"} ${2000 + yy}`;
-  };
-
-  const assureGroups = [
-    {bank:"Wells Fargo",acct:"Operating",folder:"wells operating",files:["123124 WellsFargo.pdf","013125 WellsFargo.pdf","022825 WellsFargo.pdf","033125 WellsFargo.pdf","043025 WellsFargo.pdf","053125 WellsFargo.pdf","063025 WellsFargo.pdf","073125 WellsFargo.pdf","083125 WellsFargo.pdf","093025 WellsFargo.pdf","103125 WellsFargo.pdf","113025 WellsFargo.pdf","123125 WellsFargo.pdf"]},
-    {bank:"Wells Fargo",acct:"Savings",folder:"wells savings",files:["123124 WellsFargo_Savings.pdf","013125 WellsFargo_Savings.pdf","022825 WellsFargo_Savings.pdf","033125 WellsFargo_Savings.pdf","043025 WellsFargo_Savings.pdf","053125 WellsFargo_Savings.pdf","063025 WellsFargo_Savings.pdf","073125 WellsFargo_Savings.pdf","083125 WellsFargo_Savings.pdf","093025 WellsFargo_Savings.pdf","103125 WellsFargo_Savings.pdf","113025 WellsFargo_Savings.pdf","123125 WellsFargo_Savings.pdf"]},
-    {bank:"Capital One",acct:"Business",folder:"capital one business",files:["2025-01 CapitalOne_Business.pdf","2025-02 CapitalOne_Business.pdf","2025-03 CapitalOne_Business.pdf","2025-04 CapitalOne_Business.pdf","2025-05 CapitalOne_Business.pdf","2025-06 CapitalOne_Business.pdf","2025-07 CapitalOne_Business.pdf","2025-08 CapitalOne_Business.pdf","2025-09 CapitalOne_Business.pdf","2025-10 CapitalOne_Business.pdf","2025-11 CapitalOne_Business.pdf","2025-12 CapitalOne_Business.pdf"]},
-    {bank:"Capital One",acct:"360 Personal",folder:"capital one 360",files:["2025-01 CapitalOne360.pdf","2025-02 CapitalOne360.pdf","2025-03 CapitalOne360.pdf","2025-04 CapitalOne360.pdf"]},
-    {bank:"PayPal",acct:"Merchant",folder:"paypal",files:["2025-05 PayPal.pdf","2025-06 PayPal.pdf","2025-07 PayPal.pdf","2025-08 PayPal.pdf","2025-09 PayPal.pdf"]}
-  ];
-
-  const totalAssure = assureGroups.reduce((sum,g) => sum + g.files.length, 0);
-  if (assureMeta) assureMeta.textContent = `${assureGroups.length} accounts • ${totalAssure} PDFs`;
-
-  function renderAssureIndex(filter = "") {
-    if (!assureMount) return;
-    const q = filter.trim().toLowerCase();
-
-    assureMount.innerHTML = assureGroups.map((g) => {
-      const safeFolder = encPath(`${BASE_ASSURE}/${g.folder}`);
-      const rows = g.files.map(file => {
-        const href = `${safeFolder}/${encodeURIComponent(file)}`;
-        const label = monthLabel(file);
-        const hay = `${g.bank} ${g.acct} ${g.folder} ${file} ${label}`.toLowerCase();
-        return { file, href, label, visible: !q || hay.includes(q) };
-      }).filter(x => x.visible);
-
-      if (q && rows.length === 0) return "";
-
-      const htmlRows = rows.map(x => {
-        if (assureUnlocked) {
-          return `<a class="stmt-row" href="${x.href}" target="_blank" rel="noopener"><div class="stmt-left"><div class="stmt-name">${x.label}</div><div class="stmt-meta">${x.file}</div></div><div class="stmt-open">Open PDF ↗</div></a>`;
-        } else {
-          return `<div class="stmt-row" style="opacity:0.6;cursor:not-allowed;pointer-events:none;"><div class="stmt-left"><div class="stmt-name">${x.label}</div><div class="stmt-meta">${x.file}</div></div><div class="stmt-open" style="opacity:0.5;">🔒 Locked</div></div>`;
-        }
-      }).join("");
-
-      const openDefault = q ? "open" : "";
-      return `<details class="stmt-group" ${openDefault}><summary><div class="stmt-group-title"><strong>${g.bank}</strong><span>${g.acct} • ${g.folder}</span></div><div class="stmt-count">${rows.length} PDF${rows.length===1?"":"s"}</div></summary><div class="stmt-list">${htmlRows}</div></details>`;
-    }).join("") || `<div class="tiny-note" style="padding:10px 2px;">No statements match your search.</div>`;
-  }
-
-  renderAssureIndex();
-  updateAssureLockUI();
-  assureSearch?.addEventListener("input", (e) => renderAssureIndex(e.target.value));
-
   // ============================================================
   // J&J STATEMENTS
   // ============================================================
-  const jjMount = document.getElementById("stmtIndex");
-  const jjSearch = document.getElementById("stmtSearch");
-  const jjMeta = document.getElementById("stmtMetaPill");
-  const BASE_JJ = "jandjstatements";
-
-  const jjGroups = [
-    {bank:"Capital One",acct:"Operating (…0489)",folder:"CAP OPERATING",files:["J_and_J_Operating...0489_DEC_2025 (3).pdf"]},
-    {bank:"Capital One",acct:"Savings (…7312)",folder:"cap savings",files:["J_and_J_Savings...7312_DEC_2025 (1).pdf"]},
-    {bank:"Wells Fargo",acct:"Operating",folder:"wells  operating",files:["123124 WellsFargo.pdf","013125 WellsFargo.pdf","022825 WellsFargo.pdf","033125 WellsFargo.pdf","043025 WellsFargo.pdf","053125 WellsFargo.pdf","063025 WellsFargo.pdf","073125 WellsFargo.pdf","083125 WellsFargo.pdf","093025 WellsFargo.pdf","103125 WellsFargo.pdf","113025 WellsFargo.pdf","123125 WellsFargo.pdf"]},
-    {bank:"Wells Fargo",acct:"Savings",folder:"wells savings",files:["123124 WellsFargo (1).pdf","013125 WellsFargo.pdf","022825 WellsFargo.pdf","033125 WellsFargo.pdf","043025 WellsFargo.pdf","053125 WellsFargo.pdf","063025 WellsFargo.pdf","073125 WellsFargo.pdf","083125 WellsFargo.pdf","093025 WellsFargo.pdf","103125 WellsFargo.pdf","113025 WellsFargo.pdf","123125 WellsFargo.pdf"]}
-  ];
-
-  const totalJJ = jjGroups.reduce((sum,g) => sum + g.files.length, 0);
-  if (jjMeta) jjMeta.textContent = `${jjGroups.length} groups • ${totalJJ} PDFs`;
-
-  function renderJJIndex(filter = "") {
-    if (!jjMount) return;
-    const q = filter.trim().toLowerCase();
-
-    jjMount.innerHTML = jjGroups.map((g) => {
-      const safeFolder = encPath(`${BASE_JJ}/${g.folder}`);
-      const rows = g.files.map(file => {
-        const href = `${safeFolder}/${encodeURIComponent(file)}`;
-        const label = monthLabel(file);
-        const hay = `${g.bank} ${g.acct} ${g.folder} ${file} ${label}`.toLowerCase();
-        return { file, href, label, visible: !q || hay.includes(q) };
-      }).filter(x => x.visible);
-
-      if (q && rows.length === 0) return "";
-
-      const htmlRows = rows.map(x => `<a class="stmt-row" href="${x.href}" target="_blank" rel="noopener"><div class="stmt-left"><div class="stmt-name">${x.label}</div><div class="stmt-meta">${x.file}</div></div><div class="stmt-open">Open PDF ↗</div></a>`).join("");
-      const openDefault = q ? "open" : "";
-      return `<details class="stmt-group" ${openDefault}><summary><div class="stmt-group-title"><strong>${g.bank}</strong><span>${g.acct} • ${g.folder}</span></div><div class="stmt-count">${rows.length} PDF${rows.length===1?"":"s"}</div></summary><div class="stmt-list">${htmlRows}</div></details>`;
-    }).join("") || `<div class="tiny-note" style="padding:10px 2px;">No statements match your search.</div>`;
-  }
-
-  renderJJIndex();
-  jjSearch?.addEventListener("input", (e) => renderJJIndex(e.target.value));
-
-  // ============================================================
-  // SCROLL PROGRESS BAR
-  // ============================================================
-  const progressBar = document.getElementById('progressBar');
-  const scrollProgress = document.getElementById('scrollProgress');
-  
-  if (progressBar && scrollProgress) {
-    const updateProgress = () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      progressBar.style.width = scrolled + '%';
-      scrollProgress.setAttribute('aria-valuenow', Math.round(scrolled));
-    };
+  (function() {
+    const mount = document.getElementById('stmtIndex');
+    const search = document.getElementById('stmtSearch');
+    const meta = document.getElementById('stmtMetaPill');
     
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    updateProgress();
-  }
+    if (!mount) return;
+    
+    const BASE = 'jandjstatements';
+    const groups = [
+      {bank:'Capital One',acct:'Operating',folder:'CAP OPERATING',files:['J_and_J_Operating...0489_DEC_2025 (3).pdf']},
+      {bank:'Capital One',acct:'Savings',folder:'cap savings',files:['J_and_J_Savings...7312_DEC_2025 (1).pdf']},
+      {bank:'Wells Fargo',acct:'Operating',folder:'wells  operating',files:['123124 WellsFargo.pdf','013125 WellsFargo.pdf','022825 WellsFargo.pdf','033125 WellsFargo.pdf','043025 WellsFargo.pdf','053125 WellsFargo.pdf','063025 WellsFargo.pdf','073125 WellsFargo.pdf','083125 WellsFargo.pdf','093025 WellsFargo.pdf','103125 WellsFargo.pdf','113025 WellsFargo.pdf','123125 WellsFargo.pdf']},
+      {bank:'Wells Fargo',acct:'Savings',folder:'wells savings',files:['123124 WellsFargo (1).pdf','013125 WellsFargo.pdf','022825 WellsFargo.pdf','033125 WellsFargo.pdf','043025 WellsFargo.pdf','053125 WellsFargo.pdf','063025 WellsFargo.pdf','073125 WellsFargo.pdf','083125 WellsFargo.pdf','093025 WellsFargo.pdf','103125 WellsFargo.pdf','113025 WellsFargo.pdf','123125 WellsFargo.pdf']}
+    ];
+    
+    const total = groups.reduce(function(sum, g) { return sum + g.files.length; }, 0);
+    if (meta) meta.textContent = groups.length + ' groups • ' + total + ' PDFs';
+    
+    function render(filter) {
+      const q = (filter || '').toLowerCase();
+      let html = '';
+      
+      groups.forEach(function(g) {
+        const rows = g.files.filter(function(f) {
+          if (!q) return true;
+          const hay = (g.bank + ' ' + g.acct + ' ' + f).toLowerCase();
+          return hay.includes(q);
+        });
+        
+        if (rows.length === 0) return;
+        
+        let rowsHtml = '';
+        rows.forEach(function(file) {
+          const path = BASE + '/' + g.folder + '/' + encodeURIComponent(file);
+          rowsHtml += '<a class="stmt-row" href="' + path + '" target="_blank"><div class="stmt-left"><div class="stmt-name">' + file + '</div></div><div class="stmt-open">Open PDF ↗</div></a>';
+        });
+        
+        html += '<details class="stmt-group"><summary><div class="stmt-group-title"><strong>' + g.bank + '</strong><span>' + g.acct + '</span></div><div class="stmt-count">' + rows.length + ' PDFs</div></summary><div class="stmt-list">' + rowsHtml + '</div></details>';
+      });
+      
+      mount.innerHTML = html || '<div style="padding:10px;">No matches</div>';
+    }
+    
+    if (search) {
+      search.addEventListener('input', function(e) {
+        render(e.target.value);
+      });
+    }
+    
+    render('');
+    console.log('✅ J&J statements: Initialized');
+  })();
+  
+  // ============================================================
+  // PRINT ONE-PAGER
+  // ============================================================
+  window.printOnePager = function() {
+    window.print();
+  };
+  
+  console.log('✅ ALL INITIALIZED');
+});
 
-  console.log('All systems initialized');
+console.log('✅ Script loaded');
 });
 </script>
 </body>
