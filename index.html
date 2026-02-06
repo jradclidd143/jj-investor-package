@@ -3031,6 +3031,154 @@ html[data-theme="light"] .section-head h2::before {
   background: linear-gradient(180deg, #2563eb, #f59e0b) !important;
 }
       
+/* ============================================================
+   LIGHT THEME - CHART-SPECIFIC FIXES
+   Fix SVG backgrounds and add stroke outlines
+============================================================ */
+
+/* FORCE ALL CHART BACKGROUNDS TO BE LIGHT/WHITE */
+html[data-theme="light"] .chart,
+html[data-theme="light"] .chart svg,
+html[data-theme="light"] svg[viewBox],
+html[data-theme="light"] svg[width][height] {
+  background: #ffffff !important;
+}
+
+/* FORCE SVG BACKGROUNDS - PIE CHARTS */
+html[data-theme="light"] svg rect[fill*="#0"],
+html[data-theme="light"] svg rect[fill*="#1"],
+html[data-theme="light"] svg rect[fill*="#2"][fill*="2"][fill*="2"] {
+  fill: #ffffff !important;
+}
+
+/* FIX DARK BACKGROUNDS IN SVG CONTAINERS */
+html[data-theme="light"] svg > rect[width="100%"],
+html[data-theme="light"] svg > rect[height="100%"],
+html[data-theme="light"] svg rect[x="0"][y="0"] {
+  fill: #ffffff !important;
+}
+
+/* ADD VISIBLE STROKES TO BAR CHART SEGMENTS */
+html[data-theme="light"] svg rect[fill]:not([fill="none"]):not([fill="transparent"]) {
+  stroke: #374151 !important;
+  stroke-width: 2 !important;
+}
+
+/* EXCEPTION - DON'T STROKE THE MAIN BACKGROUND RECT */
+html[data-theme="light"] svg > rect:first-child[width="100%"] {
+  stroke: none !important;
+}
+
+/* FORCE PIE CHART PATHS TO BE VISIBLE */
+html[data-theme="light"] svg path[d*="M"],
+html[data-theme="light"] svg path[fill] {
+  opacity: 1 !important;
+  stroke: #ffffff !important;
+  stroke-width: 2 !important;
+}
+
+/* FORCE ALL SVG TEXT TO BE SOLID BLACK */
+html[data-theme="light"] svg text,
+html[data-theme="light"] svg tspan,
+html[data-theme="light"] svg text[fill],
+html[data-theme="light"] svg text[style*="fill"] {
+  fill: #000000 !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+/* OVERRIDE ANY INLINE STYLES ON SVG TEXT */
+html[data-theme="light"] svg text[fill="#fff"],
+html[data-theme="light"] svg text[fill="#ffffff"],
+html[data-theme="light"] svg text[fill="white"],
+html[data-theme="light"] svg tspan[fill="#fff"],
+html[data-theme="light"] svg tspan[fill="#ffffff"],
+html[data-theme="light"] svg tspan[fill="white"] {
+  fill: #000000 !important;
+}
+
+/* FORCE DARK GREY/BLACK BACKGROUNDS TO BE WHITE */
+html[data-theme="light"] svg rect[fill="#0b1020"],
+html[data-theme="light"] svg rect[fill="#0d1222"],
+html[data-theme="light"] svg rect[fill="#05060b"],
+html[data-theme="light"] svg rect[fill="#070a12"],
+html[data-theme="light"] svg rect[fill*="rgb(11"],
+html[data-theme="light"] svg rect[fill*="rgb(13"],
+html[data-theme="light"] svg rect[fill*="rgb(5"],
+html[data-theme="light"] svg rect[fill*="rgb(7"] {
+  fill: #ffffff !important;
+}
+
+/* FIX LEGEND TEXT IN PIE CHARTS */
+html[data-theme="light"] svg text[text-anchor],
+html[data-theme="light"] svg text[x][y] {
+  fill: #000000 !important;
+  font-weight: 800 !important;
+}
+
+/* ENSURE CHART LABELS ARE VISIBLE */
+html[data-theme="light"] svg text.recharts-text,
+html[data-theme="light"] svg .recharts-label,
+html[data-theme="light"] svg text[class*="label"],
+html[data-theme="light"] svg text[class*="axis"] {
+  fill: #000000 !important;
+  font-weight: 800 !important;
+}
+
+/* FIX ANY REMAINING DARK FILLS */
+html[data-theme="light"] svg [fill*="rgba(11"],
+html[data-theme="light"] svg [fill*="rgba(13"],
+html[data-theme="light"] svg [fill*="rgba(5"],
+html[data-theme="light"] svg [fill*="rgba(7"] {
+  fill: #ffffff !important;
+}
+
+/* FORCE CHART LEGEND SQUARES/CIRCLES TO KEEP THEIR COLORS */
+html[data-theme="light"] svg circle[fill="#"],
+html[data-theme="light"] svg rect[width="10"],
+html[data-theme="light"] svg rect[width="12"],
+html[data-theme="light"] svg rect[height="10"],
+html[data-theme="light"] svg rect[height="12"] {
+  stroke: #374151 !important;
+  stroke-width: 1 !important;
+  opacity: 1 !important;
+}
+
+/* KEEP BAR/PIE SEGMENT COLORS BUT ADD BORDERS */
+html[data-theme="light"] svg rect[fill="#3b82f6"],
+html[data-theme="light"] svg rect[fill="#60a5fa"],
+html[data-theme="light"] svg rect[fill="#93c5fd"],
+html[data-theme="light"] svg rect[fill*="blue"] {
+  stroke: #1e40af !important;
+}
+
+html[data-theme="light"] svg rect[fill="#f59e0b"],
+html[data-theme="light"] svg rect[fill="#fbbf24"],
+html[data-theme="light"] svg rect[fill="#fcd34d"],
+html[data-theme="light"] svg rect[fill*="orange"],
+html[data-theme="light"] svg rect[fill*="amber"] {
+  stroke: #d97706 !important;
+}
+
+html[data-theme="light"] svg rect[fill="#ef4444"],
+html[data-theme="light"] svg rect[fill*="red"] {
+  stroke: #dc2626 !important;
+}
+
+html[data-theme="light"] svg rect[fill="#6b7280"],
+html[data-theme="light"] svg rect[fill*="gray"],
+html[data-theme="light"] svg rect[fill*="grey"] {
+  stroke: #374151 !important;
+}
+
+/* STACKED BAR CHART - ENSURE SEGMENTS HAVE BORDERS */
+html[data-theme="light"] svg g[class*="bar"] rect,
+html[data-theme="light"] svg g[class*="stack"] rect {
+  stroke: #374151 !important;
+  stroke-width: 2 !important;
+}
+      
 </style>
 </head>
 <body>
