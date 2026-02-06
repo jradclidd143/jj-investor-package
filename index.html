@@ -2176,6 +2176,23 @@ input[type="range"]::-moz-range-thumb:active {
 .metric-strip { grid-template-columns: 1fr; }
 }
 
+/* Executive One-Pager Print Styles */
+@media print {
+  body.printing-one-pager > *:not(#executive-one-pager) {
+    display: none !important;
+  }
+  
+  body.printing-one-pager #executive-one-pager {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  
+  #executive-one-pager .doc-btn {
+    display: none !important;
+  }      
+
 /* ============================================================
       PRINT STYLES
       ============================================================ */
@@ -5895,7 +5912,37 @@ a[href^="http"]:after {
     localStorage.setItem(THEME_KEY, next);
     applyTheme(next);
   });
-
+// Executive One-Pager Print Function
+function printOnePager() {
+  // Populate date and URL
+  const dateEl = document.getElementById('onePagerDate');
+  const urlEl = document.getElementById('onePagerURL');
+  
+  if (dateEl) {
+    const now = new Date();
+    dateEl.textContent = now.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  }
+  
+  if (urlEl) {
+    urlEl.textContent = window.location.href;
+  }
+  
+  // Add print class to body
+  document.body.classList.add('printing-one-pager');
+  
+  // Trigger print
+  window.print();
+  
+  // Remove class after print dialog closes
+  setTimeout(() => {
+    document.body.classList.remove('printing-one-pager');
+  }, 100);
+}
+      
   // Build sidenav
   const navList = document.getElementById('navList');
   const sideNav = document.getElementById('sideNav');
