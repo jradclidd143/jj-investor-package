@@ -2111,6 +2111,7 @@ input[type="range"]::-moz-range-thumb:active {
   #payment-calculator [style*="grid-template-columns: repeat(4"] {
     grid-template-columns: repeat(2, 1fr) !important;
   }
+}
       
 /* ============================================================
       RESPONSIVE BREAKPOINTS
@@ -2177,149 +2178,266 @@ input[type="range"]::-moz-range-thumb:active {
 }
 
 /* ============================================================
-   EXECUTIVE ONE-PAGER PRINT STYLES — FIXED
+   EXECUTIVE ONE-PAGER PRINT — FIXED ISOLATION METHOD
 ============================================================ */
 @media print {
-  /* STEP 1: Hide all major layout elements when printing one-pager */
-  body.printing-one-pager .topbar,
-  body.printing-one-pager .sidenav,
-  body.printing-one-pager .up-btn,
-  body.printing-one-pager .bg-grid,
-  body.printing-one-pager .footer,
-  body.printing-one-pager #scrollProgress {
+  /* When printing one-pager, hide EVERYTHING except the print container */
+  body.printing-one-pager > *:not(#printOnePagerContainer) {
     display: none !important;
   }
   
-  /* STEP 2: Hide ALL sections */
-  body.printing-one-pager .section {
-    display: none !important;
-  }
-  
-  /* STEP 3: Show ONLY the hero section (contains the one-pager) */
-  body.printing-one-pager .hero {
-    display: none !important;
-  }
-  
-  /* STEP 4: Show ONLY the section containing the one-pager */
-  body.printing-one-pager .section:has(#executive-one-pager) {
+  /* Show only the print container */
+  body.printing-one-pager #printOnePagerContainer {
     display: block !important;
     margin: 0 !important;
     padding: 0 !important;
-    border: none !important;
   }
   
-  body.printing-one-pager .section:has(#executive-one-pager)::before {
-    display: none !important;
-  }
-  
-  /* STEP 5: Make one-pager visible and properly styled */
-  body.printing-one-pager #executive-one-pager {
+  /* Style the cloned one-pager */
+  body.printing-one-pager #executive-one-pager-print-clone {
     display: block !important;
     margin: 0 !important;
-    padding: 20px !important;
+    padding: 20mm !important;
     background: white !important;
-    border: 1px solid #ddd !important;
+    border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     page-break-inside: avoid !important;
-    max-width: 100% !important;
   }
   
-  /* STEP 6: Ensure inner content displays correctly */
-  body.printing-one-pager #executive-one-pager * {
+  /* Force black text for print readability */
+  body.printing-one-pager #executive-one-pager-print-clone * {
     color: #000 !important;
   }
   
-  /* STEP 7: Preserve grid layouts inside one-pager */
-  body.printing-one-pager #executive-one-pager [style*="display: grid"],
-  body.printing-one-pager #executive-one-pager [style*="display:grid"] {
+  /* Preserve grid/flex layouts */
+  body.printing-one-pager #executive-one-pager-print-clone [style*="display: grid"],
+  body.printing-one-pager #executive-one-pager-print-clone [style*="display:grid"] {
     display: grid !important;
   }
   
-  body.printing-one-pager #executive-one-pager [style*="display: flex"],
-  body.printing-one-pager #executive-one-pager [style*="display:flex"] {
+  body.printing-one-pager #executive-one-pager-print-clone [style*="display: flex"],
+  body.printing-one-pager #executive-one-pager-print-clone [style*="display:flex"] {
     display: flex !important;
   }
   
-  /* STEP 8: Keep gold accent colors readable */
-  body.printing-one-pager #executive-one-pager .gold,
-  body.printing-one-pager #executive-one-pager [style*="color: var(--gold"],
-  body.printing-one-pager #executive-one-pager [style*="color:var(--gold"],
-  body.printing-one-pager #executive-one-pager [style*="color: #d4af5e"],
-  body.printing-one-pager #executive-one-pager [style*="color:#d4af5e"] {
-    color: #c9a75a !important;
+  /* Keep gold accents readable (not too light) */
+  body.printing-one-pager #executive-one-pager-print-clone .gold,
+  body.printing-one-pager #executive-one-pager-print-clone [style*="color: var(--gold"],
+  body.printing-one-pager #executive-one-pager-print-clone [style*="color:#d4af5e"] {
+    color: #996600 !important;
   }
   
-  /* STEP 9: Hide the print button itself */
-  body.printing-one-pager #executive-one-pager .doc-btn,
-  body.printing-one-pager #executive-one-pager button {
+  /* Hide print button in the clone */
+  body.printing-one-pager #executive-one-pager-print-clone .doc-btn,
+  body.printing-one-pager #executive-one-pager-print-clone button {
     display: none !important;
   }
   
-  /* STEP 10: Clean page setup */
+  /* Clean page setup */
   body.printing-one-pager {
     margin: 0 !important;
     padding: 0 !important;
     background: white !important;
   }
   
-  body.printing-one-pager .container {
-    max-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  
   @page {
     size: letter portrait;
     margin: 0.5in;
   }
-}  
+}
 
 /* ============================================================
-      PRINT STYLES
-      ============================================================ */
+   GENERAL PRINT STYLES — IMAGES, CHARTS, PAGE BREAKS
+============================================================ */
 @media print {
-.topbar,
-.sidenav,
-.up-btn,
-.nav-toggle,
-.pill-toggle,
-.doc-btn,
-#navBackdrop,
-.bg-grid {
-  display: none !important;
-}
+  /* Hide non-content elements */
+  .topbar,
+  .sidenav,
+  .up-btn,
+  .nav-toggle,
+  .pill-toggle,
+  .doc-btn,
+  #navBackdrop,
+  .bg-grid,
+  #scrollProgress {
+    display: none !important;
+  }
 
-body {
-  background: white;
-  color: black;
-}
+  /* Clean body */
+  body {
+    background: white !important;
+    color: black !important;
+  }
 
-.container {
-  padding-right: 20px !important;
-  max-width: 100%;
-}
+  .container {
+    padding-right: 20px !important;
+    max-width: 100%;
+  }
 
-.section {
-  page-break-inside: avoid;
-}
-
-.chart-card,
-.panel,
-.property-card {
-  page-break-inside: avoid;
-}
-
-a {
-  color: black;
-  text-decoration: underline;
-}
-
-a[href^="http"]:after {
-  content: " (" attr(href) ")";
-  font-size: 0.8em;
-  font-weight: normal;
-}
+  /* ============================================================
+     PAGE BREAK CONTROLS — PREVENT AWKWARD CUTS
+  ============================================================ */
+  
+  /* Avoid breaking inside these elements */
+  .section,
+  .panel,
+  .chart-card,
+  .property-card,
+  .option-card,
+  .growth-card,
+  .kpi-card,
+  .compare-card,
+  .callout,
+  .uf-table,
+  .mini-table,
+  .metric,
+  .doc,
+  figure,
+  .jj-figure {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  
+  /* Allow breaking after sections if needed */
+  .section {
+    page-break-after: auto !important;
+  }
+  
+  /* Keep headings with their content */
+  h1, h2, h3, h4, h5, h6,
+  .section-head,
+  .panel-head,
+  .chart-title {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+  
+  /* ============================================================
+     IMAGES & CHARTS — FORCE VISIBILITY
+  ============================================================ */
+  
+  /* Ensure ALL images print */
+  img,
+  .jj-header,
+  .brands-img,
+  .chart-img,
+  .jj-figure img,
+  .property-card img,
+  .option-card img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid !important;
+  }
+  
+  /* Ensure ALL SVG charts print */
+  svg,
+  .chart svg,
+  .chart-card svg,
+  svg[role="img"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Ensure chart containers print */
+  .chart,
+  .chart-card,
+  .deposits-charts,
+  .chart-card-lg {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* ============================================================
+     LAYOUT PRESERVATION
+  ============================================================ */
+  
+  /* Preserve grid layouts where appropriate */
+  .grid-2,
+  .hero,
+  .kpis,
+  .metric-strip {
+    display: grid !important;
+  }
+  
+  /* But simplify complex grids for print */
+  .grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  
+  /* Keep KPI cards in 2 columns if space allows */
+  .kpis {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* ============================================================
+     LINKS & INTERACTIVE ELEMENTS
+  ============================================================ */
+  
+  /* Make links visible */
+  a {
+    color: #000 !important;
+    text-decoration: underline !important;
+  }
+  
+  /* Show URLs for external links */
+  a[href^="http"]:after {
+    content: " (" attr(href) ")" !important;
+    font-size: 0.8em !important;
+    font-weight: normal !important;
+    word-break: break-all !important;
+  }
+  
+  /* Don't show URLs for internal anchor links */
+  a[href^="#"]:after {
+    content: "" !important;
+  }
+  
+  /* ============================================================
+     COLOR & CONTRAST ADJUSTMENTS
+  ============================================================ */
+  
+  /* Ensure text is readable */
+  .section-head,
+  .panel-head,
+  .chart-title,
+  h1, h2, h3, h4 {
+    color: #000 !important;
+  }
+  
+  /* Preserve important color coding but darken for print */
+  .badge.gold,
+  .gold,
+  .panel-tag.gold {
+    color: #996600 !important;
+    border-color: #996600 !important;
+  }
+  
+  .badge.red {
+    color: #cc0000 !important;
+    border-color: #cc0000 !important;
+  }
+  
+  /* ============================================================
+     PAGE SETUP
+  ============================================================ */
+  
+  @page {
+    size: letter portrait;
+    margin: 0.75in 0.5in;
+  }
+  
+  @page :first {
+    margin-top: 0.5in;
+  }
 }
 </style>
 </head>
@@ -2346,7 +2464,7 @@ a[href^="http"]:after {
     box-shadow: 0 0 10px rgba(59,130,255,0.5);
   "></div>
 </div>
-      
+
 <a href="#top" class="skip-to-content">Skip to content</a>
 
 <!-- Background -->
@@ -5933,16 +6051,24 @@ a[href^="http"]:after {
 
 <script>
 /* ============================================================
-   NAVIGATION + THEME + BACK TO TOP + CALCULATOR + STATEMENTS
+   JAVASCRIPT - COMPLETE WITH PRINT FIXES
 ============================================================ */
 
 // ============================================================
-// EXECUTIVE ONE-PAGER PRINT FUNCTION (MUST BE GLOBAL)
+// EXECUTIVE ONE-PAGER PRINT FUNCTION - CLONE METHOD (BULLETPROOF)
 // ============================================================
 window.printOnePager = function() {
-  console.log('Print function called');
+  console.log('🖨️ Print one-pager initiated');
   
-  // Populate date and URL
+  // Get the one-pager element
+  const onePager = document.getElementById('executive-one-pager');
+  if (!onePager) {
+    console.error('❌ One-pager element not found');
+    return;
+  }
+  console.log('✅ One-pager element found');
+  
+  // Update date and URL in the original before cloning
   const dateEl = document.getElementById('onePagerDate');
   const urlEl = document.getElementById('onePagerURL');
   
@@ -5953,30 +6079,57 @@ window.printOnePager = function() {
       month: 'long', 
       day: 'numeric' 
     });
+    console.log('✅ Date updated');
   }
   
   if (urlEl) {
     urlEl.textContent = window.location.href;
+    console.log('✅ URL updated');
   }
   
-  // Add print class to body
-  document.body.classList.add('printing-one-pager');
-  console.log('Print class added');
+  // Clone the one-pager
+  const clone = onePager.cloneNode(true);
+  clone.id = 'executive-one-pager-print-clone';
+  console.log('✅ Clone created');
   
-  // Small delay to ensure class is applied
+  // Create container for the clone
+  const container = document.createElement('div');
+  container.id = 'printOnePagerContainer';
+  container.appendChild(clone);
+  
+  // Add container to body
+  document.body.appendChild(container);
+  console.log('✅ Print container added to DOM');
+  
+  // Add print class
+  document.body.classList.add('printing-one-pager');
+  console.log('✅ Print class added');
+  
+  // Cleanup function
+  const cleanup = () => {
+    console.log('🧹 Cleaning up after print');
+    document.body.classList.remove('printing-one-pager');
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+    console.log('✅ Cleanup complete');
+  };
+  
+  // Trigger print after short delay
   setTimeout(() => {
+    console.log('🖨️ Opening print dialog...');
     window.print();
     
-    // Remove class after print dialog closes
-    setTimeout(() => {
-      document.body.classList.remove('printing-one-pager');
-      console.log('Print class removed');
-    }, 500);
-  }, 100);
+    // Cleanup after print dialog closes
+    setTimeout(cleanup, 1000);
+  }, 150);
+  
+  // Also cleanup if print is cancelled
+  window.addEventListener('afterprint', cleanup, { once: true });
 };
 
 // ============================================================
-// MAIN INITIALIZATION - RUNS ON DOM READY
+// MAIN INITIALIZATION - REST OF JS CONTINUES UNCHANGED
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
   console.log('DOM Ready - Initializing...');
