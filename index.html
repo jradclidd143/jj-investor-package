@@ -2176,28 +2176,61 @@ input[type="range"]::-moz-range-thumb:active {
 .metric-strip { grid-template-columns: 1fr; }
 }
 
-/* Executive One-Pager Print Styles */
+/* ============================================================
+   EXECUTIVE ONE-PAGER PRINT STYLES — FIXED
+============================================================ */
 @media print {
-  /* Hide EVERYTHING when printing one-pager */
-  body.printing-one-pager * {
+  /* STEP 1: Hide all major layout elements when printing one-pager */
+  body.printing-one-pager .topbar,
+  body.printing-one-pager .sidenav,
+  body.printing-one-pager .up-btn,
+  body.printing-one-pager .bg-grid,
+  body.printing-one-pager .footer,
+  body.printing-one-pager #scrollProgress {
     display: none !important;
   }
   
-  /* Show ONLY the one-pager and its parent containers */
-  body.printing-one-pager,
-  body.printing-one-pager .container,
-  body.printing-one-pager .section,
-  body.printing-one-pager #executive-one-pager,
+  /* STEP 2: Hide ALL sections */
+  body.printing-one-pager .section {
+    display: none !important;
+  }
+  
+  /* STEP 3: Show ONLY the hero section (contains the one-pager) */
+  body.printing-one-pager .hero {
+    display: none !important;
+  }
+  
+  /* STEP 4: Show ONLY the section containing the one-pager */
+  body.printing-one-pager .section:has(#executive-one-pager) {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+  
+  body.printing-one-pager .section:has(#executive-one-pager)::before {
+    display: none !important;
+  }
+  
+  /* STEP 5: Make one-pager visible and properly styled */
+  body.printing-one-pager #executive-one-pager {
+    display: block !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    background: white !important;
+    border: 1px solid #ddd !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid !important;
+    max-width: 100% !important;
+  }
+  
+  /* STEP 6: Ensure inner content displays correctly */
   body.printing-one-pager #executive-one-pager * {
-    display: block !important;
+    color: #000 !important;
   }
   
-  /* Keep panel structure intact */
-  body.printing-one-pager #executive-one-pager .panel {
-    display: block !important;
-  }
-  
-  /* Preserve grid layouts in one-pager */
+  /* STEP 7: Preserve grid layouts inside one-pager */
   body.printing-one-pager #executive-one-pager [style*="display: grid"],
   body.printing-one-pager #executive-one-pager [style*="display:grid"] {
     display: grid !important;
@@ -2208,10 +2241,26 @@ input[type="range"]::-moz-range-thumb:active {
     display: flex !important;
   }
   
-  /* Reset margins/padding for print */
+  /* STEP 8: Keep gold accent colors readable */
+  body.printing-one-pager #executive-one-pager .gold,
+  body.printing-one-pager #executive-one-pager [style*="color: var(--gold"],
+  body.printing-one-pager #executive-one-pager [style*="color:var(--gold"],
+  body.printing-one-pager #executive-one-pager [style*="color: #d4af5e"],
+  body.printing-one-pager #executive-one-pager [style*="color:#d4af5e"] {
+    color: #c9a75a !important;
+  }
+  
+  /* STEP 9: Hide the print button itself */
+  body.printing-one-pager #executive-one-pager .doc-btn,
+  body.printing-one-pager #executive-one-pager button {
+    display: none !important;
+  }
+  
+  /* STEP 10: Clean page setup */
   body.printing-one-pager {
     margin: 0 !important;
     padding: 0 !important;
+    background: white !important;
   }
   
   body.printing-one-pager .container {
@@ -2220,49 +2269,11 @@ input[type="range"]::-moz-range-thumb:active {
     margin: 0 !important;
   }
   
-  body.printing-one-pager .section {
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
+  @page {
+    size: letter portrait;
+    margin: 0.5in;
   }
-  
-  body.printing-one-pager .section::before {
-    display: none !important;
-  }
-  
-  body.printing-one-pager #executive-one-pager {
-    margin: 0 !important;
-    padding: 20px !important;
-    box-shadow: none !important;
-    border: 1px solid #ddd !important;
-    border-radius: 0 !important;
-    background: white !important;
-  }
-  
-  body.printing-one-pager #executive-one-pager .panel {
-    background: white !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-  
-  /* Hide the print button itself */
-  body.printing-one-pager #executive-one-pager .doc-btn {
-    display: none !important;
-  }
-  
-  /* Ensure text is black for print */
-  body.printing-one-pager #executive-one-pager,
-  body.printing-one-pager #executive-one-pager * {
-    color: #000 !important;
-  }
-  
-  /* Keep specific colored elements */
-  body.printing-one-pager #executive-one-pager .gold,
-  body.printing-one-pager #executive-one-pager [style*="color: var(--gold"],
-  body.printing-one-pager #executive-one-pager [style*="color:var(--gold"] {
-    color: #c9a75a !important;
-  }
-}    
+}  
 
 /* ============================================================
       PRINT STYLES
@@ -6343,166 +6354,176 @@ a[href^="http"]:after {
 renderJJIndex();
   jjSearch?.addEventListener("input", (e) => renderJJIndex(e.target.value));
 
-  /* ============================================================
-     PAYMENT CALCULATOR — ENHANCED LOGIC WITH CHART
-  ============================================================ */
-  (() => {
-    const calcBalance = document.getElementById('calcBalance');
-    const calcBalanceDisplay = document.getElementById('calcBalanceDisplay');
-    const calcInterest = document.getElementById('calcInterest');
-    const calcTotal = document.getElementById('calcTotal');
-    const calcAnnualInterest = document.getElementById('calcAnnualInterest');
-    const calcYear1Total = document.getElementById('calcYear1Total');
-    const calcRemainingBalance = document.getElementById('calcRemainingBalance');
-    const paymentChart = document.getElementById('paymentChart');
+ /* ============================================================
+   PAYMENT CALCULATOR — FIXED & ENHANCED
+============================================================ */
+(function initCalculator() {
+  const calcBalance = document.getElementById('calcBalance');
+  const calcBalanceDisplay = document.getElementById('calcBalanceDisplay');
+  const calcInterest = document.getElementById('calcInterest');
+  const calcTotal = document.getElementById('calcTotal');
+  const calcAnnualInterest = document.getElementById('calcAnnualInterest');
+  const calcYear1Total = document.getElementById('calcYear1Total');
+  const calcRemainingBalance = document.getElementById('calcRemainingBalance');
+  const paymentChart = document.getElementById('paymentChart');
 
-    const PRINCIPAL_MONTHLY = 4375; // Fixed
-    const INTEREST_RATE = 0.08;
-    const ORIGINAL_LOAN = 1050000;
+  // Check if calculator exists on page
+  if (!calcBalance || !calcBalanceDisplay) {
+    console.log('Calculator elements not found on this page');
+    return;
+  }
 
-    function formatCurrency(num) {
-      return num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  const PRINCIPAL_MONTHLY = 4375; // Fixed
+  const INTEREST_RATE = 0.08;
+  const ORIGINAL_LOAN = 1050000;
+
+  function formatCurrency(num) {
+    return num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  }
+
+  function updateCalculator() {
+    const balance = parseFloat(calcBalance.value) || ORIGINAL_LOAN;
+    const interestMonthly = (balance * INTEREST_RATE / 12);
+    const totalMonthly = interestMonthly + PRINCIPAL_MONTHLY;
+    const annualInterest = interestMonthly * 12;
+    const annualPrincipal = PRINCIPAL_MONTHLY * 12;
+    const annualTotal = totalMonthly * 12;
+    const remainingAfterYear = Math.max(0, balance - annualPrincipal);
+
+    // Update all displays
+    if (calcBalanceDisplay) calcBalanceDisplay.textContent = formatCurrency(balance);
+    if (calcInterest) calcInterest.textContent = '$' + formatCurrency(Math.round(interestMonthly));
+    if (calcTotal) calcTotal.textContent = '$' + formatCurrency(Math.round(totalMonthly));
+    if (calcAnnualInterest) calcAnnualInterest.textContent = '$' + formatCurrency(Math.round(annualInterest));
+    if (calcYear1Total) calcYear1Total.textContent = '$' + formatCurrency(Math.round(annualTotal));
+    if (calcRemainingBalance) calcRemainingBalance.textContent = '$' + formatCurrency(Math.round(remainingAfterYear));
+
+    // Update chart
+    renderPaymentChart(balance);
+  }
+
+  function renderPaymentChart(startingBalance) {
+    if (!paymentChart) return;
+
+    let balance = startingBalance;
+    const months = [];
+    
+    // Calculate 12 months of payments
+    for (let i = 1; i <= 12; i++) {
+      const interest = (balance * INTEREST_RATE / 12);
+      const total = interest + PRINCIPAL_MONTHLY;
+      months.push({ 
+        month: i, 
+        interest: interest, 
+        principal: PRINCIPAL_MONTHLY, 
+        total: total, 
+        balance: balance 
+      });
+      balance = Math.max(0, balance - PRINCIPAL_MONTHLY);
     }
 
-    function updateCalculator() {
-      const balance = parseFloat(calcBalance.value);
-      const interestMonthly = (balance * INTEREST_RATE / 12);
-      const totalMonthly = interestMonthly + PRINCIPAL_MONTHLY;
-      const annualInterest = interestMonthly * 12;
-      const annualPrincipal = PRINCIPAL_MONTHLY * 12;
-      const annualTotal = totalMonthly * 12;
-      const remainingAfterYear = balance - annualPrincipal;
+    const maxPayment = months[0].total;
 
-      // Update all displays
-      if (calcBalanceDisplay) calcBalanceDisplay.textContent = formatCurrency(balance);
-      if (calcInterest) calcInterest.textContent = '$' + formatCurrency(Math.round(interestMonthly));
-      if (calcTotal) calcTotal.textContent = '$' + formatCurrency(Math.round(totalMonthly));
-      if (calcAnnualInterest) calcAnnualInterest.textContent = '$' + formatCurrency(Math.round(annualInterest));
-      if (calcYear1Total) calcYear1Total.textContent = '$' + formatCurrency(Math.round(annualTotal));
-      if (calcRemainingBalance) calcRemainingBalance.textContent = '$' + formatCurrency(Math.max(0, Math.round(remainingAfterYear)));
-
-      // Update chart
-      renderPaymentChart(balance);
-    }
-
-    function renderPaymentChart(startingBalance) {
-      if (!paymentChart) return;
-
-      let balance = startingBalance;
-      const months = [];
+    // Generate bars
+    const bars = months.map((m, idx) => {
+      const interestPct = (m.interest / maxPayment) * 100;
+      const principalPct = (m.principal / maxPayment) * 100;
       
-      // Calculate 12 months of payments
-      for (let i = 1; i <= 12; i++) {
-        const interest = (balance * INTEREST_RATE / 12);
-        const total = interest + PRINCIPAL_MONTHLY;
-        months.push({ 
-          month: i, 
-          interest: interest, 
-          principal: PRINCIPAL_MONTHLY, 
-          total: total, 
-          balance: balance 
-        });
-        balance = Math.max(0, balance - PRINCIPAL_MONTHLY);
-      }
-
-      const maxPayment = months[0].total;
-
-      // Generate bars
-      const bars = months.map((m, idx) => {
-        const interestPct = (m.interest / maxPayment) * 100;
-        const principalPct = (m.principal / maxPayment) * 100;
-        
-        return `
+      return `
+        <div style="
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 6px;
+          min-width: 0;
+        ">
           <div style="
-            flex: 1;
+            font-size: 11px;
+            color: var(--t3);
+            font-weight: 700;
+            margin-bottom: 4px;
+          ">$${formatCurrency(Math.round(m.total))}</div>
+          
+          <div style="
+            width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            min-width: 0;
+            height: 120px;
+            gap: 0;
+            position: relative;
           ">
-            <div style="
-              font-size: 11px;
-              color: var(--t3);
-              font-weight: 700;
-              margin-bottom: 4px;
-            ">$${formatCurrency(Math.round(m.total))}</div>
-            
-            <div style="
+            <!-- Interest (top) -->
+            <div class="chart-bar" style="
               width: 100%;
-              display: flex;
-              flex-direction: column;
-              height: 120px;
-              gap: 0;
-              position: relative;
-            ">
-              <!-- Interest (top) -->
-              <div class="chart-bar" style="
-                width: 100%;
-                height: ${interestPct}%;
-                background: linear-gradient(180deg, #5da3ff, #3b82ff);
-                border-radius: 6px 6px 0 0;
-                opacity: 0.85;
-                transition: opacity 0.2s;
-                cursor: pointer;
-              " 
-              onmouseover="this.style.opacity='1'" 
-              onmouseout="this.style.opacity='0.85'"
-              title="Month ${m.month} Interest: $${formatCurrency(Math.round(m.interest))}"></div>
-              
-              <!-- Principal (bottom) -->
-              <div class="chart-bar" style="
-                width: 100%;
-                height: ${principalPct}%;
-                background: linear-gradient(180deg, #d4af5e, #c9a75a);
-                border-radius: 0 0 6px 6px;
-                opacity: 0.85;
-                transition: opacity 0.2s;
-                cursor: pointer;
-              "
-              onmouseover="this.style.opacity='1'" 
-              onmouseout="this.style.opacity='0.85'"
-              title="Month ${m.month} Principal: $${formatCurrency(Math.round(m.principal))}"></div>
-            </div>
+              height: ${interestPct}%;
+              background: linear-gradient(180deg, #5da3ff, #3b82ff);
+              border-radius: 6px 6px 0 0;
+              opacity: 0.85;
+              transition: opacity 0.2s;
+              cursor: pointer;
+            " 
+            onmouseover="this.style.opacity='1'" 
+            onmouseout="this.style.opacity='0.85'"
+            title="Month ${m.month} Interest: $${formatCurrency(Math.round(m.interest))}"></div>
             
-            <div style="
-              font-size: 10px;
-              color: var(--t4);
-              font-weight: 600;
-            ">M${m.month}</div>
+            <!-- Principal (bottom) -->
+            <div class="chart-bar" style="
+              width: 100%;
+              height: ${principalPct}%;
+              background: linear-gradient(180deg, #d4af5e, #c9a75a);
+              border-radius: 0 0 6px 6px;
+              opacity: 0.85;
+              transition: opacity 0.2s;
+              cursor: pointer;
+            "
+            onmouseover="this.style.opacity='1'" 
+            onmouseout="this.style.opacity='0.85'"
+            title="Month ${m.month} Principal: $${formatCurrency(Math.round(m.principal))}"></div>
           </div>
-        `;
-      }).join('');
-
-      paymentChart.innerHTML = `
-        <div style="
-          display: flex;
-          gap: 6px;
-          height: 100%;
-          align-items: flex-end;
-          justify-content: space-between;
-        ">
-          ${bars}
+          
+          <div style="
+            font-size: 10px;
+            color: var(--t4);
+            font-weight: 600;
+          ">M${m.month}</div>
         </div>
       `;
+    }).join('');
+
+    paymentChart.innerHTML = `
+      <div style="
+        display: flex;
+        gap: 6px;
+        height: 100%;
+        align-items: flex-end;
+        justify-content: space-between;
+      ">
+        ${bars}
+      </div>
+    `;
+  }
+
+  // Initialize calculator
+  console.log('Calculator initialized successfully');
+  updateCalculator();
+
+  // Update on slider change
+  if (calcBalance) {
+    calcBalance.addEventListener('input', updateCalculator);
+    console.log('Calculator event listener attached');
+  }
+
+  // Smooth animation on load
+  setTimeout(() => {
+    if (paymentChart) {
+      const bars = paymentChart.querySelectorAll('.chart-bar');
+      bars.forEach((bar, idx) => {
+        bar.style.animationDelay = `${idx * 0.05}s`;
+      });
     }
-
-    // Initialize
-    updateCalculator();
-
-    // Update on slider change
-    calcBalance?.addEventListener('input', updateCalculator);
-
-    // Smooth animation on load
-    setTimeout(() => {
-      if (paymentChart) {
-        const bars = paymentChart.querySelectorAll('.chart-bar');
-        bars.forEach((bar, idx) => {
-          bar.style.animationDelay = `${idx * 0.05}s`;
-        });
-      }
-    }, 100);
-  })();
+  }, 100);
+})();
 
 })();  // ← Main IIFE closes HERE
 </script>
