@@ -6029,7 +6029,7 @@ window.printOnePager = function() {
     return;
   }
   
- // Write complete HTML document to new window
+// Write complete HTML document to new window
   printWindow.document.write(`
     <!DOCTYPE html>
     <html lang="en">
@@ -6049,24 +6049,27 @@ window.printOnePager = function() {
           font-family: 'Inter', system-ui, -apple-system, sans-serif;
           background: white;
           color: #000;
-          padding: 12mm 15mm;
-          line-height: 1.35;
-          font-size: 11px;
+          padding: 14mm 16mm;
+          line-height: 1.4;
+          font-size: 12px;
         }
         
         h2 {
-          font-size: 20px !important;
-          margin-bottom: 6px !important;
+          font-size: 24px !important;
+          margin-bottom: 8px !important;
+          line-height: 1.2 !important;
         }
         
         h3 {
-          font-size: 14px !important;
-          margin-bottom: 10px !important;
+          font-size: 16px !important;
+          margin-bottom: 12px !important;
+          line-height: 1.3 !important;
         }
         
         h4 {
-          font-size: 12px !important;
-          margin-bottom: 8px !important;
+          font-size: 14px !important;
+          margin-bottom: 10px !important;
+          line-height: 1.3 !important;
         }
         
         h2, h3, h4, strong {
@@ -6087,82 +6090,112 @@ window.printOnePager = function() {
           display: flex !important;
         }
         
-        /* Reduce spacing */
+        /* Adjust spacing to fill page */
         [style*="margin-bottom: 28px"] {
-          margin-bottom: 14px !important;
+          margin-bottom: 18px !important;
         }
         
         [style*="margin-bottom: 24px"] {
-          margin-bottom: 12px !important;
+          margin-bottom: 16px !important;
         }
         
         [style*="margin-bottom: 20px"] {
-          margin-bottom: 10px !important;
+          margin-bottom: 14px !important;
         }
         
         [style*="margin-bottom: 16px"] {
-          margin-bottom: 8px !important;
+          margin-bottom: 12px !important;
+        }
+        
+        [style*="margin-bottom: 14px"] {
+          margin-bottom: 11px !important;
+        }
+        
+        [style*="margin-bottom: 12px"] {
+          margin-bottom: 10px !important;
         }
         
         [style*="padding: 32px 28px"] {
-          padding: 14px 18px !important;
+          padding: 18px 20px !important;
         }
         
         [style*="padding: 20px"] {
-          padding: 12px !important;
+          padding: 14px !important;
         }
         
         [style*="padding: 16px 20px"] {
-          padding: 10px 12px !important;
+          padding: 12px 14px !important;
+        }
+        
+        [style*="padding: 16px"] {
+          padding: 12px !important;
         }
         
         [style*="gap: 24px"] {
-          gap: 14px !important;
+          gap: 16px !important;
         }
         
         [style*="gap: 16px"] {
+          gap: 12px !important;
+        }
+        
+        [style*="gap: 14px"] {
+          gap: 11px !important;
+        }
+        
+        [style*="gap: 12px"] {
           gap: 10px !important;
         }
         
-        /* Compact font sizes */
+        /* Scale font sizes proportionally */
         [style*="font-size: 32px"] {
-          font-size: 22px !important;
+          font-size: 26px !important;
+          line-height: 1.2 !important;
         }
         
         [style*="font-size: 26px"] {
-          font-size: 18px !important;
+          font-size: 22px !important;
+          line-height: 1.2 !important;
         }
         
         [style*="font-size: 24px"] {
-          font-size: 17px !important;
+          font-size: 20px !important;
+          line-height: 1.2 !important;
         }
         
         [style*="font-size: 20px"] {
-          font-size: 14px !important;
+          font-size: 16px !important;
+          line-height: 1.3 !important;
         }
         
         [style*="font-size: 18px"] {
-          font-size: 13px !important;
+          font-size: 15px !important;
+          line-height: 1.3 !important;
         }
         
         [style*="font-size: 16px"] {
-          font-size: 12px !important;
+          font-size: 14px !important;
+          line-height: 1.4 !important;
         }
         
         [style*="font-size: 14px"] {
-          font-size: 11px !important;
+          font-size: 12px !important;
+          line-height: 1.4 !important;
         }
         
         [style*="font-size: 13px"] {
-          font-size: 10px !important;
+          font-size: 11.5px !important;
+          line-height: 1.4 !important;
         }
         
         [style*="font-size: 12px"] {
-          font-size: 9.5px !important;
+          font-size: 11px !important;
+          line-height: 1.4 !important;
         }
         
         [style*="font-size: 11px"] {
-          font-size: 9px !important;
+          font-size: 10px !important;
+          line-height: 1.4 !important;
         }
         
         /* Gold accents - darker for print */
@@ -6177,36 +6210,46 @@ window.printOnePager = function() {
         /* Preserve backgrounds but lighten */
         [style*="background:"],
         [style*="background-color:"] {
-          opacity: 0.2 !important;
+          opacity: 0.25 !important;
         }
         
-        /* Remove top border from one-pager */
+        /* Panel styling */
         .panel-head {
-          border-bottom: 1px solid #ddd !important;
+          border-bottom: 1px solid #ccc !important;
+          padding-bottom: 12px !important;
         }
         
-        /* Compact lists */
+        /* Compact lists but readable */
         ul {
-          margin: 6px 0 !important;
-          padding-left: 16px !important;
+          margin: 8px 0 !important;
+          padding-left: 18px !important;
         }
         
         li {
-          margin-bottom: 3px !important;
-          line-height: 1.4 !important;
+          margin-bottom: 4px !important;
+          line-height: 1.5 !important;
         }
         
-        /* Print setup */
+        /* Adjust border radius for print */
+        [style*="border-radius"] {
+          border-radius: 8px !important;
+        }
+        
+        /* Make sure grids have appropriate gaps */
+        [style*="grid-template-columns: repeat(3"] {
+          gap: 14px !important;
+        }
+        
+        /* Print setup - use more of the page */
         @page {
           size: letter portrait;
-          margin: 0.4in 0.5in;
+          margin: 0.45in 0.5in;
         }
         
         @media print {
           body {
             padding: 0 !important;
             background: white !important;
-            font-size: 10px !important;
           }
           
           * {
@@ -6224,6 +6267,12 @@ window.printOnePager = function() {
           /* Force single page */
           .panel {
             page-break-inside: avoid !important;
+          }
+          
+          /* Prevent orphans and widows */
+          p, li, div {
+            orphans: 3;
+            widows: 3;
           }
         }
       </style>
