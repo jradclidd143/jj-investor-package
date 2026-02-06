@@ -2372,12 +2372,11 @@ input[type="range"]::-moz-range-thumb:active {
 }
       
 /* ============================================================
-   LIGHT THEME - AGGRESSIVE VISIBILITY OVERHAUL
-   Forces ALL elements to be fully visible
+   LIGHT THEME - WITH GOLD ACCENTS RESTORED
    Added: 2026-02-06
 ============================================================ */
 
-/* FORCE BODY BACKGROUND - NO GREY WASH */
+/* FORCE BODY BACKGROUND */
 html[data-theme="light"] body {
   background: #f5f7fa !important;
 }
@@ -2414,7 +2413,7 @@ html[data-theme="light"] .pill-toggle:hover {
   background: #fef3c7 !important;
 }
 
-/* ALL CARD TYPES - PURE WHITE, STRONG BORDERS */
+/* ALL CARD TYPES - PURE WHITE WITH GOLD GLOW */
 html[data-theme="light"] .property-card,
 html[data-theme="light"] .chart-card,
 html[data-theme="light"] .glass-card,
@@ -2431,22 +2430,106 @@ html[data-theme="light"] .section-head {
   box-shadow: 0 4px 12px rgba(0,0,0,.15) !important;
 }
 
-/* REMOVE ALL GREY BACKGROUNDS FROM CARD INTERIORS */
-html[data-theme="light"] .property-card::before,
-html[data-theme="light"] .chart-card::before,
-html[data-theme="light"] .glass-card::after,
-html[data-theme="light"] .section-head::after,
-html[data-theme="light"] .kpi-card::before {
-  display: none !important;
+/* RESTORE GOLD GLOW OVERLAYS */
+html[data-theme="light"] .property-card::before {
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  inset: -1px !important;
+  background: radial-gradient(300px 200px at 10% 0%, rgba(245,158,11,.12), transparent 65%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
 }
 
-/* CARD HEADERS - VISIBLE SEPARATION */
+html[data-theme="light"] .chart-card::before {
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  inset: -1px !important;
+  background: radial-gradient(320px 220px at 15% 0%, rgba(37,99,235,.10), transparent 65%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+html[data-theme="light"] .glass-card::after {
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  inset: -1px !important;
+  background:
+    radial-gradient(380px 240px at 70% 0%, rgba(37,99,235,.10), transparent 62%),
+    radial-gradient(400px 280px at 0% 10%, rgba(245,158,11,.12), transparent 65%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+html[data-theme="light"] .section-head::after {
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  inset: -1px !important;
+  background:
+    radial-gradient(380px 180px at 20% 0%, rgba(37,99,235,.12), transparent 60%),
+    radial-gradient(340px 200px at 80% 0%, rgba(245,158,11,.14), transparent 60%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="light"] .kpi-card::before {
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  inset: -2px !important;
+  background:
+    radial-gradient(200px 140px at 15% 0%, rgba(37,99,235,.10), transparent 60%),
+    radial-gradient(240px 160px at 100% 0%, rgba(245,158,11,.12), transparent 60%) !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+html[data-theme="light"] .option-card::before {
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  inset: -1px !important;
+  background: radial-gradient(280px 200px at 15% 0%, rgba(37,99,235,.12), transparent 60%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+html[data-theme="light"] .option-card:nth-child(2)::before {
+  background: radial-gradient(280px 200px at 15% 0%, rgba(245,158,11,.14), transparent 60%) !important;
+}
+
+html[data-theme="light"] .compare-card.good::before {
+  display: block !important;
+  content: "" !important;
+  position: absolute !important;
+  inset: -1px !important;
+  background: radial-gradient(280px 200px at 15% 0%, rgba(37,99,235,.12), transparent 60%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+/* ENSURE CONTENT SITS ABOVE GLOWS */
+html[data-theme="light"] .property-card > *,
+html[data-theme="light"] .chart-card > *,
+html[data-theme="light"] .glass-card > *,
+html[data-theme="light"] .kpi-card > *,
+html[data-theme="light"] .section-head > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* CARD HEADERS */
 html[data-theme="light"] .property-top,
 html[data-theme="light"] .gc-top,
 html[data-theme="light"] .acct-head,
 html[data-theme="light"] .panel-head {
   border-bottom: 2px solid #e5e7eb !important;
-  background: #f9fafb !important;
+  background: linear-gradient(180deg, rgba(245,158,11,.04), rgba(245,158,11,.01)) !important;
 }
 
 html[data-theme="light"] .property-body,
@@ -2485,7 +2568,7 @@ html[data-theme="light"] .section-head h2 {
   text-shadow: none !important;
 }
 
-/* BODY TEXT - DARK GREY */
+/* BODY TEXT */
 html[data-theme="light"] p,
 html[data-theme="light"] .lead,
 html[data-theme="light"] .chart-sub,
@@ -2521,7 +2604,7 @@ html[data-theme="light"] .runway-sub {
   font-weight: 700 !important;
 }
 
-/* ALL TABLE ROWS - VISIBLE BORDERS */
+/* TABLE ROWS */
 html[data-theme="light"] .mini-row,
 html[data-theme="light"] .uf-row,
 html[data-theme="light"] .alloc-legend-row,
@@ -2536,7 +2619,7 @@ html[data-theme="light"] .stmt,
 html[data-theme="light"] .runway,
 html[data-theme="light"] .draw {
   border: 2px solid #e5e7eb !important;
-  background: #f9fafb !important;
+  background: #fafbfc !important;
 }
 
 html[data-theme="light"] .mini-row {
@@ -2572,7 +2655,7 @@ html[data-theme="light"] .metric .value {
   font-weight: 900 !important;
 }
 
-/* BADGES - STRONG COLORS, NO GREY */
+/* BADGES */
 html[data-theme="light"] .badge,
 html[data-theme="light"] .panel-tag,
 html[data-theme="light"] .stmt .tag,
@@ -2591,7 +2674,6 @@ html[data-theme="light"] .jj-pill.gold {
   border: 2px solid #d97706 !important;
   background: #fef3c7 !important;
   color: #78350f !important;
-  font-weight: 900 !important;
 }
 
 html[data-theme="light"] .badge.red,
@@ -2599,28 +2681,24 @@ html[data-theme="light"] .acct-pill {
   border: 2px solid #dc2626 !important;
   background: #fee2e2 !important;
   color: #991b1b !important;
-  font-weight: 900 !important;
 }
 
 html[data-theme="light"] .badge.blue {
   border: 2px solid #2563eb !important;
   background: #dbeafe !important;
   color: #1e40af !important;
-  font-weight: 900 !important;
 }
 
 html[data-theme="light"] .opt-badge {
   border: 2px solid #2563eb !important;
   background: #dbeafe !important;
   color: #1e40af !important;
-  font-weight: 900 !important;
 }
 
 html[data-theme="light"] .opt-badge.gold {
   border: 2px solid #d97706 !important;
   background: #fef3c7 !important;
   color: #78350f !important;
-  font-weight: 900 !important;
 }
 
 html[data-theme="light"] .step-n {
@@ -2634,7 +2712,6 @@ html[data-theme="light"] .dtag {
   border: 2px solid #2563eb !important;
   background: #dbeafe !important;
   color: #1e40af !important;
-  font-weight: 900 !important;
 }
 
 html[data-theme="light"] .opt-dot {
@@ -2651,10 +2728,10 @@ html[data-theme="light"] .opt-dot.b {
   border-color: #d97706 !important;
 }
 
-/* CHARTS - PURE WHITE BACKGROUND, VISIBLE BORDERS */
+/* CHARTS - KEEP LIGHT BACKGROUNDS */
 html[data-theme="light"] .chart {
-  background: #ffffff !important;
-  border: 2px solid #d1d5db !important;
+  background: #fafbfc !important;
+  border: 2px solid #e5e7eb !important;
   padding: 16px !important;
 }
 
@@ -2673,14 +2750,10 @@ html[data-theme="light"] .alloc-donut {
 
 html[data-theme="light"] .alloc-donut::after {
   background: #ffffff !important;
-  border: 2px solid #d1d5db !important;
+  border: 2px solid #e5e7eb !important;
 }
 
-/* SVG CHARTS - FORCE BLACK TEXT, FULL OPACITY */
-html[data-theme="light"] svg {
-  background: transparent !important;
-}
-
+/* SVG CHARTS - SOLID BLACK TEXT */
 html[data-theme="light"] svg text,
 html[data-theme="light"] svg tspan {
   fill: #000000 !important;
@@ -2690,46 +2763,31 @@ html[data-theme="light"] svg tspan {
 
 html[data-theme="light"] svg rect,
 html[data-theme="light"] svg path,
-html[data-theme="light"] svg circle,
-html[data-theme="light"] svg line,
-html[data-theme="light"] svg polyline,
-html[data-theme="light"] svg polygon {
-  opacity: 1 !important;
-  stroke-opacity: 1 !important;
-  fill-opacity: 1 !important;
-}
-
-/* MAKE CHART BARS/SHAPES FULLY OPAQUE */
-html[data-theme="light"] svg [fill*="#"],
-html[data-theme="light"] svg [stroke*="#"] {
+html[data-theme="light"] svg circle {
   opacity: 1 !important;
 }
 
-/* ICONS - FORCE FULL VISIBILITY */
+/* ICONS - GOLD COLORED */
 html[data-theme="light"] .sum-ic,
 html[data-theme="light"] .flow-ic,
 html[data-theme="light"] .mcard-ic,
 html[data-theme="light"] .gc-ic,
-html[data-theme="light"] .jj-mark,
-html[data-theme="light"] .rt-ic {
+html[data-theme="light"] .jj-mark {
   border: 2px solid #d97706 !important;
-  background: #fef3c7 !important;
-  opacity: 1 !important;
+  background: rgba(245,158,11,.15) !important;
 }
 
 html[data-theme="light"] .sum-ic::after,
 html[data-theme="light"] .flow-ic::after,
 html[data-theme="light"] .mcard-ic::after,
 html[data-theme="light"] .gc-ic::after {
-  background: #78350f !important;
-  opacity: 1 !important;
+  background: #f59e0b !important;
 }
 
 html[data-theme="light"] .doc-ic {
   border: 2px solid #d97706 !important;
   background: #fef3c7 !important;
   color: #78350f !important;
-  font-weight: 900 !important;
 }
 
 html[data-theme="light"] .rt-ic {
@@ -2738,8 +2796,7 @@ html[data-theme="light"] .rt-ic {
 }
 
 html[data-theme="light"] .rt-ic::after {
-  background: #1f2937 !important;
-  opacity: 1 !important;
+  background: #374151 !important;
 }
 
 /* BUTTONS */
@@ -2776,12 +2833,10 @@ html[data-theme="light"] input:focus,
 html[data-theme="light"] select:focus,
 html[data-theme="light"] textarea:focus {
   border-color: #2563eb !important;
-  outline: 2px solid #93c5fd !important;
 }
 
 html[data-theme="light"] ::placeholder {
   color: #6b7280 !important;
-  font-weight: 600 !important;
 }
 
 /* LINKS */
@@ -2794,15 +2849,13 @@ html[data-theme="light"] .doc,
 html[data-theme="light"] .stmt,
 html[data-theme="light"] .stmt-row {
   color: inherit !important;
-  border: 2px solid #e5e7eb !important;
-  background: #f9fafb !important;
 }
 
 html[data-theme="light"] .doc:hover,
 html[data-theme="light"] .stmt:hover,
 html[data-theme="light"] .stmt-row:hover {
   border-color: #d97706 !important;
-  background: #fef3c7 !important;
+  background: rgba(245,158,11,.08) !important;
 }
 
 html[data-theme="light"] .stmt-open {
@@ -2841,28 +2894,30 @@ html[data-theme="light"] .nav-list a.active {
 /* SPECIAL CARDS */
 html[data-theme="light"] .uf-row.total {
   border-color: #d97706 !important;
-  background: #fef3c7 !important;
+  background: rgba(245,158,11,.12) !important;
 }
 
-html[data-theme="light"] .chart-card.danger,
+html[data-theme="light"] .chart-card.danger {
+  border-color: #dc2626 !important;
+}
+
 html[data-theme="light"] .compare-card.bad {
   border-color: #dc2626 !important;
-  background: #fee2e2 !important;
+  background: rgba(220,38,38,.05) !important;
 }
 
 html[data-theme="light"] .compare-card.good {
   border-color: #2563eb !important;
-  background: #dbeafe !important;
 }
 
 html[data-theme="light"] .callout {
   border: 2px solid #2563eb !important;
-  background: #dbeafe !important;
+  background: rgba(37,99,235,.08) !important;
 }
 
 html[data-theme="light"] .lane.gold {
   border-color: #d97706 !important;
-  background: #fef3c7 !important;
+  background: rgba(245,158,11,.08) !important;
 }
 
 /* STATEMENT INDEX */
@@ -2877,35 +2932,24 @@ html[data-theme="light"] .stmt-group summary {
 
 html[data-theme="light"] .stmt-group .stmt-group-title strong {
   color: #000000 !important;
-  font-weight: 900 !important;
-}
-
-html[data-theme="light"] .stmt-group .stmt-group-title span {
-  color: #4b5563 !important;
-  font-weight: 700 !important;
 }
 
 html[data-theme="light"] .jj-strip {
   border: 2px solid #d1d5db !important;
-  background: #f9fafb !important;
+  background: 
+    radial-gradient(900px 160px at 20% 0%, rgba(245,158,11,.08), transparent 60%),
+    linear-gradient(180deg, #fafbfc, #f9fafb) !important;
 }
 
 html[data-theme="light"] .jj-strip-title {
   color: #000000 !important;
-  font-weight: 900 !important;
-}
-
-html[data-theme="light"] .jj-strip-sub {
-  color: #4b5563 !important;
-  font-weight: 700 !important;
 }
 
 /* RUNWAY */
 html[data-theme="light"] .runway-bar {
   border: 2px solid #d97706 !important;
-  background: linear-gradient(90deg, #fef3c7, #dbeafe) !important;
+  background: linear-gradient(90deg, rgba(245,158,11,.25), rgba(37,99,235,.20)) !important;
   color: #000000 !important;
-  font-weight: 900 !important;
 }
 
 html[data-theme="light"] .alloc-sharebar {
@@ -2953,13 +2997,11 @@ html[data-theme="light"] #progressBar {
 html[data-theme="light"] input[type="range"]::-webkit-slider-thumb {
   background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
   border: 3px solid #ffffff !important;
-  box-shadow: 0 4px 16px rgba(245,158,11,0.7), 0 0 0 4px rgba(245,158,11,0.3) !important;
 }
 
 html[data-theme="light"] input[type="range"]::-moz-range-thumb {
   background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
   border: 3px solid #ffffff !important;
-  box-shadow: 0 4px 16px rgba(245,158,11,0.7), 0 0 0 4px rgba(245,158,11,0.3) !important;
 }
 
 /* SCROLLBARS */
@@ -2969,19 +3011,10 @@ html[data-theme="light"] ::-webkit-scrollbar {
 
 html[data-theme="light"] ::-webkit-scrollbar-thumb {
   background: #9ca3af !important;
-  border: 2px solid #f3f4f6 !important;
-}
-
-html[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
-  background: #6b7280 !important;
 }
 
 /* LIST ITEMS */
-html[data-theme="light"] .bullets {
-  color: #1f2937 !important;
-  font-weight: 700 !important;
-}
-
+html[data-theme="light"] .bullets,
 html[data-theme="light"] ul li,
 html[data-theme="light"] ol li {
   color: #1f2937 !important;
@@ -2991,36 +3024,11 @@ html[data-theme="light"] ol li {
 html[data-theme="light"] ul li::marker,
 html[data-theme="light"] ol li::marker {
   color: #000000 !important;
-  font-weight: 900 !important;
 }
 
-/* EMPHASIS */
-html[data-theme="light"] strong,
-html[data-theme="light"] b {
-  color: #000000 !important;
-  font-weight: 900 !important;
-}
-
-html[data-theme="light"] em {
-  color: #1f2937 !important;
-  font-weight: 700 !important;
-}
-
-/* FORCE ALL ICONS TO BE VISIBLE */
-html[data-theme="light"] svg:not(.chart svg):not([class*="chart"]) {
-  opacity: 1 !important;
-}
-
-html[data-theme="light"] .icon,
-html[data-theme="light"] [class*="icon"] {
-  opacity: 1 !important;
-  color: #000000 !important;
-}
-
-/* FORCE ALL CONTAINED ELEMENTS */
+/* SECTION DIVIDER */
 html[data-theme="light"] .section-head h2::before {
   background: linear-gradient(180deg, #2563eb, #f59e0b) !important;
-  opacity: 1 !important;
 }
       
 </style>
