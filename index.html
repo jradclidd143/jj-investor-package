@@ -2370,6 +2370,97 @@ input[type="range"]::-moz-range-thumb:active {
     margin-top: 0.5in;
   }
 }
+/* ============================================================
+   LIGHT THEME ENHANCEMENTS - PROPERTY & CHART CARDS
+   Added: 2026-02-06
+============================================================ */
+
+html[data-theme="light"] .property-card {
+border: 1px solid rgba(0,0,0,.14);
+background: #ffffff;
+box-shadow: 0 4px 16px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.06);
+}
+
+html[data-theme="light"] .property-card::before {
+background: radial-gradient(260px 160px at 10% 0%, rgba(184,149,45,.10), transparent 60%);
+}
+
+html[data-theme="light"] .property-top {
+border-bottom: 1px solid rgba(0,0,0,.12);
+background: linear-gradient(180deg, rgba(184,149,45,.04), rgba(184,149,45,.02));
+}
+
+html[data-theme="light"] .property-body {
+background: #fafbff;
+}
+
+html[data-theme="light"] .property-title {
+color: #0a0f1a;
+}
+
+html[data-theme="light"] .chart-card {
+border: 1px solid rgba(0,0,0,.16);
+background: #ffffff;
+box-shadow: 0 4px 16px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.06);
+}
+
+html[data-theme="light"] .chart-card::before {
+background: radial-gradient(300px 200px at 15% 0%, rgba(37,99,235,.08), transparent 65%);
+}
+
+html[data-theme="light"] .chart-title {
+color: #0a0f1a;
+}
+
+html[data-theme="light"] .chart-sub {
+color: rgba(10,15,26,.70);
+}
+
+html[data-theme="light"] .chart {
+background: #f8f9fb;
+border: 1px solid rgba(0,0,0,.10);
+}
+
+html[data-theme="light"] .mini-row {
+border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+html[data-theme="light"] .mini-row.head {
+color: rgba(10,15,26,.60);
+}
+
+html[data-theme="light"] .lender {
+color: #0a0f1a;
+}
+
+html[data-theme="light"] .sub {
+color: rgba(10,15,26,.65);
+}
+
+html[data-theme="light"] .badge {
+border: 1px solid rgba(0,0,0,.20);
+background: rgba(0,0,0,.06);
+color: #0a0f1a;
+font-weight: 700;
+}
+
+html[data-theme="light"] .badge.gold {
+border-color: rgba(184,149,45,.45);
+background: rgba(184,149,45,.15);
+color: #88700d;
+font-weight: 800;
+}
+
+html[data-theme="light"] .badge.red {
+border-color: rgba(220,38,38,.40);
+background: rgba(220,38,38,.12);
+color: #b91c1c;
+font-weight: 800;
+}
+
+html[data-theme="light"] .tiny-note {
+color: rgba(10,15,26,.60);
+}
 </style>
 </head>
 <body>
