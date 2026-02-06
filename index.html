@@ -2370,175 +2370,518 @@ input[type="range"]::-moz-range-thumb:active {
     margin-top: 0.5in;
   }
 }
+      
 /* ============================================================
-   LIGHT THEME ENHANCEMENTS - PROPERTY & CHART CARDS
+   LIGHT THEME - COMPLETE COMPREHENSIVE OVERHAUL
+   All Backgrounds, Text, Shadows, Borders, Cards, Charts,
+   Tables, Badges, Buttons, Icons, Forms, Navigation
    Added: 2026-02-06
 ============================================================ */
 
-html[data-theme="light"] .property-card {
-border: 1px solid rgba(0,0,0,.14);
-background: #ffffff;
-box-shadow: 0 4px 16px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.06);
+/* BODY & MAIN BACKGROUNDS */
+html[data-theme="light"] body {
+  background: 
+    radial-gradient(1200px 600px at 20% 0%, rgba(37,99,235,.08), transparent 55%),
+    radial-gradient(900px 500px at 80% 10%, rgba(184,149,45,.10), transparent 52%),
+    linear-gradient(180deg, #ffffff, #f8f9fb) !important;
 }
 
-html[data-theme="light"] .property-card::before {
-background: radial-gradient(260px 160px at 10% 0%, rgba(184,149,45,.10), transparent 60%);
+html[data-theme="light"] .bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,.025) 1px, transparent 1px);
 }
 
-html[data-theme="light"] .property-top {
-border-bottom: 1px solid rgba(0,0,0,.12);
-background: linear-gradient(180deg, rgba(184,149,45,.04), rgba(184,149,45,.02));
+/* TOPBAR */
+html[data-theme="light"] .topbar {
+  background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.75)) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,.12);
 }
 
-html[data-theme="light"] .property-body {
-background: #fafbff;
+html[data-theme="light"] .pill {
+  background: linear-gradient(180deg, rgba(184,149,45,.22), rgba(184,149,45,.12));
+  border: 1px solid rgba(184,149,45,.45);
+  color: #5a4200;
 }
 
-html[data-theme="light"] .property-title {
-color: #0a0f1a;
+html[data-theme="light"] .pill-toggle {
+  border: 1px solid rgba(0,0,0,.22);
+  background: rgba(0,0,0,.08);
+  color: #0a0f1a;
 }
 
-html[data-theme="light"] .chart-card {
-border: 1px solid rgba(0,0,0,.16);
-background: #ffffff;
-box-shadow: 0 4px 16px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.06);
+html[data-theme="light"] .pill-toggle:hover {
+  border-color: rgba(184,149,45,.50);
+  background: rgba(184,149,45,.15);
 }
 
+/* ALL CARD TYPES */
+html[data-theme="light"] .property-card,
+html[data-theme="light"] .chart-card,
+html[data-theme="light"] .glass-card,
+html[data-theme="light"] .kpi-card,
+html[data-theme="light"] .panel,
+html[data-theme="light"] .option-card,
+html[data-theme="light"] .compare-card,
+html[data-theme="light"] .growth-card,
+html[data-theme="light"] .flow-card,
+html[data-theme="light"] .acct-card {
+  border: 2px solid rgba(0,0,0,.16) !important;
+  background: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.06) !important;
+}
+
+html[data-theme="light"] .property-card::before,
 html[data-theme="light"] .chart-card::before {
-background: radial-gradient(300px 200px at 15% 0%, rgba(37,99,235,.08), transparent 65%);
+  background: radial-gradient(300px 200px at 15% 0%, rgba(184,149,45,.10), transparent 65%) !important;
 }
 
-html[data-theme="light"] .chart-title {
-color: #0a0f1a;
+html[data-theme="light"] .glass-card::after,
+html[data-theme="light"] .section-head::after {
+  background:
+    radial-gradient(380px 240px at 70% 0%, rgba(37,99,235,.10), transparent 62%),
+    radial-gradient(400px 280px at 0% 10%, rgba(184,149,45,.10), transparent 65%) !important;
 }
 
-html[data-theme="light"] .chart-sub {
-color: rgba(10,15,26,.70);
+/* CARD HEADERS */
+html[data-theme="light"] .property-top,
+html[data-theme="light"] .gc-top,
+html[data-theme="light"] .acct-head {
+  border-bottom: 2px solid rgba(0,0,0,.14) !important;
+  background: linear-gradient(180deg, rgba(184,149,45,.06), rgba(184,149,45,.02)) !important;
 }
 
-html[data-theme="light"] .chart {
-background: #f8f9fb;
-border: 1px solid rgba(0,0,0,.10);
+html[data-theme="light"] .property-body,
+html[data-theme="light"] .card-body {
+  background: #fafbff !important;
+}
+
+/* ALL TITLES & HEADINGS */
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] h5,
+html[data-theme="light"] h6,
+html[data-theme="light"] .property-title,
+html[data-theme="light"] .chart-title,
+html[data-theme="light"] .glass-title,
+html[data-theme="light"] .kpi-value,
+html[data-theme="light"] .flow-title,
+html[data-theme="light"] .sum-title,
+html[data-theme="light"] .gc-title,
+html[data-theme="light"] .mcard-title,
+html[data-theme="light"] .lane-title,
+html[data-theme="light"] .step-title,
+html[data-theme="light"] .rt-title,
+html[data-theme="light"] .doc-title,
+html[data-theme="light"] .acct-title,
+html[data-theme="light"] .subacct-title,
+html[data-theme="light"] .alloc-total,
+html[data-theme="light"] .uf-name,
+html[data-theme="light"] .callout-title {
+  color: #000000 !important;
+  font-weight: 900 !important;
+  text-shadow: none !important;
+}
+
+/* ALL BODY TEXT & DESCRIPTIONS */
+html[data-theme="light"] p,
+html[data-theme="light"] .lead,
+html[data-theme="light"] .chart-sub,
+html[data-theme="light"] .kpi-sub,
+html[data-theme="light"] .flow-sub,
+html[data-theme="light"] .sum-sub,
+html[data-theme="light"] .gc-sub,
+html[data-theme="light"] .mcard-sub,
+html[data-theme="light"] .lane-sub,
+html[data-theme="light"] .step-sub,
+html[data-theme="light"] .rt-sub,
+html[data-theme="light"] .doc-sub,
+html[data-theme="light"] .acct-sub,
+html[data-theme="light"] .uf-sub,
+html[data-theme="light"] .callout-body,
+html[data-theme="light"] .disclaimer {
+  color: #2d3748 !important;
+  font-weight: 600 !important;
+}
+
+/* TINY TEXT & NOTES */
+html[data-theme="light"] .tiny-note,
+html[data-theme="light"] .kpi-label,
+html[data-theme="light"] .alloc-kicker,
+html[data-theme="light"] .alloc-sub,
+html[data-theme="light"] .alloc-mini-note,
+html[data-theme="light"] .meta-line,
+html[data-theme="light"] .footer,
+html[data-theme="light"] .subacct-path {
+  color: #4a5568 !important;
+  font-weight: 600 !important;
+}
+
+/* ALL TABLES */
+html[data-theme="light"] .mini-row,
+html[data-theme="light"] .uf-row,
+html[data-theme="light"] .alloc-legend-row,
+html[data-theme="light"] .sum-item,
+html[data-theme="light"] .opt-mini,
+html[data-theme="light"] .metric,
+html[data-theme="light"] .step3,
+html[data-theme="light"] .lane,
+html[data-theme="light"] .risk-tile,
+html[data-theme="light"] .subacct,
+html[data-theme="light"] .stmt,
+html[data-theme="light"] .runway {
+  border: 1px solid rgba(0,0,0,.14) !important;
+  background: rgba(0,0,0,.02) !important;
 }
 
 html[data-theme="light"] .mini-row {
-border-bottom: 1px solid rgba(0,0,0,.12);
+  border-bottom: 2px solid rgba(0,0,0,.14) !important;
 }
 
 html[data-theme="light"] .mini-row.head {
-color: rgba(10,15,26,.60);
+  color: #1a1f2e !important;
+  font-weight: 900 !important;
 }
 
-html[data-theme="light"] .lender {
-color: #0a0f1a;
+html[data-theme="light"] .lender,
+html[data-theme="light"] .alloc-name,
+html[data-theme="light"] .stmt .name {
+  color: #000000 !important;
+  font-weight: 900 !important;
 }
 
-html[data-theme="light"] .sub {
-color: rgba(10,15,26,.65);
+html[data-theme="light"] .sub,
+html[data-theme="light"] .alloc-pct,
+html[data-theme="light"] .alloc-amt {
+  color: #2d3748 !important;
+  font-weight: 700 !important;
 }
 
-html[data-theme="light"] .badge {
-border: 1px solid rgba(0,0,0,.20);
-background: rgba(0,0,0,.06);
-color: #0a0f1a;
-font-weight: 700;
+html[data-theme="light"] .mini-row .r,
+html[data-theme="light"] .uf-amt,
+html[data-theme="light"] .metric .value {
+  color: #000000 !important;
+  font-weight: 900 !important;
 }
 
-html[data-theme="light"] .badge.gold {
-border-color: rgba(184,149,45,.45);
-background: rgba(184,149,45,.15);
-color: #88700d;
-font-weight: 800;
+/* ALL BADGES & PILLS */
+html[data-theme="light"] .badge,
+html[data-theme="light"] .panel-tag,
+html[data-theme="light"] .opt-badge,
+html[data-theme="light"] .acct-pill,
+html[data-theme="light"] .stmt .tag,
+html[data-theme="light"] .jj-pill,
+html[data-theme="light"] .stmt-count,
+html[data-theme="light"] .stmt-meta-pill {
+  border: 2px solid rgba(0,0,0,.24) !important;
+  background: rgba(0,0,0,.08) !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
 }
 
-html[data-theme="light"] .badge.red {
-border-color: rgba(220,38,38,.40);
-background: rgba(220,38,38,.12);
-color: #b91c1c;
-font-weight: 800;
+html[data-theme="light"] .badge.gold,
+html[data-theme="light"] .panel-tag.gold,
+html[data-theme="light"] .opt-badge.gold,
+html[data-theme="light"] .jj-pill.gold,
+html[data-theme="light"] .lane.gold {
+  border-color: rgba(184,149,45,.55) !important;
+  background: rgba(184,149,45,.20) !important;
+  color: #5a4200 !important;
 }
 
-html[data-theme="light"] .tiny-note {
-color: rgba(10,15,26,.60);
+html[data-theme="light"] .badge.red,
+html[data-theme="light"] .acct-pill {
+  border-color: rgba(220,38,38,.50) !important;
+  background: rgba(220,38,38,.18) !important;
+  color: #991b1b !important;
 }
 
-/* ============================================================
-   LIGHT THEME - ADDITIONAL TEXT CONTRAST FIXES
-   Added: 2026-02-06
-============================================================ */
-
-/* Header row text - much darker */
-html[data-theme="light"] .mini-row.head {
-color: #1a1f2e !important;
-font-weight: 800;
-opacity: 1;
+html[data-theme="light"] .badge.blue,
+html[data-theme="light"] .opt-badge,
+html[data-theme="light"] .step-n {
+  border-color: rgba(37,99,235,.50) !important;
+  background: rgba(37,99,235,.18) !important;
+  color: #1e40af !important;
 }
 
-/* Lender names - solid black */
-html[data-theme="light"] .lender {
-color: #0a0f1a !important;
-font-weight: 800;
+html[data-theme="light"] .opt-dot.a {
+  background: rgba(37,99,235,.70) !important;
+  border-color: rgba(37,99,235,.80) !important;
 }
 
-/* Subtitle text - much darker gray */
-html[data-theme="light"] .sub {
-color: #2d3748 !important;
-font-weight: 600;
+html[data-theme="light"] .opt-dot.b {
+  background: rgba(184,149,45,.70) !important;
+  border-color: rgba(184,149,45,.80) !important;
 }
 
-/* All text in mini-row cells - darker */
-html[data-theme="light"] .mini-row {
-color: #0a0f1a;
+/* CHARTS */
+html[data-theme="light"] .chart,
+html[data-theme="light"] .alloc-donut {
+  background: #f8f9fb !important;
+  border: 2px solid rgba(0,0,0,.14) !important;
 }
 
-html[data-theme="light"] .mini-row .r {
-color: #0a0f1a !important;
-font-weight: 700;
+html[data-theme="light"] svg text,
+html[data-theme="light"] svg tspan {
+  fill: #000000 !important;
+  font-weight: 800 !important;
 }
 
-/* Property title - ensure it's very dark */
-html[data-theme="light"] .property-title {
-color: #0a0f1a !important;
-font-weight: 900;
+html[data-theme="light"] .alloc-donut::after {
+  background: linear-gradient(180deg, #fafbfc, #f8f9fb) !important;
+  border: 1px solid rgba(0,0,0,.14) !important;
 }
 
-/* Badge text improvements */
-html[data-theme="light"] .property-badges .badge {
-color: #1a1f2e;
-font-weight: 700;
-border: 1px solid rgba(0,0,0,.25);
+/* BUTTONS */
+html[data-theme="light"] button,
+html[data-theme="light"] .pill-toggle,
+html[data-theme="light"] .doc-btn,
+html[data-theme="light"] .nav-toggle,
+html[data-theme="light"] .up-btn {
+  border: 2px solid rgba(0,0,0,.24) !important;
+  background: rgba(0,0,0,.08) !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
 }
 
-html[data-theme="light"] .property-badges .badge.gold {
-color: #705600;
-border-color: rgba(112,86,0,.40);
-background: rgba(184,149,45,.18);
+html[data-theme="light"] button:hover,
+html[data-theme="light"] .pill-toggle:hover,
+html[data-theme="light"] .doc-btn:hover,
+html[data-theme="light"] .nav-toggle:hover,
+html[data-theme="light"] .up-btn:hover {
+  border-color: rgba(184,149,45,.50) !important;
+  background: rgba(184,149,45,.15) !important;
 }
 
-/* Chart title and subtitle - very dark */
-html[data-theme="light"] .chart-title {
-color: #0a0f1a !important;
-font-weight: 900;
+/* ICONS */
+html[data-theme="light"] .sum-ic,
+html[data-theme="light"] .flow-ic,
+html[data-theme="light"] .mcard-ic,
+html[data-theme="light"] .gc-ic,
+html[data-theme="light"] .jj-mark {
+  border: 1px solid rgba(184,149,45,.45) !important;
+  background: rgba(184,149,45,.18) !important;
 }
 
-html[data-theme="light"] .chart-sub {
-color: #2d3748 !important;
-font-weight: 600;
+html[data-theme="light"] .sum-ic::after,
+html[data-theme="light"] .flow-ic::after,
+html[data-theme="light"] .mcard-ic::after,
+html[data-theme="light"] .gc-ic::after {
+  background: #88700d !important;
 }
 
-/* Tiny notes - darker */
-html[data-theme="light"] .tiny-note {
-color: #4a5568 !important;
-font-weight: 500;
+html[data-theme="light"] .doc-ic {
+  border: 1px solid rgba(184,149,45,.45) !important;
+  background: rgba(184,149,45,.18) !important;
+  color: #5a4200 !important;
 }
 
-/* All var(--t3) and var(--t4) text in light mode */
-html[data-theme="light"] [style*="color: var(--t3)"] {
-color: #2d3748 !important;
+html[data-theme="light"] .rt-ic {
+  border: 1px solid rgba(0,0,0,.18) !important;
+  background: rgba(0,0,0,.06) !important;
 }
 
-html[data-theme="light"] [style*="color: var(--t4)"] {
-color: #4a5568 !important;
+html[data-theme="light"] .rt-ic::after {
+  background: #1a1f2e !important;
+}
+
+/* FORMS */
+html[data-theme="light"] input,
+html[data-theme="light"] select,
+html[data-theme="light"] textarea,
+html[data-theme="light"] .stmt-search {
+  border: 2px solid rgba(0,0,0,.20) !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+html[data-theme="light"] input:focus,
+html[data-theme="light"] select:focus,
+html[data-theme="light"] textarea:focus {
+  border-color: rgba(37,99,235,.50) !important;
+}
+
+html[data-theme="light"] ::placeholder {
+  color: #6b7280 !important;
+}
+
+/* LINKS */
+html[data-theme="light"] a,
+html[data-theme="light"] .doc,
+html[data-theme="light"] .stmt,
+html[data-theme="light"] .stmt-row {
+  color: #2563eb !important;
+}
+
+html[data-theme="light"] .doc:hover,
+html[data-theme="light"] .stmt:hover,
+html[data-theme="light"] .stmt-row:hover {
+  border-color: rgba(184,149,45,.45) !important;
+  background: rgba(184,149,45,.10) !important;
+}
+
+/* NAVIGATION */
+html[data-theme="light"] .sidenav {
+  background: rgba(255,255,255,.90) !important;
+  border: 1px solid rgba(0,0,0,.16) !important;
+}
+
+html[data-theme="light"] .nav-list a {
+  color: #2d3748 !important;
+}
+
+html[data-theme="light"] .nav-list a:hover {
+  border-color: rgba(0,0,0,.14) !important;
+  background: rgba(0,0,0,.04) !important;
+}
+
+html[data-theme="light"] .nav-list a.active {
+  border-color: rgba(37,99,235,.50) !important;
+  background: rgba(37,99,235,.15) !important;
+  color: #000000 !important;
+}
+
+/* SECTION HEADS */
+html[data-theme="light"] .section-head,
+html[data-theme="light"] .glass-card {
+  border: 1px solid rgba(0,0,0,.18) !important;
+  background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02)) !important;
+}
+
+/* SPECIAL CARDS */
+html[data-theme="light"] .uf-row.total {
+  border-color: rgba(184,149,45,.40) !important;
+  background: rgba(184,149,45,.12) !important;
+}
+
+html[data-theme="light"] .chart-card.danger,
+html[data-theme="light"] .compare-card.bad {
+  border-color: rgba(220,38,38,.40) !important;
+  background: rgba(220,38,38,.08) !important;
+}
+
+html[data-theme="light"] .compare-card.good::before,
+html[data-theme="light"] .option-card::before {
+  background: radial-gradient(280px 200px at 15% 0%, rgba(37,99,235,.12), transparent 60%) !important;
+}
+
+html[data-theme="light"] .callout {
+  border: 1px solid rgba(37,99,235,.40) !important;
+  background: linear-gradient(180deg, rgba(37,99,235,.10), rgba(37,99,235,.05)) !important;
+}
+
+/* STATEMENT INDEX */
+html[data-theme="light"] .stmt-group {
+  border: 1px solid rgba(0,0,0,.14) !important;
+  background: #fafbff !important;
+}
+
+html[data-theme="light"] .stmt-group summary {
+  background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.01)) !important;
+}
+
+html[data-theme="light"] .jj-strip {
+  border: 1px solid rgba(0,0,0,.14) !important;
+  background:
+    radial-gradient(900px 160px at 20% 0%, rgba(184,149,45,.10), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.01)) !important;
+}
+
+/* RUNWAYS & PROGRESS BARS */
+html[data-theme="light"] .runway-bar {
+  border: 1px solid rgba(184,149,45,.45) !important;
+  background: linear-gradient(90deg, rgba(184,149,45,.25), rgba(37,99,235,.18)) !important;
+}
+
+html[data-theme="light"] .alloc-sharebar {
+  border: 1px solid rgba(0,0,0,.14) !important;
+  background: rgba(0,0,0,.04) !important;
+}
+
+/* RANGE SLIDER */
+html[data-theme="light"] input[type="range"]::-webkit-slider-thumb {
+  border: 3px solid #ffffff !important;
+}
+
+html[data-theme="light"] input[type="range"]::-moz-range-thumb {
+  border: 3px solid #ffffff !important;
+}
+
+/* SCROLLBARS */
+html[data-theme="light"] ::-webkit-scrollbar {
+  background: #e5e7eb !important;
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #9ca3af !important;
+  border: 2px solid #e5e7eb !important;
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280 !important;
+}
+
+/* DRAWS TAG */
+html[data-theme="light"] .dtag {
+  border: 1px solid rgba(37,99,235,.45) !important;
+  background: rgba(37,99,235,.15) !important;
+  color: #1e40af !important;
+}
+
+/* LIST ITEMS */
+html[data-theme="light"] .bullets {
+  color: #2d3748 !important;
+}
+
+html[data-theme="light"] ul li::marker,
+html[data-theme="light"] ol li::marker {
+  color: #000000 !important;
+}
+
+/* EMPHASIS */
+html[data-theme="light"] strong,
+html[data-theme="light"] b {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+html[data-theme="light"] em {
+  color: #2d3748 !important;
+}
+
+/* ALLOC DOTS */
+html[data-theme="light"] .alloc-dot {
+  border: 1px solid rgba(0,0,0,.22) !important;
+}
+
+html[data-theme="light"] .c-liens { background: rgba(184,149,45,.40) !important; }
+html[data-theme="light"] .c-res { background: rgba(37,99,235,.35) !important; }
+html[data-theme="light"] .c-assure { background: rgba(0,0,0,.25) !important; }
+html[data-theme="light"] .c-roof { background: rgba(220,38,38,.35) !important; }
+html[data-theme="light"] .c-bills { background: rgba(37,99,235,.25) !important; }
+html[data-theme="light"] .c-mkt { background: rgba(184,149,45,.25) !important; }
+html[data-theme="light"] .c-close { background: rgba(184,149,45,.20) !important; }
+
+/* IMAGES */
+html[data-theme="light"] .brands-container,
+html[data-theme="light"] .jj-figure,
+html[data-theme="light"] .chart-card-lg {
+  border: 1px solid rgba(0,0,0,.14) !important;
+  background: #ffffff !important;
+}
+
+html[data-theme="light"] .jj-figure figcaption {
+  border-top: 1px solid rgba(0,0,0,.14) !important;
+  background: #fafbff !important;
+  color: #2d3748 !important;
+}
+
+/* PROGRESS BAR */
+html[data-theme="light"] #scrollProgress {
+  background: rgba(0,0,0,.08) !important;
 }
       
 </style>
