@@ -5998,172 +5998,172 @@ a[href^="http"]:after {
       `;
     }).join("") || `<div class="tiny-note" style="padding:10px 2px;">No statements match your search.</div>`;
   }
+      
+renderJJIndex();
+  jjSearch?.addEventListener("input", (e) => renderJJIndex(e.target.value));
 
-      /* ============================================================
-   PAYMENT CALCULATOR — ENHANCED LOGIC WITH CHART
-============================================================ */
-(() => {
-  const calcBalance = document.getElementById('calcBalance');
-  const calcBalanceDisplay = document.getElementById('calcBalanceDisplay');
-  const calcInterest = document.getElementById('calcInterest');
-  const calcTotal = document.getElementById('calcTotal');
-  const calcAnnualInterest = document.getElementById('calcAnnualInterest');
-  const calcYear1Total = document.getElementById('calcYear1Total');
-  const calcRemainingBalance = document.getElementById('calcRemainingBalance');
-  const paymentChart = document.getElementById('paymentChart');
+  /* ============================================================
+     PAYMENT CALCULATOR — ENHANCED LOGIC WITH CHART
+  ============================================================ */
+  (() => {
+    const calcBalance = document.getElementById('calcBalance');
+    const calcBalanceDisplay = document.getElementById('calcBalanceDisplay');
+    const calcInterest = document.getElementById('calcInterest');
+    const calcTotal = document.getElementById('calcTotal');
+    const calcAnnualInterest = document.getElementById('calcAnnualInterest');
+    const calcYear1Total = document.getElementById('calcYear1Total');
+    const calcRemainingBalance = document.getElementById('calcRemainingBalance');
+    const paymentChart = document.getElementById('paymentChart');
 
-  const PRINCIPAL_MONTHLY = 4375; // Fixed
-  const INTEREST_RATE = 0.08;
-  const ORIGINAL_LOAN = 1050000;
+    const PRINCIPAL_MONTHLY = 4375; // Fixed
+    const INTEREST_RATE = 0.08;
+    const ORIGINAL_LOAN = 1050000;
 
-  function formatCurrency(num) {
-    return num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-  }
-
-  function updateCalculator() {
-    const balance = parseFloat(calcBalance.value);
-    const interestMonthly = (balance * INTEREST_RATE / 12);
-    const totalMonthly = interestMonthly + PRINCIPAL_MONTHLY;
-    const annualInterest = interestMonthly * 12;
-    const annualPrincipal = PRINCIPAL_MONTHLY * 12;
-    const annualTotal = totalMonthly * 12;
-    const remainingAfterYear = balance - annualPrincipal;
-
-    // Update all displays
-    if (calcBalanceDisplay) calcBalanceDisplay.textContent = formatCurrency(balance);
-    if (calcInterest) calcInterest.textContent = '$' + formatCurrency(Math.round(interestMonthly));
-    if (calcTotal) calcTotal.textContent = '$' + formatCurrency(Math.round(totalMonthly));
-    if (calcAnnualInterest) calcAnnualInterest.textContent = '$' + formatCurrency(Math.round(annualInterest));
-    if (calcYear1Total) calcYear1Total.textContent = '$' + formatCurrency(Math.round(annualTotal));
-    if (calcRemainingBalance) calcRemainingBalance.textContent = '$' + formatCurrency(Math.max(0, Math.round(remainingAfterYear)));
-
-    // Update chart
-    renderPaymentChart(balance);
-  }
-
-  function renderPaymentChart(startingBalance) {
-    if (!paymentChart) return;
-
-    let balance = startingBalance;
-    const months = [];
-    
-    // Calculate 12 months of payments
-    for (let i = 1; i <= 12; i++) {
-      const interest = (balance * INTEREST_RATE / 12);
-      const total = interest + PRINCIPAL_MONTHLY;
-      months.push({ 
-        month: i, 
-        interest: interest, 
-        principal: PRINCIPAL_MONTHLY, 
-        total: total, 
-        balance: balance 
-      });
-      balance = Math.max(0, balance - PRINCIPAL_MONTHLY);
+    function formatCurrency(num) {
+      return num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     }
 
-    const maxPayment = months[0].total;
+    function updateCalculator() {
+      const balance = parseFloat(calcBalance.value);
+      const interestMonthly = (balance * INTEREST_RATE / 12);
+      const totalMonthly = interestMonthly + PRINCIPAL_MONTHLY;
+      const annualInterest = interestMonthly * 12;
+      const annualPrincipal = PRINCIPAL_MONTHLY * 12;
+      const annualTotal = totalMonthly * 12;
+      const remainingAfterYear = balance - annualPrincipal;
 
-    // Generate SVG bars
-    const bars = months.map((m, idx) => {
-      const interestPct = (m.interest / maxPayment) * 100;
-      const principalPct = (m.principal / maxPayment) * 100;
-      const totalHeight = interestPct + principalPct;
+      // Update all displays
+      if (calcBalanceDisplay) calcBalanceDisplay.textContent = formatCurrency(balance);
+      if (calcInterest) calcInterest.textContent = '$' + formatCurrency(Math.round(interestMonthly));
+      if (calcTotal) calcTotal.textContent = '$' + formatCurrency(Math.round(totalMonthly));
+      if (calcAnnualInterest) calcAnnualInterest.textContent = '$' + formatCurrency(Math.round(annualInterest));
+      if (calcYear1Total) calcYear1Total.textContent = '$' + formatCurrency(Math.round(annualTotal));
+      if (calcRemainingBalance) calcRemainingBalance.textContent = '$' + formatCurrency(Math.max(0, Math.round(remainingAfterYear)));
+
+      // Update chart
+      renderPaymentChart(balance);
+    }
+
+    function renderPaymentChart(startingBalance) {
+      if (!paymentChart) return;
+
+      let balance = startingBalance;
+      const months = [];
       
-      return `
-        <div style="
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 6px;
-          min-width: 0;
-        ">
+      // Calculate 12 months of payments
+      for (let i = 1; i <= 12; i++) {
+        const interest = (balance * INTEREST_RATE / 12);
+        const total = interest + PRINCIPAL_MONTHLY;
+        months.push({ 
+          month: i, 
+          interest: interest, 
+          principal: PRINCIPAL_MONTHLY, 
+          total: total, 
+          balance: balance 
+        });
+        balance = Math.max(0, balance - PRINCIPAL_MONTHLY);
+      }
+
+      const maxPayment = months[0].total;
+
+      // Generate bars
+      const bars = months.map((m, idx) => {
+        const interestPct = (m.interest / maxPayment) * 100;
+        const principalPct = (m.principal / maxPayment) * 100;
+        
+        return `
           <div style="
-            font-size: 11px;
-            color: var(--t3);
-            font-weight: 700;
-            margin-bottom: 4px;
-          ">$${formatCurrency(Math.round(m.total))}</div>
-          
-          <div style="
-            width: 100%;
+            flex: 1;
             display: flex;
             flex-direction: column;
-            height: 120px;
-            gap: 0;
-            position: relative;
+            align-items: center;
+            gap: 6px;
+            min-width: 0;
           ">
-            <!-- Interest (top) -->
-            <div class="chart-bar" style="
-              width: 100%;
-              height: ${interestPct}%;
-              background: linear-gradient(180deg, #5da3ff, #3b82ff);
-              border-radius: 6px 6px 0 0;
-              opacity: 0.85;
-              transition: opacity 0.2s;
-              cursor: pointer;
-            " 
-            onmouseover="this.style.opacity='1'" 
-            onmouseout="this.style.opacity='0.85'"
-            title="Month ${m.month} Interest: $${formatCurrency(Math.round(m.interest))}"></div>
+            <div style="
+              font-size: 11px;
+              color: var(--t3);
+              font-weight: 700;
+              margin-bottom: 4px;
+            ">$${formatCurrency(Math.round(m.total))}</div>
             
-            <!-- Principal (bottom) -->
-            <div class="chart-bar" style="
+            <div style="
               width: 100%;
-              height: ${principalPct}%;
-              background: linear-gradient(180deg, #d4af5e, #c9a75a);
-              border-radius: 0 0 6px 6px;
-              opacity: 0.85;
-              transition: opacity 0.2s;
-              cursor: pointer;
-            "
-            onmouseover="this.style.opacity='1'" 
-            onmouseout="this.style.opacity='0.85'"
-            title="Month ${m.month} Principal: $${formatCurrency(Math.round(m.principal))}"></div>
+              display: flex;
+              flex-direction: column;
+              height: 120px;
+              gap: 0;
+              position: relative;
+            ">
+              <!-- Interest (top) -->
+              <div class="chart-bar" style="
+                width: 100%;
+                height: ${interestPct}%;
+                background: linear-gradient(180deg, #5da3ff, #3b82ff);
+                border-radius: 6px 6px 0 0;
+                opacity: 0.85;
+                transition: opacity 0.2s;
+                cursor: pointer;
+              " 
+              onmouseover="this.style.opacity='1'" 
+              onmouseout="this.style.opacity='0.85'"
+              title="Month ${m.month} Interest: $${formatCurrency(Math.round(m.interest))}"></div>
+              
+              <!-- Principal (bottom) -->
+              <div class="chart-bar" style="
+                width: 100%;
+                height: ${principalPct}%;
+                background: linear-gradient(180deg, #d4af5e, #c9a75a);
+                border-radius: 0 0 6px 6px;
+                opacity: 0.85;
+                transition: opacity 0.2s;
+                cursor: pointer;
+              "
+              onmouseover="this.style.opacity='1'" 
+              onmouseout="this.style.opacity='0.85'"
+              title="Month ${m.month} Principal: $${formatCurrency(Math.round(m.principal))}"></div>
+            </div>
+            
+            <div style="
+              font-size: 10px;
+              color: var(--t4);
+              font-weight: 600;
+            ">M${m.month}</div>
           </div>
-          
-          <div style="
-            font-size: 10px;
-            color: var(--t4);
-            font-weight: 600;
-          ">M${m.month}</div>
+        `;
+      }).join('');
+
+      paymentChart.innerHTML = `
+        <div style="
+          display: flex;
+          gap: 6px;
+          height: 100%;
+          align-items: flex-end;
+          justify-content: space-between;
+        ">
+          ${bars}
         </div>
       `;
-    }).join('');
-
-    paymentChart.innerHTML = `
-      <div style="
-        display: flex;
-        gap: 6px;
-        height: 100%;
-        align-items: flex-end;
-        justify-content: space-between;
-      ">
-        ${bars}
-      </div>
-    `;
-  }
-
-  // Initialize
-  updateCalculator();
-
-  // Update on slider change
-  calcBalance?.addEventListener('input', updateCalculator);
-
-  // Smooth animation on load
-  setTimeout(() => {
-    if (paymentChart) {
-      const bars = paymentChart.querySelectorAll('.chart-bar');
-      bars.forEach((bar, idx) => {
-        bar.style.animationDelay = `${idx * 0.05}s`;
-      });
     }
-  }, 100);
-}
-      
-  renderJJIndex();
-  jjSearch?.addEventListener("input", (e) => renderJJIndex(e.target.value));
-})();
+
+    // Initialize
+    updateCalculator();
+
+    // Update on slider change
+    calcBalance?.addEventListener('input', updateCalculator);
+
+    // Smooth animation on load
+    setTimeout(() => {
+      if (paymentChart) {
+        const bars = paymentChart.querySelectorAll('.chart-bar');
+        bars.forEach((bar, idx) => {
+          bar.style.animationDelay = `${idx * 0.05}s`;
+        });
+      }
+    }, 100);
+  })();
+
+})();  // ← Main IIFE closes HERE
 </script>
 </body>
 </html>
