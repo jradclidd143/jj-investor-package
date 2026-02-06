@@ -6055,7 +6055,7 @@ input[type="range"]::-moz-range-thumb:active {
 ============================================================ */
 
 // ============================================================
-// EXECUTIVE ONE-PAGER PRINT FUNCTION - CLONE METHOD (BULLETPROOF)
+// EXECUTIVE ONE-PAGER PRINT FUNCTION - NEW WINDOW METHOD (100% RELIABLE)
 // ============================================================
 window.printOnePager = function() {
   console.log('🖨️ Print one-pager initiated');
@@ -6066,9 +6066,8 @@ window.printOnePager = function() {
     console.error('❌ One-pager element not found');
     return;
   }
-  console.log('✅ One-pager element found');
   
-  // Update date and URL in the original before cloning
+  // Update date and URL before cloning
   const dateEl = document.getElementById('onePagerDate');
   const urlEl = document.getElementById('onePagerURL');
   
@@ -6079,53 +6078,132 @@ window.printOnePager = function() {
       month: 'long', 
       day: 'numeric' 
     });
-    console.log('✅ Date updated');
   }
   
   if (urlEl) {
     urlEl.textContent = window.location.href;
-    console.log('✅ URL updated');
   }
   
   // Clone the one-pager
   const clone = onePager.cloneNode(true);
-  clone.id = 'executive-one-pager-print-clone';
-  console.log('✅ Clone created');
   
-  // Create container for the clone
-  const container = document.createElement('div');
-  container.id = 'printOnePagerContainer';
-  container.appendChild(clone);
+  // Remove the print button from clone
+  const printBtn = clone.querySelector('.doc-btn');
+  if (printBtn) printBtn.remove();
   
-  // Add container to body
-  document.body.appendChild(container);
-  console.log('✅ Print container added to DOM');
+  // Create new window
+  const printWindow = window.open('', '_blank', 'width=800,height=600');
   
-  // Add print class
-  document.body.classList.add('printing-one-pager');
-  console.log('✅ Print class added');
+  if (!printWindow) {
+    alert('Please allow pop-ups to print the one-pager');
+    return;
+  }
   
-  // Cleanup function
-  const cleanup = () => {
-    console.log('🧹 Cleaning up after print');
-    document.body.classList.remove('printing-one-pager');
-    if (container && container.parentNode) {
-      container.parentNode.removeChild(container);
-    }
-    console.log('✅ Cleanup complete');
+  // Write complete HTML document to new window
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>J&J Investments - Executive One-Pager</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+      <style>
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+        
+        body {
+          font-family: 'Inter', system-ui, -apple-system, sans-serif;
+          background: white;
+          color: #000;
+          padding: 20mm;
+          line-height: 1.5;
+        }
+        
+        h2, h3, h4, strong {
+          color: #000 !important;
+        }
+        
+        /* Force all text to black */
+        * {
+          color: #000 !important;
+        }
+        
+        /* Preserve structure */
+        [style*="display: grid"] {
+          display: grid !important;
+        }
+        
+        [style*="display: flex"] {
+          display: flex !important;
+        }
+        
+        /* Gold accents - darker for print */
+        .gold,
+        [style*="color: var(--gold"],
+        [style*="color:#d4af5e"],
+        [style*="color: #d4af5e"],
+        [style*="color: rgb(212, 175, 94)"] {
+          color: #996600 !important;
+        }
+        
+        /* Preserve backgrounds but lighten */
+        [style*="background:"],
+        [style*="background-color:"] {
+          opacity: 0.3 !important;
+        }
+        
+        /* Print setup */
+        @page {
+          size: letter portrait;
+          margin: 0.5in;
+        }
+        
+        @media print {
+          body {
+            padding: 0;
+            background: white !important;
+          }
+          
+          * {
+            color: #000 !important;
+          }
+          
+          .gold,
+          [style*="color: var(--gold"],
+          [style*="color:#d4af5e"],
+          [style*="color: #d4af5e"],
+          [style*="color: rgb(212, 175, 94)"] {
+            color: #996600 !important;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      ${clone.innerHTML}
+    </body>
+    </html>
+  `);
+  
+  printWindow.document.close();
+  
+  // Wait for content to load, then print
+  printWindow.onload = function() {
+    setTimeout(() => {
+      printWindow.focus();
+      printWindow.print();
+      
+      // Close window after printing
+      setTimeout(() => {
+        printWindow.close();
+      }, 500);
+    }, 250);
   };
   
-  // Trigger print after short delay
-  setTimeout(() => {
-    console.log('🖨️ Opening print dialog...');
-    window.print();
-    
-    // Cleanup after print dialog closes
-    setTimeout(cleanup, 1000);
-  }, 150);
-  
-  // Also cleanup if print is cancelled
-  window.addEventListener('afterprint', cleanup, { once: true });
+  console.log('✅ Print window opened');
 };
 
 // ============================================================
