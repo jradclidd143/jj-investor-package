@@ -5933,43 +5933,54 @@ a[href^="http"]:after {
 
 <script>
 /* ============================================================
-   ✅ NAVIGATION + THEME + BACK TO TOP + STATEMENT INDEXES
+   NAVIGATION + THEME + BACK TO TOP + CALCULATOR + STATEMENTS
 ============================================================ */
-(() => {
+
+// ============================================================
+// EXECUTIVE ONE-PAGER PRINT FUNCTION (MUST BE GLOBAL)
+// ============================================================
+window.printOnePager = function() {
+  console.log('Print function called');
   
-  // ============================================================
-  // EXECUTIVE ONE-PAGER PRINT FUNCTION (GLOBAL)
-  // ============================================================
-  window.printOnePager = function() {
-    // Populate date and URL
-    const dateEl = document.getElementById('onePagerDate');
-    const urlEl = document.getElementById('onePagerURL');
-    
-    if (dateEl) {
-      const now = new Date();
-      dateEl.textContent = now.toLocaleDateString('en-US', { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-      });
-    }
-    
-    if (urlEl) {
-      urlEl.textContent = window.location.href;
-    }
-    
-    // Add print class to body
-    document.body.classList.add('printing-one-pager');
-    
-    // Trigger print
+  // Populate date and URL
+  const dateEl = document.getElementById('onePagerDate');
+  const urlEl = document.getElementById('onePagerURL');
+  
+  if (dateEl) {
+    const now = new Date();
+    dateEl.textContent = now.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  }
+  
+  if (urlEl) {
+    urlEl.textContent = window.location.href;
+  }
+  
+  // Add print class to body
+  document.body.classList.add('printing-one-pager');
+  console.log('Print class added');
+  
+  // Small delay to ensure class is applied
+  setTimeout(() => {
     window.print();
     
     // Remove class after print dialog closes
     setTimeout(() => {
       document.body.classList.remove('printing-one-pager');
-    }, 100);
-  };
-      
+      console.log('Print class removed');
+    }, 500);
+  }, 100);
+};
+
+// ============================================================
+// MAIN INITIALIZATION - RUNS ON DOM READY
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM Ready - Initializing...');
+  
   const root = document.documentElement;
   const topbar = document.querySelector('.topbar');
 
@@ -6000,34 +6011,23 @@ a[href^="http"]:after {
     localStorage.setItem(THEME_KEY, next);
     applyTheme(next);
   });
-  
-  if (urlEl) {
-    urlEl.textContent = window.location.href;
-  }
-  
-  // Add print class to body
-  document.body.classList.add('printing-one-pager');
-  
-  // Trigger print
-  window.print();
-  
-  // Remove class after print dialog closes
-  setTimeout(() => {
-    document.body.classList.remove('printing-one-pager');
-  }, 100);
-}
-      
-  // Build sidenav
+
+  // ============================================================
+  // NAVIGATION SYSTEM
+  // ============================================================
   const navList = document.getElementById('navList');
   const sideNav = document.getElementById('sideNav');
   const navToggle = document.getElementById('navToggle');
   const sections = Array.from(document.querySelectorAll('[data-nav][id]'));
   const esc = (s) => (s || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
+  console.log('Found sections:', sections.length);
+
   if (navList && sections.length) {
     navList.innerHTML = sections.map(sec => 
       `<a href="#${encodeURIComponent(sec.id)}">${esc(sec.getAttribute('data-nav') || sec.id)}</a>`
     ).join('');
+    console.log('Navigation built successfully');
   }
 
   // SideNav minimize
@@ -6093,9 +6093,98 @@ a[href^="http"]:after {
   window.addEventListener('scroll', onScroll, { passive: true });
   upBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  /* ============================================================
-     ASSURE CALL — STATEMENT LOCK/UNLOCK + INDEX BUILDER
-  ============================================================ */
+  // ============================================================
+  // PAYMENT CALCULATOR - ENHANCED & FIXED
+  // ============================================================
+  const calcBalance = document.getElementById('calcBalance');
+  const calcBalanceDisplay = document.getElementById('calcBalanceDisplay');
+  const calcInterest = document.getElementById('calcInterest');
+  const calcTotal = document.getElementById('calcTotal');
+  const calcAnnualInterest = document.getElementById('calcAnnualInterest');
+  const calcYear1Total = document.getElementById('calcYear1Total');
+  const calcRemainingBalance = document.getElementById('calcRemainingBalance');
+  const paymentChart = document.getElementById('paymentChart');
+
+  if (calcBalance && calcBalanceDisplay) {
+    console.log('Calculator elements found - initializing');
+    
+    const PRINCIPAL_MONTHLY = 4375;
+    const INTEREST_RATE = 0.08;
+    const ORIGINAL_LOAN = 1050000;
+
+    function formatCurrency(num) {
+      return num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    }
+
+    function updateCalculator() {
+      const balance = parseFloat(calcBalance.value) || ORIGINAL_LOAN;
+      const interestMonthly = (balance * INTEREST_RATE / 12);
+      const totalMonthly = interestMonthly + PRINCIPAL_MONTHLY;
+      const annualInterest = interestMonthly * 12;
+      const annualPrincipal = PRINCIPAL_MONTHLY * 12;
+      const annualTotal = totalMonthly * 12;
+      const remainingAfterYear = Math.max(0, balance - annualPrincipal);
+
+      calcBalanceDisplay.textContent = formatCurrency(balance);
+      if (calcInterest) calcInterest.textContent = '$' + formatCurrency(Math.round(interestMonthly));
+      if (calcTotal) calcTotal.textContent = '$' + formatCurrency(Math.round(totalMonthly));
+      if (calcAnnualInterest) calcAnnualInterest.textContent = '$' + formatCurrency(Math.round(annualInterest));
+      if (calcYear1Total) calcYear1Total.textContent = '$' + formatCurrency(Math.round(annualTotal));
+      if (calcRemainingBalance) calcRemainingBalance.textContent = '$' + formatCurrency(Math.round(remainingAfterYear));
+
+      renderPaymentChart(balance);
+    }
+
+    function renderPaymentChart(startingBalance) {
+      if (!paymentChart) return;
+
+      let balance = startingBalance;
+      const months = [];
+      
+      for (let i = 1; i <= 12; i++) {
+        const interest = (balance * INTEREST_RATE / 12);
+        const total = interest + PRINCIPAL_MONTHLY;
+        months.push({ 
+          month: i, 
+          interest: interest, 
+          principal: PRINCIPAL_MONTHLY, 
+          total: total, 
+          balance: balance 
+        });
+        balance = Math.max(0, balance - PRINCIPAL_MONTHLY);
+      }
+
+      const maxPayment = months[0].total;
+
+      const bars = months.map((m, idx) => {
+        const interestPct = (m.interest / maxPayment) * 100;
+        const principalPct = (m.principal / maxPayment) * 100;
+        
+        return `
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;">
+            <div style="font-size:11px;color:var(--t3);font-weight:700;margin-bottom:4px;">$${formatCurrency(Math.round(m.total))}</div>
+            <div style="width:100%;display:flex;flex-direction:column;height:120px;gap:0;position:relative;">
+              <div class="chart-bar" style="width:100%;height:${interestPct}%;background:linear-gradient(180deg,#5da3ff,#3b82ff);border-radius:6px 6px 0 0;opacity:0.85;transition:opacity 0.2s;cursor:pointer;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'" title="Month ${m.month} Interest: $${formatCurrency(Math.round(m.interest))}"></div>
+              <div class="chart-bar" style="width:100%;height:${principalPct}%;background:linear-gradient(180deg,#d4af5e,#c9a75a);border-radius:0 0 6px 6px;opacity:0.85;transition:opacity 0.2s;cursor:pointer;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'" title="Month ${m.month} Principal: $${formatCurrency(Math.round(m.principal))}"></div>
+            </div>
+            <div style="font-size:10px;color:var(--t4);font-weight:600;">M${m.month}</div>
+          </div>
+        `;
+      }).join('');
+
+      paymentChart.innerHTML = `<div style="display:flex;gap:6px;height:100%;align-items:flex-end;justify-content:space-between;">${bars}</div>`;
+    }
+
+    updateCalculator();
+    calcBalance.addEventListener('input', updateCalculator);
+    console.log('Calculator initialized successfully');
+  } else {
+    console.log('Calculator elements not found on page');
+  }
+
+  // ============================================================
+  // ASSURE CALL STATEMENTS
+  // ============================================================
   const ASSURE_LOCK_KEY = 'jj_assure_unlocked';
   const assureLockBtn = document.getElementById('assureLockToggle');
   const assureLockPill = document.getElementById('assureLockPill');
@@ -6106,15 +6195,12 @@ a[href^="http"]:after {
   let assureUnlocked = localStorage.getItem(ASSURE_LOCK_KEY) === '1';
 
   const updateAssureLockUI = () => {
-    if (assureLockBtn) {
-      assureLockBtn.textContent = assureUnlocked ? '🔓 Lock Statements' : '🔒 Unlock Statements';
-    }
+    if (assureLockBtn) assureLockBtn.textContent = assureUnlocked ? '🔓 Lock Statements' : '🔒 Unlock Statements';
     if (assureLockPill) {
       assureLockPill.textContent = assureUnlocked ? '🔓 UNLOCKED' : '🔒 LOCKED';
       assureLockPill.style.borderColor = assureUnlocked ? 'rgba(59,130,255,.35)' : 'rgba(224,69,69,.35)';
       assureLockPill.style.background = assureUnlocked ? 'rgba(59,130,255,.10)' : 'rgba(224,69,69,.10)';
     }
-    // Re-render index to update link states
     renderAssureIndex();
   };
 
@@ -6124,7 +6210,6 @@ a[href^="http"]:after {
     updateAssureLockUI();
   });
 
-  // AssureCall statement groups
   const BASE_ASSURE = "assurecall-docs";
   const encPath = (p) => p.split("/").map(seg => encodeURIComponent(seg)).join("/");
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -6138,59 +6223,11 @@ a[href^="http"]:after {
   };
 
   const assureGroups = [
-    {
-      bank: "Wells Fargo",
-      acct: "Operating",
-      folder: "wells operating",
-      files: [
-        "123124 WellsFargo.pdf","013125 WellsFargo.pdf","022825 WellsFargo.pdf",
-        "033125 WellsFargo.pdf","043025 WellsFargo.pdf","053125 WellsFargo.pdf",
-        "063025 WellsFargo.pdf","073125 WellsFargo.pdf","083125 WellsFargo.pdf",
-        "093025 WellsFargo.pdf","103125 WellsFargo.pdf","113025 WellsFargo.pdf",
-        "123125 WellsFargo.pdf"
-      ]
-    },
-    {
-      bank: "Wells Fargo",
-      acct: "Savings",
-      folder: "wells savings",
-      files: [
-        "123124 WellsFargo_Savings.pdf","013125 WellsFargo_Savings.pdf","022825 WellsFargo_Savings.pdf",
-        "033125 WellsFargo_Savings.pdf","043025 WellsFargo_Savings.pdf","053125 WellsFargo_Savings.pdf",
-        "063025 WellsFargo_Savings.pdf","073125 WellsFargo_Savings.pdf","083125 WellsFargo_Savings.pdf",
-        "093025 WellsFargo_Savings.pdf","103125 WellsFargo_Savings.pdf","113025 WellsFargo_Savings.pdf",
-        "123125 WellsFargo_Savings.pdf"
-      ]
-    },
-    {
-      bank: "Capital One",
-      acct: "Business",
-      folder: "capital one business",
-      files: [
-        "2025-01 CapitalOne_Business.pdf","2025-02 CapitalOne_Business.pdf","2025-03 CapitalOne_Business.pdf",
-        "2025-04 CapitalOne_Business.pdf","2025-05 CapitalOne_Business.pdf","2025-06 CapitalOne_Business.pdf",
-        "2025-07 CapitalOne_Business.pdf","2025-08 CapitalOne_Business.pdf","2025-09 CapitalOne_Business.pdf",
-        "2025-10 CapitalOne_Business.pdf","2025-11 CapitalOne_Business.pdf","2025-12 CapitalOne_Business.pdf"
-      ]
-    },
-    {
-      bank: "Capital One",
-      acct: "360 Personal",
-      folder: "capital one 360",
-      files: [
-        "2025-01 CapitalOne360.pdf","2025-02 CapitalOne360.pdf",
-        "2025-03 CapitalOne360.pdf","2025-04 CapitalOne360.pdf"
-      ]
-    },
-    {
-      bank: "PayPal",
-      acct: "Merchant",
-      folder: "paypal",
-      files: [
-        "2025-05 PayPal.pdf","2025-06 PayPal.pdf","2025-07 PayPal.pdf",
-        "2025-08 PayPal.pdf","2025-09 PayPal.pdf"
-      ]
-    }
+    {bank:"Wells Fargo",acct:"Operating",folder:"wells operating",files:["123124 WellsFargo.pdf","013125 WellsFargo.pdf","022825 WellsFargo.pdf","033125 WellsFargo.pdf","043025 WellsFargo.pdf","053125 WellsFargo.pdf","063025 WellsFargo.pdf","073125 WellsFargo.pdf","083125 WellsFargo.pdf","093025 WellsFargo.pdf","103125 WellsFargo.pdf","113025 WellsFargo.pdf","123125 WellsFargo.pdf"]},
+    {bank:"Wells Fargo",acct:"Savings",folder:"wells savings",files:["123124 WellsFargo_Savings.pdf","013125 WellsFargo_Savings.pdf","022825 WellsFargo_Savings.pdf","033125 WellsFargo_Savings.pdf","043025 WellsFargo_Savings.pdf","053125 WellsFargo_Savings.pdf","063025 WellsFargo_Savings.pdf","073125 WellsFargo_Savings.pdf","083125 WellsFargo_Savings.pdf","093025 WellsFargo_Savings.pdf","103125 WellsFargo_Savings.pdf","113025 WellsFargo_Savings.pdf","123125 WellsFargo_Savings.pdf"]},
+    {bank:"Capital One",acct:"Business",folder:"capital one business",files:["2025-01 CapitalOne_Business.pdf","2025-02 CapitalOne_Business.pdf","2025-03 CapitalOne_Business.pdf","2025-04 CapitalOne_Business.pdf","2025-05 CapitalOne_Business.pdf","2025-06 CapitalOne_Business.pdf","2025-07 CapitalOne_Business.pdf","2025-08 CapitalOne_Business.pdf","2025-09 CapitalOne_Business.pdf","2025-10 CapitalOne_Business.pdf","2025-11 CapitalOne_Business.pdf","2025-12 CapitalOne_Business.pdf"]},
+    {bank:"Capital One",acct:"360 Personal",folder:"capital one 360",files:["2025-01 CapitalOne360.pdf","2025-02 CapitalOne360.pdf","2025-03 CapitalOne360.pdf","2025-04 CapitalOne360.pdf"]},
+    {bank:"PayPal",acct:"Merchant",folder:"paypal",files:["2025-05 PayPal.pdf","2025-06 PayPal.pdf","2025-07 PayPal.pdf","2025-08 PayPal.pdf","2025-09 PayPal.pdf"]}
   ];
 
   const totalAssure = assureGroups.reduce((sum,g) => sum + g.files.length, 0);
@@ -6200,7 +6237,7 @@ a[href^="http"]:after {
     if (!assureMount) return;
     const q = filter.trim().toLowerCase();
 
-    assureMount.innerHTML = assureGroups.map((g, idx) => {
+    assureMount.innerHTML = assureGroups.map((g) => {
       const safeFolder = encPath(`${BASE_ASSURE}/${g.folder}`);
       const rows = g.files.map(file => {
         const href = `${safeFolder}/${encodeURIComponent(file)}`;
@@ -6213,43 +6250,14 @@ a[href^="http"]:after {
 
       const htmlRows = rows.map(x => {
         if (assureUnlocked) {
-          return `
-            <a class="stmt-row" href="${x.href}" target="_blank" rel="noopener">
-              <div class="stmt-left">
-                <div class="stmt-name">${x.label}</div>
-                <div class="stmt-meta">${x.file}</div>
-              </div>
-              <div class="stmt-open">Open PDF ↗</div>
-            </a>
-          `;
+          return `<a class="stmt-row" href="${x.href}" target="_blank" rel="noopener"><div class="stmt-left"><div class="stmt-name">${x.label}</div><div class="stmt-meta">${x.file}</div></div><div class="stmt-open">Open PDF ↗</div></a>`;
         } else {
-          return `
-            <div class="stmt-row" style="opacity:0.6; cursor:not-allowed; pointer-events:none;">
-              <div class="stmt-left">
-                <div class="stmt-name">${x.label}</div>
-                <div class="stmt-meta">${x.file}</div>
-              </div>
-              <div class="stmt-open" style="opacity:0.5;">🔒 Locked</div>
-            </div>
-          `;
+          return `<div class="stmt-row" style="opacity:0.6;cursor:not-allowed;pointer-events:none;"><div class="stmt-left"><div class="stmt-name">${x.label}</div><div class="stmt-meta">${x.file}</div></div><div class="stmt-open" style="opacity:0.5;">🔒 Locked</div></div>`;
         }
       }).join("");
 
-      // ✅ FIXED: All folders closed by default, only open when searching
       const openDefault = q ? "open" : "";
-
-      return `
-        <details class="stmt-group" ${openDefault}>
-          <summary>
-            <div class="stmt-group-title">
-              <strong>${g.bank}</strong>
-              <span>${g.acct} • ${g.folder}</span>
-            </div>
-            <div class="stmt-count">${rows.length} PDF${rows.length===1?"":"s"}</div>
-          </summary>
-          <div class="stmt-list">${htmlRows}</div>
-        </details>
-      `;
+      return `<details class="stmt-group" ${openDefault}><summary><div class="stmt-group-title"><strong>${g.bank}</strong><span>${g.acct} • ${g.folder}</span></div><div class="stmt-count">${rows.length} PDF${rows.length===1?"":"s"}</div></summary><div class="stmt-list">${htmlRows}</div></details>`;
     }).join("") || `<div class="tiny-note" style="padding:10px 2px;">No statements match your search.</div>`;
   }
 
@@ -6257,52 +6265,19 @@ a[href^="http"]:after {
   updateAssureLockUI();
   assureSearch?.addEventListener("input", (e) => renderAssureIndex(e.target.value));
 
-  /* ============================================================
-     J&J — BANK STATEMENTS INDEX BUILDER
-  ============================================================ */
+  // ============================================================
+  // J&J STATEMENTS
+  // ============================================================
   const jjMount = document.getElementById("stmtIndex");
   const jjSearch = document.getElementById("stmtSearch");
   const jjMeta = document.getElementById("stmtMetaPill");
-
   const BASE_JJ = "jandjstatements";
 
   const jjGroups = [
-    {
-      bank: "Capital One",
-      acct: "Operating (…0489)",
-      folder: "CAP OPERATING",
-      files: ["J_and_J_Operating...0489_DEC_2025 (3).pdf"]
-    },
-    {
-      bank: "Capital One",
-      acct: "Savings (…7312)",
-      folder: "cap savings",
-      files: ["J_and_J_Savings...7312_DEC_2025 (1).pdf"]
-    },
-    {
-      bank: "Wells Fargo",
-      acct: "Operating",
-      folder: "wells  operating",
-      files: [
-        "123124 WellsFargo.pdf","013125 WellsFargo.pdf","022825 WellsFargo.pdf",
-        "033125 WellsFargo.pdf","043025 WellsFargo.pdf","053125 WellsFargo.pdf",
-        "063025 WellsFargo.pdf","073125 WellsFargo.pdf","083125 WellsFargo.pdf",
-        "093025 WellsFargo.pdf","103125 WellsFargo.pdf","113025 WellsFargo.pdf",
-        "123125 WellsFargo.pdf"
-      ]
-    },
-    {
-      bank: "Wells Fargo",
-      acct: "Savings",
-      folder: "wells savings",
-      files: [
-        "123124 WellsFargo (1).pdf","013125 WellsFargo.pdf","022825 WellsFargo.pdf",
-        "033125 WellsFargo.pdf","043025 WellsFargo.pdf","053125 WellsFargo.pdf",
-        "063025 WellsFargo.pdf","073125 WellsFargo.pdf","083125 WellsFargo.pdf",
-        "093025 WellsFargo.pdf","103125 WellsFargo.pdf","113025 WellsFargo.pdf",
-        "123125 WellsFargo.pdf"
-      ]
-    }
+    {bank:"Capital One",acct:"Operating (…0489)",folder:"CAP OPERATING",files:["J_and_J_Operating...0489_DEC_2025 (3).pdf"]},
+    {bank:"Capital One",acct:"Savings (…7312)",folder:"cap savings",files:["J_and_J_Savings...7312_DEC_2025 (1).pdf"]},
+    {bank:"Wells Fargo",acct:"Operating",folder:"wells  operating",files:["123124 WellsFargo.pdf","013125 WellsFargo.pdf","022825 WellsFargo.pdf","033125 WellsFargo.pdf","043025 WellsFargo.pdf","053125 WellsFargo.pdf","063025 WellsFargo.pdf","073125 WellsFargo.pdf","083125 WellsFargo.pdf","093025 WellsFargo.pdf","103125 WellsFargo.pdf","113025 WellsFargo.pdf","123125 WellsFargo.pdf"]},
+    {bank:"Wells Fargo",acct:"Savings",folder:"wells savings",files:["123124 WellsFargo (1).pdf","013125 WellsFargo.pdf","022825 WellsFargo.pdf","033125 WellsFargo.pdf","043025 WellsFargo.pdf","053125 WellsFargo.pdf","063025 WellsFargo.pdf","073125 WellsFargo.pdf","083125 WellsFargo.pdf","093025 WellsFargo.pdf","103125 WellsFargo.pdf","113025 WellsFargo.pdf","123125 WellsFargo.pdf"]}
   ];
 
   const totalJJ = jjGroups.reduce((sum,g) => sum + g.files.length, 0);
@@ -6312,7 +6287,7 @@ a[href^="http"]:after {
     if (!jjMount) return;
     const q = filter.trim().toLowerCase();
 
-    jjMount.innerHTML = jjGroups.map((g, idx) => {
+    jjMount.innerHTML = jjGroups.map((g) => {
       const safeFolder = encPath(`${BASE_JJ}/${g.folder}`);
       const rows = g.files.map(file => {
         const href = `${safeFolder}/${encodeURIComponent(file)}`;
@@ -6323,209 +6298,36 @@ a[href^="http"]:after {
 
       if (q && rows.length === 0) return "";
 
-      const htmlRows = rows.map(x => `
-        <a class="stmt-row" href="${x.href}" target="_blank" rel="noopener">
-          <div class="stmt-left">
-            <div class="stmt-name">${x.label}</div>
-            <div class="stmt-meta">${x.file}</div>
-          </div>
-          <div class="stmt-open">Open PDF ↗</div>
-        </a>
-      `).join("");
-
-      // ✅ FIXED: All folders closed by default, only open when searching
+      const htmlRows = rows.map(x => `<a class="stmt-row" href="${x.href}" target="_blank" rel="noopener"><div class="stmt-left"><div class="stmt-name">${x.label}</div><div class="stmt-meta">${x.file}</div></div><div class="stmt-open">Open PDF ↗</div></a>`).join("");
       const openDefault = q ? "open" : "";
-
-      return `
-        <details class="stmt-group" ${openDefault}>
-          <summary>
-            <div class="stmt-group-title">
-              <strong>${g.bank}</strong>
-              <span>${g.acct} • ${g.folder}</span>
-            </div>
-            <div class="stmt-count">${rows.length} PDF${rows.length===1?"":"s"}</div>
-          </summary>
-          <div class="stmt-list">${htmlRows}</div>
-        </details>
-      `;
+      return `<details class="stmt-group" ${openDefault}><summary><div class="stmt-group-title"><strong>${g.bank}</strong><span>${g.acct} • ${g.folder}</span></div><div class="stmt-count">${rows.length} PDF${rows.length===1?"":"s"}</div></summary><div class="stmt-list">${htmlRows}</div></details>`;
     }).join("") || `<div class="tiny-note" style="padding:10px 2px;">No statements match your search.</div>`;
   }
-      
-renderJJIndex();
+
+  renderJJIndex();
   jjSearch?.addEventListener("input", (e) => renderJJIndex(e.target.value));
 
- /* ============================================================
-   PAYMENT CALCULATOR — FIXED & ENHANCED
-============================================================ */
-(function initCalculator() {
-  const calcBalance = document.getElementById('calcBalance');
-  const calcBalanceDisplay = document.getElementById('calcBalanceDisplay');
-  const calcInterest = document.getElementById('calcInterest');
-  const calcTotal = document.getElementById('calcTotal');
-  const calcAnnualInterest = document.getElementById('calcAnnualInterest');
-  const calcYear1Total = document.getElementById('calcYear1Total');
-  const calcRemainingBalance = document.getElementById('calcRemainingBalance');
-  const paymentChart = document.getElementById('paymentChart');
-
-  // Check if calculator exists on page
-  if (!calcBalance || !calcBalanceDisplay) {
-    console.log('Calculator elements not found on this page');
-    return;
-  }
-
-  const PRINCIPAL_MONTHLY = 4375; // Fixed
-  const INTEREST_RATE = 0.08;
-  const ORIGINAL_LOAN = 1050000;
-
-  function formatCurrency(num) {
-    return num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-  }
-
-  function updateCalculator() {
-    const balance = parseFloat(calcBalance.value) || ORIGINAL_LOAN;
-    const interestMonthly = (balance * INTEREST_RATE / 12);
-    const totalMonthly = interestMonthly + PRINCIPAL_MONTHLY;
-    const annualInterest = interestMonthly * 12;
-    const annualPrincipal = PRINCIPAL_MONTHLY * 12;
-    const annualTotal = totalMonthly * 12;
-    const remainingAfterYear = Math.max(0, balance - annualPrincipal);
-
-    // Update all displays
-    if (calcBalanceDisplay) calcBalanceDisplay.textContent = formatCurrency(balance);
-    if (calcInterest) calcInterest.textContent = '$' + formatCurrency(Math.round(interestMonthly));
-    if (calcTotal) calcTotal.textContent = '$' + formatCurrency(Math.round(totalMonthly));
-    if (calcAnnualInterest) calcAnnualInterest.textContent = '$' + formatCurrency(Math.round(annualInterest));
-    if (calcYear1Total) calcYear1Total.textContent = '$' + formatCurrency(Math.round(annualTotal));
-    if (calcRemainingBalance) calcRemainingBalance.textContent = '$' + formatCurrency(Math.round(remainingAfterYear));
-
-    // Update chart
-    renderPaymentChart(balance);
-  }
-
-  function renderPaymentChart(startingBalance) {
-    if (!paymentChart) return;
-
-    let balance = startingBalance;
-    const months = [];
+  // ============================================================
+  // SCROLL PROGRESS BAR
+  // ============================================================
+  const progressBar = document.getElementById('progressBar');
+  const scrollProgress = document.getElementById('scrollProgress');
+  
+  if (progressBar && scrollProgress) {
+    const updateProgress = () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      progressBar.style.width = scrolled + '%';
+      scrollProgress.setAttribute('aria-valuenow', Math.round(scrolled));
+    };
     
-    // Calculate 12 months of payments
-    for (let i = 1; i <= 12; i++) {
-      const interest = (balance * INTEREST_RATE / 12);
-      const total = interest + PRINCIPAL_MONTHLY;
-      months.push({ 
-        month: i, 
-        interest: interest, 
-        principal: PRINCIPAL_MONTHLY, 
-        total: total, 
-        balance: balance 
-      });
-      balance = Math.max(0, balance - PRINCIPAL_MONTHLY);
-    }
-
-    const maxPayment = months[0].total;
-
-    // Generate bars
-    const bars = months.map((m, idx) => {
-      const interestPct = (m.interest / maxPayment) * 100;
-      const principalPct = (m.principal / maxPayment) * 100;
-      
-      return `
-        <div style="
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 6px;
-          min-width: 0;
-        ">
-          <div style="
-            font-size: 11px;
-            color: var(--t3);
-            font-weight: 700;
-            margin-bottom: 4px;
-          ">$${formatCurrency(Math.round(m.total))}</div>
-          
-          <div style="
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            height: 120px;
-            gap: 0;
-            position: relative;
-          ">
-            <!-- Interest (top) -->
-            <div class="chart-bar" style="
-              width: 100%;
-              height: ${interestPct}%;
-              background: linear-gradient(180deg, #5da3ff, #3b82ff);
-              border-radius: 6px 6px 0 0;
-              opacity: 0.85;
-              transition: opacity 0.2s;
-              cursor: pointer;
-            " 
-            onmouseover="this.style.opacity='1'" 
-            onmouseout="this.style.opacity='0.85'"
-            title="Month ${m.month} Interest: $${formatCurrency(Math.round(m.interest))}"></div>
-            
-            <!-- Principal (bottom) -->
-            <div class="chart-bar" style="
-              width: 100%;
-              height: ${principalPct}%;
-              background: linear-gradient(180deg, #d4af5e, #c9a75a);
-              border-radius: 0 0 6px 6px;
-              opacity: 0.85;
-              transition: opacity 0.2s;
-              cursor: pointer;
-            "
-            onmouseover="this.style.opacity='1'" 
-            onmouseout="this.style.opacity='0.85'"
-            title="Month ${m.month} Principal: $${formatCurrency(Math.round(m.principal))}"></div>
-          </div>
-          
-          <div style="
-            font-size: 10px;
-            color: var(--t4);
-            font-weight: 600;
-          ">M${m.month}</div>
-        </div>
-      `;
-    }).join('');
-
-    paymentChart.innerHTML = `
-      <div style="
-        display: flex;
-        gap: 6px;
-        height: 100%;
-        align-items: flex-end;
-        justify-content: space-between;
-      ">
-        ${bars}
-      </div>
-    `;
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
   }
 
-  // Initialize calculator
-  console.log('Calculator initialized successfully');
-  updateCalculator();
-
-  // Update on slider change
-  if (calcBalance) {
-    calcBalance.addEventListener('input', updateCalculator);
-    console.log('Calculator event listener attached');
-  }
-
-  // Smooth animation on load
-  setTimeout(() => {
-    if (paymentChart) {
-      const bars = paymentChart.querySelectorAll('.chart-bar');
-      bars.forEach((bar, idx) => {
-        bar.style.animationDelay = `${idx * 0.05}s`;
-      });
-    }
-  }, 100);
-})();
-
-})();  // ← Main IIFE closes HERE
+  console.log('All systems initialized');
+});
 </script>
 </body>
 </html>
