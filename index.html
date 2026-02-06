@@ -5985,7 +5985,7 @@ input[type="range"]::-moz-range-thumb:active {
 ============================================================ */
 
 // ============================================================
-// EXECUTIVE ONE-PAGER PRINT FUNCTION - NEW WINDOW METHOD (100% RELIABLE)
+// EXECUTIVE ONE-PAGER PRINT FUNCTION - PROFESSIONAL HIGH-CONTRAST VERSION
 // ============================================================
 window.printOnePager = function() {
   console.log('🖨️ Print one-pager initiated');
@@ -6022,14 +6022,14 @@ window.printOnePager = function() {
   if (printBtn) printBtn.remove();
   
   // Create new window
-  const printWindow = window.open('', '_blank', 'width=800,height=600');
+  const printWindow = window.open('', '_blank', 'width=900,height=700');
   
   if (!printWindow) {
     alert('Please allow pop-ups to print the one-pager');
     return;
   }
   
-// Write complete HTML document to new window
+  // Write complete HTML document to new window
   printWindow.document.write(`
     <!DOCTYPE html>
     <html lang="en">
@@ -6037,324 +6037,275 @@ window.printOnePager = function() {
       <meta charset="utf-8">
       <title>J&J Investments - Executive One-Pager</title>
       <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&display=swap" rel="stylesheet">
       <style>
         * {
           box-sizing: border-box;
           margin: 0;
           padding: 0;
-          color: #000 !important;
           -webkit-print-color-adjust: exact !important;
           print-color-adjust: exact !important;
+          color-adjust: exact !important;
         }
         
         body {
           font-family: 'Inter', system-ui, -apple-system, sans-serif;
-          background: white !important;
-          color: #000 !important;
-          padding: 14mm 16mm;
-          line-height: 1.4;
-          font-size: 12px;
-          font-weight: 500;
+          background: #ffffff;
+          color: #000000;
+          padding: 16mm 18mm;
+          line-height: 1.45;
+          font-size: 11.5px;
+          font-weight: 600;
         }
         
-        /* Force ALL text elements to pure black */
-        h1, h2, h3, h4, h5, h6,
-        p, span, div, li, td, th,
-        strong, b, em, i, a,
-        .sum-title, .sum-sub,
-        .callout-title, .callout-body,
-        .kpi-label, .kpi-value, .kpi-sub {
-          color: #000 !important;
+        /* FORCE EVERYTHING TO PRINT IN COLOR */
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        
+        /* ===== HEADER SECTION ===== */
+        [style*="text-align: center"][style*="margin-bottom: 28px"] {
+          text-align: center;
+          margin-bottom: 14px !important;
+          padding-bottom: 12px !important;
+          border-bottom: 3px solid #000 !important;
+        }
+        
+        h2[style*="font-size: 26px"] {
+          font-size: 26px !important;
+          font-weight: 900 !important;
+          color: #000000 !important;
+          margin-bottom: 6px !important;
+          letter-spacing: -0.02em !important;
+        }
+        
+        /* Date and URL line */
+        [style*="color: var(--t3)"][style*="font-size: 14px"] {
+          color: #333333 !important;
+          font-size: 12px !important;
           font-weight: 600 !important;
         }
         
-        /* Headings - extra bold and black */
-        h2 {
-          font-size: 24px !important;
-          margin-bottom: 8px !important;
-          line-height: 1.2 !important;
-          font-weight: 900 !important;
-          color: #000 !important;
+        /* ===== THREE COLUMN GRID ===== */
+        [style*="grid-template-columns: repeat(3, 1fr)"][style*="gap: 24px"] {
+          display: grid !important;
+          grid-template-columns: repeat(3, 1fr) !important;
+          gap: 16px !important;
+          margin-bottom: 16px !important;
         }
         
-        h3 {
-          font-size: 16px !important;
-          margin-bottom: 12px !important;
-          line-height: 1.3 !important;
-          font-weight: 800 !important;
-          color: #000 !important;
+        /* THE ASK - Gold Column */
+        [style*="grid-template-columns: repeat(3, 1fr)"] > div:nth-child(1) {
+          padding: 16px !important;
+          border-radius: 10px !important;
+          border: 2px solid #CC9933 !important;
+          background: linear-gradient(180deg, #FFF9E6 0%, #FFFFFF 100%) !important;
         }
         
-        h4 {
+        /* PURPOSE - Blue Column */
+        [style*="grid-template-columns: repeat(3, 1fr)"] > div:nth-child(2) {
+          padding: 16px !important;
+          border-radius: 10px !important;
+          border: 2px solid #4A90E2 !important;
+          background: linear-gradient(180deg, #E8F4FF 0%, #FFFFFF 100%) !important;
+        }
+        
+        /* SECURITY - Gray Column */
+        [style*="grid-template-columns: repeat(3, 1fr)"] > div:nth-child(3) {
+          padding: 16px !important;
+          border-radius: 10px !important;
+          border: 2px solid #666666 !important;
+          background: linear-gradient(180deg, #F5F5F5 0%, #FFFFFF 100%) !important;
+        }
+        
+        /* Column Headers (💰 THE ASK, 🎯 PURPOSE, 🏠 SECURITY) */
+        h3[style*="text-transform: uppercase"] {
           font-size: 14px !important;
-          margin-bottom: 10px !important;
-          line-height: 1.3 !important;
+          font-weight: 900 !important;
+          letter-spacing: 0.1em !important;
+          text-transform: uppercase !important;
+          margin-bottom: 14px !important;
+          padding-bottom: 10px !important;
+          border-bottom: 2px solid currentColor !important;
+        }
+        
+        /* THE ASK header color */
+        [style*="color: var(--gold2)"][style*="text-transform: uppercase"] {
+          color: #B8860B !important;
+        }
+        
+        /* PURPOSE header color */
+        [style*="color: #5da3ff"][style*="text-transform: uppercase"] {
+          color: #2E5C8A !important;
+        }
+        
+        /* SECURITY header color */
+        h3[style*="text-transform: uppercase"]:not([style*="color: var(--gold2)"]):not([style*="color: #5da3ff"]) {
+          color: #333333 !important;
+        }
+        
+        /* Small labels (REQUESTED COMMITMENT, etc) */
+        [style*="font-size: 11px"][style*="text-transform: uppercase"] {
+          font-size: 9px !important;
           font-weight: 800 !important;
-          color: #000 !important;
+          letter-spacing: 0.08em !important;
+          color: #555555 !important;
+          text-transform: uppercase !important;
+          margin-bottom: 4px !important;
+        }
+        
+        /* Large dollar amounts */
+        [style*="font-size: 32px"],
+        [style*="font-size: 24px"] {
+          font-size: 28px !important;
+          font-weight: 900 !important;
+          color: #000000 !important;
+          letter-spacing: -0.03em !important;
+          line-height: 1.1 !important;
+        }
+        
+        /* Medium numbers (8% annual, etc) */
+        [style*="font-size: 20px"] {
+          font-size: 18px !important;
+          font-weight: 800 !important;
+          color: #000000 !important;
+        }
+        
+        /* Descriptive text */
+        [style*="font-size: 14px"][style*="line-height: 1.4"],
+        [style*="font-size: 13px"],
+        [style*="font-size: 12px"] {
+          font-size: 11px !important;
+          font-weight: 600 !important;
+          color: #1a1a1a !important;
+          line-height: 1.5 !important;
         }
         
         /* Strong/bold text */
         strong, b {
-          font-weight: 800 !important;
-          color: #000 !important;
+          font-weight: 900 !important;
+          color: #000000 !important;
         }
         
-        /* Labels and metadata - dark gray instead of light gray */
-        [style*="color: var(--t4)"],
-        [style*="color: rgba(238,241,248,.58)"],
-        [style*="opacity:.78"],
-        [style*="opacity:.82"] {
-          color: #333 !important;
-          opacity: 1 !important;
-          font-weight: 600 !important;
-        }
-        
-        /* Secondary text - medium gray instead of light */
-        [style*="color: var(--t3)"],
-        [style*="color: rgba(238,241,248,.74)"] {
-          color: #222 !important;
-          opacity: 1 !important;
-          font-weight: 500 !important;
-        }
-        
-        /* Primary text - pure black */
-        [style*="color: var(--t1)"],
-        [style*="color: var(--t2)"],
-        [style*="color: rgba(238,241,248,1.00)"],
-        [style*="color: rgba(238,241,248,.88)"] {
-          color: #000 !important;
-          opacity: 1 !important;
-        }
-        
-        /* Preserve structure */
-        [style*="display: grid"] {
-          display: grid !important;
-        }
-        
-        [style*="display: flex"] {
-          display: flex !important;
-        }
-        
-        /* Adjust spacing to fill page */
-        [style*="margin-bottom: 28px"] {
-          margin-bottom: 18px !important;
-        }
-        
-        [style*="margin-bottom: 24px"] {
+        /* ===== PAYMENT SOURCES BAR ===== */
+        [style*="margin-bottom: 24px"]:has([style*="Monthly Payment Sources"]) {
+          padding: 14px !important;
+          border-radius: 10px !important;
+          border: 2px solid #4A90E2 !important;
+          background: linear-gradient(180deg, #E8F4FF 0%, #FFFFFF 100%) !important;
           margin-bottom: 16px !important;
         }
         
-        [style*="margin-bottom: 20px"] {
-          margin-bottom: 14px !important;
-        }
-        
-        [style*="margin-bottom: 16px"] {
+        h4[style*="font-size: 16px"] {
+          font-size: 14px !important;
+          font-weight: 900 !important;
+          color: #000000 !important;
           margin-bottom: 12px !important;
         }
         
-        [style*="margin-bottom: 14px"] {
-          margin-bottom: 11px !important;
-        }
-        
-        [style*="margin-bottom: 12px"] {
-          margin-bottom: 10px !important;
-        }
-        
-        [style*="padding: 32px 28px"] {
-          padding: 18px 20px !important;
-        }
-        
-        [style*="padding: 20px"] {
-          padding: 14px !important;
-        }
-        
-        [style*="padding: 16px 20px"] {
-          padding: 12px 14px !important;
-        }
-        
-        [style*="padding: 16px"] {
-          padding: 12px !important;
-        }
-        
-        [style*="gap: 24px"] {
-          gap: 16px !important;
-        }
-        
-        [style*="gap: 16px"] {
+        /* Payment amount grid */
+        [style*="grid-template-columns: repeat(3, 1fr)"][style*="gap: 16px"] {
+          display: grid !important;
+          grid-template-columns: repeat(3, 1fr) !important;
           gap: 12px !important;
         }
         
-        [style*="gap: 14px"] {
-          gap: 11px !important;
+        /* ===== KEY HIGHLIGHTS BOX ===== */
+        [style*="border: 1px solid rgba(212,175,94,.25)"] {
+          padding: 14px 16px !important;
+          border-radius: 10px !important;
+          border: 2px solid #CC9933 !important;
+          background: linear-gradient(180deg, #FFF9E6 0%, #FFFFFF 100%) !important;
         }
         
-        [style*="gap: 12px"] {
-          gap: 10px !important;
-        }
-        
-        /* Scale font sizes proportionally */
-        [style*="font-size: 32px"] {
-          font-size: 26px !important;
-          line-height: 1.2 !important;
+        h4[style*="color: var(--gold2)"] {
+          font-size: 13px !important;
           font-weight: 900 !important;
+          color: #B8860B !important;
+          margin-bottom: 10px !important;
         }
         
-        [style*="font-size: 26px"] {
-          font-size: 22px !important;
-          line-height: 1.2 !important;
-          font-weight: 900 !important;
-        }
-        
-        [style*="font-size: 24px"] {
-          font-size: 20px !important;
-          line-height: 1.2 !important;
-          font-weight: 800 !important;
-        }
-        
-        [style*="font-size: 20px"] {
-          font-size: 16px !important;
-          line-height: 1.3 !important;
-          font-weight: 700 !important;
-        }
-        
-        [style*="font-size: 18px"] {
-          font-size: 15px !important;
-          line-height: 1.3 !important;
-          font-weight: 700 !important;
-        }
-        
-        [style*="font-size: 16px"] {
-          font-size: 14px !important;
-          line-height: 1.4 !important;
-          font-weight: 600 !important;
-        }
-        
-        [style*="font-size: 14px"] {
-          font-size: 12px !important;
-          line-height: 1.4 !important;
-          font-weight: 600 !important;
-        }
-        
-        [style*="font-size: 13px"] {
-          font-size: 11.5px !important;
-          line-height: 1.4 !important;
-          font-weight: 500 !important;
-        }
-        
-        [style*="font-size: 12px"] {
-          font-size: 11px !important;
-          line-height: 1.4 !important;
-          font-weight: 500 !important;
-        }
-        
-        [style*="font-size: 11px"] {
-          font-size: 10px !important;
-          line-height: 1.4 !important;
-          font-weight: 500 !important;
-        }
-        
-        /* Gold accents - dark amber for print visibility */
-        .gold,
-        [style*="color: var(--gold"],
-        [style*="color:#d4af5e"],
-        [style*="color: #d4af5e"],
-        [style*="color: rgb(212, 175, 94)"],
-        [style*="color: #f5dfa0"],
-        [style*="color: rgba(212,175,94"] {
-          color: #855C00 !important;
-          font-weight: 700 !important;
-        }
-        
-        /* Borders - dark and visible */
-        [style*="border:"],
-        [style*="border-bottom:"],
-        [style*="border-top:"] {
-          border-color: #666 !important;
-        }
-        
-        /* Backgrounds - subtle but visible */
-        [style*="background: linear-gradient"],
-        [style*="background: rgba"] {
-          background: #f5f5f5 !important;
-          border: 1px solid #ccc !important;
-        }
-        
-        /* Panel styling */
-        .panel-head {
-          border-bottom: 2px solid #666 !important;
-          padding-bottom: 12px !important;
-        }
-        
-        /* Lists */
+        /* Bullet list */
         ul {
-          margin: 8px 0 !important;
+          margin: 0 !important;
           padding-left: 18px !important;
+          list-style-type: disc !important;
         }
         
         li {
-          margin-bottom: 4px !important;
-          line-height: 1.5 !important;
-          font-weight: 500 !important;
-          color: #000 !important;
+          margin-bottom: 5px !important;
+          font-size: 11px !important;
+          font-weight: 600 !important;
+          color: #000000 !important;
+          line-height: 1.6 !important;
         }
         
-        /* Adjust border radius for print */
-        [style*="border-radius"] {
-          border-radius: 8px !important;
+        li strong {
+          font-weight: 900 !important;
+          color: #000000 !important;
         }
         
-        /* Make sure grids have appropriate gaps */
-        [style*="grid-template-columns: repeat(3"] {
-          gap: 14px !important;
+        /* ===== FOOTER ===== */
+        [style*="margin-top: 24px"][style*="border-top: 2px"] {
+          margin-top: 16px !important;
+          padding-top: 12px !important;
+          border-top: 2px solid #000000 !important;
+          text-align: center !important;
+          font-size: 10px !important;
+          font-weight: 600 !important;
+          color: #333333 !important;
+          line-height: 1.6 !important;
         }
         
-        /* Print setup */
+        [style*="margin-top: 24px"][style*="border-top: 2px"] strong {
+          font-weight: 900 !important;
+          color: #000000 !important;
+        }
+        
+        /* ===== BORDERS AND DIVIDERS ===== */
+        [style*="border-bottom: 2px solid"] {
+          border-bottom-color: #000000 !important;
+        }
+        
+        [style*="border: 1px solid"] {
+          border-width: 2px !important;
+        }
+        
+        /* ===== PRINT SETUP ===== */
         @page {
           size: letter portrait;
-          margin: 0.45in 0.5in;
+          margin: 0.5in;
         }
         
         @media print {
           * {
-            color: #000 !important;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
+            color-adjust: exact !important;
           }
           
           body {
             padding: 0 !important;
-            background: white !important;
-            font-weight: 500 !important;
+            background: #ffffff !important;
           }
           
-          h1, h2, h3, h4, h5, h6 {
-            color: #000 !important;
-            font-weight: 900 !important;
+          /* Force colored backgrounds to print */
+          [style*="background: linear-gradient"] {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
           }
           
-          strong, b {
-            font-weight: 800 !important;
+          /* Force borders to print */
+          [style*="border:"],
+          [style*="border-top:"],
+          [style*="border-bottom:"] {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
           }
           
-          .gold,
-          [style*="color: var(--gold"],
-          [style*="color:#d4af5e"],
-          [style*="color: #d4af5e"],
-          [style*="color: rgb(212, 175, 94)"] {
-            color: #855C00 !important;
-            font-weight: 700 !important;
-          }
-          
-          /* Force single page */
           .panel {
             page-break-inside: avoid !important;
-          }
-          
-          /* Prevent orphans and widows */
-          p, li, div {
-            orphans: 3;
-            widows: 3;
           }
         }
       </style>
@@ -6364,6 +6315,24 @@ window.printOnePager = function() {
     </body>
     </html>
   `);
+  
+  printWindow.document.close();
+  
+  // Wait for content to load, then print
+  printWindow.onload = function() {
+    setTimeout(() => {
+      printWindow.focus();
+      printWindow.print();
+      
+      // Close window after printing
+      setTimeout(() => {
+        printWindow.close();
+      }, 500);
+    }, 250);
+  };
+  
+  console.log('✅ Print window opened');
+};
   
   printWindow.document.close();
   
