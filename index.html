@@ -6876,94 +6876,202 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('scroll', onScroll, { passive: true });
   upBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // ============================================================
-  // PAYMENT CALCULATOR - ENHANCED & FIXED
-  // ============================================================
-  const calcBalance = document.getElementById('calcBalance');
-  const calcBalanceDisplay = document.getElementById('calcBalanceDisplay');
-  const calcInterest = document.getElementById('calcInterest');
-  const calcTotal = document.getElementById('calcTotal');
-  const calcAnnualInterest = document.getElementById('calcAnnualInterest');
-  const calcYear1Total = document.getElementById('calcYear1Total');
-  const calcRemainingBalance = document.getElementById('calcRemainingBalance');
-  const paymentChart = document.getElementById('paymentChart');
-
-  if (calcBalance && calcBalanceDisplay) {
-    console.log('Calculator elements found - initializing');
-    
-    const PRINCIPAL_MONTHLY = 4375;
-    const INTEREST_RATE = 0.08;
-    const ORIGINAL_LOAN = 1050000;
-
-    function formatCurrency(num) {
-      return num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-    }
-
-    function updateCalculator() {
-      const balance = parseFloat(calcBalance.value) || ORIGINAL_LOAN;
-      const interestMonthly = (balance * INTEREST_RATE / 12);
-      const totalMonthly = interestMonthly + PRINCIPAL_MONTHLY;
+ // ============================================================
+// PAYMENT CALCULATOR - COMPLETE REWRITE
+// ============================================================
+(function initializeCalculator() {
+  console.log('🧮 Initializing Payment Calculator...');
+  
+  // Find all calculator elements
+  const elements = {
+    slider: document.getElementById('calcBalance'),
+    balanceDisplay: document.getElementById('calcBalanceDisplay'),
+    interest: document.getElementById('calcInterest'),
+    total: document.getElementById('calcTotal'),
+    annualInterest: document.getElementById('calcAnnualInterest'),
+    year1Total: document.getElementById('calcYear1Total'),
+    remainingBalance: document.getElementById('calcRemainingBalance'),
+    chart: document.getElementById('paymentChart')
+  };
+  
+  // Debug: Show what we found
+  console.log('Calculator elements found:', {
+    slider: !!elements.slider,
+    balanceDisplay: !!elements.balanceDisplay,
+    interest: !!elements.interest,
+    total: !!elements.total,
+    chart: !!elements.chart
+  });
+  
+  // Check if we have minimum required elements
+  if (!elements.slider || !elements.balanceDisplay) {
+    console.error('❌ Calculator missing required elements (slider or display)');
+    return;
+  }
+  
+  // Calculator constants
+  const PRINCIPAL_MONTHLY = 4375;
+  const INTEREST_RATE = 0.08;
+  const ORIGINAL_LOAN = 1050000;
+  
+  // Utility: Format numbers as currency
+  function formatCurrency(num) {
+    return num.toLocaleString('en-US', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    });
+  }
+  
+  // Main calculation function
+  function calculatePayment() {
+    try {
+      // Get current balance from slider
+      const balance = parseFloat(elements.slider.value) || ORIGINAL_LOAN;
+      
+      // Calculate monthly values
+      const interestMonthly = (balance * INTEREST_RATE) / 12;
+      const principalMonthly = PRINCIPAL_MONTHLY;
+      const totalMonthly = interestMonthly + principalMonthly;
+      
+      // Calculate annual values
       const annualInterest = interestMonthly * 12;
-      const annualPrincipal = PRINCIPAL_MONTHLY * 12;
+      const annualPrincipal = principalMonthly * 12;
       const annualTotal = totalMonthly * 12;
       const remainingAfterYear = Math.max(0, balance - annualPrincipal);
-
-      calcBalanceDisplay.textContent = formatCurrency(balance);
-      if (calcInterest) calcInterest.textContent = '$' + formatCurrency(Math.round(interestMonthly));
-      if (calcTotal) calcTotal.textContent = '$' + formatCurrency(Math.round(totalMonthly));
-      if (calcAnnualInterest) calcAnnualInterest.textContent = '$' + formatCurrency(Math.round(annualInterest));
-      if (calcYear1Total) calcYear1Total.textContent = '$' + formatCurrency(Math.round(annualTotal));
-      if (calcRemainingBalance) calcRemainingBalance.textContent = '$' + formatCurrency(Math.round(remainingAfterYear));
-
-      renderPaymentChart(balance);
+      
+      // Update all displays (only if elements exist)
+      elements.balanceDisplay.textContent = formatCurrency(balance);
+      
+      if (elements.interest) {
+        elements.interest.textContent = '$' + formatCurrency(Math.round(interestMonthly));
+      }
+      
+      if (elements.total) {
+        elements.total.textContent = '$' + formatCurrency(Math.round(totalMonthly));
+      }
+      
+      if (elements.annualInterest) {
+        elements.annualInterest.textContent = '$' + formatCurrency(Math.round(annualInterest));
+      }
+      
+      if (elements.year1Total) {
+        elements.year1Total.textContent = '$' + formatCurrency(Math.round(annualTotal));
+      }
+      
+      if (elements.remainingBalance) {
+        elements.remainingBalance.textContent = '$' + formatCurrency(Math.round(remainingAfterYear));
+      }
+      
+      // Update chart if element exists
+      if (elements.chart) {
+        renderChart(balance);
+      }
+      
+      console.log('Calculator updated:', {
+        balance: formatCurrency(balance),
+        monthly: formatCurrency(Math.round(totalMonthly))
+      });
+      
+    } catch (error) {
+      console.error('❌ Calculator error:', error);
     }
-
-    function renderPaymentChart(startingBalance) {
-      if (!paymentChart) return;
-
+  }
+  
+  // Chart rendering function
+  function renderChart(startingBalance) {
+    if (!elements.chart) return;
+    
+    try {
       let balance = startingBalance;
       const months = [];
       
+      // Calculate 12 months of payments
       for (let i = 1; i <= 12; i++) {
-        const interest = (balance * INTEREST_RATE / 12);
-        const total = interest + PRINCIPAL_MONTHLY;
-        months.push({ 
-          month: i, 
-          interest: interest, 
-          principal: PRINCIPAL_MONTHLY, 
-          total: total, 
-          balance: balance 
+        const interest = (balance * INTEREST_RATE) / 12;
+        const principal = PRINCIPAL_MONTHLY;
+        const total = interest + principal;
+        
+        months.push({
+          month: i,
+          interest: interest,
+          principal: principal,
+          total: total,
+          balance: balance
         });
-        balance = Math.max(0, balance - PRINCIPAL_MONTHLY);
+        
+        balance = Math.max(0, balance - principal);
       }
-
+      
+      // Find max payment for scaling
       const maxPayment = months[0].total;
-
-      const bars = months.map((m, idx) => {
-        const interestPct = (m.interest / maxPayment) * 100;
-        const principalPct = (m.principal / maxPayment) * 100;
+      
+      // Generate chart bars
+      const chartHTML = months.map(m => {
+        const interestHeight = (m.interest / maxPayment) * 100;
+        const principalHeight = (m.principal / maxPayment) * 100;
         
         return `
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;">
-            <div style="font-size:11px;color:var(--t3);font-weight:700;margin-bottom:4px;">$${formatCurrency(Math.round(m.total))}</div>
-            <div style="width:100%;display:flex;flex-direction:column;height:120px;gap:0;position:relative;">
-              <div class="chart-bar" style="width:100%;height:${interestPct}%;background:linear-gradient(180deg,#5da3ff,#3b82ff);border-radius:6px 6px 0 0;opacity:0.85;transition:opacity 0.2s;cursor:pointer;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'" title="Month ${m.month} Interest: $${formatCurrency(Math.round(m.interest))}"></div>
-              <div class="chart-bar" style="width:100%;height:${principalPct}%;background:linear-gradient(180deg,#d4af5e,#c9a75a);border-radius:0 0 6px 6px;opacity:0.85;transition:opacity 0.2s;cursor:pointer;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'" title="Month ${m.month} Principal: $${formatCurrency(Math.round(m.principal))}"></div>
+            <div style="font-size:11px;color:var(--t3);font-weight:700;margin-bottom:4px;">
+              $${formatCurrency(Math.round(m.total))}
             </div>
-            <div style="font-size:10px;color:var(--t4);font-weight:600;">M${m.month}</div>
+            <div style="width:100%;display:flex;flex-direction:column;height:120px;gap:0;">
+              <div style="
+                width:100%;
+                height:${interestHeight}%;
+                background:linear-gradient(180deg,#5da3ff,#3b82ff);
+                border-radius:6px 6px 0 0;
+                opacity:0.85;
+                transition:opacity 0.2s;
+                cursor:pointer;
+              " 
+              onmouseover="this.style.opacity='1'" 
+              onmouseout="this.style.opacity='0.85'"
+              title="Month ${m.month} Interest: $${formatCurrency(Math.round(m.interest))}">
+              </div>
+              <div style="
+                width:100%;
+                height:${principalHeight}%;
+                background:linear-gradient(180deg,#d4af5e,#c9a75a);
+                border-radius:0 0 6px 6px;
+                opacity:0.85;
+                transition:opacity 0.2s;
+                cursor:pointer;
+              "
+              onmouseover="this.style.opacity='1'" 
+              onmouseout="this.style.opacity='0.85'"
+              title="Month ${m.month} Principal: $${formatCurrency(Math.round(m.principal))}">
+              </div>
+            </div>
+            <div style="font-size:10px;color:var(--t4);font-weight:600;">
+              M${m.month}
+            </div>
           </div>
         `;
       }).join('');
-
-      paymentChart.innerHTML = `<div style="display:flex;gap:6px;height:100%;align-items:flex-end;justify-content:space-between;">${bars}</div>`;
+      
+      // Update chart container
+      elements.chart.innerHTML = `
+        <div style="display:flex;gap:6px;height:100%;align-items:flex-end;justify-content:space-between;">
+          ${chartHTML}
+        </div>
+      `;
+      
+      console.log('✅ Chart rendered successfully');
+      
+    } catch (error) {
+      console.error('❌ Chart rendering error:', error);
     }
-
-    updateCalculator();
-    calcBalance.addEventListener('input', updateCalculator);
-    console.log('Calculator initialized successfully');
-  } else {
-    console.log('Calculator elements not found on page');
   }
+  
+  // Attach event listener to slider
+  elements.slider.addEventListener('input', calculatePayment);
+  
+  // Run initial calculation
+  calculatePayment();
+  
+  console.log('✅ Calculator initialized successfully');
+})();
 
   // ============================================================
   // ASSURE CALL STATEMENTS
