@@ -2461,6 +2461,86 @@ font-weight: 800;
 html[data-theme="light"] .tiny-note {
 color: rgba(10,15,26,.60);
 }
+
+/* ============================================================
+   LIGHT THEME - ADDITIONAL TEXT CONTRAST FIXES
+   Added: 2026-02-06
+============================================================ */
+
+/* Header row text - much darker */
+html[data-theme="light"] .mini-row.head {
+color: #1a1f2e !important;
+font-weight: 800;
+opacity: 1;
+}
+
+/* Lender names - solid black */
+html[data-theme="light"] .lender {
+color: #0a0f1a !important;
+font-weight: 800;
+}
+
+/* Subtitle text - much darker gray */
+html[data-theme="light"] .sub {
+color: #2d3748 !important;
+font-weight: 600;
+}
+
+/* All text in mini-row cells - darker */
+html[data-theme="light"] .mini-row {
+color: #0a0f1a;
+}
+
+html[data-theme="light"] .mini-row .r {
+color: #0a0f1a !important;
+font-weight: 700;
+}
+
+/* Property title - ensure it's very dark */
+html[data-theme="light"] .property-title {
+color: #0a0f1a !important;
+font-weight: 900;
+}
+
+/* Badge text improvements */
+html[data-theme="light"] .property-badges .badge {
+color: #1a1f2e;
+font-weight: 700;
+border: 1px solid rgba(0,0,0,.25);
+}
+
+html[data-theme="light"] .property-badges .badge.gold {
+color: #705600;
+border-color: rgba(112,86,0,.40);
+background: rgba(184,149,45,.18);
+}
+
+/* Chart title and subtitle - very dark */
+html[data-theme="light"] .chart-title {
+color: #0a0f1a !important;
+font-weight: 900;
+}
+
+html[data-theme="light"] .chart-sub {
+color: #2d3748 !important;
+font-weight: 600;
+}
+
+/* Tiny notes - darker */
+html[data-theme="light"] .tiny-note {
+color: #4a5568 !important;
+font-weight: 500;
+}
+
+/* All var(--t3) and var(--t4) text in light mode */
+html[data-theme="light"] [style*="color: var(--t3)"] {
+color: #2d3748 !important;
+}
+
+html[data-theme="light"] [style*="color: var(--t4)"] {
+color: #4a5568 !important;
+}
+      
 </style>
 </head>
 <body>
