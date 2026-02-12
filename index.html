@@ -6253,54 +6253,51 @@ html[data-theme="light"] .section-head h2::before {
   overflow: hidden;
   box-shadow: var(--shadow2);
 ">
-
- <!-- Header -->
+  <!-- Header -->
   <div style="
     padding: 20px 24px;
     border-bottom: 2px solid rgba(212,175,94,0.35);
     background: linear-gradient(to bottom, rgba(212,175,94,0.06), transparent);
   ">
-    <h4 style="margin:0; font-size:20px; font-weight:900; color:var(--gold); letter-spacing:0.5px;">
+    <h4 style="margin:0; font-size:20px; font-weight:900; color:var(--gold);">
       Complete 36-Month Payment Schedule
     </h4>
-    <p style="margin:8px 0 0; color:var(--t3); font-size:14px; line-height:1.5;">
+    <p style="margin:8px 0 0; color:var(--t3); font-size:14px;">
       $1,050,000 @ 15% APR — fixed $10,000 monthly principal reduction — interest declines each month
     </p>
   </div>
 
- <!-- Scrollable wrapper (critical for mobile) -->
-  <div style="max-height:520px; overflow-y:auto; overflow-x:auto;">
+  <!-- Scroll wrapper – critical for mobile -->
+  <div style="max-height:520px; overflow-y:auto; overflow-x:auto; -webkit-overflow-scrolling:touch;">
     <table style="width:100%; border-collapse:collapse; font-size:14px; color:var(--text); table-layout:fixed;">
       <thead style="position:sticky; top:0; z-index:10; background:var(--card); border-bottom:2px solid #4a5568;">
         <tr>
-          <th style="width:60px;  padding:14px 8px;  text-align:center; font-weight:800; color:var(--gold);">MO</th>
-          <th style="padding:14px 12px; text-align:right; font-weight:700;">Beginning Balance</th>
-          <th style="padding:14px 12px; text-align:right; font-weight:700; color:var(--gold);">Interest (15%/12)</th>
-          <th style="padding:14px 12px; text-align:right; font-weight:700; color:var(--blue);">Principal</th>
-          <th style="padding:14px 12px; text-align:right; font-weight:900; color:#ffffff;">Total Payment</th>
-          <th style="padding:14px 12px; text-align:right; font-weight:700;">Ending Balance</th>
+          <th style="width:55px;  padding:14px 6px;  text-align:center; font-weight:800; color:var(--gold);">MO</th>
+          <th style="width:140px; padding:14px 10px; text-align:right; font-weight:700;">Beginning Balance</th>
+          <th style="width:120px; padding:14px 10px; text-align:right; font-weight:700; color:var(--gold);">Interest (15%/12)</th>
+          <th style="width:110px; padding:14px 10px; text-align:right; font-weight:700; color:var(--blue);">Principal</th>
+          <th style="width:120px; padding:14px 10px; text-align:right; font-weight:900; color:#ffffff;">Total Payment</th>
+          <th style="width:140px; padding:14px 10px; text-align:right; font-weight:700;">Ending Balance</th>
         </tr>
       </thead>
 
-<tbody id="paymentScheduleCalc">
-        <!-- Filled by JS -->
-      </tbody>
+      <tbody id="paymentScheduleCalc"></tbody>
 
       <tfoot style="background:rgba(212,175,94,0.10); font-weight:900;">
         <tr style="border-top:3px solid var(--gold);">
-          <td style="padding:16px 8px; text-align:center; color:var(--gold);">TOTALS</td>
-          <td style="padding:16px 12px; text-align:right;">—</td>
-          <td style="padding:16px 12px; text-align:right; color:var(--gold);">$394,875</td>
-          <td style="padding:16px 12px; text-align:right; color:var(--blue);">$360,000</td>
-          <td style="padding:16px 12px; text-align:right; color:#ffffff;">$754,875</td>
-          <td style="padding:16px 12px; text-align:right; color:var(--red);">$690,000 balloon</td>
+          <td style="padding:16px 6px; text-align:center; color:var(--gold);">TOTALS</td>
+          <td style="padding:16px 10px; text-align:right;">—</td>
+          <td style="padding:16px 10px; text-align:right; color:var(--gold);">$394,875</td>
+          <td style="padding:16px 10px; text-align:right; color:var(--blue);">$360,000</td>
+          <td style="padding:16px 10px; text-align:right; color:#ffffff;">$754,875</td>
+          <td style="padding:16px 10px; text-align:right; color:var(--red);">$690,000 balloon</td>
         </tr>
       </tfoot>
     </table>
   </div>
 
-  <!-- Footer note -->
-  <div style="padding:16px 24px; font-size:13px; color:var(--t3); text-align:center; border-top:1px solid rgba(255,255,255,0.08);">
+  <!-- Footer -->
+  <div style="padding:14px 24px; font-size:13px; color:var(--t3); text-align:center; border-top:1px solid rgba(255,255,255,0.08);">
     Interest = previous balance × (0.15 ÷ 12) • Principal fixed at $10,000/mo • Balloon = remaining balance at month 36
   </div>
 </div>
@@ -7258,17 +7255,21 @@ document.addEventListener('DOMContentLoaded', function() {
   upBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 // ============================================================
-// PAYMENT CALCULATOR - FIXED & EXACT VERSION
+// PAYMENT CALCULATOR - COMPLETE FIXED VERSION (EXACT INTEREST)
+// Includes table, chart, theme redraw, console verification
 // ============================================================
 (function() {
   'use strict';
 
+  // Loan parameters
   const LOAN_AMOUNT       = 1050000;
-  const ANNUAL_RATE       = 0.15;
-  const MONTHLY_RATE      = ANNUAL_RATE / 12;
+  const MONTHLY_RATE      = 0.15 / 12;          // exact 15% annual / 12
   const PRINCIPAL_PAYMENT = 10000;
   const TERM_MONTHS       = 36;
 
+  /**
+   * Generate complete 36-month payment schedule (exact interest, no rounding)
+   */
   function generatePaymentSchedule() {
     const payments = [];
     let balance = LOAN_AMOUNT;
@@ -7277,7 +7278,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for (let month = 1; month <= TERM_MONTHS; month++) {
       const startBalance = balance;
-      const interest     = startBalance * MONTHLY_RATE;     // ← exact, no rounding
+      const interest     = startBalance * MONTHLY_RATE;     // ← exact, no Math.round
       const principal    = PRINCIPAL_PAYMENT;
       const totalPayment = interest + principal;
       const endBalance   = startBalance - principal;
@@ -7286,7 +7287,12 @@ document.addEventListener('DOMContentLoaded', function() {
       totalPrincipal += principal;
 
       payments.push({
-        month, startBalance, interest, principal, totalPayment, endBalance
+        month,
+        startBalance,
+        interest,
+        principal,
+        totalPayment,
+        endBalance
       });
 
       balance = endBalance;
@@ -7301,6 +7307,9 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   }
 
+  /**
+   * Format currency (with cents by default, 0 decimals optional)
+   */
   function formatCurrency(amount, decimals = 2) {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -7310,15 +7319,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }).format(amount);
   }
 
+  /**
+   * Populate the payment schedule table — columns now match header order
+   */
   function populateTable() {
-    const el = document.getElementById('paymentScheduleCalc');
-    if (!el) return;
+    const tbody = document.getElementById('paymentScheduleCalc');
+    if (!tbody) {
+      console.warn('paymentScheduleCalc tbody not found');
+      return;
+    }
 
-    const data = generatePaymentSchedule();
+    const results = generatePaymentSchedule();
 
-    el.innerHTML = data.payments.map(p => `
+    const html = results.payments.map(p => `
       <tr class="mini-row">
-        <td style="padding:10px; font-weight:700; text-align:center;">${p.month}</td>
+        <td style="padding:10px; text-align:center; font-weight:700;">${p.month}</td>
         <td style="padding:10px; text-align:right; font-weight:700;">${formatCurrency(p.startBalance, 0)}</td>
         <td style="padding:10px; text-align:right; font-weight:700; color:var(--gold);">${formatCurrency(p.interest)}</td>
         <td style="padding:10px; text-align:right; font-weight:700; color:var(--blue);">${formatCurrency(p.principal)}</td>
@@ -7327,81 +7342,111 @@ document.addEventListener('DOMContentLoaded', function() {
       </tr>
     `).join('');
 
-    drawChart(data.payments);
+    tbody.innerHTML = html;
+
+    // Draw the chart (restored)
+    drawChart(results.payments);
+
+    // Console verification (restored)
+    console.log('Payment Calculator Loaded (exact interest):');
+    console.log('Total Interest:', formatCurrency(results.totalInterest));
+    console.log('Total Principal:', formatCurrency(results.totalPrincipal));
+    console.log('Total Paid:', formatCurrency(results.totalPaid));
+    console.log('Balloon Payment:', formatCurrency(results.balloonPayment, 0));
   }
 
+  /**
+   * Draw the payment breakdown chart (restored from your original)
+   */
   function drawChart(payments) {
     const canvas = document.getElementById('paymentChartCalc');
-    if (!canvas?.getContext) return;
+    if (!canvas || !canvas.getContext) return;
 
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const w = canvas.width, h = canvas.height;
-    const pad = 50, cw = w - pad*2, ch = h - pad*2;
-    const max = Math.max(...payments.map(p => p.totalPayment));
+    const width = canvas.width;
+    const height = canvas.height;
+    const padding = 50;
+    const chartWidth = width - padding * 2;
+    const chartHeight = height - padding * 2;
 
-    // Axes
-    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--line') || 'rgba(255,255,255,0.15)';
+    const maxPayment = Math.max(...payments.map(p => p.totalPayment));
+
+    // Draw axes
+    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--line').trim() || 'rgba(255,255,255,0.1)';
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(pad, pad); ctx.lineTo(pad, h-pad); ctx.lineTo(w-pad, h-pad);
+    ctx.moveTo(padding, padding);
+    ctx.lineTo(padding, height - padding);
+    ctx.lineTo(width - padding, height - padding);
     ctx.stroke();
 
-    // Bars
-    const bw = (cw / payments.length) - 4;
-    payments.forEach((p, i) => {
-      const x = pad + i * (cw / payments.length) + 2;
-      const ph = (p.principal / max) * ch;
-      const ih = (p.interest   / max) * ch;
+    // Draw bars
+    const barWidth = (chartWidth / payments.length) - 3;
 
-      ctx.fillStyle = '#3b82f6'; // blue principal
-      ctx.fillRect(x, h - pad - ph, bw, ph);
+    payments.forEach((payment, index) => {
+      const x = padding + (index * (chartWidth / payments.length)) + 2;
+      const principalHeight = (payment.principal / maxPayment) * chartHeight;
+      const interestHeight = (payment.interest / maxPayment) * chartHeight;
 
-      ctx.fillStyle = '#f59e0b'; // gold interest
-      ctx.fillRect(x, h - pad - (ph + ih), bw, ih);
+      // Interest (gold - top)
+      ctx.fillStyle = '#f59e0b';
+      ctx.fillRect(x, height - padding - (principalHeight + interestHeight), barWidth, interestHeight);
+
+      // Principal (blue - bottom)
+      ctx.fillStyle = '#3b82f6';
+      ctx.fillRect(x, height - padding - principalHeight, barWidth, principalHeight);
     });
 
-    // Labels (X & Y axis)
-    const text = getComputedStyle(document.documentElement).getPropertyValue('--text') || '#eef1f8';
-    ctx.fillStyle = text;
+    // X-axis labels
+    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#eef1f8';
+    ctx.fillStyle = textColor;
     ctx.font = '600 11px "DM Sans", sans-serif';
     ctx.textAlign = 'center';
 
-    [0,5,11,17,23,29,35].forEach(i => {
-      const x = pad + i * (cw / payments.length) + bw/2;
-      ctx.fillText(i+1, x, h - pad + 22);
+    [0, 5, 11, 17, 23, 29, 35].forEach(index => {
+      const x = padding + (index * (chartWidth / payments.length)) + barWidth / 2;
+      ctx.fillText(`${index + 1}`, x, height - padding + 20);
     });
 
+    // Y-axis labels
     ctx.textAlign = 'right';
     ctx.font = '600 10px "DM Sans", sans-serif';
-    [0,0.25,0.5,0.75,1].forEach(r => {
-      const v = max * r;
-      const y = h - pad - (ch * r);
-      ctx.fillText(formatCurrency(v,0), pad - 12, y + 4);
+    [0, 0.25, 0.5, 0.75, 1].forEach(ratio => {
+      const value = maxPayment * ratio;
+      const y = height - padding - (chartHeight * ratio);
+      ctx.fillText(formatCurrency(value, 0), padding - 10, y + 4);
     });
 
     // Legend
-    const ly = 25;
-    ctx.fillStyle = '#3b82f6'; ctx.fillRect(w-200, ly, 20,12);
-    ctx.fillStyle = text; ctx.textAlign = 'left'; ctx.font = '600 11px "DM Sans", sans-serif';
-    ctx.fillText('Principal ($10K)', w-175, ly+10);
+    const legendY = 25;
+    ctx.fillStyle = '#3b82f6';
+    ctx.fillRect(width - 200, legendY, 20, 12);
+    ctx.fillStyle = textColor;
+    ctx.textAlign = 'left';
+    ctx.font = '600 11px "DM Sans", sans-serif';
+    ctx.fillText('Principal ($10K)', width - 175, legendY + 10);
 
-    ctx.fillStyle = '#f59e0b'; ctx.fillRect(w-200, ly+20, 20,12);
-    ctx.fillText('Interest (15% APR)', w-175, ly+30);
+    ctx.fillStyle = '#f59e0b';
+    ctx.fillRect(width - 200, legendY + 20, 20, 12);
+    ctx.fillText('Interest (15% APR)', width - 175, legendY + 30);
   }
 
-  // Init + theme listener
+  // Initialize on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', populateTable);
   } else {
     populateTable();
   }
 
-  new MutationObserver(() => {
-    const data = generatePaymentSchedule();
-    drawChart(data.payments);
-  }).observe(document.documentElement, {
+  // Redraw chart on theme change (restored)
+  const themeObserver = new MutationObserver(function() {
+    const results = generatePaymentSchedule();
+    drawChart(results.payments);
+  });
+
+  themeObserver.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ['data-theme']
   });
