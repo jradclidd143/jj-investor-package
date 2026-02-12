@@ -7286,213 +7286,156 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('scroll', onScroll, { passive: true });
   upBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
- // ============================================================
-// PAYMENT CALCULATOR - JAVASCRIPT
-// Generates table, draws chart, handles theme changes
 // ============================================================
-
+// PAYMENT CALCULATOR - FIXED & EXACT VERSION
+// ============================================================
 (function() {
   'use strict';
-  
-  // Loan parameters
-  const LOAN_AMOUNT = 1050000;
-  const MONTHLY_RATE = 0.0125; // 15% annual / 12 months
+
+  const LOAN_AMOUNT       = 1050000;
+  const ANNUAL_RATE       = 0.15;
+  const MONTHLY_RATE      = ANNUAL_RATE / 12;
   const PRINCIPAL_PAYMENT = 10000;
-  const TERM_MONTHS = 36;
-  
-  /**
-   * Generate complete 36-month payment schedule
-   */
+  const TERM_MONTHS       = 36;
+
   function generatePaymentSchedule() {
     const payments = [];
     let balance = LOAN_AMOUNT;
     let totalInterest = 0;
     let totalPrincipal = 0;
-    
+
     for (let month = 1; month <= TERM_MONTHS; month++) {
       const startBalance = balance;
-      const interest = startBalance * MONTHLY_RATE;
-      const principal = PRINCIPAL_PAYMENT;
+      const interest     = startBalance * MONTHLY_RATE;     // ← exact, no rounding
+      const principal    = PRINCIPAL_PAYMENT;
       const totalPayment = interest + principal;
-      const endBalance = startBalance - principal;
-      
-      totalInterest += interest;
+      const endBalance   = startBalance - principal;
+
+      totalInterest  += interest;
       totalPrincipal += principal;
-      
+
       payments.push({
-        month: month,
-        startBalance: startBalance,
-        interest: interest,
-        principal: principal,
-        totalPayment: totalPayment,
-        endBalance: endBalance
+        month, startBalance, interest, principal, totalPayment, endBalance
       });
-      
+
       balance = endBalance;
     }
-    
+
     return {
-      payments: payments,
-      totalInterest: totalInterest,
-      totalPrincipal: totalPrincipal,
+      payments,
+      totalInterest,
+      totalPrincipal,
       totalPaid: totalInterest + totalPrincipal,
       balloonPayment: balance
     };
   }
-  
-  /**
-   * Format number as currency with cents
-   */
-  function formatCurrency(amount) {
+
+  function formatCurrency(amount, decimals = 2) {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
     }).format(amount);
   }
-  
-  /**
-   * Format number as currency without cents
-   */
-  function formatCurrencyNoDecimals(amount) {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  }
-  
-  /**
-   * Populate the payment schedule table
-   */
+
   function populateTable() {
-    const scheduleEl = document.getElementById('paymentScheduleCalc');
-    if (!scheduleEl) return;
-    
-    const results = generatePaymentSchedule();
-    
-    const html = results.payments.map(p => `
+    const el = document.getElementById('paymentScheduleCalc');
+    if (!el) return;
+
+    const data = generatePaymentSchedule();
+
+    el.innerHTML = data.payments.map(p => `
       <tr class="mini-row">
-        <td style="padding: 10px; font-weight: 700;">${p.month}</td>
-        <td style="padding: 10px; text-align: right; font-weight: 700;">${formatCurrencyNoDecimals(p.startBalance)}</td>
-        <td style="padding: 10px; text-align: right; font-weight: 700; color: var(--gold);">${formatCurrency(p.interest)}</td>
-        <td style="padding: 10px; text-align: right; font-weight: 700; color: var(--blue);">$10,000.00</td>
-        <td style="padding: 10px; text-align: right; font-weight: 900;">${formatCurrency(p.totalPayment)}</td>
-        <td style="padding: 10px; text-align: right; color: var(--t3);">${formatCurrencyNoDecimals(p.endBalance)}</td>
+        <td style="padding:10px; font-weight:700; text-align:center;">${p.month}</td>
+        <td style="padding:10px; text-align:right; font-weight:700;">${formatCurrency(p.startBalance, 0)}</td>
+        <td style="padding:10px; text-align:right; font-weight:700; color:var(--gold);">${formatCurrency(p.interest)}</td>
+        <td style="padding:10px; text-align:right; font-weight:700; color:var(--blue);">${formatCurrency(p.principal)}</td>
+        <td style="padding:10px; text-align:right; font-weight:900;">${formatCurrency(p.totalPayment)}</td>
+        <td style="padding:10px; text-align:right; font-weight:700; color:var(--t3);">${formatCurrency(p.endBalance, 0)}</td>
       </tr>
     `).join('');
-    
-    scheduleEl.innerHTML = html;
-    
-    // Draw chart
-    drawChart(results.payments);
-    
-    // Console verification
-    console.log('Payment Calculator Loaded:');
-    console.log('Total Interest:', formatCurrency(results.totalInterest));
-    console.log('Total Principal:', formatCurrency(results.totalPrincipal));
-    console.log('Total Paid:', formatCurrency(results.totalPaid));
-    console.log('Balloon Payment:', formatCurrencyNoDecimals(results.balloonPayment));
+
+    drawChart(data.payments);
   }
-  
-  /**
-   * Draw the payment breakdown chart
-   */
+
   function drawChart(payments) {
     const canvas = document.getElementById('paymentChartCalc');
-    if (!canvas || !canvas.getContext) return;
-    
+    if (!canvas?.getContext) return;
+
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    const width = canvas.width;
-    const height = canvas.height;
-    const padding = 50;
-    const chartWidth = width - padding * 2;
-    const chartHeight = height - padding * 2;
-    
-    const maxPayment = Math.max(...payments.map(p => p.totalPayment));
-    
-    // Draw axes
-    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--line').trim() || 'rgba(255,255,255,0.1)';
+
+    const w = canvas.width, h = canvas.height;
+    const pad = 50, cw = w - pad*2, ch = h - pad*2;
+    const max = Math.max(...payments.map(p => p.totalPayment));
+
+    // Axes
+    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--line') || 'rgba(255,255,255,0.15)';
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(padding, padding);
-    ctx.lineTo(padding, height - padding);
-    ctx.lineTo(width - padding, height - padding);
+    ctx.moveTo(pad, pad); ctx.lineTo(pad, h-pad); ctx.lineTo(w-pad, h-pad);
     ctx.stroke();
-    
-    // Draw bars
-    const barWidth = (chartWidth / payments.length) - 3;
-    
-    payments.forEach((payment, index) => {
-      const x = padding + (index * (chartWidth / payments.length)) + 2;
-      const principalHeight = (payment.principal / maxPayment) * chartHeight;
-      const interestHeight = (payment.interest / maxPayment) * chartHeight;
-      
-      // Interest (gold - top)
-      ctx.fillStyle = '#f59e0b';
-      ctx.fillRect(x, height - padding - (principalHeight + interestHeight), barWidth, interestHeight);
-      
-      // Principal (blue - bottom)
-      ctx.fillStyle = '#3b82f6';
-      ctx.fillRect(x, height - padding - principalHeight, barWidth, principalHeight);
+
+    // Bars
+    const bw = (cw / payments.length) - 4;
+    payments.forEach((p, i) => {
+      const x = pad + i * (cw / payments.length) + 2;
+      const ph = (p.principal / max) * ch;
+      const ih = (p.interest   / max) * ch;
+
+      ctx.fillStyle = '#3b82f6'; // blue principal
+      ctx.fillRect(x, h - pad - ph, bw, ph);
+
+      ctx.fillStyle = '#f59e0b'; // gold interest
+      ctx.fillRect(x, h - pad - (ph + ih), bw, ih);
     });
-    
-    // X-axis labels
-    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#eef1f8';
-    ctx.fillStyle = textColor;
+
+    // Labels (X & Y axis)
+    const text = getComputedStyle(document.documentElement).getPropertyValue('--text') || '#eef1f8';
+    ctx.fillStyle = text;
     ctx.font = '600 11px "DM Sans", sans-serif';
     ctx.textAlign = 'center';
-    
-    [0, 5, 11, 17, 23, 29, 35].forEach(index => {
-      const x = padding + (index * (chartWidth / payments.length)) + barWidth / 2;
-      ctx.fillText(`${index + 1}`, x, height - padding + 20);
+
+    [0,5,11,17,23,29,35].forEach(i => {
+      const x = pad + i * (cw / payments.length) + bw/2;
+      ctx.fillText(i+1, x, h - pad + 22);
     });
-    
-    // Y-axis labels
+
     ctx.textAlign = 'right';
     ctx.font = '600 10px "DM Sans", sans-serif';
-    [0, 0.25, 0.5, 0.75, 1].forEach(ratio => {
-      const value = maxPayment * ratio;
-      const y = height - padding - (chartHeight * ratio);
-      ctx.fillText(formatCurrencyNoDecimals(value), padding - 10, y + 4);
+    [0,0.25,0.5,0.75,1].forEach(r => {
+      const v = max * r;
+      const y = h - pad - (ch * r);
+      ctx.fillText(formatCurrency(v,0), pad - 12, y + 4);
     });
-    
+
     // Legend
-    const legendY = 25;
-    ctx.fillStyle = '#3b82f6';
-    ctx.fillRect(width - 200, legendY, 20, 12);
-    ctx.fillStyle = textColor;
-    ctx.textAlign = 'left';
-    ctx.font = '600 11px "DM Sans", sans-serif';
-    ctx.fillText('Principal ($10K)', width - 175, legendY + 10);
-    
-    ctx.fillStyle = '#f59e0b';
-    ctx.fillRect(width - 200, legendY + 20, 20, 12);
-    ctx.fillStyle = textColor;
-    ctx.fillText('Interest (15% APR)', width - 175, legendY + 30);
+    const ly = 25;
+    ctx.fillStyle = '#3b82f6'; ctx.fillRect(w-200, ly, 20,12);
+    ctx.fillStyle = text; ctx.textAlign = 'left'; ctx.font = '600 11px "DM Sans", sans-serif';
+    ctx.fillText('Principal ($10K)', w-175, ly+10);
+
+    ctx.fillStyle = '#f59e0b'; ctx.fillRect(w-200, ly+20, 20,12);
+    ctx.fillText('Interest (15% APR)', w-175, ly+30);
   }
-  
-  // Initialize on DOM ready
+
+  // Init + theme listener
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', populateTable);
   } else {
     populateTable();
   }
-  
-  // Redraw chart on theme change
-  const themeObserver = new MutationObserver(function() {
-    const results = generatePaymentSchedule();
-    drawChart(results.payments);
-  });
-  
-  themeObserver.observe(document.documentElement, {
+
+  new MutationObserver(() => {
+    const data = generatePaymentSchedule();
+    drawChart(data.payments);
+  }).observe(document.documentElement, {
     attributes: true,
     attributeFilter: ['data-theme']
   });
+
+})();
 
   // ============================================================
   // ASSURE CALL STATEMENTS
