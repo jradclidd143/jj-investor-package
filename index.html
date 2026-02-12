@@ -2023,13 +2023,18 @@ svg[role="img"] {
   word-wrap: break-word;
 }
 /* ============================================================
-   PAYMENT CALCULATOR — ENHANCED STYLES
+   PAYMENT CALCULATOR — ENHANCED STYLES (FINAL 2026)
 ============================================================ */
 
 /* Range Slider Custom Styling */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
+  height: 8px;
+  background: rgba(212,175,94,0.25);
+  border-radius: 999px;
+  outline: none;
+  margin: 15px 0;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -2056,20 +2061,13 @@ input[type="range"]::-moz-range-thumb {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 6px 20px rgba(212,175,94,0.7), 0 0 0 6px rgba(212,175,94,0.3);
-}
-
+input[type="range"]::-webkit-slider-thumb:hover,
 input[type="range"]::-moz-range-thumb:hover {
   transform: scale(1.15);
   box-shadow: 0 6px 20px rgba(212,175,94,0.7), 0 0 0 6px rgba(212,175,94,0.3);
 }
 
-input[type="range"]::-webkit-slider-thumb:active {
-  transform: scale(1.05);
-}
-
+input[type="range"]::-webkit-slider-thumb:active,
 input[type="range"]::-moz-range-thumb:active {
   transform: scale(1.05);
 }
@@ -2085,32 +2083,87 @@ input[type="range"]::-moz-range-thumb:active {
   transform-origin: bottom;
 }
 
-/* Responsive adjustments for calculator */
+/* Make sure the table container doesn't break layout */
+#payment-calculator .chart-card {
+  overflow: hidden;
+}
+
+#payment-calculator table {
+  min-width: 720px;           /* Prevents crushing on narrow screens */
+  table-layout: fixed;
+}
+
+#payment-calculator td,
+#payment-calculator th {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Mobile-first responsive adjustments */
 @media (max-width: 1020px) {
-  #payment-calculator .grid-template-columns {
+  #payment-calculator .grid-2,
+  #payment-calculator .charts-row,
+  #payment-calculator .kpis {
     grid-template-columns: 1fr !important;
+  }
+  
+  #payment-calculator .chart-card-lg img {
+    max-height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  #payment-calculator h2,
+  #payment-calculator h3,
+  #payment-calculator h4 {
+    font-size: 1.4rem !important;
+  }
+  
+  #payment-calculator .kpi-value {
+    font-size: 2.2rem !important;
+  }
+  
+  #payment-calculator .chart-card {
+    padding: 16px !important;
+  }
+  
+  /* Force horizontal scroll on table wrapper */
+  #payment-calculator [style*="overflow-x:auto"] {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
   }
 }
 
 @media (max-width: 640px) {
+  #payment-calculator h2 {
+    font-size: 1.6rem !important;
+  }
+  
   #payment-calculator h3 {
-    font-size: 18px !important;
+    font-size: 1.3rem !important;
   }
   
-  #payment-calculator [style*="font-size: 48px"] {
-    font-size: 36px !important;
+  #payment-calculator .kpi-card {
+    padding: 14px !important;
   }
   
-  #payment-calculator [style*="font-size: 36px"] {
-    font-size: 28px !important;
+  #payment-calculator .kpi-value {
+    font-size: 2rem !important;
   }
   
-  #payment-calculator [style*="grid-template-columns: repeat(3"] {
-    grid-template-columns: 1fr !important;
+  #payment-calculator .kpi-sub {
+    font-size: 0.85rem !important;
   }
   
-  #payment-calculator [style*="grid-template-columns: repeat(4"] {
-    grid-template-columns: repeat(2, 1fr) !important;
+  /* Extra protection for table on very small screens */
+  #payment-calculator table {
+    font-size: 13px !important;
+  }
+  
+  #payment-calculator th,
+  #payment-calculator td {
+    padding: 10px 6px !important;
   }
 }
       
