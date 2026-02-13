@@ -2372,14 +2372,11 @@ input[type="range"]::-moz-range-thumb:active {
 }
       
 /* ============================================================
-   LIGHT THEME - COMPLETE COMPREHENSIVE VERSION
-   All visibility fixes, gold accents, and chart corrections
-   Version: 2026-02-06 FINAL
+   LIGHT THEME - WITH GOLD ACCENTS RESTORED
+   Added: 2026-02-06
 ============================================================ */
 
-/* ============================================================
-   BODY & BACKGROUNDS
-============================================================ */
+/* FORCE BODY BACKGROUND */
 html[data-theme="light"] body {
   background: #f5f7fa !important;
 }
@@ -2391,9 +2388,7 @@ html[data-theme="light"] .bg-grid {
   opacity: 0.3 !important;
 }
 
-/* ============================================================
-   TOPBAR
-============================================================ */
+/* TOPBAR */
 html[data-theme="light"] .topbar {
   background: rgba(255,255,255,.98) !important;
   border-bottom: 2px solid rgba(0,0,0,.15) !important;
@@ -2418,14 +2413,7 @@ html[data-theme="light"] .pill-toggle:hover {
   background: #fef3c7 !important;
 }
 
-html[data-theme="light"] .meta-line {
-  color: #4b5563 !important;
-  font-weight: 700 !important;
-}
-
-/* ============================================================
-   ALL CARD TYPES - BASE STYLES
-============================================================ */
+/* ALL CARD TYPES - PURE WHITE WITH GOLD GLOW */
 html[data-theme="light"] .property-card,
 html[data-theme="light"] .chart-card,
 html[data-theme="light"] .glass-card,
@@ -2442,9 +2430,7 @@ html[data-theme="light"] .section-head {
   box-shadow: 0 4px 12px rgba(0,0,0,.15) !important;
 }
 
-/* ============================================================
-   GOLD ACCENT GLOWS - RESTORED
-============================================================ */
+/* RESTORE GOLD GLOW OVERLAYS */
 html[data-theme="light"] .property-card::before {
   display: block !important;
   content: "" !important;
@@ -2532,15 +2518,12 @@ html[data-theme="light"] .property-card > *,
 html[data-theme="light"] .chart-card > *,
 html[data-theme="light"] .glass-card > *,
 html[data-theme="light"] .kpi-card > *,
-html[data-theme="light"] .section-head > *,
-html[data-theme="light"] .option-card > * {
+html[data-theme="light"] .section-head > * {
   position: relative !important;
   z-index: 1 !important;
 }
 
-/* ============================================================
-   CARD HEADERS & BODIES
-============================================================ */
+/* CARD HEADERS */
 html[data-theme="light"] .property-top,
 html[data-theme="light"] .gc-top,
 html[data-theme="light"] .acct-head,
@@ -2554,9 +2537,7 @@ html[data-theme="light"] .card-body {
   background: #ffffff !important;
 }
 
-/* ============================================================
-   ALL TEXT - TITLES, HEADINGS, BODY TEXT
-============================================================ */
+/* ALL TITLES - SOLID BLACK */
 html[data-theme="light"] h1,
 html[data-theme="light"] h2,
 html[data-theme="light"] h3,
@@ -2587,6 +2568,7 @@ html[data-theme="light"] .section-head h2 {
   text-shadow: none !important;
 }
 
+/* BODY TEXT */
 html[data-theme="light"] p,
 html[data-theme="light"] .lead,
 html[data-theme="light"] .chart-sub,
@@ -2608,11 +2590,13 @@ html[data-theme="light"] .opt-mini-sub {
   font-weight: 700 !important;
 }
 
+/* SMALL TEXT */
 html[data-theme="light"] .tiny-note,
 html[data-theme="light"] .kpi-label,
 html[data-theme="light"] .alloc-kicker,
 html[data-theme="light"] .alloc-sub,
 html[data-theme="light"] .alloc-mini-note,
+html[data-theme="light"] .meta-line,
 html[data-theme="light"] .footer,
 html[data-theme="light"] .subacct-path,
 html[data-theme="light"] .runway-sub {
@@ -2620,9 +2604,7 @@ html[data-theme="light"] .runway-sub {
   font-weight: 700 !important;
 }
 
-/* ============================================================
-   TABLE ROWS & CONTAINERS
-============================================================ */
+/* TABLE ROWS */
 html[data-theme="light"] .mini-row,
 html[data-theme="light"] .uf-row,
 html[data-theme="light"] .alloc-legend-row,
@@ -2673,9 +2655,7 @@ html[data-theme="light"] .metric .value {
   font-weight: 900 !important;
 }
 
-/* ============================================================
-   BADGES & PILLS - ALL VARIANTS
-============================================================ */
+/* BADGES */
 html[data-theme="light"] .badge,
 html[data-theme="light"] .panel-tag,
 html[data-theme="light"] .stmt .tag,
@@ -2748,106 +2728,13 @@ html[data-theme="light"] .opt-dot.b {
   border-color: #d97706 !important;
 }
 
-/* ============================================================
-   CHARTS - COMPREHENSIVE SVG FIXES
-============================================================ */
-
-/* CHART CONTAINERS */
+/* CHARTS - KEEP LIGHT BACKGROUNDS */
 html[data-theme="light"] .chart {
-  background: #ffffff !important;
+  background: #fafbfc !important;
   border: 2px solid #e5e7eb !important;
   padding: 16px !important;
 }
 
-/* FORCE SVG BACKGROUNDS WHITE */
-html[data-theme="light"] svg {
-  background: transparent !important;
-}
-
-html[data-theme="light"] .chart svg,
-html[data-theme="light"] .chart-card svg {
-  background: transparent !important;
-}
-
-/* FORCE DARK BACKGROUND RECTANGLES TO WHITE */
-html[data-theme="light"] svg rect[fill="#0b1020"],
-html[data-theme="light"] svg rect[fill="#0d1222"],
-html[data-theme="light"] svg rect[fill="#05060b"],
-html[data-theme="light"] svg rect[fill="#070a12"],
-html[data-theme="light"] svg rect[fill="#1a1f2e"],
-html[data-theme="light"] svg rect[fill*="rgb(11,16,32)"],
-html[data-theme="light"] svg rect[fill*="rgb(13,18,34)"],
-html[data-theme="light"] svg rect[fill*="rgb(5,6,11)"],
-html[data-theme="light"] svg rect[fill*="rgb(7,10,18)"] {
-  fill: #ffffff !important;
-}
-
-/* FULL-WIDTH/HEIGHT BACKGROUND RECTS */
-html[data-theme="light"] svg > rect[width="100%"],
-html[data-theme="light"] svg > rect[height="100%"] {
-  fill: #ffffff !important;
-}
-
-/* ADD BORDERS TO BAR CHART SEGMENTS */
-html[data-theme="light"] svg rect[fill]:not([fill="none"]):not([fill="transparent"]):not([width="100%"]) {
-  stroke: #374151 !important;
-  stroke-width: 2 !important;
-  opacity: 1 !important;
-}
-
-/* SPECIFIC SEGMENT COLOR BORDERS */
-html[data-theme="light"] svg rect[fill*="#93c5fd"],
-html[data-theme="light"] svg rect[fill*="#bfdbfe"] {
-  stroke: #1e40af !important;
-  stroke-width: 2 !important;
-}
-
-html[data-theme="light"] svg rect[fill*="#fcd34d"],
-html[data-theme="light"] svg rect[fill*="#fde68a"] {
-  stroke: #d97706 !important;
-  stroke-width: 2 !important;
-}
-
-html[data-theme="light"] svg rect[fill*="#fecaca"],
-html[data-theme="light"] svg rect[fill*="#fca5a5"] {
-  stroke: #dc2626 !important;
-  stroke-width: 2 !important;
-}
-
-/* PIE CHART PATHS */
-html[data-theme="light"] svg path[d*="M"] {
-  opacity: 1 !important;
-  stroke: #ffffff !important;
-  stroke-width: 2 !important;
-}
-
-/* FORCE ALL SVG TEXT TO BLACK */
-html[data-theme="light"] svg text,
-html[data-theme="light"] svg tspan {
-  fill: #000000 !important;
-  font-weight: 900 !important;
-  opacity: 1 !important;
-}
-
-/* OVERRIDE WHITE TEXT */
-html[data-theme="light"] svg text[fill="#fff"],
-html[data-theme="light"] svg text[fill="#ffffff"],
-html[data-theme="light"] svg text[fill="white"],
-html[data-theme="light"] svg tspan[fill="#fff"],
-html[data-theme="light"] svg tspan[fill="#ffffff"],
-html[data-theme="light"] svg tspan[fill="white"] {
-  fill: #000000 !important;
-}
-
-/* CHART LABELS & LEGENDS */
-html[data-theme="light"] svg text[text-anchor],
-html[data-theme="light"] svg .recharts-text,
-html[data-theme="light"] svg .recharts-label {
-  fill: #000000 !important;
-  font-weight: 800 !important;
-}
-
-/* ALLOCATION DONUT */
 html[data-theme="light"] .alloc-donut {
   background: conic-gradient(
     #f59e0b 0% calc(var(--p-liens)*1%),
@@ -2866,22 +2753,21 @@ html[data-theme="light"] .alloc-donut::after {
   border: 2px solid #e5e7eb !important;
 }
 
-/* ALLOCATION DOTS */
-html[data-theme="light"] .alloc-dot {
-  border: 2px solid #374151 !important;
+/* SVG CHARTS - SOLID BLACK TEXT */
+html[data-theme="light"] svg text,
+html[data-theme="light"] svg tspan {
+  fill: #000000 !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
 }
 
-html[data-theme="light"] .c-liens { background: #f59e0b !important; }
-html[data-theme="light"] .c-res { background: #3b82f6 !important; }
-html[data-theme="light"] .c-assure { background: #6b7280 !important; }
-html[data-theme="light"] .c-roof { background: #ef4444 !important; }
-html[data-theme="light"] .c-bills { background: #60a5fa !important; }
-html[data-theme="light"] .c-mkt { background: #fbbf24 !important; }
-html[data-theme="light"] .c-close { background: #fcd34d !important; }
+html[data-theme="light"] svg rect,
+html[data-theme="light"] svg path,
+html[data-theme="light"] svg circle {
+  opacity: 1 !important;
+}
 
-/* ============================================================
-   ICONS - ALL TYPES
-============================================================ */
+/* ICONS - GOLD COLORED */
 html[data-theme="light"] .sum-ic,
 html[data-theme="light"] .flow-ic,
 html[data-theme="light"] .mcard-ic,
@@ -2913,9 +2799,7 @@ html[data-theme="light"] .rt-ic::after {
   background: #374151 !important;
 }
 
-/* ============================================================
-   BUTTONS & INTERACTIVE ELEMENTS
-============================================================ */
+/* BUTTONS */
 html[data-theme="light"] button,
 html[data-theme="light"] .doc-btn,
 html[data-theme="light"] .nav-toggle,
@@ -2934,9 +2818,7 @@ html[data-theme="light"] .up-btn:hover {
   background: #fef3c7 !important;
 }
 
-/* ============================================================
-   FORMS
-============================================================ */
+/* FORMS */
 html[data-theme="light"] input,
 html[data-theme="light"] select,
 html[data-theme="light"] textarea,
@@ -2957,9 +2839,7 @@ html[data-theme="light"] ::placeholder {
   color: #6b7280 !important;
 }
 
-/* ============================================================
-   LINKS & NAVIGATION
-============================================================ */
+/* LINKS */
 html[data-theme="light"] a {
   color: #2563eb !important;
   font-weight: 700 !important;
@@ -2985,6 +2865,7 @@ html[data-theme="light"] .stmt-open {
   font-weight: 900 !important;
 }
 
+/* NAVIGATION */
 html[data-theme="light"] .sidenav {
   background: rgba(255,255,255,.98) !important;
   border: 2px solid #d1d5db !important;
@@ -3010,9 +2891,7 @@ html[data-theme="light"] .nav-list a.active {
   color: #000000 !important;
 }
 
-/* ============================================================
-   SPECIAL CARDS & STATES
-============================================================ */
+/* SPECIAL CARDS */
 html[data-theme="light"] .uf-row.total {
   border-color: #d97706 !important;
   background: rgba(245,158,11,.12) !important;
@@ -3041,9 +2920,7 @@ html[data-theme="light"] .lane.gold {
   background: rgba(245,158,11,.08) !important;
 }
 
-/* ============================================================
-   STATEMENT INDEX
-============================================================ */
+/* STATEMENT INDEX */
 html[data-theme="light"] .stmt-group {
   border: 2px solid #d1d5db !important;
   background: #ffffff !important;
@@ -3068,9 +2945,7 @@ html[data-theme="light"] .jj-strip-title {
   color: #000000 !important;
 }
 
-/* ============================================================
-   RUNWAY & PROGRESS BARS
-============================================================ */
+/* RUNWAY */
 html[data-theme="light"] .runway-bar {
   border: 2px solid #d97706 !important;
   background: linear-gradient(90deg, rgba(245,158,11,.25), rgba(37,99,235,.20)) !important;
@@ -3082,30 +2957,20 @@ html[data-theme="light"] .alloc-sharebar {
   background: #f3f4f6 !important;
 }
 
-html[data-theme="light"] #scrollProgress {
-  background: #e5e7eb !important;
+/* ALLOCATION DOTS */
+html[data-theme="light"] .alloc-dot {
+  border: 2px solid #374151 !important;
 }
 
-html[data-theme="light"] #progressBar {
-  background: linear-gradient(90deg, #2563eb, #f59e0b) !important;
-}
+html[data-theme="light"] .c-liens { background: #f59e0b !important; }
+html[data-theme="light"] .c-res { background: #3b82f6 !important; }
+html[data-theme="light"] .c-assure { background: #6b7280 !important; }
+html[data-theme="light"] .c-roof { background: #ef4444 !important; }
+html[data-theme="light"] .c-bills { background: #60a5fa !important; }
+html[data-theme="light"] .c-mkt { background: #fbbf24 !important; }
+html[data-theme="light"] .c-close { background: #fcd34d !important; }
 
-/* ============================================================
-   RANGE SLIDER
-============================================================ */
-html[data-theme="light"] input[type="range"]::-webkit-slider-thumb {
-  background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
-  border: 3px solid #ffffff !important;
-}
-
-html[data-theme="light"] input[type="range"]::-moz-range-thumb {
-  background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
-  border: 3px solid #ffffff !important;
-}
-
-/* ============================================================
-   IMAGES & MEDIA
-============================================================ */
+/* IMAGES */
 html[data-theme="light"] .brands-container,
 html[data-theme="light"] .jj-figure,
 html[data-theme="light"] .chart-card-lg {
@@ -3119,9 +2984,27 @@ html[data-theme="light"] .jj-figure figcaption {
   color: #1f2937 !important;
 }
 
-/* ============================================================
-   SCROLLBARS
-============================================================ */
+/* PROGRESS BAR */
+html[data-theme="light"] #scrollProgress {
+  background: #e5e7eb !important;
+}
+
+html[data-theme="light"] #progressBar {
+  background: linear-gradient(90deg, #2563eb, #f59e0b) !important;
+}
+
+/* RANGE SLIDER */
+html[data-theme="light"] input[type="range"]::-webkit-slider-thumb {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
+  border: 3px solid #ffffff !important;
+}
+
+html[data-theme="light"] input[type="range"]::-moz-range-thumb {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
+  border: 3px solid #ffffff !important;
+}
+
+/* SCROLLBARS */
 html[data-theme="light"] ::-webkit-scrollbar {
   background: #f3f4f6 !important;
 }
@@ -3130,9 +3013,7 @@ html[data-theme="light"] ::-webkit-scrollbar-thumb {
   background: #9ca3af !important;
 }
 
-/* ============================================================
-   LIST ITEMS & EMPHASIS
-============================================================ */
+/* LIST ITEMS */
 html[data-theme="light"] .bullets,
 html[data-theme="light"] ul li,
 html[data-theme="light"] ol li {
@@ -3145,17 +3026,157 @@ html[data-theme="light"] ol li::marker {
   color: #000000 !important;
 }
 
-html[data-theme="light"] strong,
-html[data-theme="light"] b {
-  color: #000000 !important;
-  font-weight: 900 !important;
-}
-
-/* ============================================================
-   MISC ELEMENTS
-============================================================ */
+/* SECTION DIVIDER */
 html[data-theme="light"] .section-head h2::before {
   background: linear-gradient(180deg, #2563eb, #f59e0b) !important;
+}
+      
+/* ============================================================
+   LIGHT THEME - CHART-SPECIFIC FIXES
+   Fix SVG backgrounds and add stroke outlines
+============================================================ */
+
+/* FORCE ALL CHART BACKGROUNDS TO BE LIGHT/WHITE */
+html[data-theme="light"] .chart,
+html[data-theme="light"] .chart svg,
+html[data-theme="light"] svg[viewBox],
+html[data-theme="light"] svg[width][height] {
+  background: #ffffff !important;
+}
+
+/* FORCE SVG BACKGROUNDS - PIE CHARTS */
+html[data-theme="light"] svg rect[fill*="#0"],
+html[data-theme="light"] svg rect[fill*="#1"],
+html[data-theme="light"] svg rect[fill*="#2"][fill*="2"][fill*="2"] {
+  fill: #ffffff !important;
+}
+
+/* FIX DARK BACKGROUNDS IN SVG CONTAINERS */
+html[data-theme="light"] svg > rect[width="100%"],
+html[data-theme="light"] svg > rect[height="100%"],
+html[data-theme="light"] svg rect[x="0"][y="0"] {
+  fill: #ffffff !important;
+}
+
+/* ADD VISIBLE STROKES TO BAR CHART SEGMENTS */
+html[data-theme="light"] svg rect[fill]:not([fill="none"]):not([fill="transparent"]) {
+  stroke: #374151 !important;
+  stroke-width: 2 !important;
+}
+
+/* EXCEPTION - DON'T STROKE THE MAIN BACKGROUND RECT */
+html[data-theme="light"] svg > rect:first-child[width="100%"] {
+  stroke: none !important;
+}
+
+/* FORCE PIE CHART PATHS TO BE VISIBLE */
+html[data-theme="light"] svg path[d*="M"],
+html[data-theme="light"] svg path[fill] {
+  opacity: 1 !important;
+  stroke: #ffffff !important;
+  stroke-width: 2 !important;
+}
+
+/* FORCE ALL SVG TEXT TO BE SOLID BLACK */
+html[data-theme="light"] svg text,
+html[data-theme="light"] svg tspan,
+html[data-theme="light"] svg text[fill],
+html[data-theme="light"] svg text[style*="fill"] {
+  fill: #000000 !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+/* OVERRIDE ANY INLINE STYLES ON SVG TEXT */
+html[data-theme="light"] svg text[fill="#fff"],
+html[data-theme="light"] svg text[fill="#ffffff"],
+html[data-theme="light"] svg text[fill="white"],
+html[data-theme="light"] svg tspan[fill="#fff"],
+html[data-theme="light"] svg tspan[fill="#ffffff"],
+html[data-theme="light"] svg tspan[fill="white"] {
+  fill: #000000 !important;
+}
+
+/* FORCE DARK GREY/BLACK BACKGROUNDS TO BE WHITE */
+html[data-theme="light"] svg rect[fill="#0b1020"],
+html[data-theme="light"] svg rect[fill="#0d1222"],
+html[data-theme="light"] svg rect[fill="#05060b"],
+html[data-theme="light"] svg rect[fill="#070a12"],
+html[data-theme="light"] svg rect[fill*="rgb(11"],
+html[data-theme="light"] svg rect[fill*="rgb(13"],
+html[data-theme="light"] svg rect[fill*="rgb(5"],
+html[data-theme="light"] svg rect[fill*="rgb(7"] {
+  fill: #ffffff !important;
+}
+
+/* FIX LEGEND TEXT IN PIE CHARTS */
+html[data-theme="light"] svg text[text-anchor],
+html[data-theme="light"] svg text[x][y] {
+  fill: #000000 !important;
+  font-weight: 800 !important;
+}
+
+/* ENSURE CHART LABELS ARE VISIBLE */
+html[data-theme="light"] svg text.recharts-text,
+html[data-theme="light"] svg .recharts-label,
+html[data-theme="light"] svg text[class*="label"],
+html[data-theme="light"] svg text[class*="axis"] {
+  fill: #000000 !important;
+  font-weight: 800 !important;
+}
+
+/* FIX ANY REMAINING DARK FILLS */
+html[data-theme="light"] svg [fill*="rgba(11"],
+html[data-theme="light"] svg [fill*="rgba(13"],
+html[data-theme="light"] svg [fill*="rgba(5"],
+html[data-theme="light"] svg [fill*="rgba(7"] {
+  fill: #ffffff !important;
+}
+
+/* FORCE CHART LEGEND SQUARES/CIRCLES TO KEEP THEIR COLORS */
+html[data-theme="light"] svg circle[fill="#"],
+html[data-theme="light"] svg rect[width="10"],
+html[data-theme="light"] svg rect[width="12"],
+html[data-theme="light"] svg rect[height="10"],
+html[data-theme="light"] svg rect[height="12"] {
+  stroke: #374151 !important;
+  stroke-width: 1 !important;
+  opacity: 1 !important;
+}
+
+/* KEEP BAR/PIE SEGMENT COLORS BUT ADD BORDERS */
+html[data-theme="light"] svg rect[fill="#3b82f6"],
+html[data-theme="light"] svg rect[fill="#60a5fa"],
+html[data-theme="light"] svg rect[fill="#93c5fd"],
+html[data-theme="light"] svg rect[fill*="blue"] {
+  stroke: #1e40af !important;
+}
+
+html[data-theme="light"] svg rect[fill="#f59e0b"],
+html[data-theme="light"] svg rect[fill="#fbbf24"],
+html[data-theme="light"] svg rect[fill="#fcd34d"],
+html[data-theme="light"] svg rect[fill*="orange"],
+html[data-theme="light"] svg rect[fill*="amber"] {
+  stroke: #d97706 !important;
+}
+
+html[data-theme="light"] svg rect[fill="#ef4444"],
+html[data-theme="light"] svg rect[fill*="red"] {
+  stroke: #dc2626 !important;
+}
+
+html[data-theme="light"] svg rect[fill="#6b7280"],
+html[data-theme="light"] svg rect[fill*="gray"],
+html[data-theme="light"] svg rect[fill*="grey"] {
+  stroke: #374151 !important;
+}
+
+/* STACKED BAR CHART - ENSURE SEGMENTS HAVE BORDERS */
+html[data-theme="light"] svg g[class*="bar"] rect,
+html[data-theme="light"] svg g[class*="stack"] rect {
+  stroke: #374151 !important;
+  stroke-width: 2 !important;
 }
       
 </style>
