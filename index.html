@@ -2163,8 +2163,64 @@ input[type="range"]::-moz-range-thumb:active {
 #roofing-appointments .grid-2 { grid-template-columns: 1fr !important; }
 [style*="grid-template-columns: repeat(3, 1fr)"],
 [style*="grid-template-columns: repeat(4, 1fr)"],
-[style*="grid-template-columns: 200px 1fr"] {
+[style*="grid-template-columns: 200px 1fr"],
+[style*="grid-template-columns:1fr auto"],
+[style*="grid-template-columns: 1fr auto"] {
   grid-template-columns: 1fr !important;
+}
+.section-head h2,
+.property-title,
+.chart-title,
+.flow-title,
+.gc-title,
+.lane-title,
+.option-head h3,
+.doc-title {
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.panel-head,
+.option-head,
+.gc-top,
+.compare-head {
+  flex-direction: column;
+  align-items: stretch;
+}
+.panel-tag,
+.opt-badge,
+.badge,
+.jj-pill {
+  white-space: normal;
+  width: fit-content;
+  max-width: 100%;
+}
+.jj-strip {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.jj-strip-left {
+  align-items: flex-start;
+  max-width: 100%;
+}
+.jj-strip-sub {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  line-height: 1.4;
+}
+.jj-strip-badges { justify-content: flex-start; }
+.lane-grid { grid-template-columns: 1fr; }
+#assurecall-financials .chart-sub { line-height: 1.65; }
+#assurecall-financials .chart-sub strong {
+  display: block;
+  margin-top: 6px;
+}
+#jj-funding-strategy [style*="text-align:right"],
+#roofing-appointments [style*="text-align:right"],
+#assurecall-financials [style*="text-align:right"],
+#payment-calculator [style*="text-align:right"] {
+  text-align: left !important;
 }
 }
 
@@ -2180,17 +2236,70 @@ input[type="range"]::-moz-range-thumb:active {
 .metric-strip   { grid-template-columns: repeat(2, minmax(0,1fr)); }
 .mini-row,
 .uf-row {
-  grid-template-columns: 1fr;
-  gap: 6px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+.mini-row {
+  padding: 12px 0;
+}
+.mini-row.head {
+  display: none;
+}
+.mini-row:not(.head) > .r::before {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--t4);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.mini-row:not(.head) > .r:nth-child(2)::before { content: "Payoff"; }
+.mini-row:not(.head) > .r:nth-child(3)::before { content: "Timing / Accrual"; }
+.uf-row {
+  display: grid;
+  justify-content: stretch;
 }
 .mini-row .r,
 .uf-row .r {
   text-align: left;
-  justify-self: start;
+  justify-self: stretch;
+}
+.uf-left {
+  flex-basis: auto;
+  width: 100%;
 }
 .uf-amt {
+  width: 100%;
   white-space: normal;
+  text-align: left;
+  overflow-wrap: break-word;
   word-break: normal;
+}
+.address-value { min-width: 0; }
+#jj-funding-strategy .usefunds-rows .row {
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: start;
+}
+#jj-funding-strategy .usefunds-rows .label {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+#jj-funding-strategy .usefunds-rows .val {
+  grid-column: 2;
+  justify-self: start;
+  white-space: normal;
+}
+.alloc-legend-row {
+  grid-template-columns: 16px minmax(0, 1fr);
+}
+.alloc-pct,
+.alloc-amt {
+  grid-column: 2;
+  justify-self: start;
+  text-align: left;
+  white-space: normal;
 }
 .stmt-row { grid-template-columns: minmax(0,1fr); }
 .stmt-open { justify-self:start; width: fit-content; }
@@ -3478,7 +3587,7 @@ html[data-theme="light"] svg g[class*="stack"] rect {
           </div>
           
           <div style="color: var(--t3); font-size: 12px; line-height: 1.5;">
-            Liquidity BYYuffer for Operational Stability
+            Liquidity Buffer for Operational Stability
           </div>
         </div>
 
