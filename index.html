@@ -3312,7 +3312,114 @@ html[data-theme="light"] svg g[class*="stack"] rect {
   stroke-width: 2 !important;
 }
       
-</style>
+/* ============================================================
+   SCREENSHOT SAVE PASS - RESPONSIVE DENSITY AND CPA SOURCE AREAS
+============================================================ */
+.cpa-split-grid,
+.cpa-summary-grid {
+  align-items: start;
+}
+
+.cpa-split-grid .panel,
+.cpa-summary-grid .panel {
+  align-self: start;
+}
+
+#borrower-experience .charts-row,
+#borrower-experience .grid-2,
+#assurecall-financials .grid-2,
+#assurecall-source-status .grid-2,
+#appendix-statements .grid-2,
+#jj-funding-strategy .grid-2 {
+  align-items: start;
+}
+
+#borrower-experience .chart-card,
+#borrower-experience .panel,
+#assurecall-source-status .panel,
+#appendix-statements .panel {
+  align-self: start;
+  height: auto;
+}
+
+#borrower-experience .metric-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#borrower-experience .metric,
+#assurecall-overview .microcards .mcard,
+#use-of-proceeds .microcards .mcard {
+  min-height: 0;
+}
+
+#borrower-experience .growth-card {
+  height: auto;
+}
+
+#borrower-experience .growth-card .steps-3,
+#borrower-experience .growth-card .lane-grid,
+#use-of-proceeds .growth-card .steps-3,
+#use-of-proceeds .growth-card .lane-grid {
+  margin-top: 12px;
+}
+
+.metric-strip {
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.footer {
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-bottom: max(18px, env(safe-area-inset-bottom));
+}
+
+@media (min-width: 761px) and (max-width: 1120px) {
+  .metric-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #borrower-experience .charts-row,
+  #borrower-experience .grid-2,
+  #assurecall-financials .grid-2,
+  #assurecall-source-status .grid-2,
+  #appendix-statements .grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: start;
+  }
+
+  #borrower-experience .growth-grid-2,
+  #use-of-proceeds .growth-grid-2,
+  #assurecall-overview .lane-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: start;
+  }
+
+  #payment-calculator [style*="grid-template-columns: repeat(3, 1fr)"],
+  #payment-calculator [style*="grid-template-columns: repeat(4, 1fr)"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .cpa-split-grid,
+  .cpa-summary-grid,
+  #borrower-experience .charts-row,
+  #borrower-experience .grid-2,
+  #assurecall-financials .grid-2,
+  #assurecall-source-status .grid-2,
+  #appendix-statements .grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .footer {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
+
+	</style>
 </head>
 <body>
 
@@ -5600,12 +5707,12 @@ html[data-theme="light"] svg g[class*="stack"] rect {
       <ul class="bullets" style="margin-top:12px;">
         <li>CPA-backed financial support comes from QuickBooks reports, CPA schedules, property/rent support, and payoff documents.</li>
         <li>External PayPal, Capital One, payroll filing, Shami Brothers, and trademark/IP source packages were not provided in the approved CPA request.</li>
-        <li>Any management deposit charts should be treated as operating context only, not as CPA-verified bank-statement support.</li>
+        <li>CPA-backed financial statement panels now replace management deposit visuals for lender-facing financial conclusions.</li>
       </ul>
       <div class="callout" style="margin-top:12px;">
         <div class="callout-title">Where to View</div>
         <div class="callout-body">
-          See the "AssureCall Financials &amp; Source Notes" section below for CPA-backed schedules and management-context deposit charts.
+          See the "AssureCall Financials &amp; Source Notes" section below for CPA-backed schedules and financial statement panels.
         </div>
       </div>
     </div>
@@ -5638,62 +5745,79 @@ html[data-theme="light"] svg g[class*="stack"] rect {
     </p>
   </div>
 
-  <!-- ✅ NEW: AssureCall Allocation of Funds (moved to top + rewritten) -->
-  <div class="callout" style="margin-top:14px;">
-    <div class="callout-title">AssureCall — Allocation of Funds (Growth Tranche)</div>
-    <div class="callout-body">
-      AssureCall’s funding is structured to (1) accelerate revenue-producing capacity through hiring, systems, and lead flow,
-      and (2) preserve stability through reserves and cleanup items that reduce operational drag. The categories below are lender-facing
-      buckets designed for clear underwriting and straightforward execution.
+  <!-- AssureCall allocation split into two containers for the newer screenshot pass -->
+  <div class="grid-2 cpa-split-grid" style="margin-top:14px;">
+    <div class="panel">
+      <div class="panel-head">
+        <h3>AssureCall Allocation Summary</h3>
+        <span class="panel-tag gold">Growth + Stability</span>
+      </div>
+      <div class="callout" style="margin-top:12px;">
+        <div class="callout-title">AssureCall — Allocation of Funds</div>
+        <div class="callout-body">
+          AssureCall’s funding is structured to accelerate revenue-producing capacity through hiring, systems, and lead flow,
+          while preserving stability through reserves and cleanup items that reduce operational drag.
+        </div>
+      </div>
+      <div class="uf-table" style="margin-top:12px;">
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Growth Capital</div><div class="uf-sub">Hiring, marketing, tools/systems, and operating runway</div></div><div class="uf-amt">$90,000</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Bill Payoff</div><div class="uf-sub">Cleanup items that reduce operational drag</div></div><div class="uf-amt">$20,000</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Financial Reserves</div><div class="uf-sub">Reserves shown in the overall use-of-funds structure</div></div><div class="uf-amt">$104,636</div></div>
+      </div>
       <div class="tiny-note" style="margin-top:10px;">
-        <strong>Included in the overall AssureCall allocation:</strong> <strong>$90,000</strong> growth capital + <strong>$20,000</strong> bill payoff + <strong>$104,636</strong> financial reserves.
+        These lender-facing buckets remain tied to the approved funding structure and do not add unsupported source categories.
       </div>
     </div>
 
-    <div class="uf-table" style="margin-top:12px;">
-      <div class="uf-row">
-        <div class="uf-left">
-          <div class="uf-name">Hiring / Training</div>
-          <div class="uf-sub">Agent ramp, onboarding, QA/QC lanes, performance coaching</div>
-        </div>
-        <div class="uf-amt">$9,000</div>
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Growth Tranche Budget</h3>
+        <span class="panel-tag">$90,000</span>
       </div>
-
-      <div class="uf-row">
-        <div class="uf-left">
-          <div class="uf-name">Marketing / Lead Flow</div>
-          <div class="uf-sub">Lead volume support + pipeline continuity (in-season acceleration)</div>
+      <div class="uf-table" style="margin-top:12px;">
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Hiring / Training</div>
+            <div class="uf-sub">Agent ramp, onboarding, QA/QC lanes, performance coaching</div>
+          </div>
+          <div class="uf-amt">$9,000</div>
         </div>
-        <div class="uf-amt">$7,500</div>
-      </div>
 
-      <div class="uf-row">
-        <div class="uf-left">
-          <div class="uf-name">Tools / Systems</div>
-          <div class="uf-sub">Dialer, CRM, tracking, reporting, workflow automation</div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Marketing / Lead Flow</div>
+            <div class="uf-sub">Lead volume support + pipeline continuity</div>
+          </div>
+          <div class="uf-amt">$7,500</div>
         </div>
-        <div class="uf-amt">$20,000</div>
-      </div>
 
-      <div class="uf-row">
-        <div class="uf-left">
-          <div class="uf-name">Operating Runway (AssureCall Growth)</div>
-          <div class="uf-sub">Payroll buffer + ramp runway to stabilize execution while headcount scales</div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Tools / Systems</div>
+            <div class="uf-sub">Dialer, CRM, tracking, reporting, workflow automation</div>
+          </div>
+          <div class="uf-amt">$20,000</div>
         </div>
-        <div class="uf-amt">$53,500</div>
-      </div>
 
-      <div class="uf-row total">
-        <div class="uf-left">
-          <div class="uf-name">AssureCall Growth Capital Total</div>
-          <div class="uf-sub">Growth tranche subtotal (excludes reserves + bill payoff)</div>
+        <div class="uf-row">
+          <div class="uf-left">
+            <div class="uf-name">Operating Runway</div>
+            <div class="uf-sub">Payroll buffer and ramp runway while headcount scales</div>
+          </div>
+          <div class="uf-amt">$53,500</div>
         </div>
-        <div class="uf-amt">$90,000</div>
-      </div>
-    </div>
 
-    <div class="tiny-note" style="margin-top:10px;">
-      *These categories are lender-facing budget buckets; exact timing may shift based on hiring cadence, client demand, and seasonal volume.
+        <div class="uf-row total">
+          <div class="uf-left">
+            <div class="uf-name">AssureCall Growth Capital Total</div>
+            <div class="uf-sub">Growth tranche subtotal</div>
+          </div>
+          <div class="uf-amt">$90,000</div>
+        </div>
+      </div>
+      <div class="tiny-note" style="margin-top:10px;">
+        Timing may shift based on hiring cadence, client demand, and seasonal volume.
+      </div>
     </div>
   </div>
 
@@ -5734,41 +5858,39 @@ html[data-theme="light"] svg g[class*="stack"] rect {
     </div>
   </div>
 
-  <!-- Deposit Charts -->
-  <div class="deposits-charts" style="margin-top:24px;">
-    <div class="chart-card-lg">
-      <h4>2025 Management Deposit Context</h4>
-      <div class="chart-sub">Management-context chart only; CPA-backed repayment analysis comes from the QuickBooks and CPA schedules.</div>
-      <img class="chart-img" src="files/assure_deposits_summary.png" alt="AssureCall 2025 deposits summary" loading="lazy" decoding="async" />
-    </div>
-
-    <div class="chart-card-lg">
-      <h4>Monthly Deposits — Management Context</h4>
-      <div class="chart-sub">Deposit chart retained as management context, not as CPA-verified bank-statement evidence.</div>
-      <img class="chart-img" src="files/assure_deposits_monthly.png" alt="AssureCall monthly deposits 2025" loading="lazy" decoding="async" />
-      <div class="callout" style="margin-top:16px;">
-        <div class="callout-title">Seasonal Analysis</div>
-        <div class="callout-body">
-          These management charts should not be used as substitute CPA source support. The approved package uses QuickBooks reports,
-          CPA schedules, property/rent support, payoff documents, and DSCR scenarios for lender-facing financial conclusions.
-        </div>
+  <!-- CPA-backed financial statement panels replace unsupported deposit chart visuals -->
+  <div class="grid-2 cpa-summary-grid" style="margin-top:24px;">
+    <div class="panel">
+      <div class="panel-head">
+        <h3>2025 Financial Statement Summary</h3>
+        <span class="panel-tag gold">Approved 2025 Statements</span>
+      </div>
+      <div class="uf-table" style="margin-top:12px;">
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Total Income</div><div class="uf-sub">2025 profit and loss / CPA schedule</div></div><div class="uf-amt">$495,971.55</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Gross Profit</div><div class="uf-sub">2025 financial summary schedule</div></div><div class="uf-amt">$495,766.69</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Total Expenses</div><div class="uf-sub">2025 financial summary schedule</div></div><div class="uf-amt">$354,746.02</div></div>
+        <div class="uf-row total"><div class="uf-left"><div class="uf-name">Net Income</div><div class="uf-sub">2025 profit and loss / CPA schedule</div></div><div class="uf-amt">$141,020.67</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Operating Cash Flow</div><div class="uf-sub">2025 cash flow statement / schedule</div></div><div class="uf-amt">$142,084.54</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Total Assets</div><div class="uf-sub">2025 balance sheet</div></div><div class="uf-amt">$163,229.12</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Total Liabilities</div><div class="uf-sub">2025 balance sheet</div></div><div class="uf-amt">$554,711.12</div></div>
       </div>
     </div>
 
-    <div class="chart-card-lg">
-      <h4>Deposit Mix — Management Context</h4>
-      <div class="chart-sub">Account-type chart retained as background context only.</div>
-      <img class="chart-img" src="files/assure_deposits_by_account.png" alt="AssureCall deposits by account type" loading="lazy" decoding="async" />
-      <div class="tiny-note" style="margin-top:12px;">
-        External PayPal and Capital One statements were not included in the approved CPA package. Do not treat this chart as
-        CPA-verified bank-statement support.
+    <div class="panel">
+      <div class="panel-head">
+        <h3>DSCR and MaxCon Schedule Basis</h3>
+        <span class="panel-tag">CPA Schedules</span>
       </div>
-    </div>
-
-    <div class="chart-card-lg">
-      <h4>Cumulative Deposits — Management Context</h4>
-      <div class="chart-sub">Background operating context; CPA-backed conclusions are shown in the schedules above.</div>
-      <img class="chart-img" src="files/assure_deposits_cumulative.png" alt="AssureCall cumulative deposits 2025" loading="lazy" decoding="async" />
+      <div class="uf-table" style="margin-top:12px;">
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">J&amp;J Annual Rental Income</div><div class="uf-sub">Property support schedule</div></div><div class="uf-amt">$64,440.00</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">MaxCon Repayment Capacity</div><div class="uf-sub">2025 related-party balance reduction</div></div><div class="uf-amt">$168,976.55</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Primary Global Cash Flow</div><div class="uf-sub">Net income + rents + MaxCon capacity</div></div><div class="uf-amt">$374,437.22</div></div>
+        <div class="uf-row"><div class="uf-left"><div class="uf-name">Stress Annual Debt Service</div><div class="uf-sub">CPA stress scenario basis</div></div><div class="uf-amt">$234,972.00</div></div>
+        <div class="uf-row total"><div class="uf-left"><div class="uf-name">Stress DSCR</div><div class="uf-sub">Primary global scenario</div></div><div class="uf-amt">1.59x</div></div>
+      </div>
+      <div class="tiny-note" style="margin-top:10px;">
+        MaxCon repayment is not accounting profit; it is shown only as related-party repayment capacity if subordinated.
+      </div>
     </div>
   </div>
 
@@ -5812,7 +5934,7 @@ html[data-theme="light"] svg g[class*="stack"] rect {
         <span class="panel-tag">Transparency Note</span>
       </div>
       <ul class="bullets" style="margin-top:12px;">
-        <li>Management deposit charts are retained as operating context only; CPA-backed analysis does not rely on unprovided external bank-statement packages</li>
+        <li>Financial conclusions rely on the approved 2025 statements and CPA schedules, not on unprovided external bank-statement packages</li>
         <li><strong>Roofing Appointments deposits</strong> are included as AssureCall revenue (same ownership, operational integration)</li>
         <li>Approved CPA source materials include QuickBooks reports, property/rent support, payoff documents, and CPA schedules</li>
       </ul>
@@ -6777,18 +6899,18 @@ html[data-theme="light"] svg g[class*="stack"] rect {
   </div>
 
   <div class="grid-2">
-    <!-- LEFT: Statement Index -->
+    <!-- LEFT: CPA source status -->
     <div class="panel">
       <div class="panel-head">
-        <h3>Source Status</h3>
+        <h3>CPA Source Status</h3>
         <span class="panel-tag">AssureCall • CPA Package</span>
       </div>
 
-      <!-- Search + Count -->
+      <!-- Status + count -->
       <div class="stmt-tools">
         <div class="stmt-search">
           <span class="stmt-icon" aria-hidden="true">⌕</span>
-          <input id="assureStmtSearch" type="search" placeholder="External bank-statement packages are not included" disabled />
+          <input id="assureStmtSearch" type="search" placeholder="CPA-backed package only; external statements not included" disabled />
         </div>
         <div class="stmt-meta-pill" id="assureMetaPill">Loading…</div>
       </div>
@@ -6796,7 +6918,7 @@ html[data-theme="light"] svg g[class*="stack"] rect {
       <div id="assureStmtIndex" class="stmt-index" style="margin-top:12px;"></div>
 
       <div class="tiny-note" style="margin-top:10px;">
-        No AssureCall external bank-statement PDF index is presented as approved CPA evidence in this live package.
+        Approved CPA evidence is limited to QuickBooks reports, CPA schedules, property/rent support, payoff documents, and DSCR scenarios.
       </div>
     </div>
 
@@ -7585,7 +7707,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const assureGroups = [];
 
   const totalAssure = assureGroups.reduce((sum,g) => sum + g.files.length, 0);
-  if (assureMeta) assureMeta.textContent = `${totalAssure} PDFs included`;
+  if (assureMeta) assureMeta.textContent = totalAssure ? `${totalAssure} PDFs included` : 'No external statements included';
 
   function renderAssureIndex(filter = "") {
     if (!assureMount) return;
